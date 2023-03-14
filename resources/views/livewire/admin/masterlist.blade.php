@@ -1,6 +1,9 @@
 <div>
   <x-button label="Add Land Owner" indigo wire:click="$set('add_modal', true)" spinner="$set('add_modal', true)" />
 
+  <div class="mt-4">
+    {{ $this->table }}
+  </div>
 
   <x-modal wire:model.defer="add_modal" align="center" max-width="6xl">
     <x-card title="NEW LAND OWNER">
