@@ -24,10 +24,10 @@ return new class extends Migration
             $table->text('remarks')->nullable();
             $table->string('market_value')->nullable();
             $table->string('assessed_value')->nullable();
-            $table->date('year')->nullable();
+            $table->string('year')->nullable();
             $table->string('square_meter')->nullable();
             $table->string('tax_payment')->nullable();
-            $table->date('year_of_payment')->nullable();
+            $table->string('year_of_payment')->nullable();
             $table->string('official_receipt')->nullable();
             $table->timestamps();
         });

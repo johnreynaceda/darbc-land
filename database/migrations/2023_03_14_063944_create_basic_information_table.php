@@ -33,8 +33,8 @@ return new class extends Migration
             $table->text('status')->nullable();
             $table->string('land_bank_amortization')->nullable();
             $table->string('amount')->nullable();
-            $table->datetime('date_paid')->nullable();
-            $table->datetime('date_of_cert')->nullable();
+            $table->date('date_paid')->nullable();
+            $table->date('date_of_cert')->nullable();
             $table->string('ndc_direct_payment_scheme')->nullable();
             $table->string('ndc_remarks')->nullable();
             $table->text('notes')->nullable();

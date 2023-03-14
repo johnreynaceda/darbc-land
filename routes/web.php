@@ -36,6 +36,12 @@ Route::get('/inquiry', function () {
     ->middleware(['auth', 'verified'])
     ->name('inquiry');
 
+    Route::get('/upload', function () {
+        return view('admin.upload');
+    })
+        ->middleware(['auth', 'verified'])
+        ->name('upload');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
         'profile.edit'
