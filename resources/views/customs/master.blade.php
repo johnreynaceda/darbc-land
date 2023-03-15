@@ -1,125 +1,299 @@
 <div class="">
 
   <div class="flow-root overflow-x-auto">
-    <div class="">
-      <div class="">
-        <table class="min-w-full divide-y divide-gray-300">
-          <thead>
-            <tr class="divide-x divide-gray-200">
-              <th scope="col" class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pl-0">
-                NO.
-              </th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-semibold bg-indigo-500 text-white">LOT#</th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-semibold bg-indigo-500 text-white">SURVEY NO.
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">TITLE AREA
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">AWARDED AREA
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">PREVIOUS
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">FIELD
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">LOCATION
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">MUNICIPALITY
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">TITLE
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">CLOA NO.
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">PAGE
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">ENCUMBERED
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">PREVIOUS COPY OF TITLE
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">TITLE STATUS
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">TITLE COPY
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">REMARKS
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">STATUS
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">LAND BANK AMORTIZATION
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">AMOUNT
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">DATE PAID
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">DATE OF CERT
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">NDC DIRECT PAYMENT SCHEME
-              </th>
-              <th scope="col"
-                class="py-3 pl-4 pr-4 text-left text-sm font-semibold bg-indigo-500 text-white sm:pr-0">NDC REMARKS
-              </th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200 bg-white">
-            @foreach ($records as $record)
-                @php
-                    $encumbered = $record->encumbered;
-                    $encumbered_array = json_decode($encumbered, true);
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead>
+        <tr class="divide-x divide-gray-200">
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
 
-                    $previous_copy_of_title = $record->previous_copy_of_title;
-                    $previous_copy_of_title_array = json_decode($previous_copy_of_title, true);
-                @endphp
-              <tr class="divide-x divide-gray-200">
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-0">
-                  {{ $record->number }}</td>
-                <td class="whitespace-nowrap p-4 text-sm text-gray-500"> {{ $record->lot_number }}</td>
-                <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $record->survey_number }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->title_area }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->awarded_area }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->previous_land_owner }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->field_number }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->location }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->municipality }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->title }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->cloa_number }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->page }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $encumbered_array["area"] }} / {{ $encumbered_array["variance"] }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $previous_copy_of_title_array["type of title"] }} / {{ $previous_copy_of_title_array["no."] }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->title_status }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->title_copy }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->remarks }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->status }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->land_bank_amortization }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->amount }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->date_paid }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->date_of_cert }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->ndc_direct_payment_scheme }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->ndc_remarks }}</td>
-                <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-0">{{ $record->notes }}</td>
-              </tr>
-            @endforeach
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+            NO.
+          </th>
+          <th class="whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
+            LOT#
+          </th>
+          <th class=" whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
+            SURVEY
+            NO.
+          </th>
+          <th
+            class="whitespace-nowrap border-t  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            TITLE
+            AREA
+          </th>
+          <th
+            class=" whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            AWARDED AREA
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            PREVIOUS
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            FIELD
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            LOCATION
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            MUNICIPALITY
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            TITLE
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            CLOA
+            NO.
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            PAGE
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            ENCUMBERED
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            PREVIOUS COPY OF
+            TITLE
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            TITLE
+            STATUS
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            TITLE
+            COPY
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            REMARKS
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            STATUS
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            LAND
+            BANK
+            AMORTIZATION
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            AMOUNT
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            DATE
+            PAID
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            DATE
+            OF CERT
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            NDC
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            NDC REMARKS
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            <div class="flex w-64 text-center justify-center">
+              NOTES
+            </div>
+          </th>
 
-            <!-- More people... -->
-          </tbody>
-        </table>
-      </div>
-    </div>
+        </tr>
+        <tr class="divide-x divide-gray-200">
+          <th class="whitespace-nowrap  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+
+          </th>
+          <th class="whitespace-nowrap  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+
+          </th>
+          <th class="whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
+          </th>
+          <th class=" whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            HAS./S
+          </th>
+          <th
+            class=" whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            HAS./S
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            LAND OWNER
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            NO.
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            NO.
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4  text-center text-sm font-semibold bg-indigo-500 text-white ">
+            <div class="flex space-x-6">
+              <span>AREA</span>
+              <span>/</span>
+              <span>VARIANCE</span>
+            </div>
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            <div class="flex space-x-6">
+              <span>TYPE OF TITLE</span>
+              <span>/</span>
+              <span>NO.</span>
+            </div>
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            REMARKS
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            STATUS
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            PHP
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            MONTHLY DAY YEAR
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            MONTHLY DAY YEAR
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+            DIRECT
+            PAYMENT SCHEME
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+
+          </th>
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+          </th>
+
+
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        @foreach ($records as $record)
+          @php
+            $encumbered = $record->encumbered;
+            $encumbered_array = json_decode($encumbered, true);
+            
+            $previous_copy_of_title = $record->previous_copy_of_title;
+            $previous_copy_of_title_array = json_decode($previous_copy_of_title, true);
+          @endphp
+          <tr class="divide-x divide-gray-200">
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">
+              <x-button label="View" icon="eye" dark sm />
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+              {{ $record->number }}</td>
+            <td class=" p-4 text-sm text-gray-500 text-center"> {{ $record->lot_number }}</td>
+            <td class="p-4 text-sm text-gray-500 text-center">{{ $record->survey_number }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->title_area }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->awarded_area }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">
+              {{ $record->previous_land_owner }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->field_number }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->location }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->municipality }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->title }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->cloa_number }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->page }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">
+              {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">
+              {{ $previous_copy_of_title_array['type of title'] }} / {{ $previous_copy_of_title_array['no.'] }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->title_status }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->title_copy }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->remarks }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->status }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">
+              {{ $record->land_bank_amortization }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->amount }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->date_paid }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->date_of_cert }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">
+              {{ $record->ndc_direct_payment_scheme }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->ndc_remarks }}
+            </td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">{{ $record->notes }}</td>
+
+          </tr>
+        @endforeach
+
+        <!-- More people... -->
+      </tbody>
+    </table>
   </div>
 </div>

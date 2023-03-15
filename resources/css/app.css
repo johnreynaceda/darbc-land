@@ -14,3 +14,7 @@
 .filament-tables-table > thead tr {
   @apply !bg-indigo-500;
 }
+
+.columns-table {
+  @apply !w-[100rem];
+}
