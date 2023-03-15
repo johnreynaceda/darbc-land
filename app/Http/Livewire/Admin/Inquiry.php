@@ -16,8 +16,30 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     use Tables\Concerns\InteractsWithTable;
     public $filters = [
         'number' => null,
-        'email' => null,
-        'phone' => null,
+        'lot_number' => null,
+        'survey_number' => null,
+        'title_area' => null,
+        'awarded_area' => null,
+        'previous_land_owner' => null,
+        'field_number' => null,
+        'location' => null,
+        'municipality' => null,
+        'title' => null,
+        'cloa_number' => null,
+        'page' => null,
+        'encumbered' => null,
+        'previous_copy_of_title' => null,
+        'title_status' => null,
+        'title_copy' => null,
+        'remarks' => null,
+        'status' => null,
+        'land_bank_amortization' => null,
+        'amount' => null,
+        'date_paid' => null,
+        'date_of_cert' => null,
+        'ndc_direct_payment_scheme' => null,
+        'ndc_remarks' => null,
+        'notes' => null,
     ];
 
     protected function getTableQuery(): Builder
@@ -33,24 +55,6 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     protected function getTableColumns(): array
     {
         return [
-            // TextColumn::make('name')
-            //     ->searchable()
-            //     ->visible(function () {
-            //         $count = count(
-            //             array_filter($this->filters, function ($value) {
-            //                 return $value != null;
-            //             })
-            //         );
-
-            //         if ($count < 1) {
-            //             return true;
-            //             # code...
-            //         } else {
-            //             return $this->filters['name'];
-            //         }
-            //     })
-            //     ->sortable(),
-
             TextColumn::make('number')
                 ->label('NO.')
                 ->searchable()
