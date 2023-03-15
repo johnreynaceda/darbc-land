@@ -125,3 +125,4 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
         return view('livewire.admin.masterlist');
     }
 }
+
