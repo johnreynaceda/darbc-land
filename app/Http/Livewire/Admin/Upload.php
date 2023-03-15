@@ -105,7 +105,6 @@ class Upload extends Component
         $csvRecords = $csvReader->getRecords();
 
         foreach ($csvRecords as $csvRecord) {
-            // dd($csvRecord);
             Tax::create([
                'basic_information_id' => $csvRecord[0],
                'number' => $csvRecord[0],
