@@ -244,7 +244,8 @@
           @endphp
           <tr class="divide-x divide-gray-200">
             <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center ">
-              <x-button label="View" icon="eye" dark sm />
+              <x-button label="View" icon="eye" dark sm wire:click="viewData({{ $record->id }})"
+                spinner="viewData({{ $record->id }})" />
             </td>
             <td class=" py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
               {{ $record->number }}</td>

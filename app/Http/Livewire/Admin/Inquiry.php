@@ -63,10 +63,9 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         })
                     );
 
-                    if ($column > 1) {
+                    if ($column < 1) {
                         return true;
                     } else {
-                        return false;
                         return $this->filters['number'];
                     }
                 })
@@ -74,6 +73,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('lot_number')
+                ->label('LOT NO.')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -81,13 +81,12 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         })
                     );
 
-                    if ($column > 1) {
+                    if ($column < 1) {
                         return true;
                     } else {
                         return $this->filters['lot_number'];
                     }
                 })
-                ->label('LOT NO.')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('survey_number')
@@ -98,7 +97,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         })
                     );
 
-                    if ($column > 1) {
+                    if ($column < 1) {
                         return true;
                     } else {
                         return $this->filters['survey_number'];
@@ -108,78 +107,364 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('title_area')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['title_area'];
+                    }
+                })
                 ->label('TITLE AREA')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('awarded_area')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['awarded_area'];
+                    }
+                })
                 ->label('AWARDED AREA')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('previous_land_owner')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['previous_land_owner'];
+                    }
+                })
                 ->label('PREVIOUS LAND OWNER')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('field_number')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['field_number'];
+                    }
+                })
                 ->label('FIELD NO.')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('location')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['location'];
+                    }
+                })
                 ->label('LOCATION')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('municipality')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['municipality'];
+                    }
+                })
                 ->label('MUNICIPALITY')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('title')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['title'];
+                    }
+                })
                 ->label('TITLE')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('cloa_number')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['cloa_number'];
+                    }
+                })
                 ->label('CLOA NO.')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('page')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['page'];
+                    }
+                })
                 ->label('PAGE')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('encumbered')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['encumbered'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('previous_copy_of_title')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['previous_copy_of_title'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('title_status')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['title_status'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('title_copy')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['title_copy'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('remarks')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['remarks'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('status')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['status'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('land_bank_amortization')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['land_bank_amortization'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('amount')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['amount'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('date_paid')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['date_paid'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('date_of_cert')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['date_of_cert'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('ndc_direct_payment_scheme')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['ndc_direct_payment_scheme'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('ndc_remarks')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['ndc_remarks'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('notes')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['notes'];
+                    }
+                })
                 ->searchable()
                 ->sortable(),
         ];

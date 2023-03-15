@@ -9,11 +9,20 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\BasicInformation;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\FileUpload;
 
 class Masterlist extends Component implements Tables\Contracts\HasTable
 {
     public $add_modal = false;
+    public $view_modal = false;
+    public $datas = [];
+
     use Tables\Concerns\InteractsWithTable;
+
+    protected function getFormSchema(): array
+    {
+        return [FileUpload::make('file')->label('UPLOAD LOT IMAGE')];
+    }
 
     protected function getTableQuery(): Builder
     {
@@ -124,5 +133,10 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     {
         return view('livewire.admin.masterlist');
     }
-}
 
+    public function viewData($id)
+    {
+        $this->datas = BasicInformation::where('id', $id)->first();
+        $this->view_modal = true;
+    }
+}
