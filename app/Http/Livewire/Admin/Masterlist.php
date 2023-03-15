@@ -79,25 +79,42 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('encumbered')
-                ->label('ENCUMBRANCE (AREA/VARIANCE)')
-                ->formatStateUsing(function ($record) {
-                    $data = json_decode($record->encumbered, true);
-
-                    return ($data['area'] ?? 'N/A') .
-                        ' / ' .
-                        ($data['variance'] ?? 'N/A');
-                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('previous_copy_of_title')
-                ->label('PREVIOUS COPY OF TITLE (TYPE OF TITLE/NO.)')
-                ->formatStateUsing(function ($record) {
-                    $data = json_decode($record->encumbered, true);
-
-                    return ($data['area'] ?? 'N/A') .
-                        ' / ' .
-                        ($data['variance'] ?? 'N/A');
-                })
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('title_status')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('title_copy')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('remarks')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('status')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('land_bank_amortization')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('amount')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('date_paid')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('date_of_cert')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('ndc_direct_payment_scheme')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('ndc_remarks')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('notes')
                 ->searchable()
                 ->sortable(),
         ];
