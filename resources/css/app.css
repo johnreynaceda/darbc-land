@@ -6,23 +6,11 @@
 
 /* Filament Tables Customization */
 
-.filament-tables-table-container {
-  @apply !rounded;
-}
-
-.filament-tables-container {
-  @apply !rounded;
-}
-
 .filament-tables-header-cell button {
   @apply !text-white;
-  @apply !border;
+  @apply !border-gray-100;
 }
 
 .filament-tables-table > thead tr {
-  @apply !bg-indigo-700;
-}
-
-.filament-tables-text-column > tbody > tr > td {
-  @apply !border-l-2;
+  @apply !bg-indigo-500;
 }

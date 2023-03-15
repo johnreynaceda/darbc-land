@@ -20,6 +20,13 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
         return BasicInformation::query();
     }
 
+    public function getTableContent()
+    {
+        return view('customs.master', [
+            'infos' => BasicInformation::query(),
+        ]);
+    }
+
     protected function getTableColumns(): array
     {
         return [
@@ -35,7 +42,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->label('SURVEY NO.')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('title_are')
+            TextColumn::make('title_area')
                 ->label('TITLE AREA')
                 ->searchable()
                 ->sortable(),
@@ -71,8 +78,19 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->label('PAGE')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('encumbrance')
+            TextColumn::make('encumbered')
                 ->label('ENCUMBRANCE (AREA/VARIANCE)')
+                ->formatStateUsing(function ($record) {
+                    $data = json_decode($record->encumbered, true);
+
+                    return ($data['area'] ?? 'N/A') .
+                        ' / ' .
+                        ($data['variance'] ?? 'N/A');
+                })
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('previous_copy_of_title')
+                ->label('PREVIOUS COPY OF TITLE (TYPE OF TITLE/NO.)')
                 ->formatStateUsing(function ($record) {
                     $data = json_decode($record->encumbered, true);
 
