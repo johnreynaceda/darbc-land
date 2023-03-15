@@ -56,14 +56,54 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     {
         return [
             TextColumn::make('number')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column > 1) {
+                        return true;
+                    } else {
+                        return false;
+                        return $this->filters['number'];
+                    }
+                })
                 ->label('NO.')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('lot_number')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column > 1) {
+                        return true;
+                    } else {
+                        return $this->filters['lot_number'];
+                    }
+                })
                 ->label('LOT NO.')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('survey_number')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column > 1) {
+                        return true;
+                    } else {
+                        return $this->filters['survey_number'];
+                    }
+                })
                 ->label('SURVEY NO.')
                 ->searchable()
                 ->sortable(),
