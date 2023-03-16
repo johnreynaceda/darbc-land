@@ -13,91 +13,91 @@
         <x-checkbox label="N0." wire:model="filters.number" />
       </div>
       <div class="border p-1 px-3 rounded">
-        <x-checkbox label="LOT NO." wire:model.defer="filters.lot_number" />
+        <x-checkbox label="LOT NO." wire:model="filters.lot_number" />
       </div>
       <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="SUREVY NO." wire:model.defer="filters.survey_number" />
+        <x-checkbox id="right-label" label="SUREVY NO." wire:model="filters.survey_number" />
       </div>
       <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="TITLE AREA" wire:model.defer="filters.title_area" />
-      </div>
-      <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="
-        AWARDED-AREA" wire:model.defer="filters.awarded_area" />
-      </div>
-      <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="PREVIOUS LAND OWNER" wire:model.defer="filters.previous_land_owner" />
+        <x-checkbox id="right-label" label="TITLE AREA" wire:model="filters.title_area" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-        FIELD" wire:model.defer="filters.field_number" />
+        AWARDED-AREA" wire:model="filters.awarded_area" />
       </div>
       <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="LOCATION" wire:model.defer="filters.location" />
-      </div>
-      <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="MUNICIPALITY" wire:model.defer="filters.municipality" />
-      </div>
-      <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="TITTLE" wire:model.defer="filters.title" />
-      </div>
-      <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="CLOA NO." wire:model.defer="filters.cloa_number" />
-      </div>
-      <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="PAGE" wire:model.defer="filters.page" />
+        <x-checkbox id="right-label" label="PREVIOUS LAND OWNER" wire:model="filters.previous_land_owner" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            ENCONMBERED" wire:model.defer="filters.encumbered" />
+        FIELD" wire:model="filters.field_number" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="LOCATION" wire:model="filters.location" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="MUNICIPALITY" wire:model="filters.municipality" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="TITTLE" wire:model="filters.title" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="CLOA NO." wire:model="filters.cloa_number" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="PAGE" wire:model="filters.page" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            AREA" wire:model.defer="filters.encumbered" />
+            ENCONMBERED" wire:model="filters.encumbered" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            VARIANCE" wire:model.defer="filters.encumbered" />
-      </div>
-      <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="PREVIOUS COPY OF TITLE" wire:model.defer="filters.previous_copy_of_title" />
+            AREA" wire:model="filters.encumbered" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            TITLE STATUS" wire:model.defer="filters.title_status" />
+            VARIANCE" wire:model="filters.encumbered" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="PREVIOUS COPY OF TITLE" wire:model="filters.previous_copy_of_title" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            TITLE COPY" wire:model.defer="filters.title_copy" />
+            TITLE STATUS" wire:model="filters.title_status" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            REMARKS" wire:model.defer="filters.remarks" />
+            TITLE COPY" wire:model="filters.title_copy" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            STATUS" wire:model.defer="filters.status" />
+            REMARKS" wire:model="filters.remarks" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            AMORTIZATION" wire:model.defer="filters.land_bank_amortization" />
+            STATUS" wire:model="filters.status" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            AMOUNT" wire:model.defer="filters.amount" />
+            AMORTIZATION" wire:model="filters.land_bank_amortization" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            DATE PAID" wire:model.defer="filters.date_paid" />
+            AMOUNT" wire:model="filters.amount" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="
+            DATE PAID" wire:model="filters.date_paid" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
 
-            DATE OF CERT" wire:model.defer="filters.date_of_cert" />
+            DATE OF CERT" wire:model="filters.date_of_cert" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            NDC" wire:model.defer="filters.ndc_direct_payment_scheme" />
+            NDC" wire:model="filters.ndc_direct_payment_scheme" />
       </div>
     </div>
 
@@ -108,7 +108,7 @@
 
 
 
-  <x-modal wire:model.defer="add_modal">
+  <x-modal wire:model="add_modal">
     <x-card title="Consent Terms">
       <p class="text-gray-600">
         Lorem Ipsum...

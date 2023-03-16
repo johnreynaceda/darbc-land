@@ -11,6 +11,7 @@ use App\Models\BasicInformation;
 use Filament\Tables\Columns\TextColumn;
 use WireUi\Traits\Actions;
 use DB;
+use Filament\Forms\Components\FileUpload;
 
 class Masterlist extends Component implements Tables\Contracts\HasTable
 {
@@ -42,9 +43,16 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     public $_ndc_direct_payment_scheme;
     public $_ndc_remarks;
     public $_notes;
+    public $view_modal = false;
+    public $datas = [];
 
     use Tables\Concerns\InteractsWithTable;
     use Actions;
+
+    protected function getFormSchema(): array
+    {
+        return [FileUpload::make('file')->label('UPLOAD LOT IMAGE')];
+    }
 
     protected function getTableQuery(): Builder
     {
@@ -204,5 +212,10 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     {
         return view('livewire.admin.masterlist');
     }
-}
 
+    public function viewData($id)
+    {
+        $this->datas = BasicInformation::where('id', $id)->first();
+        $this->view_modal = true;
+    }
+}
