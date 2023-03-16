@@ -49,16 +49,16 @@
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            ENCONMBERED" wire:model="filters.encumbered" />
+            ENCUMBERED" wire:model="filters.encumbered" />
       </div>
-      <div class="border p-1 px-3 rounded">
+      {{-- <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
             AREA" wire:model="filters.encumbered" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
             VARIANCE" wire:model="filters.encumbered" />
-      </div>
+      </div> --}}
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="PREVIOUS COPY OF TITLE" wire:model="filters.previous_copy_of_title" />
       </div>
@@ -92,7 +92,6 @@
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-
             DATE OF CERT" wire:model="filters.date_of_cert" />
       </div>
       <div class="border p-1 px-3 rounded">
