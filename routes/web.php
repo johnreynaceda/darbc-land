@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
@@ -36,11 +36,11 @@ Route::get('/inquiry', function () {
     ->middleware(['auth', 'verified'])
     ->name('inquiry');
 
-    Route::get('/upload', function () {
-        return view('admin.upload');
-    })
-        ->middleware(['auth', 'verified'])
-        ->name('upload');
+Route::get('/upload', function () {
+    return view('admin.upload');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('upload');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name(

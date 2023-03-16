@@ -1,10 +1,10 @@
 @section('title', 'Dashboard')
 <x-main-layout>
   <div class="flex  w-full gap-4">
-    <div class="w-5/12">
+    <div class="w-4/12">
       <div class="bg-gray-50 rounded-xl p-2 px-4 shadow">
         <header class=" font-bold">DARBC LAND STATUS</header>
-        <div class="mt-2 bg-blue-300">
+        <div class="mt-2">
           <div class="">
             <div id="chart" style="width: 400px; height: 400px;"></div>
           </div>
