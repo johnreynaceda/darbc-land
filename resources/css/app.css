@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+[x-cloak] {
+  display: none;
+}
 /* Filament Tables Customization */
 
 .filament-tables-header-cell button {

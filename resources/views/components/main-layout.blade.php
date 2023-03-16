@@ -182,7 +182,7 @@
               </svg>
               Inquiry
             </a>
-            <a href="{{ route('upload') }}"
+            {{-- <a href="{{ route('upload') }}"
               class="{{ request()->routeIs('upload') ? 'bg-violet-800' : '' }} hover:bg-violet-800 text-white group flex items-center rounded-md px-2 py-2 text-sm font-medium">
               <svg class="mr-3 h-6 w-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                 fill="none">
@@ -191,7 +191,7 @@
                   fill="currentColor"></path>
               </svg>
               Upload
-            </a>
+            </a> --}}
             <a href="#"
               class=" hover:bg-violet-800 text-white group flex items-center rounded-md px-2 py-2 text-sm font-medium">
               {{-- <x-fluentui-calendar-rtl-48 class="mr-3 h-6 w-6 flex-shrink-0" /> --}}
@@ -299,8 +299,17 @@
                     id="options-menu-item-4">Support</a>
                 </div>
                 <div class="py-1" role="none">
-                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                    id="options-menu-item-5">Logout</a>
+
+
+                  <form method="POST" action="{{ route('logout') }}" class="flex space-x-2">
+                    @csrf
+                    <a href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+              this.closest('form').submit();"
+                      class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
+                      id="options-menu-item-5">Logout</a>
+
+                  </form>
                 </div>
               </div>
             </div>
