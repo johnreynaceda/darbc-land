@@ -260,6 +260,12 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('encumbered')
+                ->label('ENCUMBERED AREA')
+                ->formatStateUsing(function (string $state){
+                    $encumbered_array = json_decode($state, true);
+                    $encumbered = "Area: ".$encumbered_array['area']." / ". "Variance: ".$encumbered_array['variance'];
+                    return $encumbered;
+                })
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -276,6 +282,12 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('previous_copy_of_title')
+                ->label('PREVIOUS COPY OF TITLE')
+                ->formatStateUsing(function (string $state){
+                    $previous_copy_of_title_array = json_decode($state, true);
+                    $previous_copy_of_title = "Type Of Title: ".$previous_copy_of_title_array['type of title']." / ". "No.: ".$previous_copy_of_title_array['no.'];
+                    return $previous_copy_of_title;
+                })
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -292,6 +304,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('title_status')
+                ->label('TITLE STATUS')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -308,6 +321,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('title_copy')
+                ->label('TITLE COPY')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -324,6 +338,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('remarks')
+                ->label('REMARKS')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -340,6 +355,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('status')
+                ->label('STATUS')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -356,6 +372,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('land_bank_amortization')
+                ->label('LAND BANK AMORTIZATION')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -372,6 +389,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('amount')
+                ->label('AMOUNT')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -388,6 +406,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('date_paid')
+                ->label('DATE PAID')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -404,6 +423,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('date_of_cert')
+                ->label('DATE OF CERT')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -420,6 +440,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('ndc_direct_payment_scheme')
+                ->label('NDC DIRECT PAYMENT SCHEME')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -436,6 +457,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('ndc_remarks')
+                ->label('NDC REMARKS')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
@@ -452,6 +474,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('notes')
+                ->label('NOTES')
                 ->visible(function ($record) {
                     $column = count(
                         array_filter($this->filters, function ($value) {
