@@ -39,30 +39,31 @@
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right rounded ">
-                        {{ $datas->number ?? '' }}
+                        {{ $basicInfo->number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Lot No.</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right"> {{ $datas->lot_number ?? '' }}
+                      <div class="font-rubik text-black uppercase text-sm text-right">
+                        {{ $basicInfo->lot_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Survey No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->survey_number ?? '' }}
+                        {{ $basicInfo->survey_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Title Area</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->title_area ?? '' }}
+                        {{ $basicInfo->title_area ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Award Area</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->awarded_area ?? '' }}
+                        {{ $basicInfo->awarded_area ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
@@ -70,51 +71,52 @@
                         Previous Land Owner
                       </p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->previous_land_owner ?? '' }}
+                        {{ $basicInfo->previous_land_owner ?? '' }}
                       </div>
                     </div>
 
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Field No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->field_number ?? '' }}
+                        {{ $basicInfo->field_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Barangay</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->location ?? '' }}
+                        {{ $basicInfo->location ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Municipality</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->municipality ?? '' }}
+                        {{ $basicInfo->municipality ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Title</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->title ?? '' }}
+                        {{ $basicInfo->title ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Cloa No.</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right"> {{ $datas->cloa_number ?? '' }}
+                      <div class="font-rubik text-black uppercase text-sm text-right">
+                        {{ $basicInfo->cloa_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Page</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->page ?? '' }}
+                        {{ $basicInfo->page ?? '' }}
                       </div>
                     </div>
 
                     <div class="flex items-start border-b py-2">
                       @php
-                        $encumbered_array = json_decode($datas->encumbered ?? '', true);
+                        $encumbered_array = json_decode($basicInfo->encumbered ?? '', true);
                         
-                        $previous_title_array = json_decode($datas->previous_copy_of_title ?? '', true);
+                        $previous_title_array = json_decode($basicInfo->previous_copy_of_title ?? '', true);
                         
                       @endphp
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Encumbered</p>
@@ -142,13 +144,13 @@
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">TITLE STATUS</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->title_status ?? '' }}
+                        {{ $basicInfo->title_status ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">TITLE COPY</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $datas->title_copy ?? '' }}
+                        {{ $basicInfo->title_copy ?? '' }}
                       </div>
                     </div>
 
@@ -257,13 +259,13 @@
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Land Status</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        Leased/Unplanted
+                        {{ $actual->land_status ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Leased Area</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        82.7065
+                        {{ $actual->dolephil_leased ?? '' }}
                       </div>
                     </div>
 
@@ -272,19 +274,19 @@
                         Unplanted Area
                       </p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        247.233
+                        {{ $actual->owned_but_not_planted ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Status</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        TWOC
+                        {{ $actual->status ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Remarks</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        AREAS NOT PLANTED TO P/A AS AGREED W/ DFL & DARBC
+                        {{ $actual->remarks ?? '' }}
                       </div>
                     </div>
                   </div>
@@ -313,20 +315,20 @@
           <div class="border rounded-lg p-5">
             <div class="flex space-x-4 items-center">
               <h1 class="font-bold text-lg text-gray-600 font-montserrat">TAX</h1>
-              <x-native-select wire:model="model">
-                <option>2023</option>
-                <option>2022</option>
-                <option>2021</option>
-                <option>2020</option>
+              <x-native-select wire:model="tax_get">
+                @foreach ($tax_year as $item)
+                  <option value="{{ $item }}">{{ $item }}</option>
+                @endforeach
+
               </x-native-select>
             </div>
             <div class="mt-3">
-              <ul role="list" class="divide-y divide-gray-200 border-gray-200">
+              {{-- <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                 <li class="relative py-5 px-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Year</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
-                      2023
+                     
                     </div>
                   </div>
                   <div class="" v-if="selected_item != null">
@@ -397,7 +399,75 @@
                     </div>
                   </div>
                 </li>
-              </ul>
+              </ul> --}}
+              <div class="">
+                <div class=" flow-root">
+                  <div class="">
+                    <div class="border">
+                      <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                          <tr class="divide-x divide-gray-200">
+                            <th scope="col"
+                              class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">Year</th>
+                            <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Area
+                              in Title HA./S
+                            </th>
+                            <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">Tax
+                              Declaration No.
+                            </th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              Owner</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              Market Value</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              Assesed Value</th>
+
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              Paid By Leased To Dolefil</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              Paid By Tax Payment</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              Paid By Year of Payment</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              Official Receipt</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                          @foreach ($taxss as $item)
+                            <tr class="divide-x divide-gray-200">
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+                                {{ $item->year }}</td>
+                              <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $basicInfo->title_area }}
+                              </td>
+                              <td class="whitespace-nowrap p-4 text-sm text-gray-500">
+                                {{ $item->rax_declaration_number }}</td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">{{ $item->owner }}
+                              </td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                {{ $item->market_value }}</td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                {{ $item->assessed_value }}</td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                {{ $item->lease_to_dolefil }}</td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                {{ $item->darbc_growers_hip }}</td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                {{ $item->darbc_area_not_planted_pineapple }}</td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                {{ $item->official_receipt }}</td>
+
+
+                            </tr>
+                          @endforeach
+
+                          <!-- More people... -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -427,25 +497,25 @@
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Amortization </p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
-                      FULLY PAID
+                      {{ $basicInfo->land_bank_amortization ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600"> AMOUNT </p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
-                      ₱ 124,985.6
+                      {{ $basicInfo->amount ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Date Paid</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
-                      March 1, 2023
+                      {{ $basicInfo->date_paid ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Date of Cert</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
-                      April 7, 2023
+                      {{ $basicInfo->date_of_cert ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
@@ -454,20 +524,19 @@
                     </p>
                     <div class="font-rubik  uppercase text-sm text-right bg-green-600 text-white px-2 rounded ">
 
-                      FULLY PAID
+                      {{ $basicInfo->ncd_direct_payment_scheme ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">NDC REMARKS</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
-                      March 24, 2023
+                      {{ $basicInfo->ncd_remarks ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">NOTES</p>
                     <div class="ctd font-rubik text-black leading-5 text-sm left ">
-                      DEED OF SALE (ALFREDO RADAZA-NDC) ORIGINAL CERTIFICATE TITLE P-21334 5 HA. IN DEED OF SALE AND
-                      3.6HA IN DEED OF AWARD AND TRANSFER 1.4 HA LEASED CONTRACT TO DOLEFIL BETWEEN RADAZA.
+                      {{ $basicInfo->notes ?? '' }}
                     </div>
                   </div>
                 </li>

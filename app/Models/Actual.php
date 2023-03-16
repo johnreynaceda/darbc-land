@@ -12,6 +12,6 @@ class Actual extends Model
 
     public function basic_information()
     {
-        return $this->belongsTo(BasicInformation::class, "basic_information_id");
+        return $this->belongsTo(BasicInformation::class);
     }
 }

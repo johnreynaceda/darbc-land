@@ -10,14 +10,28 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\BasicInformation;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\FileUpload;
+use App\Models\Actual;
+use App\Models\Tax;
 
 class Masterlist extends Component implements Tables\Contracts\HasTable
 {
     public $add_modal = false;
     public $view_modal = false;
-    public $datas = [];
+    public $basicInfo = [];
+    public $actual = [];
+    public $tax_year;
+    public $tax_get;
+    public $informationId;
 
     use Tables\Concerns\InteractsWithTable;
+
+    public function mount()
+    {
+        $this->tax_year = Tax::where('year', '!=', '')
+            ->groupBy('year')
+            ->pluck('year')
+            ->toArray();
+    }
 
     protected function getFormSchema(): array
     {
@@ -131,12 +145,20 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
 
     public function render()
     {
-        return view('livewire.admin.masterlist');
+        return view('livewire.admin.masterlist', [
+            'taxss' => Tax::where('basic_information_id', $this->informationId)
+                ->when($this->tax_get, function ($query) {
+                    $query->where('year', $this->tax_get);
+                })
+                ->get(),
+        ]);
     }
 
     public function viewData($id)
     {
-        $this->datas = BasicInformation::where('id', $id)->first();
-        $this->view_modal = true;
+        $this->informationId = $id;
+        $this->basicInfo = BasicInformation::where('id', $id)->first();
+        $this->actual = Actual::where('basic_information_id', $id)->first();
+        $this->taxes = $this->view_modal = true;
     }
 }

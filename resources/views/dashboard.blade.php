@@ -1,12 +1,12 @@
 @section('title', 'Dashboard')
 <x-main-layout>
   <div class="flex  w-full gap-4">
-    <div class="w-4/12">
+    <div class="w-5/12">
       <div class="bg-gray-50 rounded-xl p-2 px-4 shadow">
         <header class=" font-bold">DARBC LAND STATUS</header>
-        <div class="mt-2 flex justify-center">
+        <div class="mt-2 bg-blue-300">
           <div class="">
-            <div id="chart" style="width: 200px; height: 200px;"></div>
+            <div id="chart" style="width: 400px; height: 400px;"></div>
           </div>
         </div>
       </div>
@@ -307,9 +307,15 @@
           trigger: 'item'
         },
 
+        label: {
+          formatter: "{b}: {c} ({d}%)",
+          position: "oter",
+        },
+
         series: [{
           name: 'Access From',
           type: 'pie',
+
           radius: '50%',
           data: [{
               value: 1048,
@@ -332,6 +338,12 @@
               name: 'asdasdsdsadasdsad'
             }
           ],
+          labelType: {
+            type: Object,
+            default: {
+              fontSize: 12,
+            },
+          },
           emphasis: {
             itemStyle: {
               shadowBlur: 10,

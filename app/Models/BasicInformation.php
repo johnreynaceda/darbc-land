@@ -12,17 +12,19 @@ class BasicInformation extends Model
 
     public function lot_amortizations()
     {
-        return $this->hasMany(BasicInformationLotAmortization::class, "basic_information_id");
+        return $this->hasMany(
+            BasicInformationLotAmortization::class,
+            'basic_information_id'
+        );
     }
 
-    public function tax()
+    public function taxes()
     {
-        return $this->hasMany(Tax::class, "basic_information_id");
+        return $this->hasMany(Tax::class, 'basic_information_id');
     }
 
-
-    public function actual()
+    public function actuals()
     {
-        return $this->hasMany(Actual::class, "basic_information_id");
+        return $this->hasMany(Actual::class);
     }
 }
