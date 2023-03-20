@@ -37,37 +37,37 @@
 
                   <div class="">
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">No.</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right rounded ">
                         {{ $basicInfo->number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Lot No.</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Lot No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->lot_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Survey No.</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Survey No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->survey_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Title Area</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Title Area</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->title_area ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Award Area</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Award Area</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->awarded_area ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">
                         Previous Land Owner
                       </p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
@@ -76,37 +76,37 @@
                     </div>
 
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Field No.</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Field No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->field_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Barangay</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Barangay</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->location ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Municipality</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Municipality</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->municipality ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Title</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Title</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->title ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Cloa No.</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Cloa No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->cloa_number ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Page</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Page</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->page ?? '' }}
                       </div>
@@ -115,11 +115,11 @@
                     <div class="flex items-start border-b py-2">
                       @php
                         $encumbered_array = json_decode($basicInfo->encumbered ?? '', true);
-                        
+
                         $previous_title_array = json_decode($basicInfo->previous_copy_of_title ?? '', true);
-                        
+
                       @endphp
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Encumbered</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Encumbered</p>
                       <div class="lg:w-24 font-rubik mb-1">
                         <p class="text-sm text-gray-900">Area</p>
                         <p class="text-sm text-black fot-rubik"> {{ $encumbered_array['area'] ?? '' }}</p>
@@ -130,7 +130,7 @@
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Previous Copy of Title </p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Previous Copy of Title </p>
                       <div class="lg:w-24 font-rubik ">
                         <p class="text-sm text-gray-900 mb-1 ">Type of title</p>
                         <p class="text-sm text-black fot-rubik">{{ $previous_title_array['type of title'] ?? '' }}</p>
@@ -142,13 +142,13 @@
                     </div>
 
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">TITLE STATUS</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Title Status</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->title_status ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">TITLE COPY</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Title Copy</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->title_copy ?? '' }}
                       </div>
@@ -257,20 +257,20 @@
 
                   <div class="">
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Land Status</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Land Status</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $actual->land_status ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Leased Area</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Leased Area</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $actual->dolephil_leased ?? '' }}
                       </div>
                     </div>
 
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">
                         Unplanted Area
                       </p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
@@ -278,13 +278,13 @@
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Status</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Status</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $actual->status ?? '' }}
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Remarks</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Remarks</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $actual->remarks ?? '' }}
                       </div>
@@ -328,7 +328,7 @@
                   <div class="flex items-start border-b py-2">
                     <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Year</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
-                     
+
                     </div>
                   </div>
                   <div class="" v-if="selected_item != null">
@@ -495,31 +495,31 @@
               <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                 <li class="relative py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
                   <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Amortization </p>
+                    <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Amortization </p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
                       {{ $basicInfo->land_bank_amortization ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600"> AMOUNT </p>
+                    <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600"> AMOUNT </p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
                       {{ $basicInfo->amount ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Date Paid</p>
+                    <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Date Paid</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
                       {{ $basicInfo->date_paid ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Date of Cert</p>
+                    <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Date of Cert</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
                       {{ $basicInfo->date_of_cert ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600 leading-4">
+                    <p class="lg:w-48 border-r mr-2 font-bold  text-sm text-gray-600 leading-4">
                       NDC DIRECT PAYMENT SCHEME
                     </p>
                     <div class="font-rubik  uppercase text-sm text-right bg-green-600 text-white px-2 rounded ">
@@ -528,13 +528,13 @@
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">NDC REMARKS</p>
+                    <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">NDC REMARKS</p>
                     <div class="font-rubik text-black uppercase text-sm text-right">
                       {{ $basicInfo->ncd_remarks ?? '' }}
                     </div>
                   </div>
                   <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">NOTES</p>
+                    <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">NOTES</p>
                     <div class="ctd font-rubik text-black leading-5 text-sm left ">
                       {{ $basicInfo->notes ?? '' }}
                     </div>
