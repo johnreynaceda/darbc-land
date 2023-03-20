@@ -44,7 +44,7 @@
         <header class=" font-bold">MUNICIPALITIES</header>
         <div class="mt-2 flex justify-center w-full">
           <div style="padding-top: 10px" class="h-56 ">
-            <canvas id="bar" height="200"></canvas>
+            <canvas id="piechart3" height="200"></canvas>
           </div>
         </div>
       </div>
@@ -65,7 +65,12 @@
         </div>
       </div>
       <div class="mt-2 text-center">
-        <h1 class="text-2xl font-bold font-montserrat text-gray-700">9,086,8016,123</h1>
+        <h1 class="text-2xl font-bold font-montserrat text-gray-700">
+          @php
+            $total = App\Models\BasicInformation::sum('title_area');
+          @endphp
+          {{ number_format($total, 2) }}
+        </h1>
       </div>
       <div class="mt-5 grid grid-cols-2 gap-5">
         <div>
@@ -73,7 +78,10 @@
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="p-1 bg-gray-100 text-xs font-bold">
-                  <span>POLOMOLOK AREA: 6,669,4968</span>
+                  @php
+                    $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area');
+                  @endphp
+                  <span>POLOMOLOK AREA: {{ $total }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -90,26 +98,124 @@
                   <tbody class="bg-white">
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Titled with CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->sum('title_area');
+                        $lots = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Titled without CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->sum('title_area');
+                        $lots = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
+                        Untitled with CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->sum('title_area');
+                        
+                        $lots = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Untitled without CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->sum('title_area');
+                        
+                        $lots = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="mt-2 flow-root">
+            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+
+                <table class="min-w-full divide-y divide-gray-300">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
+                        STATUS</th>
+                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                        HECTARS</th>
+
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white">
+                    <tr>
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Areas Leased by Dolefil</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        DARBC Growership</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Idle Lands</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Problematic Lands</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        FREE LOTS</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
                       </td>
                     </tr>
                   </tbody>
@@ -123,7 +229,10 @@
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="p-1 bg-gray-100 text-xs font-bold">
-                  <span>POLOMOLOK AREA: 6,669,4968</span>
+                  @php
+                    $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
+                  @endphp
+                  <span>TUPI AREA: {{ $total }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -140,76 +249,72 @@
                   <tbody class="bg-white">
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Titled with CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->sum('title_area');
+                        $lots = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Titled without CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->sum('title_area');
+                        $lots = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="mt-2 flow-root">
-            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div class="p-1 bg-gray-100 text-xs font-bold">
-                  <span>TUPI AREA: 6,669,4968</span>
-                </div>
-                <table class="min-w-full divide-y divide-gray-300">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
-                        STATUS</th>
-                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                        HECTARS</th>
-                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
-                      </th>
-
-                    </tr>
-                  </thead>
-                  <tbody class="bg-white">
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Untitled with CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->sum('title_area');
+                        
+                        $lots = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Untitled without CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->sum('title_area');
+                        
+                        $lots = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'TUPI' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                   </tbody>
@@ -273,7 +378,10 @@
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="p-1 bg-gray-100 text-xs font-bold">
-                  <span>GENSAN AREA: 6,669,4968</span>
+                  @php
+                    $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENSAN' . '%')->sum('title_area');
+                  @endphp
+                  <span>GENSAN AREA: {{ $total }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -290,26 +398,72 @@
                   <tbody class="bg-white">
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Titled with CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->sum('title_area');
+                        $lots = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Titled without CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->sum('title_area');
+                        $lots = App\Models\BasicInformation::whereNotNull('title')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
+                        Untitled with CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->sum('title_area');
+                        
+                        $lots = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '!=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Untitled without CLOA</td>
+                      @php
+                        $area = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->sum('title_area');
+                        
+                        $lots = App\Models\BasicInformation::where('title', '=', '')
+                            ->where('cloa_number', '=', 'NO CLOA')
+                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->count();
+                      @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
                   </tbody>
@@ -440,38 +594,29 @@
     </script>
 
     <script>
-      // Get the canvas element and create a new chart instance
-      var canvas = document.getElementById('bar');
-      var chart = new Chart(canvas, {
+      const pieChart3 = new Chart(document.getElementById('piechart3'), {
         type: 'bar',
         data: {
-          labels: ['POLOMOLOK', 'TUPI', 'GENSAN', ],
+          labels: [
+            'Polomolok',
+            'Tupi',
+            'GenSan'
+          ],
           datasets: [{
-            label: 'No. of Lots',
-            data: [{{ $polomolok }}, {{ $tupi }}, {{ $gensan }}, 8, 10],
+            label: 'Lot Count',
+            data: [{{ $polomolok }}, {{ $tupi }}, {{ $gensan }}],
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-
-            ],
-            borderWidth: 1
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#E7E9ED',
+              '#8C9EFF',
+              '#FF7F50'
+            ]
           }]
         },
         options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
-              }
-            }]
-          }
+          responsive: true
         }
       });
     </script>
