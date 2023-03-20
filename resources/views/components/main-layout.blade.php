@@ -18,9 +18,9 @@
     rel="stylesheet">
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js "></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js "></script>
   <script src="https://fastly.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
-  <script src="./index.js"></script>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
   {{--  --}}
   <!-- Scripts -->
   @wireUiScripts
@@ -29,6 +29,7 @@
 
   <!-- Styles -->
   @livewireStyles
+  @stack('scripts')
 </head>
 
 <body class="antialiased">
@@ -192,7 +193,7 @@
               </svg>
               Upload
             </a> --}}
-            <a href="#"
+            <a href="{{route('calendar')}}"
               class=" hover:bg-violet-800 text-white group flex items-center rounded-md px-2 py-2 text-sm font-medium">
               {{-- <x-fluentui-calendar-rtl-48 class="mr-3 h-6 w-6 flex-shrink-0" /> --}}
               Calendar

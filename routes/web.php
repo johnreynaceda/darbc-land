@@ -42,6 +42,12 @@ Route::get('/upload', function () {
     ->middleware(['auth', 'verified'])
     ->name('upload');
 
+Route::get('/calendar', function () {
+        return view('admin.calendar');
+    })
+        ->middleware(['auth', 'verified'])
+        ->name('calendar');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
         'profile.edit'
