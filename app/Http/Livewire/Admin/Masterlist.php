@@ -173,10 +173,8 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
         ];
     }
 
-
     public function saveBasicInformation()
     {
-
         $encumbered = json_encode([
             'area' => $this->_encumbered_area,
             'variance' => $this->_encumbered_variance,
@@ -207,16 +205,20 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             'status' => $this->_status,
             'land_bank_amortization' => $this->_land_bank_amortization,
             'amount' => $this->_amount,
-            'date_paid' => \Carbon\Carbon::parse($this->_date_paid)->format('Y-m-d'),
-            'date_of_cert' => \Carbon\Carbon::parse($this->_date_of_cert)->format('Y-m-d'),
+            'date_paid' => \Carbon\Carbon::parse($this->_date_paid)->format(
+                'Y-m-d'
+            ),
+            'date_of_cert' => \Carbon\Carbon::parse(
+                $this->_date_of_cert
+            )->format('Y-m-d'),
             'ndc_direct_payment_scheme' => $this->_ndc_direct_payment_scheme,
             'ndc_remarks' => $this->_ndc_remarks,
             'notes' => $this->_notes,
-         ]);
-         DB::commit();
-         $this->add_modal = false;
+        ]);
+        DB::commit();
+        $this->add_modal = false;
 
-         $this->dialog()->success(
+        $this->dialog()->success(
             $title = 'Success',
             $description = 'Data successfully saved'
         );

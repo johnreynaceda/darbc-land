@@ -3,7 +3,16 @@
   <div class="flex  w-full gap-4">
     <div class="w-4/12">
       <div class="bg-gray-50 rounded-xl p-2 px-4 shadow">
-        <header class=" font-bold">LAND STATUS</header>
+        @php
+          $leased = App\Models\Actual::where('land_status', 'Leased')->count();
+          $unplanted = App\Models\Actual::where('land_status', 'Unplanted')->count();
+          $growers = App\Models\Actual::where('land_status', 'Growers')->count();
+          $compromise = App\Models\Actual::where('land_status', 'Compromise Agreement')->count();
+          $deleted = App\Models\Actual::where('land_status', 'Deleted')->count();
+          $others = App\Models\Actual::where('land_status', 'Others')->count();
+          
+        @endphp
+        <header class=" font-bold">STATUS</header>
         <div class="mt-2">
           <div class="">
             <div id="chart" style="width: 400px; height: 400px;"></div>
@@ -11,18 +20,31 @@
         </div>
       </div>
       <div class="bg-gray-50  mt-3 rounded-xl p-2 px-4 shadow">
-        <header class=" font-bold">ACTUAL SUMMARY CALENDAR </header>
-        <div class="mt-2 flex justify-center">
-          <div style="padding-top: 10px" class="h-56">
-            <canvas id="piechart2" width="200" height="200"></canvas>
+        @php
+          $gross = App\Models\Actual::sum('gross_area');
+          $planted = App\Models\Actual::sum('planted_area');
+          $gulley = App\Models\Actual::sum('gulley_area');
+          $total = App\Models\Actual::sum('total_area');
+          $facility = App\Models\Actual::sum('facility_area');
+          $unutilized = App\Models\Actual::sum('unutilized_area');
+        @endphp
+        <header class=" font-bold">ACTUAL SUMMARY </header>
+        <div class="mt-2">
+          <div class="">
+            <div id="chart1" style="width: 400px; height: 400px;"></div>
           </div>
         </div>
       </div>
       <div class="bg-gray-50  mt-3 rounded-xl p-2 px-4 shadow">
+        @php
+          $polomolok = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->count();
+          $tupi = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Tupi' . '%')->count();
+          $gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GenSan' . '%')->count();
+        @endphp
         <header class=" font-bold">MUNICIPALITIES</header>
         <div class="mt-2 flex justify-center w-full">
           <div style="padding-top: 10px" class="h-56 ">
-            <canvas id="piechart3" height="200"></canvas>
+            <canvas id="bar" height="200"></canvas>
           </div>
         </div>
       </div>
@@ -309,33 +331,35 @@
 
         label: {
           formatter: "{b}: {c} ({d}%)",
-          position: "oter",
         },
 
         series: [{
-          name: 'Access From',
+
           type: 'pie',
 
-          radius: '50%',
+          radius: '40%',
           data: [{
-              value: 1048,
-              name: 'Search Engine'
+              value: {{ $leased }},
+              name: 'Leased'
             },
             {
-              value: 735,
-              name: 'Direct'
+              value: {{ $unplanted }},
+              name: 'Unplanted'
             },
             {
-              value: 580,
-              name: 'Email'
+              value: {{ $growers }},
+              name: 'Growers'
             },
             {
-              value: 484,
-              name: 'Union Ads'
+              value: {{ $deleted }},
+              name: 'Deleted'
             },
             {
-              value: 300,
-              name: 'asdasdsdsadasdsad'
+              value: {{ $compromise }},
+              name: 'Compromise Aggrement'
+            }, {
+              value: {{ $others }},
+              name: 'Others'
             }
           ],
           labelType: {
@@ -357,85 +381,97 @@
     </script>
 
     <script>
-      const pieChart1 = new Chart(document.getElementById('piechart1'), {
-        type: 'pie',
-        data: {
-          labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-          ],
-          datasets: [{
-            label: 'Patient Counts',
-            data: [300, 50, 100],
-            backgroundColor: [
-              '#FF6384',
-              '#36A2EB',
-              '#FFCE56',
-              '#E7E9ED',
-              '#8C9EFF',
-              '#FF7F50'
-            ]
-          }]
-        },
-        options: {
-          responsive: true
-        }
-        //set time
-        // setInterval(function() {
-        //   pieChart1.update();
-        // }, 1000);
-      });
+      var myChart1 = echarts.init(document.getElementById('chart1'));
+      var option = {
 
-      const pieChart2 = new Chart(document.getElementById('piechart2'), {
-        type: 'pie',
-        data: {
-          labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-          ],
-          datasets: [{
-            label: 'Patient Counts',
-            data: [300, 50, 100],
-            backgroundColor: [
-              '#FF6384',
-              '#36A2EB',
-              '#FFCE56',
-              '#E7E9ED',
-              '#8C9EFF',
-              '#FF7F50'
-            ]
-          }]
+        tooltip: {
+          trigger: 'item'
         },
-        options: {
-          responsive: true
-        }
-      });
 
-      const pieChart3 = new Chart(document.getElementById('piechart3'), {
+        label: {
+          formatter: "{b}: {c} ({d}%)",
+        },
+
+        series: [{
+
+          type: 'pie',
+
+          radius: '40%',
+          data: [{
+              value: {{ $gross }},
+              name: 'Gross Area'
+            },
+            {
+              value: {{ $planted }},
+              name: 'Planted Area'
+            },
+            {
+              value: {{ $gulley }},
+              name: 'Gulley Area'
+            },
+            {
+              value: {{ $total }},
+              name: 'Total Area'
+            },
+            {
+              value: {{ $facility }},
+              name: 'Facility Area'
+            }, {
+              value: {{ $unutilized }},
+              name: 'Unutilized Area'
+            }
+          ],
+          labelType: {
+            type: Object,
+            default: {
+              fontSize: 12,
+            },
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }]
+      };
+      myChart1.setOption(option);
+    </script>
+
+    <script>
+      // Get the canvas element and create a new chart instance
+      var canvas = document.getElementById('bar');
+      var chart = new Chart(canvas, {
         type: 'bar',
         data: {
-          labels: [
-            'Red',
-            'Blue',
-            'Yellow'
-          ],
+          labels: ['POLOMOLOK', 'TUPI', 'GENSAN', ],
           datasets: [{
-            label: 'Patient Counts',
-            data: [300, 50, 100],
+            label: 'No. of Lots',
+            data: [{{ $polomolok }}, {{ $tupi }}, {{ $gensan }}, 8, 10],
             backgroundColor: [
-              '#FF6384',
-              '#36A2EB',
-              '#FFCE56',
-              '#E7E9ED',
-              '#8C9EFF',
-              '#FF7F50'
-            ]
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+
+            ],
+            borderWidth: 1
           }]
         },
         options: {
-          responsive: true
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
         }
       });
     </script>
