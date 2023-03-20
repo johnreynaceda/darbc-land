@@ -39,7 +39,7 @@
         <x-checkbox id="right-label" label="MUNICIPALITY" wire:model="filters.municipality" />
       </div>
       <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="TITTLE" wire:model="filters.title" />
+        <x-checkbox id="right-label" label="TITLE" wire:model="filters.title" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="CLOA NO." wire:model="filters.cloa_number" />

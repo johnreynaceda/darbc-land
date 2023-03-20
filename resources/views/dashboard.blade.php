@@ -3,7 +3,7 @@
   <div class="flex  w-full gap-4">
     <div class="w-4/12">
       <div class="bg-gray-50 rounded-xl p-2 px-4 shadow">
-        <header class=" font-bold">DARBC LAND STATUS</header>
+        <header class=" font-bold">LAND STATUS</header>
         <div class="mt-2">
           <div class="">
             <div id="chart" style="width: 400px; height: 400px;"></div>
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="bg-gray-50  mt-3 rounded-xl p-2 px-4 shadow">
-        <header class=" font-bold">DARBC LAND </header>
+        <header class=" font-bold">ACTUAL SUMMARY CALENDAR </header>
         <div class="mt-2 flex justify-center">
           <div style="padding-top: 10px" class="h-56">
             <canvas id="piechart2" width="200" height="200"></canvas>
