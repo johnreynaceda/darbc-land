@@ -191,32 +191,26 @@
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         Areas Leased by Dolefil</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        {{ App\Models\Actual::sum('dolephil_leased') }}</td>
                       </td>
                     </tr>
                     <tr>
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         DARBC Growership</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        {{ App\Models\Actual::sum('darbc_grower') }}</td>
+                      </td>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Idle Lands</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Problematic Lands</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        FREE LOTS</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      </td>
+
+                    <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                      FREE LOTS</td>
+                    <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                      {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }}
+                    </td>
+                    }}</td>
+                    </td>
                     </tr>
                   </tbody>
                 </table>
