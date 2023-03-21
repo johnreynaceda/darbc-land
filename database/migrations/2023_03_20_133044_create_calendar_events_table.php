@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->index();
             $table->string('event_name');
             $table->string('event_description');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

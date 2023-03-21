@@ -5,18 +5,28 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use App\Models\CalendarEvent;
 use WireUi\Traits\Actions;
+use Carbon\Carbon;
 use DB;
 class Calendar extends Component
 {
     use Actions;
     public $eventModal = false;
+    public $updateModal = false;
 
     public $events = [];
+    public $event_id;
+    //create event
     public $event_name;
     public $event_desc;
     public $start_date;
     public $end_date;
+    //update event
+    public $update_event_name;
+    public $update_event_desc;
+    public $update_start_date;
+    public $update_end_date;
 
+    protected $listeners = ['calendarEventClicked' => 'openUpdateModal'];
     public function mount()
     {
         $this->events = $this->getFormattedEvents();
@@ -65,6 +75,7 @@ class Calendar extends Component
             $this->dispatchBrowserEvent('refreshCalendar', [
                 'events' => $this->getFormattedEvents()
             ]);
+
         }
 
     }
@@ -76,11 +87,68 @@ class Calendar extends Component
         foreach ($events as $event) {
             $formattedEvents[] = [
                 'title' => $event->event_name,
-                'start' =>  $event->start_date,
-                'end' => $event->start_date,
+                'start' => Carbon::parse($event->start_date)->utc()->toIso8601String(),
+                'end' => Carbon::parse($event->end_date)->utc()->toIso8601String(),
                 'description' => $event->event_description,
+                'id' => $event->id,
             ];
         }
         return $formattedEvents;
+    }
+
+    public function openUpdateModal($id)
+    {
+       $this->event_id = $id;
+       $event = CalendarEvent::find($this->event_id);
+       $this->update_event_name = $event->event_name;
+       $this->update_event_desc = $event->event_description;
+       $this->update_start_date = $event->start_date;
+       $this->update_end_date = $event->end_date;
+       $this->updateModal = true;
+    }
+
+    public function updateEvent()
+    {
+        DB::beginTransaction();
+        $event = CalendarEvent::find($this->event_id);
+        $event->event_name = $this->update_event_name;
+        $event->event_description = $this->update_event_desc;
+        $event->start_date = $this->update_start_date;
+        $event->end_date = $this->update_end_date;
+        $event->save();
+        DB::commit();
+
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Event updated successfully'
+        );
+
+        $this->reset('update_event_name', 'update_event_name', 'update_event_name', 'update_event_name');
+        $this->updateModal = false;
+
+        $this->dispatchBrowserEvent('refreshCalendar', [
+            'events' => $this->getFormattedEvents()
+        ]);
+    }
+
+    public function deleteEvent()
+    {
+        DB::beginTransaction();
+        $event = CalendarEvent::find($this->event_id);
+        $event->delete();
+        DB::commit();
+
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Event successfully deleted'
+        );
+
+        $this->reset('update_event_name', 'update_event_name', 'update_event_name', 'update_event_name');
+        $this->updateModal = false;
+
+        $this->dispatchBrowserEvent('refreshCalendar', [
+            'events' => $this->getFormattedEvents()
+        ]);
+
     }
 }
