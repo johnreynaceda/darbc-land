@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div>
-                {{ $this->form }}
+                {{-- {{ $this->form }} --}}
               </div>
 
 
@@ -120,9 +120,9 @@
                     <div class="flex items-start border-b py-2">
                       @php
                         $encumbered_array = json_decode($basicInfo->encumbered ?? '', true);
-                        
+
                         $previous_title_array = json_decode($basicInfo->previous_copy_of_title ?? '', true);
-                        
+
                       @endphp
                       <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Encumbered</p>
                       <div class="lg:w-24 font-rubik mb-1">
@@ -266,7 +266,7 @@
                 </x-native-select>
               </div>
               <div>
-                <x-button label="New Actual" icon="plus" positive />
+                <x-button label="New Actual" icon="plus" positive wire:click="$set('addActualModal', true)" />
               </div>
             </div>
             <div class="mt-3">
@@ -387,7 +387,7 @@
                 </x-native-select>
               </div>
               <div>
-                <x-button label="Add New" positive icon="plus" />
+                <x-button label="Add New" positive icon="plus" wire:click="$set('addTaxModal', true)" />
               </div>
             </div>
             <div class="mt-3">
@@ -603,6 +603,108 @@
           <x-button indigo right-icon="save-as" label="Save Owner" wire:click="saveBasicInformation" />
         </div>
       </x-slot>
+    </x-card>
+  </x-modal>
+
+  <x-modal align="center" wire:model.defer="addActualModal">
+    <x-card title="Add Actual Lot">
+        <div class="space-y-3">
+            <div class="grid grid-cols-2 gap-4">
+                <x-input label="Land Status" placeholder="Status" wire:model.defer="land_status" />
+                <x-input label="DOLEPHIL Leased" placeholder="Leased Area" wire:model.defer="leased_area" />
+                <x-input label="DARBC Grower" placeholder="DARBC Grower" wire:model.defer="darbc_grower" />
+                <x-input label="Other Area" placeholder="Owned but not planted by DOLEPHIL" wire:model.defer="other_area" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <x-textarea label="Status" placeholder="" wire:model.defer="status" />
+                <x-textarea label="Remarks" placeholder="" wire:model.defer="remarks" />
+            </div>
+
+        </div>
+        <div class="grid grid-cols-3 gap-4 mt-3">
+            <x-input label="Gross Area" placeholder="0" wire:model.defer="gross_area" />
+            <x-input label="Planted Area" placeholder="0" wire:model.defer="planted_area" />
+            <x-input label="Gulley Area" placeholder="0" wire:model.defer="gulley_area" />
+            <x-input label="Total Area" placeholder="0" wire:model.defer="total_area" />
+            <x-input label="Facility Area" placeholder="0" wire:model.defer="facility_area" />
+            <x-input label="Unutilized Area" placeholder="0" wire:model.defer="unutilized_area" />
+        </div>
+        <div class="bg-gray-200 rounded-md space-y-2 p-2 mt-3">
+            <div class="grid grid-cols-3 gap-4">
+                <x-input label="Portion Field" placeholder="0" wire:model.defer="portion_field_array.0"/>
+                <x-input label="Planted Area" placeholder="0" wire:model.defer="planted_area_array.0"/>
+                <x-input label="Gulley Area" placeholder="0" wire:model.defer="gulley_area_array.0"/>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <x-input label="Total Area" placeholder="0" wire:model.defer="total_area_array.0" />
+                <x-input label="Unutilized Area" placeholder="0" wire:model.defer="unutilized_area_array.0" />
+            </div>
+        </div>
+        <div class="bg-gray-200 rounded-md space-y-2 p-2 mt-3">
+            <div class="grid grid-cols-3 gap-4">
+                <x-input label="Portion Field" placeholder="0" wire:model.defer="portion_field_array.1" />
+                <x-input label="Planted Area" placeholder="0" wire:model.defer="planted_area_array.1" />
+                <x-input label="Gulley Area" placeholder="0" wire:model.defer="gulley_area_array.1" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <x-input label="Total Area" placeholder="0" wire:model.defer="total_area_array.1" />
+                <x-input label="Unutilized Area" placeholder="0" wire:model.defer="unutilized_area_array.1" />
+            </div>
+        </div>
+
+        <x-slot name="footer">
+            <div class="flex justify-end gap-x-4">
+                <x-button flat label="Cancel" x-on:click="close" />
+                <x-button primary label="Submit" x-on:confirm="{
+                    title: 'Are you sure you want to save this information?',
+                    icon: 'question',
+                    method: 'saveActualLot'
+                }" />
+            </div>
+        </x-slot>
+    </x-card>
+  </x-modal>
+
+  <x-modal align="center" wire:model.defer="addTaxModal">
+    <x-card title="Add Tax">
+        <div class="space-y-3">
+                    <x-input label="Title Number" placeholder="" wire:model.defer="title_number" />
+                    <x-input label="Tax Declaration Number" placeholder="" wire:model.defer="tax_declaration_number" />
+                    <x-input label="Owner" placeholder="" wire:model.defer="owner" />
+                <div class="grid grid-cols-3 gap-4">
+                    <x-input label="Lease to DOLEFIL" placeholder="" wire:model.defer="lease_to_dolefil" />
+                    <x-input label="DARBC Growership" placeholder="" wire:model.defer="darbc_growers_hip" />
+                    <x-input label="Area not planted pineapple" placeholder="" wire:model.defer="darbc_not_planted" />
+                </div>
+                <x-textarea label="Remarks" placeholder="" wire:model.defer="remarks" />
+                <div class="grid grid-cols-2 gap-4">
+                    <x-input label="Market Value" placeholder="" wire:model.defer="market_value" />
+                    <x-input label="Assessed Value" placeholder="" wire:model.defer="assessed_value" />
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <x-input label="Year" placeholder="" wire:model.defer="year" />
+                    <x-input label="Square Meters" placeholder="" wire:model.defer="square_meter" />
+                    <x-input label="Year of payment" placeholder="" wire:model.defer="year_of_payment" />
+                    <x-input label="Official Receipt" placeholder="" wire:model.defer="official_receipt" />
+                </div>
+                <div class="">
+
+                    {{ $this->form }}
+                </div>
+
+        </div>
+
+        <x-slot name="footer">
+            <div class="flex justify-end gap-x-4">
+                <x-button flat label="Cancel" x-on:click="close" />
+                <x-button primary label="Submit" x-on:confirm="{
+                    title: 'Are you sure you want to save this information?',
+                    icon: 'question',
+                    method: 'saveTax'
+                }" />
+            </div>
+        </x-slot>
     </x-card>
   </x-modal>
 </div>

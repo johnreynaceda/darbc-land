@@ -14,4 +14,9 @@ class Tax extends Model
     {
         return $this->belongsTo(BasicInformation::class, "basic_information_id");
     }
+
+    public function tax_receipt()
+    {
+        return $this->hasOne(TaxReceiptImage::class);
+    }
 }
