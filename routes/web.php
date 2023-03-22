@@ -36,6 +36,12 @@ Route::get('/inquiry', function () {
     ->middleware(['auth', 'verified'])
     ->name('inquiry');
 
+Route::get('/inquiry/print-preview', function () {
+    return view('admin.print-preview');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('print-preview');
+
 Route::get('/upload', function () {
     return view('admin.upload');
 })
@@ -43,10 +49,10 @@ Route::get('/upload', function () {
     ->name('upload');
 
 Route::get('/calendar', function () {
-        return view('admin.calendar');
-    })
-        ->middleware(['auth', 'verified'])
-        ->name('calendar');
+    return view('admin.calendar');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('calendar');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name(

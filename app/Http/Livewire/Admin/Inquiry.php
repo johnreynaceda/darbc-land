@@ -42,6 +42,8 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         'notes' => null,
     ];
 
+    public $search = '';
+
     protected function getTableQuery(): Builder
     {
         return BasicInformation::query();
@@ -49,7 +51,17 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
 
     public function render()
     {
-        return view('livewire.admin.inquiry');
+        return view('livewire.admin.inquiry', [
+            'records' => BasicInformation::where(
+                'number',
+                'like',
+                '%' . $this->search . '%'
+            )
+                ->orWhere('lot_number', 'like', '%' . $this->search . '%')
+                ->orWhere('survey_number', 'like', '%' . $this->search . '%')
+                ->orWhere('title_area', 'like', '%' . $this->search . '%')
+                ->get(),
+        ]);
     }
 
     protected function getTableColumns(): array
@@ -261,9 +273,14 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->sortable(),
             TextColumn::make('encumbered')
                 ->label('ENCUMBERED AREA')
-                ->formatStateUsing(function (string $state){
+                ->formatStateUsing(function (string $state) {
                     $encumbered_array = json_decode($state, true);
-                    $encumbered = "Area: ".$encumbered_array['area']." / ". "Variance: ".$encumbered_array['variance'];
+                    $encumbered =
+                        'Area: ' .
+                        $encumbered_array['area'] .
+                        ' / ' .
+                        'Variance: ' .
+                        $encumbered_array['variance'];
                     return $encumbered;
                 })
                 ->visible(function ($record) {
@@ -283,9 +300,14 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 ->sortable(),
             TextColumn::make('previous_copy_of_title')
                 ->label('PREVIOUS COPY OF TITLE')
-                ->formatStateUsing(function (string $state){
+                ->formatStateUsing(function (string $state) {
                     $previous_copy_of_title_array = json_decode($state, true);
-                    $previous_copy_of_title = "Type Of Title: ".$previous_copy_of_title_array['type of title']." / ". "No.: ".$previous_copy_of_title_array['no.'];
+                    $previous_copy_of_title =
+                        'Type Of Title: ' .
+                        $previous_copy_of_title_array['type of title'] .
+                        ' / ' .
+                        'No.: ' .
+                        $previous_copy_of_title_array['no.'];
                     return $previous_copy_of_title;
                 })
                 ->visible(function ($record) {
