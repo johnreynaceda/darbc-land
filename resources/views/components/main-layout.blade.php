@@ -193,9 +193,28 @@
               </svg>
               Upload
             </a> --}}
-            <a href="{{route('calendar')}}"
-              class=" hover:bg-violet-800 text-white group flex items-center rounded-md px-2 py-2 text-sm font-medium">
-              {{-- <x-fluentui-calendar-rtl-48 class="mr-3 h-6 w-6 flex-shrink-0" /> --}}
+            <a href="{{ route('calendar') }}"
+              class="{{ request()->routeIs('calendar') ? 'bg-violet-800' : '' }} hover:bg-violet-800 text-white group flex items-center rounded-md px-2 py-2 text-sm font-medium">
+              <svg class="mr-3 h-6 w-6 flex-shrink-0" viewBox="0 0 48 48" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" fill="white" fill-opacity="0.01"></rect>
+                <path d="M5 19H43V40C43 41.1046 42.1046 42 41 42H7C5.89543 42 5 41.1046 5 40V19Z" fill="currentColor"
+                  stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+                <path d="M5 9C5 7.89543 5.89543 7 7 7H41C42.1046 7 43 7.89543 43 9V19H5V9Z" stroke="currentColor"
+                  stroke-width="2" stroke-linejoin="round"></path>
+                <path d="M16 4V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M32 4V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M28 34H34" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M14 34H20" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M28 26H34" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path d="M14 26H20" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
               Calendar
             </a>
             <a href="#"
@@ -211,7 +230,7 @@
       </div>
     </div>
     <div class="flex flex-col lg:pl-64">
-      <div class="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white">
+      <div class="sticky top-0 z-10 flex h-16 flex-shrink-0 shadow-sm bg-white">
         <button type="button"
           class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden">
           <span class="sr-only">Open sidebar</span>

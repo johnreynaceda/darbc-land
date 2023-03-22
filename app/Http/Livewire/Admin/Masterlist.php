@@ -232,6 +232,18 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     $query->where('year', $this->tax_get);
                 })
                 ->get(),
+            'tax_years' => Tax::where('year', '!=', '')
+                ->when($this->informationId, function ($query) {
+                    $query->where('basic_information_id', $this->informationId);
+                })
+                ->groupBy('year')
+                ->pluck('year')
+                ->toArray(),
+
+            'actuals' => Actual::where(
+                'basic_information_id',
+                $this->informationId
+            )->get(),
         ]);
     }
 

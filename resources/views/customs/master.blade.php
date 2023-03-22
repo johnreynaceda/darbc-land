@@ -243,52 +243,52 @@
             $previous_copy_of_title_array = json_decode($previous_copy_of_title, true);
           @endphp
           <tr class="divide-x divide-gray-200">
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
               <x-button label="View" icon="eye" dark sm wire:click="viewData({{ $record->id }})"
                 spinner="viewData({{ $record->id }})" />
             </td>
             <td class=" py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
               {{ $record->number }}</td>
-            <td class=" p-4 text-sm text-gray-500 text-center"> {{ $record->lot_number }}</td>
-            <td class="p-4 text-sm text-gray-500 text-center">{{ $record->survey_number }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->title_area }}
+            <td class=" p-4 text-sm text-gray-500 text-left"> {{ $record->lot_number }}</td>
+            <td class="p-4 text-sm text-gray-500 text-left">{{ $record->survey_number }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_area }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->awarded_area }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->awarded_area }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
               {{ $record->previous_land_owner }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->field_number }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->field_number }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->location }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->municipality }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->location }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->municipality }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->title }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->cloa_number }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->cloa_number }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->page }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->page }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
               {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
               {{ $previous_copy_of_title_array['type of title'] }} / {{ $previous_copy_of_title_array['no.'] }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->title_status }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_status }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->title_copy }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_copy }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->remarks }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->status }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->remarks }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->status }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
               {{ $record->land_bank_amortization }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->amount }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->date_paid }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->amount }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->date_paid }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->date_of_cert }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->date_of_cert }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
               {{ $record->ndc_direct_payment_scheme }}</td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->ndc_remarks }}
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->ndc_remarks }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-center uppercase ">{{ $record->notes }}</td>
+            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->notes }}</td>
 
           </tr>
         @endforeach

@@ -209,7 +209,7 @@
                     <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
                       {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }}
                     </td>
-                    }}</td>
+                    </td>
                     </td>
                     </tr>
                   </tbody>

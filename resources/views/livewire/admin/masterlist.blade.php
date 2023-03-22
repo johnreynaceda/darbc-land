@@ -29,7 +29,12 @@
         </div>
         <div class="mt-5 md:col-span-2 md:mt-0">
           <div class="border rounded-lg p-5">
-            <h1 class="font-bold text-lg text-gray-600 font-montserrat">BASIC INFORMATION</h1>
+            <div class="flex justify-between">
+              <h1 class="font-bold text-lg text-gray-600 font-montserrat">BASIC INFORMATION</h1>
+              <div>
+                <x-button label="Update" icon="pencil-alt" dark />
+              </div>
+            </div>
             <div class="mt-3">
               <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                 <li class="relative py-5 px-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
@@ -115,9 +120,9 @@
                     <div class="flex items-start border-b py-2">
                       @php
                         $encumbered_array = json_decode($basicInfo->encumbered ?? '', true);
-
+                        
                         $previous_title_array = json_decode($basicInfo->previous_copy_of_title ?? '', true);
-
+                        
                       @endphp
                       <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Encumbered</p>
                       <div class="lg:w-24 font-rubik mb-1">
@@ -250,9 +255,22 @@
         </div>
         <div class="mt-5 md:col-span-2 md:mt-0">
           <div class="border rounded-lg p-5">
-            <h1 class="font-bold text-lg text-gray-600 font-montserrat">ACTUAL</h1>
+            <div class="flex justify-between items-center">
+              <div class="flex space-x-3 items-center">
+                <h1 class="font-bold text-lg text-gray-600 font-montserrat">ACTUAL</h1>
+                <x-native-select wire:model="tax_get">
+                  @foreach ($tax_years as $item)
+                    <option value="{{ $item }}">{{ $item }}</option>
+                  @endforeach
+
+                </x-native-select>
+              </div>
+              <div>
+                <x-button label="New Actual" icon="plus" positive />
+              </div>
+            </div>
             <div class="mt-3">
-              <ul role="list" class="divide-y divide-gray-200 border-gray-200">
+              {{-- <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                 <li class="relative py-5 px-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
 
                   <div class="">
@@ -293,7 +311,52 @@
 
 
                 </li>
-              </ul>
+              </ul> --}}
+              <div class="">
+                <div class=" flow-root">
+                  <div class="">
+                    <div class="border">
+                      <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                          <tr class="divide-x divide-gray-200">
+                            <th scope="col"
+                              class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">LAND STATUS</th>
+                            <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                              LEASED AREA
+                            </th>
+                            <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                              UPLANTED AREA
+                            </th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              STATUS</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                              REMARKS</th>
+
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                          @foreach ($actuals as $item)
+                            <tr class="divide-x divide-gray-200">
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+                                {{ $item->land_status }}</td>
+                              <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $item->dolephil_leased }}
+                              </td>
+                              <td class="whitespace-nowrap p-4 text-sm text-gray-500">
+                                {{ $item->owned_but_not_planted }}</td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">{{ $item->status }}
+                              </td>
+                              <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                {{ $item->remarks }}</td>
+                            </tr>
+                          @endforeach
+
+                          <!-- More people... -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -313,93 +376,22 @@
         </div>
         <div class="mt-5 md:col-span-2 md:mt-0">
           <div class="border rounded-lg p-5">
-            <div class="flex space-x-4 items-center">
-              <h1 class="font-bold text-lg text-gray-600 font-montserrat">TAX</h1>
-              <x-native-select wire:model="tax_get">
-                @foreach ($tax_year as $item)
-                  <option value="{{ $item }}">{{ $item }}</option>
-                @endforeach
+            <div class="flex justify-between items-center">
+              <div class="flex space-x-4 items-center">
+                <h1 class="font-bold text-lg text-gray-600 font-montserrat">TAX</h1>
+                <x-native-select wire:model="tax_get">
+                  @foreach ($tax_years as $item)
+                    <option value="{{ $item }}">{{ $item }}</option>
+                  @endforeach
 
-              </x-native-select>
+                </x-native-select>
+              </div>
+              <div>
+                <x-button label="Add New" positive icon="plus" />
+              </div>
             </div>
             <div class="mt-3">
-              {{-- <ul role="list" class="divide-y divide-gray-200 border-gray-200">
-                <li class="relative py-5 px-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
-                  <div class="flex items-start border-b py-2">
-                    <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Year</p>
-                    <div class="font-rubik text-black uppercase text-sm text-right">
 
-                    </div>
-                  </div>
-                  <div class="" v-if="selected_item != null">
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">
-                        Area in Title HA./S
-                      </p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        DSD
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">
-                        Tax Declaration No.
-                      </p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        SD
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Owner</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        SD
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Market Value</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        ₱ 121
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Assesed Value</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        ₱2323
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Paid By</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        Dolefile
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Leased To Dolefil</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        10.6291
-                      </div>
-                    </div>
-
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Tax Payment</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        ₱ 5456.64
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Year of Payment</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        2023
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 text-sm text-gray-600">Official Reciept</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        229436
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul> --}}
               <div class="">
                 <div class=" flow-root">
                   <div class="">
@@ -564,18 +556,18 @@
         <x-input wire:model="_cloa_number" label="Cloa No." placeholder="" />
         <x-input wire:model="_page" label="Page" placeholder="" />
         <div class="col-span-5 border-y-2 py-3 border-gray-500">
-            <div class="grid grid-cols-2">
-                <h1>Encumbered</h1>
-                <h1>Previous Copy Of Title</h1>
-            </div>
+          <div class="grid grid-cols-2">
+            <h1>Encumbered</h1>
+            <h1>Previous Copy Of Title</h1>
+          </div>
           <div class="grid grid-cols-2 gap-4 mt-1">
             <div class="grid grid-cols-2 gap-4 mt-1">
-            <x-input wire:model="_encumbered_area" label="Area" placeholder="" />
-            <x-input wire:model="_encumbered_variance" label="Variance" placeholder="" />
+              <x-input wire:model="_encumbered_area" label="Area" placeholder="" />
+              <x-input wire:model="_encumbered_variance" label="Variance" placeholder="" />
             </div>
             <div class="grid grid-cols-2 gap-4 mt-1">
-            <x-input wire:model="_previous_copy_of_title_type_of_title" label="Type Of Title" placeholder="" />
-            <x-input wire:model="_previous_copy_of_title_number" label="No." placeholder="" />
+              <x-input wire:model="_previous_copy_of_title_type_of_title" label="Type Of Title" placeholder="" />
+              <x-input wire:model="_previous_copy_of_title_number" label="No." placeholder="" />
             </div>
           </div>
         </div>
@@ -592,8 +584,9 @@
 
         <x-input wire:model="_amount" label="Amount" placeholder="" />
         {{-- <x-input wire:model="" label="Date Paid" placeholder="" /> --}}
-        <x-datetime-picker without-time label="Date Paid" placeholder="Date Paid" wire:model.defer="_date_paid"/>
-        <x-datetime-picker without-time label="Date of Certificate" placeholder="Date of Certificate" wire:model.defer="_date_of_cert"/>
+        <x-datetime-picker without-time label="Date Paid" placeholder="Date Paid" wire:model.defer="_date_paid" />
+        <x-datetime-picker without-time label="Date of Certificate" placeholder="Date of Certificate"
+          wire:model.defer="_date_of_cert" />
         {{-- <x-input wire:model="" label="Date of Certificate" placeholder="" /> --}}
         <x-input wire:model="_ndc_direct_payment_scheme" label="NDC Direct Payment Scheme" placeholder="" />
         <div class="col-span-3">
