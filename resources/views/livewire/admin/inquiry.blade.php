@@ -690,56 +690,56 @@
                 @php
                   $encumbered = $record->encumbered;
                   $encumbered_array = json_decode($encumbered, true);
-
+                  
                   $previous_copy_of_title = $record->previous_copy_of_title;
                   $previous_copy_of_title_array = json_decode($previous_copy_of_title, true);
                 @endphp
                 @if ($count < 1)
                   <tr class="divide-x divide-gray-200">
 
-                    <td class=" py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+                    <td class=" py-4 pl-4 pr-4 text-sm  text-gray-700 ">
                       {{ $record->number }}</td>
-                    <td class=" p-4 text-sm text-gray-500 text-left"> {{ $record->lot_number }}</td>
-                    <td class="p-4 text-sm text-gray-500 text-left">{{ $record->survey_number }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_area }}
+                    <td class=" p-4 text-sm text-gray-700 text-left"> {{ $record->lot_number }}</td>
+                    <td class="p-4 text-sm text-gray-700 text-left">{{ $record->survey_number }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_area }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->awarded_area }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->awarded_area }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                       {{ $record->previous_land_owner }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->field_number }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->field_number }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->location }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->municipality }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->location }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->municipality }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->cloa_number }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->cloa_number }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->page }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->page }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                       {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                       {{ $previous_copy_of_title_array['type of title'] }} /
                       {{ $previous_copy_of_title_array['no.'] }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_status }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_status }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_copy }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_copy }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->remarks }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->status }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->remarks }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->status }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                       {{ $record->land_bank_amortization }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->amount }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->date_paid }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->amount }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->date_paid }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->date_of_cert }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->date_of_cert }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                       {{ $record->ndc_direct_payment_scheme }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->ndc_remarks }}
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->ndc_remarks }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->notes }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->notes }}</td>
 
                   </tr>
                 @elseif($count > 0)
@@ -751,119 +751,119 @@
                     @endif
 
                     @if ($filters['lot_number'] != false && $filters['lot_number'] != null)
-                      <td class=" p-4 text-sm text-gray-500 text-left"> {{ $record->lot_number }}</td>
+                      <td class=" p-4 text-sm text-gray-700 text-left"> {{ $record->lot_number }}</td>
                     @endif
                     @if ($filters['survey_number'] != false && $filters['survey_number'] != null)
-                      <td class="p-4 text-sm text-gray-500 text-left">{{ $record->survey_number }}</td>
+                      <td class="p-4 text-sm text-gray-700 text-left">{{ $record->survey_number }}</td>
                     @endif
 
                     @if ($filters['title_area'] != false && $filters['title_area'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_area }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_area }}
                       </td>
                     @endif
 
                     @if ($filters['awarded_area'] != false && $filters['awarded_area'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->awarded_area }}
                       </td>
                     @endif
 
                     @if ($filters['previous_land_owner'] != false && $filters['previous_land_owner'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->previous_land_owner }}</td>
                     @endif
 
                     @if ($filters['field_number'] != false && $filters['field_number'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->field_number }}
                       </td>
                     @endif
 
                     @if ($filters['location'] != false && $filters['location'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->location }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->location }}
                       </td>
                     @endif
                     @if ($filters['municipality'] != false && $filters['municipality'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->municipality }}
                       </td>
                     @endif
 
                     @if ($filters['title'] != false && $filters['title'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title }}</td>
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title }}</td>
                     @endif
 
                     @if ($filters['cloa_number'] != false && $filters['cloa_number'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->cloa_number }}
                       </td>
                     @endif
                     @if ($filters['page'] != false && $filters['page'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->page }}</td>
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->page }}</td>
                     @endif
                     @if ($filters['encumbered'] != false && $filters['encumbered'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td>
                     @endif
 
                     @if ($filters['previous_copy_of_title'] != false && $filters['previous_copy_of_title'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $previous_copy_of_title_array['type of title'] }} /
                         {{ $previous_copy_of_title_array['no.'] }}
                       </td>
                     @endif
                     @if ($filters['title_status'] != false && $filters['title_status'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->title_status }}
                       </td>
                     @endif
                     @if ($filters['title_copy'] != false && $filters['title_copy'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_copy }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_copy }}
                       </td>
                     @endif
 
                     @if ($filters['remarks'] != false && $filters['remarks'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->remarks }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->remarks }}
                       </td>
                     @endif
 
                     @if ($filters['status'] != false && $filters['status'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->status }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->status }}
                       </td>
                     @endif
                     @if ($filters['land_bank_amortization'] != false && $filters['land_bank_amortization'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->land_bank_amortization }}</td>
                     @endif
 
                     @if ($filters['amount'] != false && $filters['amount'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->amount }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->amount }}
                       </td>
                     @endif
 
                     @if ($filters['date_paid'] != false && $filters['date_paid'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->date_paid }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->date_paid }}
                       </td>
                     @endif
 
                     @if ($filters['date_of_cert'] != false && $filters['date_of_cert'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->date_of_cert }}
                       </td>
                     @endif
                     @if ($filters['ndc_direct_payment_scheme'] != false && $filters['ndc_direct_payment_scheme'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->ndc_direct_payment_scheme }}</td>
                     @endif
 
                     @if ($filters['ndc_remarks'] != false && $filters['ndc_remarks'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $record->ndc_remarks }}
                       </td>
                     @endif
 
                     @if ($filters['notes'] != false && $filters['notes'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->notes }}</td>
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->notes }}</td>
                     @endif
 
                   </tr>
@@ -896,15 +896,15 @@
   </x-modal>
 
   @push('scripts')
-        <script>
-            function printDiv(divName) {
-                var printContents = document.getElementById(divName).innerHTML;
-                var originalContents = document.body.innerHTML;
-                document.body.innerHTML = printContents;
-                window.print();
-                document.body.innerHTML = originalContents;
-            }
-        </script>
-    @endpush
+    <script>
+      function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+      }
+    </script>
+  @endpush
 
 </div>
