@@ -98,6 +98,10 @@
         <x-checkbox id="right-label" label="
             NDC" wire:model="filters.ndc_direct_payment_scheme" />
       </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="
+            NOTES" wire:model="filters.notes" />
+      </div>
     </div>
 
     <div class="mt-4 relative">
@@ -115,10 +119,10 @@
             </div>
           </div>
           <div>
-            <x-button label="PRINT" class="font-bold" icon="printer" dark />
+            <x-button label="PRINT" class="font-bold" icon="printer" dark onclick="printDiv('print_table')" />
           </div>
         </div>
-        <div class="flow-root overflow-x-auto">
+        <div class="flow-root overflow-x-auto" id="print_table">
           @php
             $count = count(
                 array_filter($filters, function ($value) {
@@ -686,7 +690,7 @@
                 @php
                   $encumbered = $record->encumbered;
                   $encumbered_array = json_decode($encumbered, true);
-                  
+
                   $previous_copy_of_title = $record->previous_copy_of_title;
                   $previous_copy_of_title_array = json_decode($previous_copy_of_title, true);
                 @endphp
@@ -890,4 +894,17 @@
       </x-slot>
     </x-card>
   </x-modal>
+
+  @push('scripts')
+        <script>
+            function printDiv(divName) {
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+            }
+        </script>
+    @endpush
+
 </div>
