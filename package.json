@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "fullcalendar": "^6.1.4"
+        "fullcalendar": "^6.1.4",
+        "js-image-zoom": "^0.7.0"
     }
 }
