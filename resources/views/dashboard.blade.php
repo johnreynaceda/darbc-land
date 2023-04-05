@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="flex-1 ">
-      <div class=" flex justify-center">
+      <div id="img-container" class=" flex justify-center">
         <img src="{{ asset('images/darbcmap3.jpg') }}" class="h-96" alt="">
       </div>
       <div class="relative">
@@ -613,6 +613,29 @@
           responsive: true
         }
       });
+    </script>
+    <script>
+      var options1 = {
+        width: 40,
+        zoomWidth: 40,
+        offset: {
+          vertical: 0,
+          horizontal: 10
+        }
+      };
+
+      // If the width and height of the image are not known or to adjust the image to the container of it
+      var options2 = {
+        width: 500,
+        zoomWidth: 500,
+        fillContainer: true,
+        offset: {
+          vertical: 0,
+          horizontal: -500
+        }
+      };
+
+      new ImageZoom(document.getElementById("img-container"), options2);
     </script>
   </div>
 </x-main-layout>
