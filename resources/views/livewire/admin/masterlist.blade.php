@@ -1,5 +1,5 @@
 <div>
-  <x-button label="Add Land Owner" indigo wire:click="$set('add_modal', true)" spinner="$set('add_modal', true)" />
+  <x-button label="Add Lot" indigo wire:click="$set('add_modal', true)" spinner="$set('add_modal', true)" />
 
   <div class="mt-4">
     {{ $this->table }}
@@ -41,12 +41,12 @@
 
 
                   <div class="">
-                    <div class="flex items-start border-b py-2">
+                    {{-- <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right rounded ">
                         {{ $basicInfo->number ?? '' }}
                       </div>
-                    </div>
+                    </div> --}}
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Lot No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
@@ -66,7 +66,7 @@
                       </div>
                     </div>
                     <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Award Area</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Awarded Area</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
                         {{ $basicInfo->awarded_area ?? '' }}
                       </div>
@@ -122,9 +122,9 @@
                         $encumbered_array = json_decode($basicInfo->encumbered ?? '', true);
 
                         $previous_title_array = json_decode($basicInfo->previous_copy_of_title ?? '', true);
-
+                        $title_status = $basicInfo->previous_copy_of_title ?? '';
                       @endphp
-                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Encumbered</p>
+                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Variance Of Awarded And Based On Title Area</p>
                       <div class="lg:w-24 font-rubik mb-1">
                         <p class="text-sm text-gray-900">Area</p>
                         <p class="text-sm text-black fot-rubik"> {{ $encumbered_array['area'] ?? '' }}</p>
@@ -149,13 +149,7 @@
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Title Status</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $basicInfo->title_status ?? '' }}
-                      </div>
-                    </div>
-                    <div class="flex items-start border-b py-2">
-                      <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Title Copy</p>
-                      <div class="font-rubik text-black uppercase text-sm text-right">
-                        {{ $basicInfo->title_copy ?? '' }}
+                        {{ $title_status_detailed }}
                       </div>
                     </div>
 
@@ -480,7 +474,7 @@
         <div class="mt-5 md:col-span-2 md:mt-0">
           <div class="border rounded-lg p-5">
             <div class="flex space-x-4 items-center">
-              <h1 class="font-bold text-lg text-gray-600 font-montserrat">LAND AMORTIZATION</h1>
+              <h1 class="font-bold text-lg text-gray-600 font-montserrat">LANDBANK AMORTIZATION</h1>
 
             </div>
             <div class="mt-3">

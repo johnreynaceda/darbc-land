@@ -8,10 +8,10 @@
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
 
           </th>
-          <th
+          {{-- <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
             NO.
-          </th>
+          </th> --}}
           <th class="whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
             LOT#
           </th>
@@ -21,8 +21,7 @@
           </th>
           <th
             class="whitespace-nowrap border-t  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
-            TITLE
-            AREA
+           AREA BASED
           </th>
           <th
             class=" whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
@@ -59,7 +58,7 @@
           </th>
           <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
-            ENCUMBERED
+            VARIANCE OF AWARDED AND BASE ON TITLE AREA
           </th>
           <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
@@ -71,11 +70,11 @@
             TITLE
             STATUS
           </th>
-          <th
+          {{-- <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
             TITLE
             COPY
-          </th>
+          </th> --}}
           <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
             REMARKS
@@ -130,11 +129,7 @@
           <th class="whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
           </th>
           <th class=" whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
-
-          </th>
-          <th
-            class="whitespace-nowrap border-t  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
-            HAS./S
+            ON TITLE
           </th>
           <th
             class=" whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
@@ -188,17 +183,17 @@
           <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
           </th>
-          <th
+          {{-- <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
 
+          </th> --}}
+          <th
+            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
+            {{-- REMARKS --}}
           </th>
           <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
-            REMARKS
-          </th>
-          <th
-            class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
-            STATUS
+            {{-- STATUS --}}
           </th>
           <th
             class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
@@ -238,7 +233,7 @@
           @php
             $encumbered = $record->encumbered;
             $encumbered_array = json_decode($encumbered, true);
-            
+
             $previous_copy_of_title = $record->previous_copy_of_title;
             $previous_copy_of_title_array = json_decode($previous_copy_of_title, true);
           @endphp
@@ -247,8 +242,8 @@
               <x-button label="View" icon="eye" dark sm wire:click="viewData({{ $record->id }})"
                 spinner="viewData({{ $record->id }})" />
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
-              {{ $record->number }}</td>
+            {{-- <td class=" py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+              {{ $record->number }}</td> --}}
             <td class=" p-4 text-sm text-gray-500 text-left"> {{ $record->lot_number }}</td>
             <td class="p-4 text-sm text-gray-500 text-left">{{ $record->survey_number }}</td>
             <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_area }}
@@ -273,8 +268,8 @@
             </td>
             <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_status }}
             </td>
-            <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_copy }}
-            </td>
+            {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->title_copy }}
+            </td> --}}
             <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->remarks }}</td>
             <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">{{ $record->status }}</td>
             <td class=" py-4 pl-4 pr-4 text-sm text-gray-500 text-left uppercase ">

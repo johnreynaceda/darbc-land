@@ -49,6 +49,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     public $_notes;
     public $view_modal = false;
     public $basicInfo = [];
+    public $title_status_detailed;
     public $actual = [];
     public $tax_year;
     public $tax_get;
@@ -144,10 +145,10 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('number')
-                ->label('NO.')
-                ->searchable()
-                ->sortable(),
+            // TextColumn::make('number')
+            //     ->label('NO.')
+            //     ->searchable()
+            //     ->sortable(),
             TextColumn::make('lot_number')
                 ->label('LOT NO.')
                 ->searchable()
@@ -410,5 +411,24 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
         $this->basicInfo = BasicInformation::where('id', $id)->first();
         $this->actual = Actual::where('basic_information_id', $id)->first();
         $this->taxes = $this->view_modal = true;
+
+        // $this->title_status_detailed = $this->basicInfo->title_status;
+        switch ($this->basicInfo->title_status) {
+            case 'TWC':
+                $this->title_status_detailed = 'TWC - Title with CLOA';
+                break;
+            case 'TWOC':
+                    $this->title_status_detailed = 'TWOC - Title without CLOA';
+                break;
+            case 'UWC':
+                    $this->title_status_detailed = 'UWC - Untitled with CLOA';
+                break;
+            case 'UWOC':
+                    $this->title_status_detailed = 'UWOC - Untitled without CLOA';
+                 break;
+            default:
+            $this->title_status_detailed = '';
+                break;
+        }
     }
 }
