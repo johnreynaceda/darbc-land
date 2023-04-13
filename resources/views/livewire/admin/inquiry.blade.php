@@ -104,6 +104,21 @@
       </div>
     </div>
 
+    {{-- filters --}}
+    <div class="grid grid-cols-4 gap-4 mt-4">
+        <div class="col-span-1">
+            <x-select
+            label="Select Status"
+            placeholder="Select one status"
+            wire:model.defer="model">
+            <x-select.option label="Pending" value="1" />
+            <x-select.option label="In Progress" value="2" />
+            <x-select.option label="Stuck" value="3" />
+            <x-select.option label="Done" value="4" />
+        </x-select>
+        </div>
+    </div>
+
     <div class="mt-4 relative">
       <div class="p-3 border rounded-lg">
         <div class="flex mb-2 justify-between items-center">
@@ -690,7 +705,7 @@
                 @php
                   $encumbered = $record->encumbered;
                   $encumbered_array = json_decode($encumbered, true);
-                  
+
                   $previous_copy_of_title = $record->previous_copy_of_title;
                   $previous_copy_of_title_array = json_decode($previous_copy_of_title, true);
                 @endphp

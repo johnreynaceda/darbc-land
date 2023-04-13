@@ -19,6 +19,7 @@ use DB;
 
 class Masterlist extends Component implements Tables\Contracts\HasTable
 {
+    protected $listeners = ['close_modal'=> 'closeModal'];
     public $add_modal = false;
     public $_number;
     public $_lot_number;
@@ -338,6 +339,11 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             $title = 'Success',
             $description = 'Data successfully saved'
         );
+    }
+
+    public function closeModal()
+    {
+        $this->add_modal = false;
     }
 
     public function saveTax()
