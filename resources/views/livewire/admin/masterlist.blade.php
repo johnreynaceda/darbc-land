@@ -536,8 +536,8 @@
     </div>
   </x-modal.card>
 
-  <x-modal wire:model.defer="add_modal" align="center" max-width="6xl">
-    <x-card title="NEW LAND OWNER">
+  <x-modal wire:model.defer="update_modal" align="center" max-width="6xl">
+    <x-card title="ADD LOT">
       <div class="grid grid-cols-5 gap-4">
         <x-input wire:model="_number" label="No." placeholder="" />
         <x-input wire:model="_lot_number" label="Lot No." placeholder="" />
@@ -599,6 +599,12 @@
           <x-button indigo right-icon="save-as" label="Save Owner" wire:click="saveBasicInformation" />
         </div>
       </x-slot>
+    </x-card>
+  </x-modal>
+
+  <x-modal wire:model.defer="add_modal" align="center" max-width="6xl">
+    <x-card title="ADD LOT">
+        <livewire:components.add-lot />
     </x-card>
   </x-modal>
 
