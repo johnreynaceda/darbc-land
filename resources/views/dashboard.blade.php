@@ -10,12 +10,13 @@
           $compromise = App\Models\Actual::where('land_status', 'Compromise Agreement')->count();
           $deleted = App\Models\Actual::where('land_status', 'Deleted')->count();
           $others = App\Models\Actual::where('land_status', 'Others')->count();
-          
+          $total_hectars = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area') + App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
         @endphp
-        <header class=" font-bold">STATUS</header>
+        <header class=" font-bold">LAND SUMMARY</header>
+        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
         <div class="mt-2">
           <div class="">
-            <div id="chart" style="width: 400px; height: 400px;"></div>
+            <canvas id="land_summary" height="200"></canvas>
           </div>
         </div>
       </div>
@@ -28,10 +29,11 @@
           $facility = App\Models\Actual::sum('facility_area');
           $unutilized = App\Models\Actual::sum('unutilized_area');
         @endphp
-        <header class=" font-bold">ACTUAL SUMMARY </header>
+        <header class=" font-bold">ACTUAL LAND SUMMARY </header>
+        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
         <div class="mt-2">
           <div class="">
-            <div id="chart1" style="width: 400px; height: 400px;"></div>
+            <canvas id="actual_summary" height="200"></canvas>
           </div>
         </div>
       </div>
@@ -42,9 +44,25 @@
           $gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GenSan' . '%')->count();
         @endphp
         <header class=" font-bold">MUNICIPALITIES</header>
-        <div class="mt-2 flex justify-center w-full">
-          <div style="padding-top: 10px" class="h-56 ">
+        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
+        <div class="mt-2">
+          <div>
             <canvas id="piechart3" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50  mt-3 rounded-xl p-2 px-4 shadow">
+        @php
+          $twc = App\Models\BasicInformation::where('title_status', 'TWC')->count();
+          $twoc = App\Models\BasicInformation::where('title_status', 'TWOC')->count();
+          $uwc = App\Models\BasicInformation::where('title_status', 'UWC')->count();
+          $uwoc = App\Models\BasicInformation::where('title_status', 'UWOC')->count();
+        @endphp
+        <header class=" font-bold">TITLE STATUS</header>
+        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
+        <div class="mt-2">
+          <div>
+            <canvas id="title_status" height="200"></canvas>
           </div>
         </div>
       </div>
@@ -318,54 +336,7 @@
           </div>
         </div>
         <div>
-          {{-- <div class="mt-2 flow-root">
-            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div class="p-1 bg-gray-100 text-xs font-bold">
-                  <span>TUPI AREA: 6,669,4968</span>
-                </div>
-                <table class="min-w-full divide-y divide-gray-300">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
-                        STATUS</th>
-                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                        HECTARS</th>
-                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
-                      </th>
 
-                    </tr>
-                  </thead>
-                  <tbody class="bg-white">
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Lindsay
-                        Walton</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">Front-end Developer</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">lindsay.walton@example.com
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div> --}}
         </div>
         <div>
           <div class="mt-2 flow-root">
@@ -470,121 +441,71 @@
     </div>
 
     <script>
-      var myChart = echarts.init(document.getElementById('chart'));
-      var option = {
+      const land_summary = new Chart(document.getElementById('land_summary'), {
+        type: 'bar',
+        data: {
+          labels: [
+            'Leased',
+            'Growership',
+            'Unplanted',
+            'Compromise Agreement',
+            'Deleted',
+            'Others',
 
-        tooltip: {
-          trigger: 'item'
-        },
-
-        label: {
-          formatter: "{b}: {c} ({d}%)",
-        },
-
-        series: [{
-
-          type: 'pie',
-
-          radius: '40%',
-          data: [{
-              value: {{ $leased }},
-              name: 'Leased'
-            },
-            {
-              value: {{ $unplanted }},
-              name: 'Unplanted'
-            },
-            {
-              value: {{ $growers }},
-              name: 'Growers'
-            },
-            {
-              value: {{ $deleted }},
-              name: 'Deleted'
-            },
-            {
-              value: {{ $compromise }},
-              name: 'Compromise Aggrement'
-            }, {
-              value: {{ $others }},
-              name: 'Others'
-            }
           ],
-          labelType: {
-            type: Object,
-            default: {
-              fontSize: 12,
-            },
-          },
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }]
-      };
-      myChart.setOption(option);
+          datasets: [{
+            label: 'Land Summary',
+            data: [{{ $leased }}, {{ $growers }}, {{ $unplanted }}, {{ $compromise }},
+              {{ $deleted }}, {{ $others }}
+            ],
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#E7E9ED',
+              '#8C9EFF',
+              '#FF7F50'
+            ]
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
     </script>
 
     <script>
-      var myChart1 = echarts.init(document.getElementById('chart1'));
-      var option = {
+      const actual_summary = new Chart(document.getElementById('actual_summary'), {
+        type: 'bar',
+        data: {
+          labels: [
+            'Planted Area',
+            'Gulley Area',
+            'Total Area',
+            'Facilty Area',
+            'Unutilized Area',
+            'Gross Area',
 
-        tooltip: {
-          trigger: 'item'
-        },
-
-        label: {
-          formatter: "{b}: {c} ({d}%)",
-        },
-
-        series: [{
-
-          type: 'pie',
-
-          radius: '40%',
-          data: [{
-              value: {{ $gross }},
-              name: 'Gross Area'
-            },
-            {
-              value: {{ $planted }},
-              name: 'Planted Area'
-            },
-            {
-              value: {{ $gulley }},
-              name: 'Gulley Area'
-            },
-            {
-              value: {{ $total }},
-              name: 'Total Area'
-            },
-            {
-              value: {{ $facility }},
-              name: 'Facility Area'
-            }, {
-              value: {{ $unutilized }},
-              name: 'Unutilized Area'
-            }
           ],
-          labelType: {
-            type: Object,
-            default: {
-              fontSize: 12,
-            },
-          },
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }]
-      };
-      myChart1.setOption(option);
+          datasets: [{
+            label: 'Land Summary',
+            data: [{{ $planted }}, {{ $gulley }}, {{ $total }}, {{ $facility }},
+              {{ $unutilized }}, {{ $gross }}
+            ],
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#E7E9ED',
+              '#8C9EFF',
+              '#FF7F50'
+            ]
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
     </script>
 
     <script>
@@ -599,6 +520,34 @@
           datasets: [{
             label: 'Lot Count',
             data: [{{ $polomolok }}, {{ $tupi }}, {{ $gensan }}],
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#E7E9ED',
+              '#8C9EFF',
+              '#FF7F50'
+            ]
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    </script>
+    <script>
+      const title_status = new Chart(document.getElementById('title_status'), {
+        type: 'bar',
+        data: {
+          labels: [
+            'Titled with CLOA',
+            'Titled without CLOA',
+            'Untitled with CLOA',
+            'Untitled without CLOA'
+          ],
+          datasets: [{
+            label: 'Title Status',
+            data: [{{ $twc }}, {{ $twoc }}, {{ $uwc }}, {{ $uwoc }}],
             backgroundColor: [
               '#FF6384',
               '#36A2EB',
