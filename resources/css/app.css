@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 [x-cloak] {
-  display: none;
+    display: none !important;
 }
 /* Filament Tables Customization */
 
