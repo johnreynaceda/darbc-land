@@ -12,8 +12,11 @@
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
           <div class="px-4 sm:px-0">
-            <div class="p-5">
-              <div class="py-5">
+            <div class="">
+              <div class="">
+                <div class="mb-3">
+                    <x-button label="Back" icon="arrow-left" emerald wire:click="$set('view_modal', false)" />
+                  </div>
                 <div class="border rounded-lg bg-gray-500 h-96 relative">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png"
@@ -121,7 +124,7 @@
                     <div class="flex items-start border-b py-2">
                       @php
                         $encumbered_array = json_decode($basicInfo->encumbered ?? '', true);
-                        
+
                         $previous_title_array = json_decode($basicInfo->previous_copy_of_title ?? '', true);
                         $title_status = $basicInfo->previous_copy_of_title ?? '';
                       @endphp
