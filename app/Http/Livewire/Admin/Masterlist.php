@@ -10,17 +10,33 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\BasicInformation;
 use Filament\Tables\Columns\TextColumn;
 use WireUi\Traits\Actions;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Actual;
 use App\Models\Tax;
 use App\Models\TaxReceiptImage;
+use Filament\Tables\Actions\Position;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Illuminate\Support\HtmlString;
+use Carbon\Carbon;
 use DB;
 
 class Masterlist extends Component implements Tables\Contracts\HasTable
 {
     protected $listeners = ['close_modal'=> 'closeModal'];
     public $add_modal = false;
+    public $update_modal = false;
+
+    //for add
     public $_number;
     public $_lot_number;
     public $_survey_number;
@@ -48,6 +64,36 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     public $_ndc_direct_payment_scheme;
     public $_ndc_remarks;
     public $_notes;
+    //for update
+    public $__number;
+    public $__lot_number;
+    public $__survey_number;
+    public $__title_area;
+    public $__awarded_area;
+    public $__previous_land_owner;
+    public $__field_number;
+    public $__location;
+    public $__municipality;
+    public $__title;
+    public $__cloa_number;
+    public $__page;
+    public $__encumbered_area;
+    public $__encumbered_variance;
+    public $__previous_copy_of_title_type_of_title;
+    public $__previous_copy_of_title_number;
+    public $__title_status;
+    public $__title_copy;
+    public $__remarks;
+    public $__status;
+    public $__land_bank_amortization;
+    public $__amount;
+    public $__date_paid;
+    public $__date_of_cert;
+    public $__ndc_direct_payment_scheme;
+    public $__ndc_remarks;
+    public $__notes;
+
+
     public $view_modal = false;
     public $basicInfo = [];
     public $title_status_detailed;
@@ -131,17 +177,185 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
         ];
     }
 
+    protected function getTableActionsPosition(): ?string
+{
+    return Position::BeforeCells;
+}
+
+
     protected function getTableQuery(): Builder
     {
         return BasicInformation::query();
     }
 
-    public function getTableContent()
+
+    protected function getTableActions(): array
     {
-        return view('customs.master', [
-            'infos' => BasicInformation::query(),
-        ]);
+        return [
+            Action::make('update')
+            ->button()
+            ->color('success')
+            ->icon('heroicon-o-pencil')
+            ->modalHeading('Update Record')
+            ->modalSubheading('Make sure all the data are correct before submitting.')
+            ->modalWidth('5xl')
+            ->mountUsing(fn (Forms\ComponentContainer $form, BasicInformation $record) => $form->fill([
+                '__number' => $record->number,
+                '__lot_number' => $record->lot_number,
+                '__survey_number' => $record->survey_number,
+                '__title_area' => $record->title_area,
+                '__awarded_area' => $record->awarded_area,
+                '__previous_land_owner' => $record->previous_land_owner,
+                '__field_number' => $record->field_number,
+                '__location' => $record->location,
+                '__municipality' => $record->municipality,
+                '__title' => $record->title,
+                '__cloa_number' => $record->cloa_number,
+                '__page' => $record->page,
+                '__encumbered_area' => json_decode($record->encumbered, true)['area'],
+                '__encumbered_variance' => json_decode($record->encumbered, true)['variance'],
+                '__previous_copy_of_title_type_of_title' => json_decode($record->previous_copy_of_title, true)['type of title'],
+                '__previous_copy_of_title_number' => json_decode($record->previous_copy_of_title, true)['no.'],
+                '__title_copy' => $record->title_copy,
+                '__title_status' => $record->title_status,
+                '__land_bank_amortization' => $record->land_bank_amortization,
+                '__remarks' => $record->remarks,
+                '__status' => $record->status,
+                '__date_paid' => $record->date_paid,
+                '__date_of_cert' => $record->date_of_cert,
+                '__amount' => $record->amount,
+                '__ndc_direct_payment_scheme' => $record->ndc_direct_payment_scheme,
+                '__ndc_remarks' => $record->ndc_remarks,
+                '__notes' => $record->notes,
+            ]))
+            ->action(function (array $data, BasicInformation $record): void {
+                $encumbered = json_encode([
+                    'area' => $data['__encumbered_area'],
+                    'variance' => $data['__encumbered_variance'],
+                ]);
+                $previous_copy_of_title = json_encode([
+                    'type of title' => $data['__previous_copy_of_title_type_of_title'],
+                    'no.' => $data['__previous_copy_of_title_number'],
+                ]);
+
+                DB::beginTransaction();
+                $record->number = $data['__number'];
+                $record->lot_number = $data['__lot_number'];
+                $record->survey_number = $data['__survey_number'];
+                $record->title_area = $data['__title_area'];
+                $record->awarded_area = $data['__awarded_area'];
+                $record->previous_land_owner = $data['__previous_land_owner'];
+                $record->field_number = $data['__field_number'];
+                $record->location = $data['__location'];
+                $record->municipality = $data['__municipality'];
+                $record->title = $data['__title'];
+                $record->cloa_number = $data['__cloa_number'];
+                $record->page = $data['__page'];
+                $record->encumbered = $encumbered;
+                $record->previous_copy_of_title = $previous_copy_of_title;
+                $record->title_copy = $data['__title_copy'];
+                $record->title_status = $data['__title_status'];
+                $record->land_bank_amortization = $data['__land_bank_amortization'];
+                $record->remarks = $data['__remarks'];
+                $record->status = $data['__status'];
+                $record->date_paid =  \Carbon\Carbon::parse($data['__date_paid'])->format('Y-m-d');
+                $record->date_of_cert = \Carbon\Carbon::parse($data['__date_of_cert'])->format('Y-m-d');
+                $record->amount = $data['__amount'];
+                $record->ndc_direct_payment_scheme = $data['__ndc_direct_payment_scheme'];
+                $record->ndc_remarks = $data['__ndc_remarks'];
+                $record->notes = $data['__notes'];
+                $record->save();
+                DB::commit();
+
+                $this->dialog()->success(
+                    $title = 'Success',
+                    $description = 'Data successfully saved'
+                );
+                // $this->record->author()->associate($data['authorId']);
+                // $this->record->save();
+            })
+            ->form([
+
+                Wizard::make([
+                    Wizard\Step::make('first')
+                        ->schema([
+                            Grid::make(2)
+                            ->schema([
+                                TextInput::make('__number')->label('No.'),
+                                TextInput::make('__lot_number')->label('Lot No.'),
+                                TextInput::make('__survey_number')->label('Survey No.'),
+                                TextInput::make('__title_area')->label('Area Based On Title'),
+                                TextInput::make('__awarded_area')->label('Awarded Area'),
+                                TextInput::make('__previous_land_owner')->label('Previous Land Owner'),
+                                TextInput::make('__field_number')->label('Field No.'),
+                                TextInput::make('__location')->label('Location'),
+                                TextInput::make('__municipality')->label('Municipality'),
+                                TextInput::make('__title')->label('Title'),
+                                TextInput::make('__cloa_number')->label('Cloa No.'),
+                                TextInput::make('__page')->label('Page'),
+                            ])
+
+                        ])->label('Step 1'),
+                    Wizard\Step::make('second')
+                        ->schema([
+                            Fieldset::make('Variance of Awarded and Base on Title Area')
+                            ->schema([
+                                TextInput::make('__encumbered_area')->label('Area'),
+                                TextInput::make('__encumbered_variance')->label('Variance'),
+                            ])
+                            ->columns(2),
+                            Fieldset::make('Previous Copy Of Title')
+                            ->schema([
+                                TextInput::make('__previous_copy_of_title_type_of_title')->label('Type Of Title'),
+                                TextInput::make('__previous_copy_of_title_number')->label('No.'),
+                            ])
+                            ->label('Previous Copy Of Title')
+                            ->columns(2)
+                        ])->label('Step 2'),
+                    Wizard\Step::make('third')
+                        ->schema([
+                                Card::make()
+                                ->schema([
+                                    TextInput::make('__title_copy')->label('Title Copy'),
+                                    TextInput::make('__title_status')->label('Title Status'),
+                                    TextInput::make('__land_bank_amortization')->label('Land Bank Amortization'),
+                                ])->columns(3),
+                                Card::make()
+                                ->schema([
+                                TextArea::make('__remarks')->label('Remarks'),
+                                TextArea::make('__status')->label('Status'),
+                                ])->columns(2),
+                        ])->label('Step 3'),
+                    Wizard\Step::make('last')
+                        ->schema([
+                            Card::make()
+                            ->schema([
+                                DatePicker::make('__date_paid')->label('Date Paid'),
+                                DatePicker::make('__date_of_cert')->label('Date Of Certificate'),
+                                TextInput::make('__amount')->label('Amount'),
+                                TextInput::make('__ndc_direct_payment_scheme')->label('NDC Direct Payment Scheme'),
+                                TextArea::make('__ndc_remarks')->label('NDC Remarks'),
+                                TextArea::make('__notes')->label('Notes'),
+                            ])->columns(2)
+                        ])->label('Step 4'),
+                ])
+                // ->submitAction(new HtmlString(view('components.forms.save-button')->render()))
+
+            ]),
+            Action::make('view')
+            ->button()
+            ->color('warning')
+            ->icon('heroicon-o-eye')
+            ->action(fn ($record) => $this->viewData($record->id))
+        ];
     }
+
+    // public function getTableContent()
+    // {
+    //     return view('customs.master', [
+    //         'infos' => BasicInformation::query(),
+    //     ]);
+    // }
 
     protected function getTableColumns(): array
     {

@@ -35,9 +35,9 @@
           <div class="border rounded-lg p-5">
             <div class="flex justify-between">
               <h1 class="font-bold text-lg text-gray-600 font-montserrat">BASIC INFORMATION</h1>
-              <div>
-                <x-button label="Update" icon="pencil-alt" dark />
-              </div>
+              {{-- <div>
+                <x-button label="Update" icon="pencil-alt" dark wire:click="$set('update_modal', true)" />
+              </div> --}}
             </div>
             <div class="mt-3">
               <ul role="list" class="divide-y divide-gray-200 border-gray-200">
