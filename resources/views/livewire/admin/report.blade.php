@@ -66,14 +66,14 @@
               STATUS</th>
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
               REMARKS</th>
-            <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-              GROSS AREA</th>
+            {{-- <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
+              GROSS AREA</th> --}}
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
               PLANTED</th>
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
               GULLEY</th>
-            <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-              TOTAL</th>
+            {{-- <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
+              TOTAL</th> --}}
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
               FACILTY</th>
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
@@ -127,17 +127,17 @@
             </th>
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
             </th>
-            <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-            </th>
-            <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
-              AREA
-            </th>
+            {{-- <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
+            </th> --}}
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
               AREA
             </th>
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
               AREA
             </th>
+            {{-- <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
+              AREA
+            </th> --}}
             <th class="border bg-indigo-700   text-center px-2 text-sm font-medium text-white py-2 whitespace-nowrap">
               AREA
             </th>
@@ -178,10 +178,10 @@
               <td class="border text-gray-600  px-3 py-1">{{ $item->owned_but_not_planted }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->status }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->remarks }}</td>
-              <td class="border text-gray-600  px-3 py-1">{{ $item->gross_area }}</td>
+              {{-- <td class="border text-gray-600  px-3 py-1">{{ $item->gross_area }}</td> --}}
               <td class="border text-gray-600  px-3 py-1">{{ $item->planted_area }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->gulley_area }}</td>
-              <td class="border text-gray-600  px-3 py-1">{{ $item->total_area }}</td>
+              {{-- <td class="border text-gray-600  px-3 py-1">{{ $item->total_area }}</td> --}}
               <td class="border text-gray-600  px-3 py-1">{{ $item->facility_area }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->unutilized_area }}</td>
               @php
