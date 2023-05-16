@@ -553,15 +553,15 @@
       <div class="grid grid-cols-4 mt-0.5">
         <div class="flex items-center">
           <span class="rounded-l-lg bg-gray-100 border font-bold px-2 w-32 py-1">LOT NO.:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->lot_number ?? '' }}</span>
         </div>
         <div class="flex items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 py-1">FIELD NO.:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->field_number ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 py-1">MUNICIPALITY:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->municipality ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">SURVEY NO.:</span>
