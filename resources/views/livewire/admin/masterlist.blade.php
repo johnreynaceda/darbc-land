@@ -7,7 +7,7 @@
   </div>
 
   <x-modal.card title="LAND SECTION" fullscreen wire:model.defer="view_modal">
-    {{-- 
+    {{--
     <div>
       <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
@@ -34,7 +34,7 @@
           <div class="border rounded-lg p-5">
             <div class="flex justify-between">
               <h1 class="font-bold text-lg text-gray-600 font-montserrat">BASIC INFORMATION</h1>
-           
+
             </div>
             <div class="mt-3">
               <ul role="list" class="divide-y divide-gray-200 border-gray-200">
@@ -42,7 +42,7 @@
 
 
                   <div class="">
-                  
+
                     <div class="flex items-start border-b py-2">
                       <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Lot No.</p>
                       <div class="font-rubik text-black uppercase text-sm text-right">
@@ -345,7 +345,7 @@
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
      </div>
           </div>
         </div>
@@ -547,7 +547,7 @@
         <div class="border flex items-center">
           <span class="px-2 font-bold border-r bg-gray-100 text-gray-700">ID:</span>
           <span class="bg-yellow-50 flex-1 text-center uppercase font-bold text-gray-700">
-            1-0135</span>
+            {{ $basicInfo->id ?? '' }}</span>
         </div>
       </div>
       <div class="grid grid-cols-4 mt-0.5">
@@ -565,27 +565,27 @@
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">SURVEY NO.:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->survey_number ?? '' }}</span>
         </div>
         <div class="flex  items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">TITLE:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->title ?? '' }}</span>
         </div>
         <div class="flex  items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">PAGE:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->page ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">TITLED AREA:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->title_area ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">CLOA NO.:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->cloa_number ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 py-2">AWARDED AREA:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->awarded_area ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 ">
@@ -593,27 +593,48 @@
 
             <h1 class="text-2xs">AWARDED VS. TITLE</h1>
           </span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          @php
+            if($encumbered == null)
+            {
+                $area = '';
+              $variance = '';
+            }else{
+                $json1 = json_decode($encumbered, true);
+                $area = $json1['area'];
+                $variance = $json1['variance'];
+            }
+
+            if($previous_copy_of_title == null)
+            {
+                $type = '';
+                $number = '';
+            }else{
+                $json2 = json_decode($previous_copy_of_title, true);
+                $type = $json2['type of title'];
+                $number = $json2['no.'];
+            }
+          @endphp
+          <span class="flex-1 text-center bg-green-50 border py-1">{{$area}}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">PREV. LAND OWNER:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->previous_land_owner ?? ''}}</span>
         </div>
         <div class="flex col-span-1 items-center">
           <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 py-2">TYPE OF TITLE:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{$type}}</span>
         </div>
         <div class="flex col-span-1 items-center">
           <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 py-2">TITLE NO.:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{$number}}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">BARANGAY:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->location ?? ''}}</span>
         </div>
         <div class="flex col-span-2 items-center">
           <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">TITLE STATUS:</span>
-          <span class="flex-1 text-center bg-green-50 border py-1">sd </span>
+          <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->title_status ?? ''}}</span>
         </div>
       </div>
       <div class="mt-0 5">

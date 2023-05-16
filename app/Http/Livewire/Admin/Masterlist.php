@@ -24,6 +24,7 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Support\HtmlString;
@@ -96,6 +97,8 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
 
     public $view_modal = false;
     public $basicInfo = [];
+    public $encumbered;
+    public $previous_copy_of_title;
     public $title_status_detailed;
     public $actual = [];
     public $tax_year;
@@ -360,12 +363,20 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     protected function getTableColumns(): array
     {
         return [
-            // TextColumn::make('number')
-            //     ->label('NO.')
-            //     ->searchable()
-            //     ->sortable(),
-            TextColumn::make('lot_number')
-                ->label('LOT NO.')
+            TextColumn::make('missingDetails')
+                ->label('Missing Details')
+                ->formatStateUsing(function ($record) {
+                    $post = BasicInformation::find($record->id);
+
+                    $empty_columns = 0;
+
+                    foreach ($post->getAttributes() as $column => $value) {
+                        if (is_null($value) || empty($value)) {
+                            $empty_columns++;
+                        }
+                    }
+                    return $empty_columns;
+                })
                 ->searchable()
                 ->sortable(),
             TextColumn::make('survey_number')
@@ -408,11 +419,45 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->label('PAGE')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('encumbered')
+            TextColumn::make('encumberedArea')
+                ->label('Encumbered Area')
                 ->searchable()
+                ->formatStateUsing(function ($record) {
+                    $json = json_decode($record->encumbered, true);
+                    $area = $json['area'];
+
+                    return $area;
+                })
                 ->sortable(),
-            TextColumn::make('previous_copy_of_title')
+            TextColumn::make('encumberedVariance')
+                ->label('Encumbered Variance')
                 ->searchable()
+                ->formatStateUsing(function ($record) {
+                    $json = json_decode($record->encumbered, true);
+                    $area = $json['variance'];
+
+                    return $area;
+                })
+                ->sortable(),
+            TextColumn::make('previuscopyType')
+                ->label('Previous Copy of Title (Type)')
+                ->searchable()
+                ->formatStateUsing(function ($record) {
+                    $json = json_decode($record->previous_copy_of_title, true);
+                    $type = $json['type of title'];
+
+                    return $type;
+                })
+                ->sortable(),
+            TextColumn::make('previuscopyNo')
+                ->label('Previous Copy of Title (No.)')
+                ->searchable()
+                ->formatStateUsing(function ($record) {
+                    $json = json_decode($record->previous_copy_of_title, true);
+                     $number = $json['no.'];
+
+                    return $number;
+                })
                 ->sortable(),
             TextColumn::make('title_status')
                 ->searchable()
@@ -629,6 +674,9 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     {
         $this->informationId = $id;
         $this->basicInfo = BasicInformation::where('id', $id)->first();
+        $this->encumbered = BasicInformation::where('id', $id)->first()->encumbered;
+        $this->previous_copy_of_title = BasicInformation::where('id', $id)->first()->previous_copy_of_title;
+
         $this->actual = Actual::where('basic_information_id', $id)->first();
         $this->taxes = $this->view_modal = true;
 
