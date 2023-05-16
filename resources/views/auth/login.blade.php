@@ -12,7 +12,7 @@
         autofocus autocomplete="username" /> --}}
       <x-input icon="identification" id="email" label="Email" name="email" :value="old('email')" required autofocus
         autocomplete="username" placeholder="" />
-      <x-input-error :messages="$errors->get('email')" class="mt-2" />
+      {{-- <x-input-error :messages="$errors->get('email')" class="mt-2" /> --}}
     </div>
 
     <!-- Password -->
@@ -23,7 +23,7 @@
         autocomplete="current-password" /> --}}
       <x-inputs.password icon="lock-closed" id="password" label="Password" name="password" required
         autocomplete="current-password" value="" />
-      <x-input-error :messages="$errors->get('password')" class="mt-2" />
+      {{-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> --}}
     </div>
 
     <!-- Remember Me -->
