@@ -363,8 +363,9 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('missingDetails')
-                ->label('Missing Details')
+            BadgeColumn::make('missingDetails')
+            // TextColumn::make('missingDetails')
+                ->label('MISSING DETAILS')
                 ->formatStateUsing(function ($record) {
                     $post = BasicInformation::find($record->id);
 
@@ -376,7 +377,8 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                         }
                     }
                     return $empty_columns;
-                }),
+                })
+                ->color('warning'),
             TextColumn::make('survey_number')
                 ->label('SURVEY NO.')
                 ->searchable()

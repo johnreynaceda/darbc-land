@@ -33,7 +33,7 @@
         FIELD" wire:model="filters.field_number" />
       </div>
       <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="LOCATION" wire:model="filters.location" />
+        <x-checkbox id="right-label" label="BARANGAY" wire:model="filters.location" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="MUNICIPALITY" wire:model="filters.municipality" />
@@ -150,10 +150,10 @@
               @if ($count < 1)
                 <tr class="divide-x divide-gray-200">
 
-                  <th
+                  {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
                     NO.
-                  </th>
+                  </th> --}}
                   <th
                     class="whitespace-nowrap border-t px-4 py-1 text-center text-sm font-semibold bg-indigo-500 text-white">
                     LOT#
@@ -172,14 +172,14 @@
                     class=" whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     AWARDED AREA
                   </th>
-                  <th
+                  {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     PREVIOUS
                   </th>
                   <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     FIELD
-                  </th>
+                  </th> --}}
                   <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     BARANGAY
@@ -188,34 +188,34 @@
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     MUNICIPALITY
                   </th>
-                  <th
+                  {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     TITLE
-                  </th>
+                  </th> --}}
                   <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     CLOA
                     NO.
                   </th>
-                  <th
+                  {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     PAGE
                   </th>
                   <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     ENCUMBERED
-                  </th>
+                  </th> --}}
                   <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     PREVIOUS COPY OF
                     TITLE
                   </th>
-                  <th
+                  {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     TITLE
                     STATUS
-                  </th>
-                  <th
+                  </th> --}}
+                  {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     TITLE
                     COPY
@@ -261,9 +261,9 @@
                     <div class="flex w-64 text-center justify-center">
                       NOTES
                     </div>
-                  </th>
+                  </th> --}}
 
-                </tr>
+                {{-- </tr>
                 <tr class="divide-x divide-gray-200">
                   <th
                     class="whitespace-nowrap  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
@@ -379,7 +379,7 @@
                   </th>
 
 
-                </tr>
+                </tr> --}}
               @elseif($count > 0)
                 <tr class="divide-x divide-gray-200">
 
@@ -712,32 +712,32 @@
                 @if ($count < 1)
                   <tr class="divide-x divide-gray-200">
 
-                    <td class=" py-4 pl-4 pr-4 text-sm  text-gray-700 ">
-                      {{ $record->number }}</td>
+                    {{-- <td class=" py-4 pl-4 pr-4 text-sm  text-gray-700 ">
+                      {{ $record->number }}</td> --}}
                     <td class=" p-4 text-sm text-gray-700 text-left"> {{ $record->lot_number }}</td>
                     <td class="p-4 text-sm text-gray-700 text-left">{{ $record->survey_number }}</td>
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_area }}
                     </td>
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->awarded_area }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
-                      {{ $record->previous_land_owner }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->field_number }}
-                    </td>
+                    {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
+                      {{ $record->previous_land_owner }}</td> --}}
+                    {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->field_number }}
+                    </td> --}}
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->location }}</td>
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->municipality }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title }}</td>
+                    {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title }}</td> --}}
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->cloa_number }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->page }}</td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
-                      {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td>
+                    {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->page }}</td> --}}
+                    {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
+                      {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td> --}}
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                       {{ $previous_copy_of_title_array['type of title'] }} /
                       {{ $previous_copy_of_title_array['no.'] }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_status }}
+                    {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_status }}
                     </td>
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_copy }}
                     </td>
@@ -754,7 +754,7 @@
                       {{ $record->ndc_direct_payment_scheme }}</td>
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->ndc_remarks }}
                     </td>
-                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->notes }}</td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->notes }}</td> --}}
 
                   </tr>
                 @elseif($count > 0)
