@@ -528,8 +528,8 @@
     </div> --}}
     <div>
       <div class="grid grid-cols-4">
-        <div class="border bg-green-400 p-0.5 flex space-x-2 items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-green-600">
+        <div class="border bg-green-600 p-0.5 flex space-x-2 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-white">
             <path
               d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13.529 14.4464L15.7395 16.6569L17.1537 15.2426L14.9432 13.0322C15.8492 11.4983 15.6432 9.48951 14.3252 8.17157C12.7631 6.60948 10.2305 6.60948 8.66839 8.17157C7.1063 9.73367 7.1063 12.2663 8.66839 13.8284C9.98633 15.1464 11.9951 15.3524 13.529 14.4464ZM12.911 12.4142C12.13 13.1953 10.8637 13.1953 10.0826 12.4142C9.30156 11.6332 9.30156 10.3668 10.0826 9.58579C10.8637 8.80474 12.13 8.80474 12.911 9.58579C13.6921 10.3668 13.6921 11.6332 12.911 12.4142Z">
             </path>
@@ -537,50 +537,55 @@
           <span class="font-bold text-gray-700">BASIC INFORMATION</span>
         </div>
         <div class="border flex items-center">
-          <span class="px-2 font-bold border-r bg-gray-100 text-gray-700">USER:</span>
-          <span class="bg-yellow-50 flex-1 text-center uppercase font-bold text-gray-700">
+          <span class="px-2 pr-10 py-2 text-xs font-bold border-r bg-gray-100 text-gray-700">USER:</span>
+          <span class="bg-yellow-50 flex-1 py-1 text-center uppercase font-bold text-gray-700">
             {{ $basicInfo->previous_land_owner ?? '' }}</span>
         </div>
-        <div class="border flex-1 text-center">
+        <div class="border bg-green-600 p-0.5 flex space-x-2 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-white">
+                <path
+                  d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13.529 14.4464L15.7395 16.6569L17.1537 15.2426L14.9432 13.0322C15.8492 11.4983 15.6432 9.48951 14.3252 8.17157C12.7631 6.60948 10.2305 6.60948 8.66839 8.17157C7.1063 9.73367 7.1063 12.2663 8.66839 13.8284C9.98633 15.1464 11.9951 15.3524 13.529 14.4464ZM12.911 12.4142C12.13 13.1953 10.8637 13.1953 10.0826 12.4142C9.30156 11.6332 9.30156 10.3668 10.0826 9.58579C10.8637 8.80474 12.13 8.80474 12.911 9.58579C13.6921 10.3668 13.6921 11.6332 12.911 12.4142Z">
+                </path>
+              </svg>
           <span class="px-2 font-bold  text-gray-700">LAND SECTION</span>
         </div>
         <div class="border flex items-center">
-          <span class="px-2 font-bold border-r bg-gray-100 text-gray-700">ID:</span>
-          <span class="bg-yellow-50 flex-1 text-center uppercase font-bold text-gray-700">
+          <span class="px-2 font-bold text-sm border-r bg-gray-100 text-gray-700 py-1">ID:</span>
+          <span class="bg-yellow-50 flex-1 text-center uppercase font-bold text-gray-700 py-1">
             {{ $basicInfo->id ?? '' }}</span>
         </div>
       </div>
       <div class="grid grid-cols-4 mt-0.5">
         <div class="flex items-center">
-          <span class="rounded-l-lg bg-gray-100 border font-bold px-2 w-32 py-1">LOT NO.:</span>
+          <span class="rounded-l-lg text-xs bg-gray-100 border font-bold px-2 w-32 py-2">LOT NO:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->lot_number ?? '' }}</span>
         </div>
         <div class="flex items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 py-1">FIELD NO.:</span>
+          <span class=" pr-4 py-2 text-xs bg-gray-100 font-bold border px-2">FIELD NO:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->field_number ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 py-1">MUNICIPALITY:</span>
+          <span class="bg-gray-100 text-xs font-bold border px-2 pr-8 py-2">MUNICIPALITY: </span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->municipality ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">SURVEY NO.:</span>
+          <span class="rounded-l-lg text-xs bg-gray-100 font-bold border px-2 w-32 py-2">SURVEY NO:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->survey_number ?? '' }}</span>
         </div>
         <div class="flex  items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">TITLE:</span>
+          <span class=" text-xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLE:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->title ?? '' }}</span>
         </div>
         <div class="flex  items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">PAGE:</span>
+          <span class="text-xs bg-gray-100 font-bold border px-2 w-32 py-2">PAGE:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->page ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">TITLED AREA:</span>
+          <span class="rounded-l-lg text-xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLED AREA:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->title_area ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">CLOA NO.:</span>
+          <span class="text-xs bg-gray-100 font-bold border px-2 w-32 py-2">CLOA NO.:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->cloa_number ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
@@ -588,7 +593,7 @@
           <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->awarded_area ?? '' }}</span>
         </div>
         <div class="flex col-span-2 items-center">
-          <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 ">
+          <span class="bg-gray-100 text-xs font-bold border px-2 w-32 ">
             <h1>VARIANCE AREA:</h1>
 
             <h1 class="text-2xs">AWARDED VS. TITLE</h1>
@@ -621,19 +626,19 @@
           <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->previous_land_owner ?? ''}}</span>
         </div>
         <div class="flex col-span-1 items-center">
-          <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 py-2">TYPE OF TITLE:</span>
+          <span class="bg-gray-100 text-xs font-bold border px-2 w-32 py-2">TYPE OF TITLE:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{$type}}</span>
         </div>
         <div class="flex col-span-1 items-center">
-          <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 py-2">TITLE NO.:</span>
+          <span class="bg-gray-100 text-xs font-bold border px-2 w-32 py-2">TITLE NO:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{$number}}</span>
         </div>
         <div class="flex col-span-2 items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">BARANGAY:</span>
+          <span class="rounded-l-lg text-xs bg-gray-100 font-bold border px-2 w-32 py-2">BARANGAY:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->location ?? ''}}</span>
         </div>
         <div class="flex col-span-2 items-center">
-          <span class="rounded-l-lg bg-gray-100 font-bold border px-2 w-32 py-1">TITLE STATUS:</span>
+          <span class="text-xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLE STATUS:</span>
           <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->title_status ?? ''}}</span>
         </div>
       </div>
@@ -645,7 +650,7 @@
               d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 11H8V13H12V16L16 12L12 8V11Z">
             </path>
           </svg>
-          <span class="font-bold text-white">ADDITIONAL INFORMATION</span>
+          <span class="font-bold text-black">ADDITIONAL INFORMATION</span>
         </div>
         <div class="grid grid-cols-2">
           <div>
@@ -828,7 +833,7 @@
                     <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                       <li class="relative py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
                         <div class="flex items-start border-b py-2">
-                          <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Amortization </p>
+                          <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">AMORTIZATION </p>
                           <div class="font-rubik text-black uppercase text-sm text-right">
                             {{ $basicInfo->land_bank_amortization ?? '' }}
                           </div>
@@ -840,15 +845,15 @@
                           </div>
                         </div>
                         <div class="flex items-start border-b py-2">
-                          <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Date Paid</p>
+                          <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">DATE PAID</p>
                           <div class="font-rubik text-black uppercase text-sm text-right">
-                            {{ $basicInfo->date_paid ?? '' }}
+                            {{ Carbon\Carbon::parse($basicInfo->date_paid ?? '')->format('F d, Y') }}
                           </div>
                         </div>
                         <div class="flex items-start border-b py-2">
-                          <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">Date of Cert</p>
+                          <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">DATE OF CERT</p>
                           <div class="font-rubik text-black uppercase text-sm text-right">
-                            {{ $basicInfo->date_of_cert ?? '' }}
+                            {{ Carbon\Carbon::parse($basicInfo->date_of_cert ?? '')->format('F d, Y') }}
                           </div>
                         </div>
                         <div class="flex items-start border-b py-2">
@@ -882,13 +887,13 @@
         </div>
       </div>
       <div class="mt-0 5">
-        <div class="flex items-center bg-green-500 space-x-1 py-1 px-2">
+        <div class="flex items-center bg-green-600 space-x-1 py-1 px-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-white">
             <path
               d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13 12H16L12 8L8 12H11V16H13V12Z">
             </path>
           </svg>
-          <span class="font-bold text-white">DOCUMENT ATTACHMENTS</span>
+          <span class="font-bold text-black">DOCUMENT ATTACHMENTS</span>
         </div>
         <div class="grid grid-cols-6 mt-3 gap-4 border py-3 mb-5">
           <div class="grid place-content-center">

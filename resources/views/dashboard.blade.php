@@ -13,7 +13,7 @@
           $total_hectars = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area') + App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
         @endphp
         <header class=" font-bold">LAND SUMMARY</header>
-        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
+        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
         <div class="mt-2">
           <div class="">
             <canvas id="land_summary" height="200"></canvas>
@@ -30,7 +30,7 @@
           $unutilized = App\Models\Actual::sum('unutilized_area');
         @endphp
         <header class=" font-bold">ACTUAL LAND SUMMARY </header>
-        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
+        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
         <div class="mt-2">
           <div class="">
             <canvas id="actual_summary" height="200"></canvas>
@@ -44,7 +44,7 @@
           $gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GenSan' . '%')->count();
         @endphp
         <header class=" font-bold">MUNICIPALITIES</header>
-        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
+        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
         <div class="mt-2">
           <div>
             <canvas id="piechart3" height="200"></canvas>
@@ -59,7 +59,7 @@
           $uwoc = App\Models\BasicInformation::where('title_status', 'UWOC')->count();
         @endphp
         <header class=" font-bold">TITLE STATUS</header>
-        <span class="leading-3 text-sm">Total Hectars: {{ $total_hectars }}</span>
+        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
         <div class="mt-2">
           <div>
             <canvas id="title_status" height="200"></canvas>
@@ -156,7 +156,7 @@
                             ->where('cloa_number', '!=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->sum('title_area');
-                        
+
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '!=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
@@ -174,7 +174,7 @@
                             ->where('cloa_number', '=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->sum('title_area');
-                        
+
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
@@ -301,7 +301,7 @@
                             ->where('cloa_number', '!=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->sum('title_area');
-                        
+
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '!=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
@@ -319,7 +319,7 @@
                             ->where('cloa_number', '=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->sum('title_area');
-                        
+
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
@@ -403,7 +403,7 @@
                             ->where('cloa_number', '!=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'GENSAN' . '%')
                             ->sum('title_area');
-                        
+
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '!=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'GENSAN' . '%')
@@ -421,7 +421,7 @@
                             ->where('cloa_number', '=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'GENSAN' . '%')
                             ->sum('title_area');
-                        
+
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '=', 'NO CLOA')
                             ->where('municipality', 'like', '%' . 'GENSAN' . '%')

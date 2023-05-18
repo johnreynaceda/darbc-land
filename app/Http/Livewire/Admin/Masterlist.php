@@ -363,8 +363,9 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('missingDetails')
-                ->label('Missing Details')
+            BadgeColumn::make('missingDetails')
+            // TextColumn::make('missingDetails')
+                ->label('MISSING DETAILS')
                 ->formatStateUsing(function ($record) {
                     $post = BasicInformation::find($record->id);
 
@@ -377,8 +378,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     }
                     return $empty_columns;
                 })
-                ->searchable()
-                ->sortable(),
+                ->color('warning'),
             TextColumn::make('survey_number')
                 ->label('SURVEY NO.')
                 ->searchable()
@@ -421,44 +421,36 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->sortable(),
             TextColumn::make('encumberedArea')
                 ->label('Encumbered Area')
-                ->searchable()
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->encumbered, true);
                     $area = $json['area'];
 
                     return $area;
-                })
-                ->sortable(),
+                }),
             TextColumn::make('encumberedVariance')
                 ->label('Encumbered Variance')
-                ->searchable()
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->encumbered, true);
                     $area = $json['variance'];
 
                     return $area;
-                })
-                ->sortable(),
+                }),
             TextColumn::make('previuscopyType')
                 ->label('Previous Copy of Title (Type)')
-                ->searchable()
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->previous_copy_of_title, true);
                     $type = $json['type of title'];
 
                     return $type;
-                })
-                ->sortable(),
+                }),
             TextColumn::make('previuscopyNo')
                 ->label('Previous Copy of Title (No.)')
-                ->searchable()
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->previous_copy_of_title, true);
                      $number = $json['no.'];
 
                     return $number;
-                })
-                ->sortable(),
+                }),
             TextColumn::make('title_status')
                 ->searchable()
                 ->sortable(),
