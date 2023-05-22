@@ -128,7 +128,7 @@
           <div class="grid grid-cols-2">
             <div>
               <div class="mt-5 md:col-span-2 md:mt-0">
-                <div class="border  p-5">
+                <div class="border h-96 overflow-y-auto p-5">
                   <div class="flex justify-between items-center">
                     <div class="flex space-x-3 items-center">
                       <h1 class="font-bold text-lg text-gray-600 font-montserrat">ACTUAL</h1>
@@ -196,7 +196,7 @@
                 </div>
               </div>
               <div class="mt-5 md:col-span-2 md:mt-0">
-                <div class="border p-5">
+                <div class="border h-96 overflow-y-auto p-5">
                   <div class="flex justify-between items-center">
                     <div class="flex space-x-4 items-center">
                       <h1 class="font-bold text-lg text-gray-600 font-montserrat">TAX</h1>
