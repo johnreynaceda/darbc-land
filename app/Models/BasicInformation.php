@@ -10,6 +10,11 @@ class BasicInformation extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function attachments()
+    {
+        return $this->morphMany(Attachment::class, 'documentable');
+    }
+
     public function lot_amortizations()
     {
         return $this->hasMany(

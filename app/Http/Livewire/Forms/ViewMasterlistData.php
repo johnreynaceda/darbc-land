@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\BasicInformation;
 use App\Models\Actual;
 use App\Models\Tax;
+use App\Models\Attachment;
 use App\Models\TaxReceiptImage;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Support\HtmlString;
@@ -87,6 +88,32 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $official_receipt;
      public $receipt_image;
 
+     //attachment variables
+     public $title_attachment_id;
+     public $tax_attachment_id;
+     public $sketch_attachment_id;
+     public $actual_attachment_id;
+     public $video_attachment_id;
+     public $others_attachment_id;
+
+     //modals
+     public $titleAttachmentModal = false;
+     public $taxDecAttachmentModal = false;
+     public $sketchPlanAttachmentModal = false;
+     public $actualPhotoAttachmentModal = false;
+     public $videoAttachmentModal = false;
+     public $othersAttachmentModal = false;
+     protected $listeners = [
+        'close_title_modal'=> 'closeTitleModal',
+        'close_tax_modal' => 'closeTaxModal',
+        'close_sketch_plan_modal' => 'closeSketchPlanModal',
+        'close_actual_photo_modal' => 'closeActualPhotoModal',
+        'close_video_modal' => 'closeVideoModal',
+        'close_others_modal' => 'closeOthersModal',
+        'refreshComponent' => '$refresh'
+    ];
+
+
     protected function getFormSchema(): array
     {
         return [
@@ -95,6 +122,239 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
             ->label('UPLOAD RECEIPT IMAGE')
             ->image()
         ];
+    }
+
+    public function getFileUrl($filename)
+    {
+        return Storage::url($filename);
+    }
+
+    public function deleteTitleAttachment($curAtt)
+    {
+        $this->title_attachment_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteTitleAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteTitleAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->title_attachment_id)) {
+            $deleted = Attachment::where('id',$this->title_attachment_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
+    }
+
+    public function deleteTaxAttachment($curAtt)
+    {
+        $this->tax_attachment_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteTaxAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteTaxAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->tax_attachment_id)) {
+            $deleted = Attachment::where('id',$this->tax_attachment_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
+    }
+
+    public function deleteSketchPlanAttachment($curAtt)
+    {
+        $this->sketch_attachment_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteSketchAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteSketchAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->sketch_attachment_id)) {
+            $deleted = Attachment::where('id',$this->sketch_attachment_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
+    }
+
+    public function deleteActualAttachment($curAtt)
+    {
+        $this->actual_attachment_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteActualAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteActualAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->actual_attachment_id)) {
+            $deleted = Attachment::where('id',$this->actual_attachment_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
+    }
+
+    public function deleteVideoAttachment($curAtt)
+    {
+        $this->video_attachment_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteVideoAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteVideoAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->video_attachment_id)) {
+            $deleted = Attachment::where('id',$this->video_attachment_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
+    }
+
+    public function deleteOthersAttachment($curAtt)
+    {
+        $this->others_attachment_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteOthersAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteOthersAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->others_attachment_id)) {
+            $deleted = Attachment::where('id',$this->others_attachment_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
     }
 
     public function saveActualLot()
@@ -192,6 +452,43 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
             $description = 'Data successfully saved'
         );
     }
+
+    public function closeTitleModal()
+    {
+        $this->titleAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
+    public function closeTaxModal()
+    {
+        $this->taxDecAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
+    public function closeSketchPlanModal()
+    {
+        $this->sketchPlanAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
+    public function closeActualPhotoModal()
+    {
+        $this->actualPhotoAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
+    public function closeVideoModal()
+    {
+        $this->videoAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
+    public function closeOthersModal()
+    {
+        $this->othersAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
 
     public function mount()
     {
