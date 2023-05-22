@@ -36,6 +36,8 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     protected $listeners = ['close_modal'=> 'closeModal'];
     public $add_modal = false;
     public $update_modal = false;
+    public $viewMissingData = false;
+    public $missingData = [];
 
     //for add
     public $_number;
@@ -356,7 +358,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             ->color('warning')
             ->icon('heroicon-o-eye')
             ->url(fn (BasicInformation $record): string => route('masterlist-data', $record))
-            ->openUrlInNewTab()
+            ->openUrlInNewTab(),
         ];
     }
 
@@ -366,6 +368,12 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     //         'infos' => BasicInformation::query(),
     //     ]);
     // }
+
+    public function viewEmptyColumns($missingData)
+    {
+        $this->missingData = $missingData;
+        $this->viewMissingData = true;
+    }
 
     protected function getTableColumns(): array
     {
@@ -385,7 +393,20 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     }
                     return $empty_columns;
                 })
-                ->color('warning'),
+                ->color('warning')
+                ->action(function (BasicInformation $record): void {
+                    $post = BasicInformation::find($record->id);
+
+                    $emptyColumns = [];
+
+                    foreach ($post->getAttributes() as $column => $value) {
+                        if (is_null($value) || empty($value)) {
+                            $emptyColumns[] = $column;
+                        }
+                    }
+                    $this->viewEmptyColumns($emptyColumns);
+
+                }),
             TextColumn::make('survey_number')
                 ->label('SURVEY NO.')
                 ->searchable()

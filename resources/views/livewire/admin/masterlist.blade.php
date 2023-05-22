@@ -1113,4 +1113,30 @@
       </x-slot>
     </x-card>
   </x-modal>
+
+    {{-- view missing data modal --}}
+
+  <x-modal align="center" wire:model.defer="viewMissingData">
+    <x-card title="Missing Details">
+      <div class="space-y-3">
+        <ul class="p-3 list-disc">
+            @if (count($missingData) > 0)
+                @foreach ($missingData as $missing)
+                <li class="text-sm font-semibold uppercase">
+                    {{ str_replace('_', ' ', $missing) }}
+                </li>
+                @endforeach
+            @else
+            <li class="text-sm font-semibold uppercase">NO MISSING DATA</li>
+            @endif
+
+        </ul>
+      </div>
+      <x-slot name="footer">
+        <div class="flex justify-end gap-x-4">
+          <x-button flat label="Cancel" x-on:click="close" />
+        </div>
+      </x-slot>
+    </x-card>
+  </x-modal>
 </div>
