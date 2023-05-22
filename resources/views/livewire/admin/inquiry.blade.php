@@ -16,7 +16,7 @@
         <x-checkbox label="LOT NO." wire:model="filters.lot_number" />
       </div>
       <div class="border p-1 px-3 rounded">
-        <x-checkbox id="right-label" label="SUREVY NO." wire:model="filters.survey_number" />
+        <x-checkbox id="right-label" label="SURVEY NO." wire:model="filters.survey_number" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="TITLE AREA" wire:model="filters.title_area" />
@@ -30,7 +30,7 @@
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-        FIELD" wire:model="filters.field_number" />
+        FIELD NO." wire:model="filters.field_number" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="BARANGAY" wire:model="filters.location" />
@@ -47,9 +47,17 @@
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="PAGE" wire:model="filters.page" />
       </div>
-      <div class="border p-1 px-3 rounded">
+      {{-- <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
             ENCUMBERED" wire:model="filters.encumbered" />
+      </div> --}}
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="
+            ENCUMBERED AREA" wire:model="filters.encumbered_area" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="
+            ENCUMBERED VARIANCE" wire:model="filters.encumbered_variance" />
       </div>
       {{-- <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
@@ -59,8 +67,14 @@
         <x-checkbox id="right-label" label="
             VARIANCE" wire:model="filters.encumbered" />
       </div> --}}
-      <div class="border p-1 px-3 rounded">
+      {{-- <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="PREVIOUS COPY OF TITLE" wire:model="filters.previous_copy_of_title" />
+      </div> --}}
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="PREVIOUS COPY OF TITLE (TYPE)" wire:model="filters.previous_copy_of_title_type" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="PREVIOUS COPY OF TITLE (NO.)" wire:model="filters.previous_copy_of_title_number" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
@@ -80,7 +94,7 @@
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
-            AMORTIZATION" wire:model="filters.land_bank_amortization" />
+            LAND BANK AMORTIZATION" wire:model="filters.land_bank_amortization" />
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
@@ -105,16 +119,25 @@
     </div>
 
     {{-- filters --}}
-    <div class="grid grid-cols-4 gap-4 mt-4">
-        <div class="col-span-1">
-            <x-select
-            label="Select Status"
-            placeholder="Select one status"
-            wire:model.defer="model">
-            <x-select.option label="Pending" value="1" />
-            <x-select.option label="In Progress" value="2" />
-            <x-select.option label="Stuck" value="3" />
-            <x-select.option label="Done" value="4" />
+    <div class=" grid grid-cols-4 gap-4 mt-4">
+            @php
+            $count = count(
+                array_filter($filters, function ($value) {
+                    return $value !== null;
+                }),
+            );
+        @endphp
+        <div class="{{$filters['municipality'] != true ? 'hidden' : ''}} col-span-1 col-start-4">
+            {{-- <x-select label="Select Status" multiselect placeholder="All" wire:model="municipalities">
+                <x-select.option label="Encoded" value="ENCODED" />
+                <x-select.option label="Transmitted" value="TRANSMITTED" />
+                <x-select.option label="Paid" value="PAID" />
+                <x-select.option label="Unpaid" value="UNPAID" />
+            </x-select> --}}
+            <x-select label="Select Municipality" multiselect placeholder="All" wire:model="municipalities">
+            <x-select.option label="POLOMOLOK" value="POLOMOLOK" />
+            <x-select.option label="TUPI" value="TUPI" />
+            <x-select.option label="GENSAN" value="GENSAN" />
         </x-select>
         </div>
     </div>
@@ -174,7 +197,7 @@
                   </th>
                   {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
-                    PREVIOUS
+                    PREVIOUS LAND OWNER
                   </th>
                   <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
@@ -208,7 +231,7 @@
                   <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
                     PREVIOUS COPY OF
-                    TITLE
+                    TITLE (NO.)
                   </th>
                   {{-- <th
                     class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white ">
@@ -416,13 +439,13 @@
                   @if ($filters['previous_land_owner'] != false && $filters['previous_land_owner'] != null)
                     <th
                       class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
-                      PEVIOUS
+                      PEVIOUS LAND OWNER
                     </th>
                   @endif
                   @if ($filters['field_number'] != false && $filters['field_number'] != null)
                     <th
                       class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
-                      FIELD
+                      FIELD NO.
                     </th>
                   @endif
                   @if ($filters['location'] != false && $filters['location'] != null)
@@ -452,7 +475,7 @@
                   @if ($filters['page'] != false && $filters['page'] != null)
                     <th
                       class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
-
+                      PAGE
                     </th>
                   @endif
                   @if ($filters['encumbered'] != false && $filters['encumbered'] != null)
@@ -461,12 +484,36 @@
                       ENCUMBERED
                     </th>
                   @endif
+                  @if ($filters['encumbered_area'] != false && $filters['encumbered_area'] != null)
+                  <th
+                    class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+                    ENCUMBERED AREA
+                  </th>
+                   @endif
+                    @if ($filters['encumbered_variance'] != false && $filters['encumbered_variance'] != null)
+                    <th
+                    class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+                    ENCUMBERED VARIANCE
+                    </th>
+                    @endif
                   @if ($filters['previous_copy_of_title'] != false && $filters['previous_copy_of_title'] != null)
                     <th
                       class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
                       PREVIOUS COPY OF TITLE
                     </th>
                   @endif
+                    @if ($filters['previous_copy_of_title_type'] != false && $filters['previous_copy_of_title_type'] != null)
+                    <th
+                        class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+                        PREVIOUS COPY OF TITLE (TYPE)
+                    </th>
+                    @endif
+                    @if ($filters['previous_copy_of_title_number'] != false && $filters['previous_copy_of_title_number'] != null)
+                    <th
+                    class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+                    PREVIOUS COPY OF TITLE (NO.)
+                    </th>
+                @endif
                   @if ($filters['title_status'] != false && $filters['title_status'] != null)
                     <th
                       class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
@@ -535,7 +582,7 @@
                   @endif
 
                 </tr>
-                <tr class="divide-x divide-gray-200">
+                {{-- <tr class="divide-x divide-gray-200">
                   @if ($filters['number'] != false && $filters['number'] != null)
                     <th
                       class="whitespace-nowrap  py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
@@ -697,7 +744,7 @@
                   @endif
 
 
-                </tr>
+                </tr> --}}
               @endif
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
@@ -734,7 +781,6 @@
                     {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                       {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td> --}}
                     <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
-                      {{ $previous_copy_of_title_array['type of title'] }} /
                       {{ $previous_copy_of_title_array['no.'] }}
                     </td>
                     {{-- <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_status }}
@@ -820,12 +866,30 @@
                       <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $encumbered_array['area'] }} / {{ $encumbered_array['variance'] }}</td>
                     @endif
+                    @if ($filters['encumbered_area'] != false && $filters['encumbered_area'] != null)
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
+                      {{ $encumbered_array['area'] }}</td>
+                    @endif
+                    @if ($filters['encumbered_variance'] != false && $filters['encumbered_variance'] != null)
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
+                        {{ $encumbered_array['variance'] }}</td>
+                    @endif
 
                     @if ($filters['previous_copy_of_title'] != false && $filters['previous_copy_of_title'] != null)
                       <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
                         {{ $previous_copy_of_title_array['type of title'] }} /
                         {{ $previous_copy_of_title_array['no.'] }}
                       </td>
+                    @endif
+                        @if ($filters['previous_copy_of_title_type'] != false && $filters['previous_copy_of_title_type'] != null)
+                        <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
+                        {{ $previous_copy_of_title_array['type of title'] }}
+                        </td>
+                    @endif
+                    @if ($filters['previous_copy_of_title_number'] != false && $filters['previous_copy_of_title_number'] != null)
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
+                        {{ $previous_copy_of_title_array['no.'] }}
+                    </td>
                     @endif
                     @if ($filters['title_status'] != false && $filters['title_status'] != null)
                       <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
@@ -895,7 +959,7 @@
 
 
 
-  <x-modal wire:model="add_modal">
+  {{-- <x-modal wire:model="add_modal">
     <x-card title="Consent Terms">
       <p class="text-gray-600">
         Lorem Ipsum...
@@ -908,7 +972,7 @@
         </div>
       </x-slot>
     </x-card>
-  </x-modal>
+  </x-modal> --}}
 
   @push('scripts')
     <script>

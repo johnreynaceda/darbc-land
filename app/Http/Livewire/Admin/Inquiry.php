@@ -14,6 +14,7 @@ use App\Models\BasicInformation;
 class Inquiry extends Component implements Tables\Contracts\HasTable
 {
     use Tables\Concerns\InteractsWithTable;
+    public $municipalities = [];
     public $filters = [
         'number' => null,
         'lot_number' => null,
@@ -28,7 +29,11 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         'cloa_number' => null,
         'page' => null,
         'encumbered' => null,
+        'encumbered_area' => null,
+        'encumbered_variance' => null,
         'previous_copy_of_title' => null,
+        'previous_copy_of_title_type' => null,
+        'previous_copy_of_title_number' => null,
         'title_status' => null,
         'title_copy' => null,
         'remarks' => null,
@@ -49,38 +54,52 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         return BasicInformation::query();
     }
 
+    public function mount()
+    {
+        $this->filters['lot_number'] = true;
+        $this->filters['survey_number'] = true;
+        $this->filters['title_area'] = true;
+        $this->filters['awarded_area'] = true;
+        $this->filters['location'] = true;
+        $this->filters['municipality'] = true;
+        $this->filters['cloa_number'] = true;
+        $this->filters['previous_copy_of_title_number'] = true;
+    }
+
     public function render()
     {
         return view('livewire.admin.inquiry', [
-            'records' => BasicInformation::where(
-                'number',
-                'like',
-                '%' . $this->search . '%'
-            )
-                ->orWhere('lot_number', 'like', '%' . $this->search . '%')
-                ->orWhere('survey_number', 'like', '%' . $this->search . '%')
-                ->orWhere('title_area', 'like', '%' . $this->search . '%')
-                ->orWhere('awarded_area', 'like', '%' . $this->search . '%')
-                ->orWhere('previous_land_owner', 'like', '%' . $this->search . '%')
-                ->orWhere('field_number', 'like', '%' . $this->search . '%')
-                ->orWhere('location', 'like', '%' . $this->search . '%')
-                ->orWhere('municipality', 'like', '%' . $this->search . '%')
-                ->orWhere('title', 'like', '%' . $this->search . '%')
-                ->orWhere('cloa_number', 'like', '%' . $this->search . '%')
-                ->orWhere('page', 'like', '%' . $this->search . '%')
-                ->orWhere('encumbered', 'like', '%' . $this->search . '%')
-                ->orWhere('previous_copy_of_title', 'like', '%' . $this->search . '%')
-                ->orWhere('title_status', 'like', '%' . $this->search . '%')
-                ->orWhere('title_copy', 'like', '%' . $this->search . '%')
-                ->orWhere('remarks', 'like', '%' . $this->search . '%')
-                ->orWhere('status', 'like', '%' . $this->search . '%')
-                ->orWhere('land_bank_amortization', 'like', '%' . $this->search . '%')
-                ->orWhere('amount', 'like', '%' . $this->search . '%')
-                ->orWhere('date_paid', 'like', '%' . $this->search . '%')
-                ->orWhere('date_of_cert', 'like', '%' . $this->search . '%')
-                ->orWhere('ndc_direct_payment_scheme', 'like', '%' . $this->search . '%')
-                ->orWhere('ndc_remarks', 'like', '%' . $this->search . '%')
-                ->orWhere('notes', 'like', '%' . $this->search . '%')
+            'records' => BasicInformation::when(!empty($this->municipalities), function ($query) {
+                if (is_array($this->municipalities)) {
+                    $query->whereIn('municipality', $this->municipalities);
+                } else {
+                    $query->where('municipality', $this->municipalities);
+                }
+            })
+                // ->orWhere('lot_number', 'like', '%' . $this->search . '%')
+                // ->orWhere('survey_number', 'like', '%' . $this->search . '%')
+                // ->orWhere('title_area', 'like', '%' . $this->search . '%')
+                // ->orWhere('awarded_area', 'like', '%' . $this->search . '%')
+                // ->orWhere('previous_land_owner', 'like', '%' . $this->search . '%')
+                // ->orWhere('field_number', 'like', '%' . $this->search . '%')
+                // ->orWhere('location', 'like', '%' . $this->search . '%')
+                // ->orWhere('municipality', 'like', '%' . $this->search . '%')
+                // ->orWhere('title', 'like', '%' . $this->search . '%')
+                // ->orWhere('cloa_number', 'like', '%' . $this->search . '%')
+                // ->orWhere('page', 'like', '%' . $this->search . '%')
+                // ->orWhere('encumbered', 'like', '%' . $this->search . '%')
+                // ->orWhere('previous_copy_of_title', 'like', '%' . $this->search . '%')
+                // ->orWhere('title_status', 'like', '%' . $this->search . '%')
+                // ->orWhere('title_copy', 'like', '%' . $this->search . '%')
+                // ->orWhere('remarks', 'like', '%' . $this->search . '%')
+                // ->orWhere('status', 'like', '%' . $this->search . '%')
+                // ->orWhere('land_bank_amortization', 'like', '%' . $this->search . '%')
+                // ->orWhere('amount', 'like', '%' . $this->search . '%')
+                // ->orWhere('date_paid', 'like', '%' . $this->search . '%')
+                // ->orWhere('date_of_cert', 'like', '%' . $this->search . '%')
+                // ->orWhere('ndc_direct_payment_scheme', 'like', '%' . $this->search . '%')
+                // ->orWhere('ndc_remarks', 'like', '%' . $this->search . '%')
+                // ->orWhere('notes', 'like', '%' . $this->search . '%')
                 ->get(),
         ]);
     }
@@ -316,9 +335,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     } else {
                         return $this->filters['encumbered'];
                     }
-                })
-                ->searchable()
-                ->sortable(),
+                }),
             TextColumn::make('previous_copy_of_title')
                 ->label('PREVIOUS COPY OF TITLE')
                 ->formatStateUsing(function (string $state) {
@@ -343,9 +360,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     } else {
                         return $this->filters['previous_copy_of_title'];
                     }
-                })
-                ->searchable()
-                ->sortable(),
+                }),
             TextColumn::make('title_status')
                 ->label('TITLE STATUS')
                 ->visible(function ($record) {
