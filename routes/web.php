@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\BasicInformation;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,13 @@ Route::get('/masterlist', function () {
 })
     ->middleware(['auth', 'verified'])
     ->name('masterlist');
+
+Route::get('/masterlist-information/{record}', function ($record) {
+    $masterlistData = BasicInformation::findOrFail($record);
+    return view('masterlist-data', ['record' => $masterlistData]);
+})
+    ->middleware(['auth', 'verified'])
+    ->name('masterlist-data');
 
 Route::get('/inquiry', function () {
     return view('admin.inquiry');

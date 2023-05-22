@@ -345,11 +345,18 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 // ->submitAction(new HtmlString(view('components.forms.save-button')->render()))
 
             ]),
+            // Action::make('view')
+            // ->button()
+            // ->color('warning')
+            // ->icon('heroicon-o-eye')
+            // ->action(fn ($record) => $this->viewData($record->id)),
             Action::make('view')
+            ->label('View')
             ->button()
             ->color('warning')
             ->icon('heroicon-o-eye')
-            ->action(fn ($record) => $this->viewData($record->id))
+            ->url(fn (BasicInformation $record): string => route('masterlist-data', $record))
+            ->openUrlInNewTab()
         ];
     }
 
