@@ -16,7 +16,6 @@
         <div>
         <x-modal.card width="xl" align="center" title="Land Summary ({{$land_summary_type}})" blur wire:model="showLandSummaryModal">
             <div>
-                {{$land_summary_value}}
                 <div class="inline-block min-w-full py-2">
                     <livewire:tables.land-summary-table :record="$land_summary_type"/>
                   </div>
@@ -42,46 +41,94 @@
       </div>
       <div class="bg-gray-50  mt-3 rounded-xl p-2 px-4 shadow">
         @php
-          $gross = App\Models\Actual::sum('gross_area');
-          $planted = App\Models\Actual::sum('planted_area');
-          $gulley = App\Models\Actual::sum('gulley_area');
-          $total = App\Models\Actual::sum('total_area');
-          $facility = App\Models\Actual::sum('facility_area');
-          $unutilized = App\Models\Actual::sum('unutilized_area');
+        //   $gross = App\Models\Actual::sum('gross_area');
+        //   $planted = App\Models\Actual::sum('planted_area');
+        //   $gulley = App\Models\Actual::sum('gulley_area');
+        //   $total = App\Models\Actual::sum('total_area');
+        //   $facility = App\Models\Actual::sum('facility_area');
+        //   $unutilized = App\Models\Actual::sum('unutilized_area');
         @endphp
         <header class=" font-bold">ACTUAL LAND SUMMARY </header>
+        <x-modal.card width="xl" align="center" title="Actual Land Summary ({{$actual_land_summary_type}})" blur wire:model="showActualLandSummaryModal">
+            <div>
+                <div class="inline-block min-w-full py-2">
+                    <livewire:tables.actual-land-summary-table :record="$actual_land_summary_type"/>
+                  </div>
+            </div>
+
+            <x-slot name="footer">
+                <div class="flex justify-between gap-x-4">
+                    <div></div>
+                    <div class="flex">
+                        <x-button slate label="CLOSE" wire:click="closeActualModal" />
+                    </div>
+                </div>
+            </x-slot>
+        </x-modal.card>
         <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
         <div class="mt-2">
-          <div class="">
+          <div class="" wire:ignore>
             <canvas id="actual_summary" height="200"></canvas>
           </div>
         </div>
       </div>
       <div class="bg-gray-50  mt-3 rounded-xl p-2 px-4 shadow">
         @php
-          $polomolok = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->count();
-          $tupi = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Tupi' . '%')->count();
-          $gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GenSan' . '%')->count();
+        //   $polomolok = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->count();
+        //   $tupi = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Tupi' . '%')->count();
+        //   $gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GenSan' . '%')->count();
         @endphp
         <header class=" font-bold">MUNICIPALITIES</header>
+        <x-modal.card width="xl" align="center" title="Municipality ({{$municipality_type}})" blur wire:model="showMunicipalitySummaryModal">
+            <div>
+                <div class="inline-block min-w-full py-2">
+                    <livewire:tables.municipality-table :record="$municipality_type"/>
+                  </div>
+            </div>
+
+            <x-slot name="footer">
+                <div class="flex justify-between gap-x-4">
+                    <div></div>
+                    <div class="flex">
+                        <x-button slate label="CLOSE" wire:click="closeMunicipalityModal" />
+                    </div>
+                </div>
+            </x-slot>
+        </x-modal.card>
         <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
         <div class="mt-2">
-          <div>
+          <div wire:ignore>
             <canvas id="piechart3" height="200"></canvas>
           </div>
         </div>
       </div>
       <div class="bg-gray-50  mt-3 rounded-xl p-2 px-4 shadow">
         @php
-          $twc = App\Models\BasicInformation::where('title_status', 'TWC')->count();
-          $twoc = App\Models\BasicInformation::where('title_status', 'TWOC')->count();
-          $uwc = App\Models\BasicInformation::where('title_status', 'UWC')->count();
-          $uwoc = App\Models\BasicInformation::where('title_status', 'UWOC')->count();
+        //   $twc = App\Models\BasicInformation::where('title_status', 'TWC')->count();
+        //   $twoc = App\Models\BasicInformation::where('title_status', 'TWOC')->count();
+        //   $uwc = App\Models\BasicInformation::where('title_status', 'UWC')->count();
+        //   $uwoc = App\Models\BasicInformation::where('title_status', 'UWOC')->count();
         @endphp
         <header class=" font-bold">TITLE STATUS</header>
+        <x-modal.card width="xl" align="center" title="Title Status ({{$title_status}})" blur wire:model="showTitleStatusModal">
+            <div>
+                <div class="inline-block min-w-full py-2">
+                    <livewire:tables.title-status-table :record="$title_status"/>
+                  </div>
+            </div>
+
+            <x-slot name="footer">
+                <div class="flex justify-between gap-x-4">
+                    <div></div>
+                    <div class="flex">
+                        <x-button slate label="CLOSE" wire:click="closeTitleStatusModal" />
+                    </div>
+                </div>
+            </x-slot>
+        </x-modal.card>
         <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
         <div class="mt-2">
-          <div>
+          <div wire:ignore>
             <canvas id="title_status" height="200"></canvas>
           </div>
         </div>
@@ -460,8 +507,10 @@
       </div>
     </div>
    @include('charts.land-summary')
-
-    <script>
+   @include('charts.actual-land-summary')
+   @include('charts.municipalities')
+   @include('charts.title-status')
+    {{-- <script>
       const actual_summary = new Chart(document.getElementById('actual_summary'), {
         type: 'bar',
         data: {
@@ -493,9 +542,9 @@
           responsive: true
         }
       });
-    </script>
+    </script> --}}
 
-    <script>
+    {{-- <script>
       const pieChart3 = new Chart(document.getElementById('piechart3'), {
         type: 'bar',
         data: {
@@ -521,8 +570,8 @@
           responsive: true
         }
       });
-    </script>
-    <script>
+    </script> --}}
+    {{-- <script>
       const title_status = new Chart(document.getElementById('title_status'), {
         type: 'bar',
         data: {
@@ -549,7 +598,7 @@
           responsive: true
         }
       });
-    </script>
+    </script> --}}
     <script>
       var options1 = {
         width: 40,
