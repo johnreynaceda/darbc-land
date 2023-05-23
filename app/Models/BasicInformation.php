@@ -30,6 +30,6 @@ class BasicInformation extends Model
 
     public function actuals()
     {
-        return $this->hasMany(Actual::class);
+        return $this->hasMany(Actual::class, 'basic_information_id');
     }
 }
