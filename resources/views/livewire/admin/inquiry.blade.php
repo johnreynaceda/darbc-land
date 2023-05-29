@@ -1,14 +1,45 @@
 <div>
   <div>
-    <div class="flex justify-between">
+    <div class="">
       <div>
         <h1 class="font-bold font-montserrat uppercase text-lg text-gray-700">Search</h1>
         <h1 class="text-gray-500 text-sm">
           You can search anything you like as long as the datails existed in the table columns
         </h1>
+        <div class="pt-4 w-full">
+            <x-select label="Select Columns" placeholder="Select one status" searchable multiselect wire:model="selected_columns">
+                <x-select.option label="NO." value="number" />
+                <x-select.option label="LOT NO." value="lot_number" />
+                <x-select.option label="SURVEY NO." value="survey_number" />
+                <x-select.option label="TITLE AREA" value="title_area" />
+                <x-select.option label="AWARDED AREA" value="awarded_area" />
+                <x-select.option label="PREVIOUS LAND OWNER" value="previous_land_owner" />
+                <x-select.option label="FIELD NO." value="field_number" />
+                <x-select.option label="BARANGAY" value="location" />
+                <x-select.option label="MUNICIPALITY" value="municipality" />
+                <x-select.option label="TITLE" value="title" />
+                <x-select.option label="CLOA NO." value="cloa_number" />
+                <x-select.option label="PAGE" value="page" />
+                <x-select.option label="ENCUMBERED AREA" value="encumbered_area" />
+                <x-select.option label="ENCUMBERED VARIANCE" value="encumbered_variance" />
+                <x-select.option label="PREVIOUS COPY OF TITLE (TYPE)" value="previous_copy_of_title_type" />
+                <x-select.option label="PREVIOUS COPY OF TITLE (NO.)" value="previous_copy_of_title_number" />
+                <x-select.option label="TITLE STATUS" value="title_status" />
+                <x-select.option label="TITLE COPY" value="title_copy" />
+                <x-select.option label="REMARKS" value="remarks" />
+                <x-select.option label="STATUS" value="status" />
+                <x-select.option label="LAND BANK AMORTIZATION" value="land_bank_amortization" />
+                <x-select.option label="AMOUNT" value="amount" />
+                <x-select.option label="DATE PAID" value="date_paid" />
+                <x-select.option label="DATE OF CERT" value="date_of_cert" />
+                <x-select.option label="NDC" value="ndc_remarks" />
+                <x-select.option label="NOTES" value="notes" />
+            </x-select>
+        </div>
+
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-2 mt-4">
+    <div class="hidden grid grid-cols-4 gap-2 mt-4">
       <div class="border p-1 px-3 rounded">
         <x-checkbox label="N0." wire:model="filters.number" />
       </div>
@@ -127,17 +158,23 @@
                 }),
             );
         @endphp
-        <div class="{{$filters['municipality'] != true ? 'hidden' : ''}} col-span-1 col-start-4">
-            {{-- <x-select label="Select Status" multiselect placeholder="All" wire:model="municipalities">
-                <x-select.option label="Encoded" value="ENCODED" />
-                <x-select.option label="Transmitted" value="TRANSMITTED" />
-                <x-select.option label="Paid" value="PAID" />
-                <x-select.option label="Unpaid" value="UNPAID" />
-            </x-select> --}}
+
+
+    </div>
+    <div class="grid grid-cols-4 space-x-3">
+        <div class="{{in_array('municipality', $selected_columns) ? '' : 'hidden'}} col-span-1">
             <x-select label="Select Municipality" multiselect placeholder="All" wire:model="municipalities">
             <x-select.option label="POLOMOLOK" value="POLOMOLOK" />
             <x-select.option label="TUPI" value="TUPI" />
             <x-select.option label="GENSAN" value="GENSAN" />
+        </x-select>
+        </div>
+        <div class="{{in_array('title_status', $selected_columns) ? '' : 'hidden'}} col-span-1">
+            <x-select label="Select Title Status" multiselect placeholder="All" wire:model="title_statuses">
+            <x-select.option label="TWC" value="TWC" />
+            <x-select.option label="TWOC" value="TWOC" />
+            <x-select.option label="UWC" value="UWC" />
+            <x-select.option label="UWOC" value="UWOC" />
         </x-select>
         </div>
     </div>
@@ -146,7 +183,7 @@
       <div class="p-3 border rounded-lg">
         <div class="flex mb-2 justify-between items-center">
           <div>
-            <div class="border rounded-lg flex items-center  px-1.5">
+            {{-- <div class="border rounded-lg flex items-center  px-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 fill-gray-500">
                 <path fill="none" d="M0 0h24v24H0z" />
                 <path
@@ -154,7 +191,7 @@
               </svg>
               <input type="text" wire:model="search" class="border-0 outline-none focus:ring-0"
                 placeholder="Search">
-            </div>
+            </div> --}}
           </div>
           <div>
             <x-button label="PRINT" class="font-bold" icon="printer" dark onclick="printDiv('print_table')" />
@@ -921,13 +958,13 @@
                     @endif
 
                     @if ($filters['date_paid'] != false && $filters['date_paid'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->date_paid }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ \Carbon\Carbon::parse($record->date_paid)->format('F d, Y') }}
                       </td>
                     @endif
 
                     @if ($filters['date_of_cert'] != false && $filters['date_of_cert'] != null)
                       <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
-                        {{ $record->date_of_cert }}
+                        {{ \Carbon\Carbon::parse($record->date_of_cert)->format('F d, Y') }}
                       </td>
                     @endif
                     @if ($filters['ndc_direct_payment_scheme'] != false && $filters['ndc_direct_payment_scheme'] != null)

@@ -15,6 +15,8 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
 {
     use Tables\Concerns\InteractsWithTable;
     public $municipalities = [];
+    public $title_statuses = [];
+    public $selected_columns = [];
     public $filters = [
         'number' => null,
         'lot_number' => null,
@@ -54,16 +56,32 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         return BasicInformation::query();
     }
 
+    public function updatedSelectedColumns()
+    {
+
+        foreach ($this->filters as $key => $value) {
+            $this->filters[$key] = false;
+        }
+
+        // Set the selected column's corresponding filter value to true
+        foreach ($this->selected_columns as $column) {
+            //if (isset($this->filters[$column])) {
+                $this->filters[$column] = true;
+           // }
+        }
+    }
+
     public function mount()
     {
-        $this->filters['lot_number'] = true;
-        $this->filters['survey_number'] = true;
-        $this->filters['title_area'] = true;
-        $this->filters['awarded_area'] = true;
-        $this->filters['location'] = true;
-        $this->filters['municipality'] = true;
-        $this->filters['cloa_number'] = true;
-        $this->filters['previous_copy_of_title_number'] = true;
+        $this->selected_columns = ['lot_number', 'survey_number', 'title_area', 'awarded_area', 'location', 'municipality', 'cloa_number', 'previous_copy_of_title_number'];
+        // $this->filters['lot_number'] = true;
+        // $this->filters['survey_number'] = true;
+        // $this->filters['title_area'] = true;
+        // $this->filters['awarded_area'] = true;
+        // $this->filters['location'] = true;
+        // $this->filters['municipality'] = true;
+        // $this->filters['cloa_number'] = true;
+        // $this->filters['previous_copy_of_title_number'] = true;
     }
 
     public function render()
@@ -74,6 +92,13 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     $query->whereIn('municipality', $this->municipalities);
                 } else {
                     $query->where('municipality', $this->municipalities);
+                }
+            })
+            ->when(!empty($this->title_statuses), function ($query) {
+                if (is_array($this->title_statuses)) {
+                    $query->whereIn('title_status', $this->title_statuses);
+                } else {
+                    $query->where('title_status', $this->title_statuses);
                 }
             })
                 // ->orWhere('lot_number', 'like', '%' . $this->search . '%')
@@ -122,7 +147,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('NO.')
-                ->searchable()
+                // ->searchable()
                 ->sortable(),
             TextColumn::make('lot_number')
                 ->label('LOT NO.')
@@ -139,7 +164,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['lot_number'];
                     }
                 })
-                ->searchable()
+                // ->searchable()
                 ->sortable(),
             TextColumn::make('survey_number')
                 ->visible(function ($record) {
@@ -156,7 +181,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('SURVEY NO.')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('title_area')
                 ->visible(function ($record) {
@@ -173,7 +198,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('TITLE AREA')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('awarded_area')
                 ->visible(function ($record) {
@@ -190,7 +215,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('AWARDED AREA')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('previous_land_owner')
                 ->visible(function ($record) {
@@ -207,7 +232,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('PREVIOUS LAND OWNER')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('field_number')
                 ->visible(function ($record) {
@@ -224,7 +249,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('FIELD NO.')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('location')
                 ->visible(function ($record) {
@@ -241,7 +266,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('LOCATION')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('municipality')
                 ->visible(function ($record) {
@@ -258,7 +283,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('MUNICIPALITY')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('title')
                 ->visible(function ($record) {
@@ -275,7 +300,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('TITLE')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('cloa_number')
                 ->visible(function ($record) {
@@ -292,7 +317,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('CLOA NO.')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('page')
                 ->visible(function ($record) {
@@ -309,7 +334,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     }
                 })
                 ->label('PAGE')
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('encumbered')
                 ->label('ENCUMBERED AREA')
@@ -376,7 +401,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['title_status'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('title_copy')
                 ->label('TITLE COPY')
@@ -393,7 +418,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['title_copy'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('remarks')
                 ->label('REMARKS')
@@ -410,7 +435,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['remarks'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('status')
                 ->label('STATUS')
@@ -427,7 +452,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['status'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('land_bank_amortization')
                 ->label('LAND BANK AMORTIZATION')
@@ -444,7 +469,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['land_bank_amortization'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('amount')
                 ->label('AMOUNT')
@@ -461,7 +486,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['amount'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('date_paid')
                 ->label('DATE PAID')
@@ -478,7 +503,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['date_paid'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('date_of_cert')
                 ->label('DATE OF CERT')
@@ -495,7 +520,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['date_of_cert'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('ndc_direct_payment_scheme')
                 ->label('NDC DIRECT PAYMENT SCHEME')
@@ -512,7 +537,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['ndc_direct_payment_scheme'];
                     }
                 })
-                ->searchable()
+                //->searchable()
                 ->sortable(),
             TextColumn::make('ndc_remarks')
                 ->label('NDC REMARKS')
@@ -529,7 +554,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['ndc_remarks'];
                     }
                 })
-                ->searchable()
+               // ->searchable()
                 ->sortable(),
             TextColumn::make('notes')
                 ->label('NOTES')
@@ -546,7 +571,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return $this->filters['notes'];
                     }
                 })
-                ->searchable()
+               // ->searchable()
                 ->sortable(),
         ];
     }
