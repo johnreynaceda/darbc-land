@@ -1,12 +1,12 @@
-<div>
+<div x-data>
   <div>
     <div class="">
       <div>
-        <h1 class="font-bold font-montserrat uppercase text-lg text-gray-700">Search</h1>
-        <h1 class="text-gray-500 text-sm">
+        {{-- <h1 class="font-bold font-montserrat uppercase text-lg text-gray-700">Search</h1> --}}
+        {{-- <h1 class="text-gray-500 text-sm">
           You can search anything you like as long as the datails existed in the table columns
-        </h1>
-        <div class="pt-4 w-full">
+        </h1> --}}
+        <div wire:ignore class="pt-4 w-full">
             <x-select label="Select Columns" placeholder="Select one status" searchable multiselect wire:model="selected_columns">
                 <x-select.option label="NO." value="number" />
                 <x-select.option label="LOT NO." value="lot_number" />
@@ -194,10 +194,10 @@
             </div> --}}
           </div>
           <div>
-            <x-button label="PRINT" class="font-bold" icon="printer" dark onclick="printDiv('print_table')" />
+            <x-button label="PRINT" class="font-bold" icon="printer" dark @click="printOut($refs.printContainer.outerHTML);" />
           </div>
         </div>
-        <div class="flow-root overflow-x-auto" id="print_table">
+        <div class="flow-root overflow-x-auto" x-ref="printContainer" id="print_table">
           @php
             $count = count(
                 array_filter($filters, function ($value) {
