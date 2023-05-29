@@ -30,7 +30,7 @@
         </div>
         <div class="grid grid-cols-4 mt-0.5">
           <div class="flex items-center">
-            <span class="rounded-l-lg text-xs bg-gray-100 border font-bold px-2 w-32 py-2">LOT NO:</span>
+            <span class="rounded-l-sm text-xs bg-gray-100 border font-bold px-2 w-32 py-2">LOT NO:</span>
             <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->lot_number ?? '' }}</span>
           </div>
           <div class="flex items-center">
@@ -42,7 +42,7 @@
             <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->municipality ?? '' }}</span>
           </div>
           <div class="flex col-span-2 items-center">
-            <span class="rounded-l-lg text-xs bg-gray-100 font-bold border px-2 w-32 py-2">SURVEY NO:</span>
+            <span class="rounded-l-sm text-xs bg-gray-100 font-bold border px-2 w-32 py-2">SURVEY NO:</span>
             <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->survey_number ?? '' }}</span>
           </div>
           <div class="flex  items-center">
@@ -54,7 +54,7 @@
             <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->page ?? '' }}</span>
           </div>
           <div class="flex col-span-2 items-center">
-            <span class="rounded-l-lg text-xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLED AREA:</span>
+            <span class="rounded-l-sm text-xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLED AREA:</span>
             <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->title_area ?? '' }}</span>
           </div>
           <div class="flex col-span-2 items-center">
@@ -62,7 +62,7 @@
             <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->cloa_number ?? '' }}</span>
           </div>
           <div class="flex col-span-2 items-center">
-            <span class="rounded-l-lg bg-gray-100 text-xs font-bold border px-2 w-32 py-2">AWARDED AREA:</span>
+            <span class="rounded-l-sm bg-gray-100 text-xs font-bold border px-2 w-32 py-2">AWARDED AREA:</span>
             <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->awarded_area ?? '' }}</span>
           </div>
           <div class="flex col-span-2 items-center">
@@ -95,7 +95,7 @@
             <span class="flex-1 text-center bg-green-50 border py-1">{{$area}}</span>
           </div>
           <div class="flex col-span-2 items-center">
-            <span class="rounded-l-lg bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">PREV. LAND OWNER:</span>
+            <span class="rounded-l-sm bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">PREV. LAND OWNER:</span>
             <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->previous_land_owner ?? ''}}</span>
           </div>
           <div class="flex col-span-1 items-center">
@@ -107,7 +107,7 @@
             <span class="flex-1 text-center bg-green-50 border py-1">{{$number}}</span>
           </div>
           <div class="flex col-span-2 items-center">
-            <span class="rounded-l-lg text-xs bg-gray-100 font-bold border px-2 w-32 py-2">BARANGAY:</span>
+            <span class="rounded-l-sm text-xs bg-gray-100 font-bold border px-2 w-32 py-2">BARANGAY:</span>
             <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->location ?? ''}}</span>
           </div>
           <div class="flex col-span-2 items-center">
@@ -153,21 +153,20 @@
                               <thead>
                                 <tr class="divide-x divide-gray-200">
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">LAND STATUS
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">LAND STATUS
                                   </th>
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     LEASED AREA
                                   </th>
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     UPLANTED AREA
                                   </th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     STATUS</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     REMARKS</th>
-
                                 </tr>
                               </thead>
                               <tbody class="divide-y divide-gray-200 bg-white">
@@ -196,7 +195,7 @@
                 </div>
               </div>
               <div class="mt-5 md:col-span-2 md:mt-0">
-                <div class="border h-96 overflow-y-auto p-5">
+                <div class="border h-96  overflow-y-auto p-5">
                   <div class="flex justify-between items-center">
                     <div class="flex space-x-4 items-center">
                       <h1 class="font-bold text-lg text-gray-600 font-montserrat">TAX</h1>
@@ -221,35 +220,35 @@
                                 <tr class="divide-x divide-gray-200">
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">Year</th>
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Area
                                     in Title HA./S
                                   </th>
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Tax
                                     Declaration No.
                                   </th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Owner</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Market Value</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Assesed Value</th>
 
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Paid By Leased To Dolefil</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Paid By Tax Payment</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Paid By Year of Payment</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     Official Receipt</th>
                                 </tr>
                               </thead>
@@ -661,41 +660,59 @@
             <span class="font-bold text-black">DOCUMENT ATTACHMENTS</span>
           </div>
           <div class="grid grid-cols-6 mt-3 gap-4 border py-3 mb-5">
-            <div class="grid place-content-center">
+            <div class="grid place-content-center space-y-3">
               <button wire:click="$set('titleAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
                 <span class="font-bold text-gray-600 ">TITLE</span>
               </button>
+                {{-- <div class="mx-auto">
+                    <x-button emerald icon="eye" label="View" />
+                </div> --}}
             </div>
-            <div class="grid place-content-center">
+            <div class="grid place-content-center space-y-3">
               <button wire:click="$set('taxDecAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
                 <span class="font-bold text-gray-600 ">TAX DEC</span>
               </button>
+                {{-- <div class="mx-auto">
+                    <x-button emerald icon="eye" label="View" />
+                </div> --}}
             </div>
-            <div class="grid place-content-center">
+            <div class="grid place-content-center space-y-3">
               <button wire:click="$set('sketchPlanAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
                 <span class="font-bold text-gray-600 ">SKETCH PLAN & VICINITY MAP</span>
               </button>
+              {{-- <div class="mx-auto">
+                <x-button emerald icon="eye" label="View" />
+              </div> --}}
             </div>
-            <div wire:click="$set('actualPhotoAttachmentModal', true)" class="grid place-content-center">
-              <button class="flex justify-center items-center flex-col hover:text-green-500">
+            <div class="grid place-content-center space-y-3">
+              <button wire:click="$set('actualPhotoAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
                 <span class="font-bold text-gray-600 ">ACTUAL PHOTO</span>
               </button>
+              {{-- <div class="mx-auto">
+                <x-button emerald icon="eye" label="View" />
+              </div> --}}
             </div>
-            <div class="grid place-content-center">
+            <div class="grid place-content-center space-y-3">
               <button wire:click="$set('videoAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
                 <span class="font-bold text-gray-600 ">VIDEO</span>
               </button>
+              {{-- <div class="mx-auto">
+                <x-button emerald icon="eye" label="View" />
+              </div> --}}
             </div>
-            <div class="grid place-content-center">
+            <div class="grid place-content-center space-y-3">
               <button wire:click="$set('othersAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
                 <span class="font-bold text-gray-600 ">OTHERS</span>
               </button>
+              {{-- <div class="mx-auto">
+                <x-button emerald icon="eye" label="View" />
+              </div> --}}
             </div>
           </div>
         </div>
