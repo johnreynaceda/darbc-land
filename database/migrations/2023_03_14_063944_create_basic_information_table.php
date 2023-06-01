@@ -29,6 +29,7 @@ return new class extends Migration
             $table->json('previous_copy_of_title')->nullable();
             $table->string('title_status')->nullable();
             $table->string('title_copy')->nullable();
+            $table->string('tax_dec_number')->nullable();
             $table->text('remarks')->nullable();
             $table->text('status')->nullable();
             $table->string('land_bank_amortization')->nullable();

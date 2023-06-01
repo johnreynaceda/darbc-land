@@ -16,6 +16,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     use Tables\Concerns\InteractsWithTable;
     public $municipalities = [];
     public $title_statuses = [];
+    public $title_types = [];
     public $selected_columns = [];
     public $filters = [
         'number' => null,
@@ -38,6 +39,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         'previous_copy_of_title_number' => null,
         'title_status' => null,
         'title_copy' => null,
+        'tax_dec_number' => null,
         'remarks' => null,
         'status' => null,
         'land_bank_amortization' => null,
@@ -101,30 +103,13 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                     $query->where('title_status', $this->title_statuses);
                 }
             })
-                // ->orWhere('lot_number', 'like', '%' . $this->search . '%')
-                // ->orWhere('survey_number', 'like', '%' . $this->search . '%')
-                // ->orWhere('title_area', 'like', '%' . $this->search . '%')
-                // ->orWhere('awarded_area', 'like', '%' . $this->search . '%')
-                // ->orWhere('previous_land_owner', 'like', '%' . $this->search . '%')
-                // ->orWhere('field_number', 'like', '%' . $this->search . '%')
-                // ->orWhere('location', 'like', '%' . $this->search . '%')
-                // ->orWhere('municipality', 'like', '%' . $this->search . '%')
-                // ->orWhere('title', 'like', '%' . $this->search . '%')
-                // ->orWhere('cloa_number', 'like', '%' . $this->search . '%')
-                // ->orWhere('page', 'like', '%' . $this->search . '%')
-                // ->orWhere('encumbered', 'like', '%' . $this->search . '%')
-                // ->orWhere('previous_copy_of_title', 'like', '%' . $this->search . '%')
-                // ->orWhere('title_status', 'like', '%' . $this->search . '%')
-                // ->orWhere('title_copy', 'like', '%' . $this->search . '%')
-                // ->orWhere('remarks', 'like', '%' . $this->search . '%')
-                // ->orWhere('status', 'like', '%' . $this->search . '%')
-                // ->orWhere('land_bank_amortization', 'like', '%' . $this->search . '%')
-                // ->orWhere('amount', 'like', '%' . $this->search . '%')
-                // ->orWhere('date_paid', 'like', '%' . $this->search . '%')
-                // ->orWhere('date_of_cert', 'like', '%' . $this->search . '%')
-                // ->orWhere('ndc_direct_payment_scheme', 'like', '%' . $this->search . '%')
-                // ->orWhere('ndc_remarks', 'like', '%' . $this->search . '%')
-                // ->orWhere('notes', 'like', '%' . $this->search . '%')
+            ->when(!empty($this->title_types), function ($query) {
+                if (is_array($this->title_types)) {
+                    $query->whereIn('previous_copy_of_title->type of title', $this->title_types);
+                } else {
+                    $query->where('previous_copy_of_title->type of title', $this->title_types);
+                }
+            })
                 ->get(),
         ]);
     }
@@ -416,6 +401,23 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                         return true;
                     } else {
                         return $this->filters['title_copy'];
+                    }
+                })
+                //->searchable()
+                ->sortable(),
+            TextColumn::make('tax_dec_number')
+                ->label('TAX DECLARATION NUMBER')
+                ->visible(function ($record) {
+                    $column = count(
+                        array_filter($this->filters, function ($value) {
+                            return $value != null;
+                        })
+                    );
+
+                    if ($column < 1) {
+                        return true;
+                    } else {
+                        return $this->filters['tax_dec_number'];
                     }
                 })
                 //->searchable()

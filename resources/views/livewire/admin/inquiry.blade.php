@@ -26,6 +26,7 @@
                 <x-select.option label="PREVIOUS COPY OF TITLE (NO.)" value="previous_copy_of_title_number" />
                 <x-select.option label="TITLE STATUS" value="title_status" />
                 <x-select.option label="TITLE COPY" value="title_copy" />
+                <x-select.option label="TAX DECLARATION NUMBER" value="tax_dec_number" />
                 <x-select.option label="REMARKS" value="remarks" />
                 <x-select.option label="STATUS" value="status" />
                 <x-select.option label="LAND BANK AMORTIZATION" value="land_bank_amortization" />
@@ -117,6 +118,10 @@
       </div>
       <div class="border p-1 px-3 rounded">
         <x-checkbox id="right-label" label="
+            TAX DECLARATION NUMBER" wire:model="filters.tax_dec_number" />
+      </div>
+      <div class="border p-1 px-3 rounded">
+        <x-checkbox id="right-label" label="
             REMARKS" wire:model="filters.remarks" />
       </div>
       <div class="border p-1 px-3 rounded">
@@ -175,6 +180,12 @@
             <x-select.option label="TWOC" value="TWOC" />
             <x-select.option label="UWC" value="UWC" />
             <x-select.option label="UWOC" value="UWOC" />
+        </x-select>
+        </div>
+        <div class="{{in_array('previous_copy_of_title_type', $selected_columns) ? '' : 'hidden'}} col-span-1">
+            <x-select label="Select Title Type" multiselect placeholder="All" wire:model="title_types">
+            <x-select.option label="TCT" value="TCT" />
+            <x-select.option label="OCT" value="OCT" />
         </x-select>
         </div>
     </div>
@@ -563,6 +574,12 @@
                       TITLE COPY
                     </th>
                   @endif
+                  @if ($filters['tax_dec_number'] != false && $filters['tax_dec_number'] != null)
+                  <th
+                    class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
+                    TAX DECLARATION NUMBER
+                  </th>
+                 @endif
                   @if ($filters['remarks'] != false && $filters['remarks'] != null)
                     <th
                       class="whitespace-nowrap border-t py-1 pl-4 pr-4 text-center text-sm font-semibold bg-indigo-500 text-white">
@@ -936,6 +953,10 @@
                     @if ($filters['title_copy'] != false && $filters['title_copy'] != null)
                       <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_copy }}
                       </td>
+                    @endif
+                    @if ($filters['tax_dec_number'] != false && $filters['tax_dec_number'] != null)
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->tax_dec_number }}
+                    </td>
                     @endif
 
                     @if ($filters['remarks'] != false && $filters['remarks'] != null)

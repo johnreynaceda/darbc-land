@@ -38,6 +38,7 @@ class AddLot extends Component implements Forms\Contracts\HasForms
     public $_previous_copy_of_title_number;
     public $_title_status;
     public $_title_copy;
+    public $_tax_dec_number;
     public $_remarks;
     public $_status;
     public $_land_bank_amortization;
@@ -91,6 +92,10 @@ class AddLot extends Component implements Forms\Contracts\HasForms
                     ->schema([
                             Card::make()
                             ->schema([
+                                Grid::make(1)
+                                ->schema([
+                                    TextInput::make('_tax_dec_number')->label('Tax Declaration Number'),
+                                ]),
                                 TextInput::make('_title_copy')->label('Title Copy'),
                                 TextInput::make('_title_status')->label('Title Status'),
                                 TextInput::make('_land_bank_amortization')->label('Land Bank Amortization'),
@@ -145,6 +150,7 @@ class AddLot extends Component implements Forms\Contracts\HasForms
             'previous_copy_of_title' => $previous_copy_of_title,
             'title_status' => $this->_title_status,
             'title_copy' => $this->_title_copy,
+            'tax_dec_number' => $this->_tax_dec_number,
             'remarks' => $this->_remarks,
             'status' => $this->_status,
             'land_bank_amortization' => $this->_land_bank_amortization,

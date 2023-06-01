@@ -58,6 +58,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     public $_previous_copy_of_title_number;
     public $_title_status;
     public $_title_copy;
+    public $_tax_dec_number;
     public $_remarks;
     public $_status;
     public $_land_bank_amortization;
@@ -86,6 +87,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     public $__previous_copy_of_title_number;
     public $__title_status;
     public $__title_copy;
+    public $__tax_dec_number;
     public $__remarks;
     public $__status;
     public $__land_bank_amortization;
@@ -222,6 +224,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 '__previous_copy_of_title_type_of_title' => json_decode($record->previous_copy_of_title, true)['type of title'],
                 '__previous_copy_of_title_number' => json_decode($record->previous_copy_of_title, true)['no.'],
                 '__title_copy' => $record->title_copy,
+                '__tax_dec_number' => $record->tax_dec_number,
                 '__title_status' => $record->title_status,
                 '__land_bank_amortization' => $record->land_bank_amortization,
                 '__remarks' => $record->remarks,
@@ -259,6 +262,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 $record->encumbered = $encumbered;
                 $record->previous_copy_of_title = $previous_copy_of_title;
                 $record->title_copy = $data['__title_copy'];
+                $record->tax_dec_number = $data['__tax_dec_number'];
                 $record->title_status = $data['__title_status'];
                 $record->land_bank_amortization = $data['__land_bank_amortization'];
                 $record->remarks = $data['__remarks'];
@@ -321,6 +325,10 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                         ->schema([
                                 Card::make()
                                 ->schema([
+                                    Grid::make(1)
+                                    ->schema([
+                                        TextInput::make('__tax_dec_number')->label('Tax Declaration Number'),
+                                    ]),
                                     TextInput::make('__title_copy')->label('Title Copy'),
                                     TextInput::make('__title_status')->label('Title Status'),
                                     TextInput::make('__land_bank_amortization')->label('Land Bank Amortization'),
@@ -448,7 +456,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->searchable()
                 ->sortable(),
             TextColumn::make('encumberedArea')
-                ->label('Encumbered Area')
+                ->label('ENCUMBERED AREA')
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->encumbered, true);
                     $area = $json['area'];
@@ -456,7 +464,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     return $area;
                 }),
             TextColumn::make('encumberedVariance')
-                ->label('Encumbered Variance')
+                ->label('ENCUMBERED VARIANCE')
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->encumbered, true);
                     $area = $json['variance'];
@@ -464,7 +472,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     return $area;
                 }),
             TextColumn::make('previuscopyType')
-                ->label('Previous Copy of Title (Type)')
+                ->label('PREVIOUS COPY OF TITLE (TYPE)')
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->previous_copy_of_title, true);
                     $type = $json['type of title'];
@@ -472,7 +480,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     return $type;
                 }),
             TextColumn::make('previuscopyNo')
-                ->label('Previous Copy of Title (No.)')
+                ->label('PREVIOUS COPY OF TITLE (NO.)')
                 ->formatStateUsing(function ($record) {
                     $json = json_decode($record->previous_copy_of_title, true);
                      $number = $json['no.'];
@@ -480,36 +488,53 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     return $number;
                 }),
             TextColumn::make('title_status')
+                ->label('TITLE STATUS')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('title_copy')
+                ->label('TITLE COPY')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('tax_dec_number')
+                ->label('TAX DECLARATION NUMBER')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('remarks')
+                ->label('REMARKS')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('status')
+                ->label('STATUS')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('land_bank_amortization')
+                ->label('LANDBANK AMORTIZATION')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('amount')
+                ->label('AMOUNT')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('date_paid')
+                ->label('DATE PAID')
+                ->date('F d, Y')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('date_of_cert')
+                ->label('DATE OF CERT')
+                ->date('F d, Y')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('ndc_direct_payment_scheme')
+                ->label('NDC DIRECT PAYMENT SCHEME')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('ndc_remarks')
+                ->label('NDC REMARKS')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('notes')
+                ->label('NOTES')
                 ->searchable()
                 ->sortable(),
         ];
