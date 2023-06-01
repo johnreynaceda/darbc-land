@@ -15,7 +15,7 @@
           labels: [
             'Polomolok',
             'Tupi',
-            'GenSan'
+            'General Santos'
           ],
           datasets: [{
             label: 'Land Summary',

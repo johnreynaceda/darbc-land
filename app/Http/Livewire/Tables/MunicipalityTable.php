@@ -32,7 +32,7 @@ class MunicipalityTable extends Component implements Tables\Contracts\HasTable
 
     protected function getTableQuery(): Builder
     {
-        return BasicInformation::query()->where('municipality', $this->record);
+        return BasicInformation::query()->where('municipality', 'like', '%' . $this->record . '%');
     }
 
     protected function paginateTableQuery(Builder $query): Paginator
