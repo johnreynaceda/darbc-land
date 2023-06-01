@@ -126,9 +126,9 @@ class Dashboard extends Component
         $this->total = Actual::sum('total_area');
         $this->facility = Actual::sum('facility_area');
         $this->unutilized = Actual::sum('unutilized_area');
-        $this->polomolok = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->count();
-        $this->tupi = BasicInformation::where('municipality', 'like', '%' . 'Tupi' . '%')->count();
-        $this->gensan = BasicInformation::where('municipality', 'like', '%' . 'GenSan' . '%')->count();
+        $this->polomolok = BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->count();
+        $this->tupi = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->count();
+        $this->gensan = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->count();
         $this->twc = BasicInformation::where('title_status', 'TWC')->count();
         $this->twoc = BasicInformation::where('title_status', 'TWOC')->count();
         $this->uwc = BasicInformation::where('title_status', 'UWC')->count();
