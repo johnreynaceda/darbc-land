@@ -434,11 +434,11 @@
                       @php
                         $area = App\Models\BasicInformation::whereNotNull('title')
                             ->where('cloa_number', '!=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->sum('title_area');
                         $lots = App\Models\BasicInformation::whereNotNull('title')
                             ->where('cloa_number', '!=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
@@ -451,11 +451,11 @@
                       @php
                         $area = App\Models\BasicInformation::whereNotNull('title')
                             ->where('cloa_number', '=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->sum('title_area');
                         $lots = App\Models\BasicInformation::whereNotNull('title')
                             ->where('cloa_number', '=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
@@ -468,12 +468,12 @@
                       @php
                         $area = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '!=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->sum('title_area');
 
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '!=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
@@ -486,12 +486,12 @@
                       @php
                         $area = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->sum('title_area');
 
                         $lots = App\Models\BasicInformation::where('title', '=', '')
                             ->where('cloa_number', '=', 'NO CLOA')
-                            ->where('municipality', 'like', '%' . 'GENSAN' . '%')
+                            ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
