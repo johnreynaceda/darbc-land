@@ -395,7 +395,17 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     $empty_columns = 0;
 
                     foreach ($post->getAttributes() as $column => $value) {
-                        if (is_null($value) || empty($value)) {
+                        // List the columns to exclude
+                        $excludedColumns = ['cloa_number', 'notes', 'remarks', 'land_bank_amortization'];
+
+                        if ($column === 'encumbered') {
+                            $encumberedData = json_decode($value, true);
+                            $varianceValue = $encumberedData['variance'] == null ? '' : $encumberedData['variance'];
+
+                            if (empty($varianceValue)) {
+                                continue; // Skip the variance column
+                            }
+                        } elseif (!in_array($column, $excludedColumns) && (is_null($value) || empty($value))) {
                             $empty_columns++;
                         }
                     }
@@ -405,13 +415,16 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->action(function (BasicInformation $record): void {
                     $post = BasicInformation::find($record->id);
 
+                    $excludedColumns = ['cloa_number', 'variance', 'notes', 'remarks', 'land_bank_amortization'];
+
                     $emptyColumns = [];
 
                     foreach ($post->getAttributes() as $column => $value) {
-                        if (is_null($value) || empty($value)) {
+                        if (!in_array($column, $excludedColumns) && (is_null($value) || empty($value))) {
                             $emptyColumns[] = $column;
                         }
                     }
+
                     $this->viewEmptyColumns($emptyColumns);
 
                 }),
