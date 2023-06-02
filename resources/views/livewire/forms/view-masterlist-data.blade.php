@@ -92,7 +92,7 @@
                 <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->cloa_number == null ? '--' : $basicInfo->cloa_number }}</span>
               </div>
               <div class="flex items-center">
-                <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">PAGE</span>
+                <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">PAGE:</span>
                 <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->page == null ? '--' : $basicInfo->page }}</span>
               </div>
           </div>
