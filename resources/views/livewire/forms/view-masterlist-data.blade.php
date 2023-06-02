@@ -52,7 +52,7 @@
         <div class="grid grid-cols-4 mt-0.5">
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">LOT NO:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->lot_number == null ? '--' : $basicInfo->lot_number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->lot_number == null ? '--' : $basicInfo->lot_number }}</span>
           </div>
           <div class="flex items-center">
             <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">SURVEY NO:</span>
@@ -60,15 +60,15 @@
           </div>
           <div class="flex col-span-2 items-center">
             <span class="bg-gray-100 text-2xs font-bold border px-2 pr-8 py-2  w-40">PREV. LAND OWNER: </span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->previous_land_owner == null ? '--' : $basicInfo->previous_land_owner }}</span>
+            <span class="flex-1 text-sm  text-center bg-green-50 border py-1.5">{{ $basicInfo->previous_land_owner == null ? '--' : $basicInfo->previous_land_owner }}</span>
           </div>
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">FIELD NO:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->field_number == null ? '--' : $basicInfo->field_number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->field_number == null ? '--' : $basicInfo->field_number }}</span>
           </div>
           <div class="flex items-center">
             <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">TITLE AREA:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->title_area == null ? '--' : $basicInfo->title_area }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->title_area == null ? '--' : $basicInfo->title_area }}</span>
           </div>
           {{-- <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm text-xs bg-gray-100 font-bold border px-2 w-32 py-2">SURVEY NO:</span>
@@ -76,7 +76,7 @@
           </div> --}}
           <div class="flex col-span-2  items-center">
             <span class=" text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">AWARDED AREA:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->awarded_area == null ? '--' : $basicInfo->awarded_area }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->awarded_area == null ? '--' : $basicInfo->awarded_area }}</span>
           </div>
           {{-- <div class="flex  items-center">
             <span class="text-xs bg-gray-100 font-bold border px-2 w-32 py-2">PAGE:</span>
@@ -84,16 +84,16 @@
           </div> --}}
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">TITLE NO:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $number == null ? '--' : $number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $number == null ? '--' : $number }}</span>
           </div>
           <div class="grid grid-cols-2">
             <div class="flex items-center">
                 <span class=" pr-7 py-2 text-2xs bg-gray-100 font-bold border px-2">CLOA NO:</span>
-                <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->cloa_number == null ? '--' : $basicInfo->cloa_number }}</span>
+                <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->cloa_number == null ? '--' : $basicInfo->cloa_number }}</span>
               </div>
               <div class="flex items-center">
                 <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">PAGE</span>
-                <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->page == null ? '--' : $basicInfo->page }}</span>
+                <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->page == null ? '--' : $basicInfo->page }}</span>
               </div>
           </div>
 
@@ -104,45 +104,45 @@
           </div> --}}
           <div class="flex items-center">
             <span class="text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">TYPE OF TITLE. :</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $type == null ? '--' : $type }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $type == null ? '--' : $type }}</span>
           </div>
           <div class="flex items-center">
             <span class="text-2xs bg-gray-100 font-bold border px-2 w-32 py-2">PREV. TITLE NO. :</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $number == null ? '--' : $number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $number == null ? '--' : $number }}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">BARANGAY:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->location == null ? '--' : $basicInfo->location }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->location == null ? '--' : $basicInfo->location }}</span>
           </div>
           <div class="flex  items-center">
             <span class="bg-gray-100 text-2xs font-bold border px-2 w-40 ">
               <h1>ENCUMBERED:</h1>
               <h1 class="text-2xs">AREA</h1>
             </span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{$area == null ? '0' : $area}}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$area == null ? '0' : $area}}</span>
           </div>
           <div class="flex  items-center">
             <span class="bg-gray-100 text-2xs font-bold border px-2 w-32 ">
               <h1>ENCUMBERED:</h1>
               <h1 class="text-2xs">VARIANCE</h1>
             </span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{$variance == null ? '0' : $variance}}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$variance == null ? '0' : $variance}}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">MUNICIPALITY:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->municipality == null ? '--' : $basicInfo->municipality}}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$basicInfo->municipality == null ? '--' : $basicInfo->municipality}}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">REMARKS :</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{ $basicInfo->remarks == null ? '--' : $basicInfo->remarks }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->remarks == null ? '--' : $basicInfo->remarks }}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLE STATUS:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->title_status == null ? '--' : $basicInfo->title_status}}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$basicInfo->title_status == null ? '--' : $basicInfo->title_status}}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">STATUS:</span>
-            <span class="flex-1 text-center bg-green-50 border py-1">{{$basicInfo->status == null ? '--' : $basicInfo->status}}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$basicInfo->status == null ? '--' : $basicInfo->status}}</span>
           </div>
         </div>
         <div class="mt-0 5">
