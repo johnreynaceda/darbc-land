@@ -174,7 +174,7 @@
                       <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
                         STATUS</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                        HECTARS</th>
+                        HECTARES</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                       </th>
 
@@ -268,7 +268,7 @@
                       <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
                         STATUS</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                        HECTARS</th>
+                        HECTARES</th>
 
                     </tr>
                   </thead>
@@ -319,7 +319,7 @@
                       <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
                         STATUS</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                        HECTARS</th>
+                        HECTARES</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                       </th>
 
@@ -421,7 +421,7 @@
                       <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
                         STATUS</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                        HECTARS</th>
+                        HECTARES</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                       </th>
 
