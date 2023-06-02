@@ -185,7 +185,7 @@
               </svg>
               Inquiry
             </a>
-            <a href="{{ route('upload') }}"
+            {{-- <a href="{{ route('upload') }}"
               class="{{ request()->routeIs('upload') ? 'bg-violet-800' : '' }} hover:bg-violet-800 text-white group flex items-center rounded-md px-2 py-2 text-sm font-medium">
               <svg class="mr-3 h-6 w-6 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                 fill="none">
@@ -194,7 +194,7 @@
                   fill="currentColor"></path>
               </svg>
               Upload
-            </a>
+            </a> --}}
             <a href="{{ route('calendar') }}"
               class="{{ request()->routeIs('calendar') ? 'bg-violet-800' : '' }} hover:bg-violet-800 text-white group flex items-center rounded-md px-2 py-2 text-sm font-medium">
               <svg class="mr-3 h-6 w-6 flex-shrink-0" viewBox="0 0 48 48" fill="none"
