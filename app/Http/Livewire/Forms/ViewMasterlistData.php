@@ -90,6 +90,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
 
      //attachment variables
      public $title_attachment_id;
+     public $deed_of_sale_attachment_id;
      public $tax_attachment_id;
      public $sketch_attachment_id;
      public $actual_attachment_id;
@@ -98,6 +99,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
 
      //modals
      public $titleAttachmentModal = false;
+     public $deedOfSaleAttachmentModal = false;
      public $taxDecAttachmentModal = false;
      public $sketchPlanAttachmentModal = false;
      public $actualPhotoAttachmentModal = false;
@@ -105,6 +107,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $othersAttachmentModal = false;
      protected $listeners = [
         'close_title_modal'=> 'closeTitleModal',
+        'close_deed_of_sale_modal'=> 'closeDeedOfSaleModal',
         'close_tax_modal' => 'closeTaxModal',
         'close_sketch_plan_modal' => 'closeSketchPlanModal',
         'close_actual_photo_modal' => 'closeActualPhotoModal',
@@ -152,6 +155,44 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $deleted = false;
         if (isset($this->title_attachment_id)) {
             $deleted = Attachment::where('id',$this->title_attachment_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
+    }
+
+    public function deleteDeedOfSaleAttachment($curAtt)
+    {
+        $this->deed_of_sale_attachment_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteDeedOfSaleAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteDeedOfSaleAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->deed_of_sale_attachment_id)) {
+            $deleted = Attachment::where('id',$this->deed_of_sale_attachment_id)->first()->delete();
         }
        if ($deleted) {
         $this->dialog()->success(
@@ -456,6 +497,12 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public function closeTitleModal()
     {
         $this->titleAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
+    public function closeDeedOfSaleModal()
+    {
+        $this->deedOfSaleAttachmentModal = false;
         $this->emit('refreshComponent');
     }
 

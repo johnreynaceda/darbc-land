@@ -415,6 +415,10 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     $this->viewEmptyColumns($emptyColumns);
 
                 }),
+            TextColumn::make('lot_number')
+                ->label('LOT NO.')
+                ->searchable()
+                ->sortable(),
             TextColumn::make('survey_number')
                 ->label('SURVEY NO.')
                 ->searchable()
@@ -533,10 +537,10 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->label('NDC REMARKS')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('notes')
-                ->label('NOTES')
-                ->searchable()
-                ->sortable(),
+            // TextColumn::make('notes')
+            //     ->label('NOTES')
+            //     ->searchable()
+            //     ->sortable(),
         ];
     }
 
