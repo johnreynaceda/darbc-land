@@ -10,9 +10,9 @@ class Tax extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function basic_information()
+    public function basicInformation()
     {
-        return $this->belongsTo(BasicInformation::class, "basic_information_id");
+        return $this->belongsTo(BasicInformation::class);
     }
 
     public function tax_receipt()

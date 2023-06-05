@@ -18,6 +18,8 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     public $title_statuses = [];
     public $title_types = [];
     public $selected_columns = [];
+    public $title_filter;
+    public $search = '';
     public $filters = [
         'number' => null,
         'lot_number' => null,
@@ -51,7 +53,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         'notes' => null,
     ];
 
-    public $search = '';
+
 
     protected function getTableQuery(): Builder
     {
@@ -71,48 +73,119 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 $this->filters[$column] = true;
            // }
         }
+        $this->title_filter = null;
+        $this->search = '';
     }
 
     public function mount()
     {
-        $this->selected_columns = ['lot_number', 'survey_number', 'title_area', 'awarded_area', 'location', 'municipality', 'cloa_number', 'previous_copy_of_title_number'];
-        // $this->filters['lot_number'] = true;
-        // $this->filters['survey_number'] = true;
-        // $this->filters['title_area'] = true;
-        // $this->filters['awarded_area'] = true;
-        // $this->filters['location'] = true;
-        // $this->filters['municipality'] = true;
-        // $this->filters['cloa_number'] = true;
-        // $this->filters['previous_copy_of_title_number'] = true;
+        $this->selected_columns = ['lot_number', 'survey_number', 'title_area', 'awarded_area',
+        'location', 'municipality', 'cloa_number', 'previous_copy_of_title_number'];
     }
 
     public function render()
-    {
-        return view('livewire.admin.inquiry', [
-            'records' => BasicInformation::when(!empty($this->municipalities), function ($query) {
-                if (is_array($this->municipalities)) {
-                    $query->whereIn('municipality', $this->municipalities);
-                } else {
-                    $query->where('municipality', $this->municipalities);
-                }
-            })
-            ->when(!empty($this->title_statuses), function ($query) {
-                if (is_array($this->title_statuses)) {
-                    $query->whereIn('title_status', $this->title_statuses);
-                } else {
-                    $query->where('title_status', $this->title_statuses);
-                }
-            })
-            ->when(!empty($this->title_types), function ($query) {
-                if (is_array($this->title_types)) {
-                    $query->whereIn('previous_copy_of_title->type of title', $this->title_types);
-                } else {
-                    $query->where('previous_copy_of_title->type of title', $this->title_types);
-                }
-            })
-                ->get(),
-        ]);
+{
+    $query = BasicInformation::query();
+
+    if (!empty($this->municipalities)) {
+        $query->whereIn('municipality', $this->municipalities);
     }
+
+    if (!empty($this->title_statuses)) {
+        $query->whereIn('title_status', $this->title_statuses);
+    }
+
+    if (!empty($this->title_types)) {
+        $query->whereIn('previous_copy_of_title->type of title', $this->title_types);
+    }
+
+    if (!empty($this->title_filter) && !empty($this->search)) {
+        // Apply the selected filter based on the search input
+        switch ($this->title_filter) {
+            case 'number':
+                $query->where('number', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'lot_number':
+                $query->where('lot_number', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'survey_number':
+                $query->where('survey_number', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'title_area':
+                $query->where('title_area', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'awarded_area':
+                $query->where('awarded_area', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'previous_land_owner':
+                $query->where('previous_land_owner', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'field_number':
+                $query->where('field_number', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'location':
+                $query->where('location', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'municipality':
+                $query->where('municipality', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'title':
+                $query->where('title', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'cloa_number':
+                $query->where('cloa_number', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'page':
+                $query->where('page', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'encumbered_area':
+                $query->where('encumbered_area', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'encumbered_variance':
+                $query->where('encumbered_variance', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'previous_copy_of_title_type':
+                $query->where('previous_copy_of_title_type', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'previous_copy_of_title_number':
+                $query->where('previous_copy_of_title_number', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'title_status':
+                $query->where('title_status', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'title_copy':
+                $query->where('title_copy', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'tax_dec_number':
+                $query->where('tax_dec_number', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'remarks':
+                $query->where('remarks', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'status':
+                $query->where('status', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'land_bank_amortization':
+                $query->where('land_bank_amortization', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'amount':
+                $query->where('amount', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'ndc_remarks':
+                $query->where('ndc_remarks', 'LIKE', '%' . $this->search . '%');
+                break;
+            case 'notes':
+                $query->where('notes', 'LIKE', '%' . $this->search . '%');
+                break;
+        }
+    }
+
+    $records = $query->get();
+
+    return view('livewire.admin.inquiry', [
+        'records' => $records,
+    ]);
+}
 
     protected function getTableColumns(): array
     {

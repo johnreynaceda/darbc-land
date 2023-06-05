@@ -25,7 +25,7 @@ class BasicInformation extends Model
 
     public function taxes()
     {
-        return $this->hasMany(Tax::class, 'basic_information_id');
+        return $this->hasMany(Tax::class);
     }
 
     public function actuals()

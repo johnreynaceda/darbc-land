@@ -171,7 +171,7 @@
             <x-select label="Select Municipality" multiselect placeholder="All" wire:model="municipalities">
             <x-select.option label="POLOMOLOK" value="POLOMOLOK" />
             <x-select.option label="TUPI" value="TUPI" />
-            <x-select.option label="GENSAN" value="GENSAN" />
+            <x-select.option label="GENERAL SANTOS" value="GENERAL SANTOS" />
         </x-select>
         </div>
         <div class="{{in_array('title_status', $selected_columns) ? '' : 'hidden'}} col-span-1">
@@ -187,6 +187,89 @@
             <x-select.option label="TCT" value="TCT" />
             <x-select.option label="OCT" value="OCT" />
         </x-select>
+        </div>
+
+        <div class="col-span-1 col-start-4">
+            <div class="flex space-x-3">
+                <x-input label="Search" placeholder="" wire:model="search"/>
+                    <x-select label="Filter" placeholder="Select One" wire:model="title_filter">
+                      @if (in_array('number', $selected_columns))
+                      <x-select.option label="NO." value="number" />
+                      @endif
+                      @if (in_array('lot_number', $selected_columns))
+                      <x-select.option label="LOT NO." value="lot_number" />
+                      @endif
+                      @if (in_array('survey_number', $selected_columns))
+                      <x-select.option label="SURVEY NO." value="survey_number" />
+                      @endif
+                      @if (in_array('title_area', $selected_columns))
+                      <x-select.option label="TITLE AREA" value="title_area" />
+                      @endif
+                      @if (in_array('awarded_area', $selected_columns))
+                      <x-select.option label="AWARDED AREA" value="awarded_area" />
+                      @endif
+                      @if (in_array('previous_land_owner', $selected_columns))
+                      <x-select.option label="PREVIOUS LAND OWNER" value="previous_land_owner" />
+                      @endif
+                      @if (in_array('field_number', $selected_columns))
+                      <x-select.option label="FIELD NO." value="field_number" />
+                      @endif
+                      @if (in_array('location', $selected_columns))
+                      <x-select.option label="BARANGAY" value="location" />
+                      @endif
+                      @if (in_array('municipality', $selected_columns))
+                      <x-select.option label="MUNICIPALITY" value="municipality" />
+                      @endif
+                      @if (in_array('title', $selected_columns))
+                      <x-select.option label="TITLE" value="title" />
+                      @endif
+                      @if (in_array('cloa_number', $selected_columns))
+                      <x-select.option label="CLOA NO." value="cloa_number" />
+                      @endif
+                      @if (in_array('page', $selected_columns))
+                      <x-select.option label="PAGE" value="page" />
+                      @endif
+                      @if (in_array('encumbered_area', $selected_columns))
+                      <x-select.option label="ENCUMBERED AREA" value="encumbered_area" />
+                      @endif
+                      @if (in_array('encumbered_variance', $selected_columns))
+                      <x-select.option label="ENCUMBERED VARIANCE" value="encumbered_variance" />
+                      @endif
+                      @if (in_array('previous_copy_of_title_type', $selected_columns))
+                      <x-select.option label="PREVIOUS COPY OF TITLE (TYPE)" value="previous_copy_of_title_type" />
+                      @endif
+                      @if (in_array('previous_copy_of_title_number', $selected_columns))
+                      <x-select.option label="PREVIOUS COPY OF TITLE (NO.)" value="previous_copy_of_title_number" />
+                      @endif
+                      @if (in_array('title_status', $selected_columns))
+                      <x-select.option label="TITLE STATUS" value="title_status" />
+                      @endif
+                      @if (in_array('title_copy', $selected_columns))
+                      <x-select.option label="TITLE COPY" value="title_copy" />
+                      @endif
+                      @if (in_array('tax_dec_number', $selected_columns))
+                      <x-select.option label="TAX DECLARATION NUMBER" value="tax_dec_number" />
+                      @endif
+                      @if (in_array('remarks', $selected_columns))
+                      <x-select.option label="REMARKS" value="remarks" />
+                      @endif
+                      @if (in_array('status', $selected_columns))
+                      <x-select.option label="STATUS" value="status" />
+                      @endif
+                      @if (in_array('land_bank_amortization', $selected_columns))
+                      <x-select.option label="LAND BANK AMORTIZATION" value="land_bank_amortization" />
+                      @endif
+                      @if (in_array('amount', $selected_columns))
+                      <x-select.option label="AMOUNT" value="amount" />
+                      @endif
+                      @if (in_array('ndc_remarks', $selected_columns))
+                        <x-select.option label="NDC" value="ndc_remarks" />
+                      @endif
+                      @if (in_array('notes', $selected_columns))
+                      <x-select.option label="NOTES" value="notes" />
+                      @endif
+                    </x-select>
+            </div>
         </div>
     </div>
 

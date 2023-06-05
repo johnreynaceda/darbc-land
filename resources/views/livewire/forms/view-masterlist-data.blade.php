@@ -84,7 +84,7 @@
           </div> --}}
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">TITLE NO:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $number == null ? '--' : $number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->taxes->first()->title_number == null ? '--' : $basicInfo->taxes->first()->title_number }}</span>
           </div>
           <div class="grid grid-cols-2">
             <div class="flex items-center">
@@ -249,37 +249,35 @@
                               <thead>
                                 <tr class="divide-x divide-gray-200">
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">Year</th>
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">YEAR</th>
                                   <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Area
-                                    in Title HA./S
+                                   AREA IN TITLE
                                   </th>
                                   <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Tax
-                                    Declaration No.
+                                   TAX DECLARATION NO.
                                   </th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Owner</th>
+                                    OWNER</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Market Value</th>
+                                    MARKET VALUE</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Assesed Value</th>
+                                    ASSESSED VALUE</th>
 
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Paid By Leased To Dolefil</th>
+                                    PAID BY LEASED TO DOLEFIL</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Paid By Tax Payment</th>
+                                    PAID BY TAX PAYMENT</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Paid By Year of Payment</th>
+                                    PAID BY YEAR OF PAYMENT</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    Official Receipt</th>
+                                    OFFICIAL RECEIPT</th>
                                 </tr>
                               </thead>
                               <tbody class="divide-y divide-gray-200 bg-white">
