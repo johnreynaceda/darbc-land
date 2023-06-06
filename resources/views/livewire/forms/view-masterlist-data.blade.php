@@ -84,7 +84,7 @@
           </div> --}}
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">TITLE NO:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->taxes->first()->title_number == null ? '--' : $basicInfo->taxes->first()->title_number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->taxes->first()?->title_number == null ? '--' : $basicInfo->taxes->first()?->title_number }}</span>
           </div>
           <div class="grid grid-cols-2">
             <div class="flex items-center">
