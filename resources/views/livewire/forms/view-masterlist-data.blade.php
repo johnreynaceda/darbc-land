@@ -52,23 +52,23 @@
         <div class="grid grid-cols-4 mt-0.5">
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">LOT NO:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->lot_number == null ? '--' : $basicInfo->lot_number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->lot_number == null ? '--' : $basicInfo->lot_number }}</span>
           </div>
           <div class="flex items-center">
             <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">SURVEY NO:</span>
-            <span class="flex-1 text-center text-sm bg-green-50 border py-1.5">{{ $basicInfo->survey_number == null ? '--' : $basicInfo->survey_number }}</span>
+            <span class="flex-1 text-center text-sm bg-green-100 border py-1.5">{{ $basicInfo->survey_number == null ? '--' : $basicInfo->survey_number }}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="bg-gray-100 text-2xs font-bold border px-2 pr-8 py-2  w-40">PREV. LAND OWNER: </span>
-            <span class="flex-1 text-sm  text-center bg-green-50 border py-1.5">{{ $basicInfo->previous_land_owner == null ? '--' : $basicInfo->previous_land_owner }}</span>
+            <span class="flex-1 text-sm  text-center bg-green-100 border py-1.5">{{ $basicInfo->previous_land_owner == null ? '--' : $basicInfo->previous_land_owner }}</span>
           </div>
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">FIELD NO:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->field_number == null ? '--' : $basicInfo->field_number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->field_number == null ? '--' : $basicInfo->field_number }}</span>
           </div>
           <div class="flex items-center">
             <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">TITLE AREA:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->title_area == null ? '--' : $basicInfo->title_area }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->title_area == null ? '--' : $basicInfo->title_area }}</span>
           </div>
           {{-- <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm text-xs bg-gray-100 font-bold border px-2 w-32 py-2">SURVEY NO:</span>
@@ -76,7 +76,7 @@
           </div> --}}
           <div class="flex col-span-2  items-center">
             <span class=" text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">AWARDED AREA:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->awarded_area == null ? '--' : $basicInfo->awarded_area }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->awarded_area == null ? '--' : $basicInfo->awarded_area }}</span>
           </div>
           {{-- <div class="flex  items-center">
             <span class="text-xs bg-gray-100 font-bold border px-2 w-32 py-2">PAGE:</span>
@@ -84,16 +84,16 @@
           </div> --}}
           <div class="flex items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">TITLE NO:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->taxes->first()?->title_number == null ? '--' : $basicInfo->taxes->first()?->title_number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->taxes->first()?->title_number == null ? '--' : $basicInfo->taxes->first()?->title_number }}</span>
           </div>
           <div class="grid grid-cols-2">
             <div class="flex items-center">
                 <span class=" pr-7 py-2 text-2xs bg-gray-100 font-bold border px-2">CLOA NO:</span>
-                <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->cloa_number == null ? '--' : $basicInfo->cloa_number }}</span>
+                <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->cloa_number == null ? '--' : $basicInfo->cloa_number }}</span>
               </div>
               <div class="flex items-center">
                 <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">PAGE:</span>
-                <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->page == null ? '--' : $basicInfo->page }}</span>
+                <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->page == null ? '--' : $basicInfo->page }}</span>
               </div>
           </div>
 
@@ -104,45 +104,45 @@
           </div> --}}
           <div class="flex items-center">
             <span class="text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">TYPE OF TITLE. :</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $type == null ? '--' : $type }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $type == null ? '--' : $type }}</span>
           </div>
           <div class="flex items-center">
             <span class="text-2xs bg-gray-100 font-bold border px-2 w-32 py-2">PREV. TITLE NO. :</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $number == null ? '--' : $number }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $number == null ? '--' : $number }}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">BARANGAY:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->location == null ? '--' : $basicInfo->location }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->location == null ? '--' : $basicInfo->location }}</span>
           </div>
           <div class="flex  items-center">
             <span class="bg-gray-100 text-2xs font-bold border px-2 w-40 ">
               <h1>ENCUMBERED:</h1>
               <h1 class="text-2xs">AREA</h1>
             </span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$area == null ? '0' : $area}}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$area == null ? '0' : $area}}</span>
           </div>
           <div class="flex  items-center">
             <span class="bg-gray-100 text-2xs font-bold border px-2 w-32 ">
               <h1>ENCUMBERED:</h1>
               <h1 class="text-2xs">VARIANCE</h1>
             </span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$variance == null ? '0' : $variance}}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$variance == null ? '0' : $variance}}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">MUNICIPALITY:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$basicInfo->municipality == null ? '--' : $basicInfo->municipality}}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$basicInfo->municipality == null ? '--' : $basicInfo->municipality}}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">REMARKS :</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{ $basicInfo->remarks == null ? '--' : $basicInfo->remarks }}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->remarks == null ? '--' : $basicInfo->remarks }}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLE STATUS:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$basicInfo->title_status == null ? '--' : $basicInfo->title_status}}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$basicInfo->title_status == null ? '--' : $basicInfo->title_status}}</span>
           </div>
           <div class="flex col-span-2 items-center">
             <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">STATUS:</span>
-            <span class="flex-1 text-sm text-center bg-green-50 border py-1.5">{{$basicInfo->status == null ? '--' : $basicInfo->status}}</span>
+            <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$basicInfo->status == null ? '--' : $basicInfo->status}}</span>
           </div>
         </div>
         <div class="mt-0 5">
@@ -155,7 +155,7 @@
             </svg>
             <span class="font-bold text-black">ADDITIONAL INFORMATION</span>
           </div>
-          <div class="grid grid-cols-2">
+          <div class="grid grid-cols-2 bg-green-100">
             <div>
               <div class="mt-5 md:col-span-2 md:mt-0">
                 <div class="border h-80 overflow-y-auto p-5">
@@ -183,23 +183,23 @@
                               <thead>
                                 <tr class="divide-x divide-gray-200">
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">LAND STATUS
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                   </th>
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     LEASED AREA
                                   </th>
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     UPLANTED AREA
                                   </th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                     STATUS</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                     REMARKS</th>
                                 </tr>
                               </thead>
-                              <tbody class="divide-y divide-gray-200 bg-white">
+                              <tbody class="divide-y divide-gray-200 bg-gray-100">
                                 @foreach ($actuals as $item)
                                   <tr class="divide-x divide-gray-200">
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
@@ -253,21 +253,21 @@
                                   {{-- <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                    AREA IN TITLE
                                   </th> --}}
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                    TAX DECLARATION NO.
                                   </th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     OWNER</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     STATUS</th>
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     TAX PAYMENT</th>
 
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     YEAR OF PAYMENT</th>
                                   {{-- <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
@@ -276,11 +276,11 @@
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     PAID BY YEAR OF PAYMENT</th> --}}
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     OFFICIAL RECEIPT</th>
                                 </tr>
                               </thead>
-                              <tbody class="divide-y divide-gray-200 bg-white">
+                              <tbody class="divide-y divide-gray-200 bg-gray-100">
                                 @foreach ($taxss as $item)
                                   <tr class="divide-x divide-gray-200">
                                     {{-- <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
