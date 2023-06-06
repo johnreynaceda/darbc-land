@@ -63,7 +63,7 @@ class ActualLandSummaryTable extends Component implements Tables\Contracts\HasTa
     {
         $order = $this->record;
         switch ($this->record) {
-                case 'Planted_Area':
+                case 'Planted Area':
                         $order = 'planted_area';
                       break;
                     case 'Gulley Area':
@@ -75,6 +75,9 @@ class ActualLandSummaryTable extends Component implements Tables\Contracts\HasTa
                     case 'Facilty Area':
                         $order = 'facility_area';
                       break;
+                    // case 'Unutilized Area':
+                    //     $order = 'unutilized_area';
+                    //   break;
                     case 'Gross Area':
                         $order = 'gross_area';
                       break;

@@ -166,12 +166,38 @@
 
 
     </div>
-    <div class="grid grid-cols-4 space-x-3">
+    <div class="grid grid-cols-5 space-x-3">
         <div class="{{in_array('municipality', $selected_columns) ? '' : 'hidden'}} col-span-1">
             <x-select label="Select Municipality" multiselect placeholder="All" wire:model="municipalities">
             <x-select.option label="POLOMOLOK" value="POLOMOLOK" />
             <x-select.option label="TUPI" value="TUPI" />
             <x-select.option label="GENERAL SANTOS" value="GENERAL SANTOS" />
+        </x-select>
+        </div>
+        <div class="{{in_array('location', $selected_columns) ? '' : 'hidden'}} col-span-1">
+            <x-select label="Select Barangay" multiselect placeholder="All" wire:model="locations">
+            <x-select.option label="ACMONAN" value="ACMONAN" />
+            <x-select.option label="APOPONG" value="Apopong" />
+            <x-select.option label="AQUINO GATE" value="AQUINO GATE" />
+            <x-select.option label="CANNERY" value="CANNERY" />
+            <x-select.option label="CANNERY SITE" value="CANNERY SITE" />
+            <x-select.option label="CEBUANO" value="CEBUANO" />
+            <x-select.option label="CR. PALKAN" value="CR. PALKAN" />
+            <x-select.option label="KABLON" value="KABLON" />
+            <x-select.option label="KINILES" value="KINILES" />
+            <x-select.option label="KINILIS" value="KINILIS" />
+            <x-select.option label="KLINAN" value="KLINAN" />
+            <x-select.option label="LAGAO" value="LAGAO" />
+            <x-select.option label="LAMCALIAF" value="LAMCALIAF" />
+            <x-select.option label="PAGALUNGAN" value="PAGALUNGAN" />
+            <x-select.option label="LINAN" value="LINAN" />
+            <x-select.option label="LUMAKIL" value="LUMAKIL" />
+            <x-select.option label="MALIGO" value="MALIGO" />
+            <x-select.option label="LANDAN" value="LANDAN" />
+            <x-select.option label="SANGRILA" value="SANGRILA" />
+            <x-select.option label="MATINAO" value="MATINAO" />
+            <x-select.option label="MATUTUM" value="MATUTUM" />
+            <x-select.option label="MATINAO" value="MATINAO" />
         </x-select>
         </div>
         <div class="{{in_array('title_status', $selected_columns) ? '' : 'hidden'}} col-span-1">
@@ -189,7 +215,7 @@
         </x-select>
         </div>
 
-        <div class="col-span-1 col-start-4">
+        <div class="col-span-1 col-start-5">
             <div class="flex space-x-3">
                 <x-input label="Search" placeholder="" wire:model="search"/>
                     <x-select label="Filter" placeholder="Select One" wire:model="title_filter">
@@ -289,6 +315,7 @@
           </div>
           <div>
             <x-button label="PRINT" class="font-bold" icon="printer" dark @click="printOut($refs.printContainer.outerHTML);" />
+            <x-button label="Export" class="font-bold" icon="document-text" positive class="font-bold uppercase" wire:click="$emit('exportTableData')" />
           </div>
         </div>
         <div class="flow-root overflow-x-auto" x-ref="printContainer" id="print_table">
@@ -299,7 +326,7 @@
                 }),
             );
           @endphp
-          <table class="min-w-full divide-y divide-gray-300">
+          <table id="my-table" class="min-w-full divide-y divide-gray-300">
             <thead>
               @if ($count < 1)
                 <tr class="divide-x divide-gray-200">
@@ -1125,6 +1152,43 @@
         document.body.innerHTML = originalContents;
       }
     </script>
+
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        var myTable = document.getElementById('my-table');
+
+        if (myTable) {
+            Livewire.on('exportTableData', function () {
+                var headers = Array.from(myTable.querySelectorAll('th')).map(function (header) {
+                    return header.innerText.trim();
+                });
+
+                var tableData = Array.from(myTable.querySelectorAll('tbody tr')).map(function (row) {
+                    return Array.from(row.querySelectorAll('td')).map(function (cell) {
+                        return cell.innerText.trim();
+                    });
+                });
+
+                tableData.unshift(headers); // Add headers as the first row
+
+                var collectionData = tableData.map(function (row) {
+                    var rowData = {};
+
+                    headers.forEach(function (header, index) {
+                        rowData[header] = row[index];
+                    });
+
+                    return rowData;
+                });
+
+                //var collection = collect(collectionData);
+                //console.log(collectionData);
+                Livewire.emit('tableDataExported', collectionData);
+            });
+        }
+    });
+</script>
   @endpush
 
 </div>

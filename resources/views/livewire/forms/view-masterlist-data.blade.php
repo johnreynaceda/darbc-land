@@ -248,12 +248,7 @@
                             <table class="min-w-full divide-y divide-gray-300 ">
                               <thead>
                                 <tr class="divide-x divide-gray-200">
-                                  {{-- <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">YEAR</th> --}}
-                                  {{-- <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                   AREA IN TITLE
-                                  </th> --}}
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-wrap">
                                    TAX DECLARATION NO.
                                   </th>
                                   <th scope="col"
@@ -267,14 +262,8 @@
                                     TAX PAYMENT</th>
 
                                   <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-wrap">
                                     YEAR OF PAYMENT</th>
-                                  {{-- <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    PAID BY TAX PAYMENT</th>
-                                  <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    PAID BY YEAR OF PAYMENT</th> --}}
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                     OFFICIAL RECEIPT</th>
@@ -283,10 +272,6 @@
                               <tbody class="divide-y divide-gray-200 bg-gray-100">
                                 @foreach ($taxss as $item)
                                   <tr class="divide-x divide-gray-200">
-                                    {{-- <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
-                                      {{ $item->year }}</td> --}}
-                                    {{-- <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $basicInfo->title_area }}
-                                    </td> --}}
                                     <td class="whitespace-nowrap p-4 text-sm text-gray-500">
                                       {{ $item->basicInformation->tax_dec_number }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
@@ -298,12 +283,27 @@
                                       {{ $item->tax_payment }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
                                       {{ $item->year_of_payment }}</td>
-                                    {{-- <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
-                                      {{ $item->darbc_growers_hip }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
-                                      {{ $item->darbc_area_not_planted_pineapple }}</td> --}}
-                                    <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
-                                      {{ $item->official_receipt }}</td>
+                                        {{-- add view buttton --}}
+                                       @if ($item->tax_receipt != null)
+                                       <div class="flex space-x-3 justify-center">
+                                        <a href="{{ $this->getFileUrl($item->tax_receipt->image_path) }}" x-data="{}" target='_blank' class="">
+                                        <svg class="h-5 w-5 flex-shrink-0 text-indigo-800 font-medium" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        </a>
+                                        <button wire:click="deleteTaxReceiptAttachment({{ $item->tax_receipt->id }})">
+                                        <svg  class="h-5 w-5 flex-shrink-0 font-medium text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                       </svg>
+                                      </button>
+                                     </div>
+                                     @else
+                                     <div class="flex space-x-3 justify-center">
+                                        <x-button emerald icon="plus" sm label="Add" wire:click="$set('addTaxReceiptModal', true)" />
+                                     </div>
+                                       @endif
 
                                   </tr>
                                 @endforeach
@@ -983,10 +983,9 @@
               <x-input label="Year of payment" placeholder="" wire:model.defer="year_of_payment" />
               <x-input label="Official Receipt" placeholder="" wire:model.defer="official_receipt" />
             </div>
-            <div class="">
-
+            {{-- <div class="">
               {{ $this->form }}
-            </div>
+            </div> --}}
 
           </div>
 
@@ -1003,6 +1002,11 @@
           </x-slot>
         </x-card>
       </x-modal>
+
+        {{-- ADD TAX MODAL --}}
+        <x-modal.card title="Upload" align="center" blur wire:model.defer="addTaxReceiptModal">
+            <livewire:forms.upload-tax-receipt :tax_id="$basicInfo->taxes->first()->id" />
+        </x-modal.card>
 
       {{-- TITLE ATTACHMENT MODAL --}}
        <x-modal.card title="Upload" align="center" blur wire:model.defer="titleAttachmentModal">

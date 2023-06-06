@@ -17,6 +17,59 @@
         <x-modal.card width="xl" align="center" title="Land Summary ({{$land_summary_type}})" blur wire:model="showLandSummaryModal">
             <div>
                 <div class="inline-block min-w-full py-2">
+                    @switch($land_summary_type)
+                        @case('Leased')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::where('land_status', 'LEASED')->sum('dolephil_leased');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Growers')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::where('land_status', 'GROWERS')->sum('darbc_grower');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Unplanted')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::where('land_status', 'UNPLANTED')->sum('owned_but_not_planted');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Compromise Agreement')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::where('land_status', 'COMPROMISE AGREEMENT')->sum('owned_but_not_planted');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Deleted')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::where('land_status', 'DELETED')->sum('owned_but_not_planted');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Others')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::where('land_status', 'OTHERS')->sum('owned_but_not_planted');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @default
+
+                    @endswitch
+
                     <livewire:tables.land-summary-table :record="$land_summary_type"/>
                   </div>
             </div>
@@ -52,6 +105,57 @@
         <x-modal.card width="xl" align="center" title="Actual Land Summary ({{$actual_land_summary_type}})" blur wire:model="showActualLandSummaryModal">
             <div>
                 <div class="inline-block min-w-full py-2">
+                        @switch($actual_land_summary_type)
+                        @case('Planted Area')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('planted_area');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Gulley Area')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('gulley_area');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Total Area')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('total_area');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Facilty Area')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('facility_area');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Unutilized Area')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('unutilized_area');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @case('Gross Area')
+                        <div class="flex justify-end py-2">
+                            @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('gross_area');
+                            @endphp
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        </div>
+                        @break
+                        @default
+                        @endswitch
                     <livewire:tables.actual-land-summary-table :record="$actual_land_summary_type"/>
                   </div>
             </div>
@@ -82,6 +186,33 @@
         <x-modal.card width="xl" align="center" title="Municipality ({{$municipality_type}})" blur wire:model="showMunicipalitySummaryModal">
             <div>
                 <div class="inline-block min-w-full py-2">
+                    @switch($municipality_type)
+                    @case('POLOMOLOK')
+                    <div class="flex justify-end py-2">
+                        @php
+                            $sum = App\Models\BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->sum('title_area');
+                        @endphp
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                    </div>
+                    @break
+                    @case('TUPI')
+                    <div class="flex justify-end py-2">
+                        @php
+                            $sum = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
+                        @endphp
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                    </div>
+                    @break
+                    @case('GENERAL SANTOS')
+                    <div class="flex justify-end py-2">
+                        @php
+                            $sum = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
+                        @endphp
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                    </div>
+                    @break
+                    @default
+                    @endswitch
                     <livewire:tables.municipality-table :record="$municipality_type"/>
                   </div>
             </div>
@@ -113,6 +244,42 @@
         <x-modal.card width="xl" align="center" title="Title Status ({{$title_status}})" blur wire:model="showTitleStatusModal">
             <div>
                 <div class="inline-block min-w-full py-2">
+                    @switch($title_status)
+                    @case('Titled with CLOA')
+                    <div class="flex justify-end py-2">
+                        @php
+                            $sum = App\Models\BasicInformation::where('title_status', 'TWC')->sum('title_area');
+                        @endphp
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                    </div>
+                    @break
+                    @case('Titled without CLOA')
+                    <div class="flex justify-end py-2">
+                        @php
+                            $sum = App\Models\BasicInformation::where('title_status', 'TWOC')->sum('title_area');
+                        @endphp
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                    </div>
+                    @break
+                    @case('Untitled with CLOA')
+                    <div class="flex justify-end py-2">
+                        @php
+                            $sum = App\Models\BasicInformation::where('title_status', 'UWC')->sum('title_area');
+                        @endphp
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                    </div>
+                    @break
+                    @case('Untitled without CLOA')
+                    <div class="flex justify-end py-2">
+                        @php
+                            $sum = App\Models\BasicInformation::where('title_status', 'UWOC')->sum('title_area');
+                        @endphp
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                    </div>
+                    @break
+                    @default
+
+                    @endswitch
                     <livewire:tables.title-status-table :record="$title_status"/>
                   </div>
             </div>

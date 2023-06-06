@@ -36,6 +36,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $view_modal = false;
     public $addActualModal = false;
     public $addTaxModal = false;
+    public $addTaxReceiptModal = false;
     public $tax_get;
     public $tax_year;
      //actual lot models
@@ -96,6 +97,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $actual_attachment_id;
      public $video_attachment_id;
      public $others_attachment_id;
+     public $tax_receipt_id;
 
      //modals
      public $titleAttachmentModal = false;
@@ -113,6 +115,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         'close_actual_photo_modal' => 'closeActualPhotoModal',
         'close_video_modal' => 'closeVideoModal',
         'close_others_modal' => 'closeOthersModal',
+        'close_tax_receipt_modal' => 'closeTaxReciptModal',
         'refreshComponent' => '$refresh'
     ];
 
@@ -398,6 +401,44 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
        $this->emit('refreshComponent');
     }
 
+    public function deleteTaxReceiptAttachment($curAtt)
+    {
+        $this->tax_receipt_id = $curAtt;
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete attachement? This action cannot be undone',
+            'icon'        => 'error',
+            'accept'      => [
+                'label'  => 'Yes, delete it',
+                'method' => 'deleteTaxReceiptAttachmentFinal',
+                'params' => 'Saved',
+            ],
+            'reject' => [
+                'label'  => 'No, cancel',
+            ],
+        ]);
+    }
+
+    public function deleteTaxReceiptAttachmentFinal()
+    {
+        $deleted = false;
+        if (isset($this->tax_receipt_id)) {
+            $deleted = TaxReceiptImage::where('id',$this->tax_receipt_id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Attachment has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('refreshComponent');
+    }
+
     public function saveActualLot()
     {
         $portion = json_encode([
@@ -533,6 +574,12 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public function closeOthersModal()
     {
         $this->othersAttachmentModal = false;
+        $this->emit('refreshComponent');
+    }
+
+    public function closeTaxReciptModal()
+    {
+        $this->addTaxReceiptModal = false;
         $this->emit('refreshComponent');
     }
 

@@ -15,10 +15,12 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
 {
     use Tables\Concerns\InteractsWithTable;
     public $municipalities = [];
+    public $locations = [];
     public $title_statuses = [];
     public $title_types = [];
     public $selected_columns = [];
     public $title_filter;
+    public $dataToExport;
     public $search = '';
     public $filters = [
         'number' => null,
@@ -53,11 +55,19 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         'notes' => null,
     ];
 
-
+    protected $listeners = ['tableDataExported'];
 
     protected function getTableQuery(): Builder
     {
         return BasicInformation::query();
+    }
+
+    public function tableDataExported($tableData)
+    {
+        return \Excel::download(
+            new \App\Exports\InquiryExport(collect($tableData)),
+            'inquiry.xlsx'
+        );
     }
 
     public function updatedSelectedColumns()
@@ -89,6 +99,14 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
 
     if (!empty($this->municipalities)) {
         $query->whereIn('municipality', $this->municipalities);
+    }
+
+    if (!empty($this->locations)) {
+        $query->where(function ($query) {
+            foreach ($this->locations as $location) {
+                $query->orWhere('location', 'LIKE', '%' . $location . '%');
+            }
+        });
     }
 
     if (!empty($this->title_statuses)) {
@@ -185,6 +203,14 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     return view('livewire.admin.inquiry', [
         'records' => $records,
     ]);
+}
+
+public function exportInquiry()
+{
+    return \Excel::download(
+        new \App\Exports\InquiryExport($dataToExport),
+        'inquiry.xlsx'
+    );
 }
 
     protected function getTableColumns(): array

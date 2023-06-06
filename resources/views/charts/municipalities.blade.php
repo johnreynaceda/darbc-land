@@ -13,9 +13,9 @@
         type: 'bar',
         data: {
           labels: [
-            'Polomolok',
-            'Tupi',
-            'General Santos'
+            'POLOMOLOK',
+            'TUPI',
+            'GENERAL SANTOS'
           ],
           datasets: [{
             label: 'Land Summary',

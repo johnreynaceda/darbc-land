@@ -29,34 +29,34 @@ class LandSummaryTable extends Component implements Tables\Contracts\HasTable
         $this->record = $label;
     }
 
-    protected function getTableFilters(): array
-    {
-        switch ($this->record) {
-            case 'Leased':
-                $defaultLandStatus = 'Leased';
-              break;
-            case 'Growers':
-                $defaultLandStatus = 'Growers';
-              break;
-            case 'Unplanted':
-                $defaultLandStatus = 'Unplanted';
-              break;
-            default:
-            $defaultLandStatus = null;
-          }
+    // protected function getTableFilters(): array
+    // {
+    //     switch ($this->record) {
+    //         case 'Leased':
+    //             $defaultLandStatus = 'Leased';
+    //           break;
+    //         case 'Growers':
+    //             $defaultLandStatus = 'Growers';
+    //           break;
+    //         case 'Unplanted':
+    //             $defaultLandStatus = 'Unplanted';
+    //           break;
+    //         default:
+    //         $defaultLandStatus = null;
+    //       }
 
-        return [
-            SelectFilter::make('land_status')
-            ->options([
-                'Leased' => 'Leased',
-                'Growers' => 'Growers',
-                'Unplanted' => 'Unplanted',
-                'Compromise Agreement' => 'Compromise Agreement',
-                'Deleted' => 'Deleted',
-                'Others' => 'Others',
-            ])->default($defaultLandStatus)
-        ];
-    }
+    //     return [
+    //         SelectFilter::make('land_status')
+    //         ->options([
+    //             'Leased' => 'Leased',
+    //             'Growers' => 'Growers',
+    //             'Unplanted' => 'Unplanted',
+    //             'Compromise Agreement' => 'Compromise Agreement',
+    //             'Deleted' => 'Deleted',
+    //             'Others' => 'Others',
+    //         ])->default($defaultLandStatus)
+    //     ];
+    // }
 
 
     protected function getTableQuery(): Builder
