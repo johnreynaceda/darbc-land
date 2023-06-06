@@ -248,11 +248,11 @@
                             <table class="min-w-full divide-y divide-gray-300 ">
                               <thead>
                                 <tr class="divide-x divide-gray-200">
-                                  <th scope="col"
-                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">YEAR</th>
-                                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
+                                  {{-- <th scope="col"
+                                    class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 ">YEAR</th> --}}
+                                  {{-- <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                    AREA IN TITLE
-                                  </th>
+                                  </th> --}}
                                   <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                    TAX DECLARATION NO.
                                   </th>
@@ -261,20 +261,20 @@
                                     OWNER</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    MARKET VALUE</th>
+                                    STATUS</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    ASSESSED VALUE</th>
+                                    TAX PAYMENT</th>
 
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    PAID BY LEASED TO DOLEFIL</th>
-                                  <th scope="col"
+                                    YEAR OF PAYMENT</th>
+                                  {{-- <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     PAID BY TAX PAYMENT</th>
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                    PAID BY YEAR OF PAYMENT</th>
+                                    PAID BY YEAR OF PAYMENT</th> --}}
                                   <th scope="col"
                                     class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 whitespace-nowrap">
                                     OFFICIAL RECEIPT</th>
@@ -283,25 +283,25 @@
                               <tbody class="divide-y divide-gray-200 bg-white">
                                 @foreach ($taxss as $item)
                                   <tr class="divide-x divide-gray-200">
-                                    <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
-                                      {{ $item->year }}</td>
-                                    <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $basicInfo->title_area }}
-                                    </td>
+                                    {{-- <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+                                      {{ $item->year }}</td> --}}
+                                    {{-- <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $basicInfo->title_area }}
+                                    </td> --}}
                                     <td class="whitespace-nowrap p-4 text-sm text-gray-500">
-                                      {{ $item->rax_declaration_number }}</td>
+                                      {{ $item->basicInformation->tax_dec_number }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
                                       {{ $item->owner }}
                                     </td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
-                                      {{ $item->market_value }}</td>
+                                      {{ $item->basicInformation->title_status }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
-                                      {{ $item->assessed_value }}</td>
+                                      {{ $item->tax_payment }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
-                                      {{ $item->lease_to_dolefil }}</td>
-                                    <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                      {{ $item->year_of_payment }}</td>
+                                    {{-- <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
                                       {{ $item->darbc_growers_hip }}</td>
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
-                                      {{ $item->darbc_area_not_planted_pineapple }}</td>
+                                      {{ $item->darbc_area_not_planted_pineapple }}</td> --}}
                                     <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
                                       {{ $item->official_receipt }}</td>
 
