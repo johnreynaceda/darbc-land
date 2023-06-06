@@ -1,13 +1,13 @@
 <div>
     <div>
         <div class="grid grid-cols-1">
-          <div class="border bg-green-600 p-0.5 flex space-x-2 items-center">
+          <div class="border bg-green-700 p-0.5 flex space-x-2 items-center">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-white">
               <path
                 d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13.529 14.4464L15.7395 16.6569L17.1537 15.2426L14.9432 13.0322C15.8492 11.4983 15.6432 9.48951 14.3252 8.17157C12.7631 6.60948 10.2305 6.60948 8.66839 8.17157C7.1063 9.73367 7.1063 12.2663 8.66839 13.8284C9.98633 15.1464 11.9951 15.3524 13.529 14.4464ZM12.911 12.4142C12.13 13.1953 10.8637 13.1953 10.0826 12.4142C9.30156 11.6332 9.30156 10.3668 10.0826 9.58579C10.8637 8.80474 12.13 8.80474 12.911 9.58579C13.6921 10.3668 13.6921 11.6332 12.911 12.4142Z">
               </path>
             </svg>
-            <span class="font-bold text-gray-700">BASIC INFORMATION</span>
+            <span class="font-bold text-black">BASIC INFORMATION</span>
           </div>
           @php
           if($encumbered == null)
@@ -158,7 +158,7 @@
           <div class="grid grid-cols-2">
             <div>
               <div class="mt-5 md:col-span-2 md:mt-0">
-                <div class="border h-96 overflow-y-auto p-5">
+                <div class="border h-80 overflow-y-auto p-5">
                   <div class="flex justify-between items-center">
                     <div class="flex space-x-3 items-center">
                       <h1 class="font-bold text-lg text-gray-600 font-montserrat">ACTUAL</h1>
@@ -225,7 +225,7 @@
                 </div>
               </div>
               <div class="mt-5 md:col-span-2 md:mt-0">
-                <div class="border h-96  overflow-y-auto p-5">
+                <div class="border h-80 overflow-y-auto p-5">
                   <div class="flex justify-between items-center">
                     <div class="flex space-x-4 items-center">
                       <h1 class="font-bold text-lg text-gray-600 font-montserrat">TAX</h1>
@@ -444,7 +444,7 @@
 
                   </div>
                   {{-- ATTACHMENTS --}}
-                  <div class="px-5">
+                  {{-- <div class="px-5">
                     <div class="flex space-x-4 items-center">
                       <h1 class="font-bold text-lg text-gray-600 font-montserrat">ATTACHMENTS</h1>
                     </div>
@@ -782,14 +782,14 @@
                             @endif
                         </div>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="mt-0 5">
-          <div class="flex items-center bg-green-600 space-x-1 py-1 px-2">
+          <div class="flex items-center bg-green-700 space-x-1 py-1 px-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-white">
               <path
                 d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13 12H16L12 8L8 12H11V16H13V12Z">
@@ -797,7 +797,7 @@
             </svg>
             <span class="font-bold text-black">DOCUMENT ATTACHMENTS</span>
           </div>
-          <div class="grid grid-cols-7 mt-3 gap-4 border py-3 mb-5">
+          <div class="grid grid-cols-7 bg-green-100 mt-3 gap-4 border py-3 mb-5">
             <div class="grid place-content-center space-y-3">
               <button wire:click="$set('titleAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
@@ -857,9 +857,42 @@
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
                 <span class="font-bold text-gray-600 ">OTHERS</span>
               </button>
-              {{-- <div class="mx-auto">
-                <x-button emerald icon="eye" label="View" />
-              </div> --}}
+            </div>
+            {{-- buttons --}}
+            <div class="grid place-content-center space-y-2">
+                <div class="mx-auto">
+                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'TITLE')" label="View" />
+                  </div>
+            </div>
+            <div class="grid place-content-center space-y-2">
+                <div class="mx-auto">
+                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'DEED OF SALE')" label="View" />
+                  </div>
+            </div>
+            <div class="grid place-content-center space-y-2">
+                <div class="mx-auto">
+                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'TAX DEC')"   label="View" />
+                  </div>
+            </div>
+            <div class="grid place-content-center space-y-2">
+                <div class="mx-auto">
+                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'SKETCH PLAN')"   label="View" />
+                  </div>
+            </div>
+            <div class="grid place-content-center space-y-2">
+                <div class="mx-auto">
+                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'ACTUAL PHOTO')"   label="View" />
+                  </div>
+            </div>
+            <div class="grid place-content-center space-y-2">
+                <div class="mx-auto">
+                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'VIDEO')"   label="View" />
+                  </div>
+            </div>
+            <div class="grid place-content-center space-y-2">
+                <div class="mx-auto">
+                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'OTHERS')"   label="View" />
+                  </div>
             </div>
           </div>
         </div>

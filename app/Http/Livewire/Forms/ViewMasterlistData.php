@@ -537,6 +537,12 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     }
 
 
+    public function viewAttachment($record, $type)
+    {
+        return redirect()->route('view-attachments', ['record' => $record,'type' => $type,]);
+    }
+
+
     public function mount()
     {
         $this->tax_year = Tax::where('year', '!=', '')

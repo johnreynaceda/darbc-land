@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\BasicInformation;
-
+use App\Models\Attachment;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +38,19 @@ Route::get('/masterlist-information/{record}', function ($record) {
 })
     ->middleware(['auth', 'verified'])
     ->name('masterlist-data');
+
+Route::get('/view-attachments/{record}', function ($record) {
+    $attachment = BasicInformation::findOrFail($record);
+    $record = request()->query('record');
+    $type = request()->query('type');
+
+    return view('forms.view-attachments', [
+        'record' => $attachment,
+        'type' => $type,
+    ]);
+})
+    ->middleware(['auth', 'verified'])
+    ->name('view-attachments');
 
 Route::get('/inquiry', function () {
     return view('admin.inquiry');
