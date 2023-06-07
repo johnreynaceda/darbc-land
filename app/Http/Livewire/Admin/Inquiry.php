@@ -157,16 +157,16 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 $query->where('page', 'LIKE', '%' . $this->search . '%');
                 break;
             case 'encumbered_area':
-                $query->where('encumbered_area', 'LIKE', '%' . $this->search . '%');
+                $query->where('encumbered->area', 'LIKE', '%' . $this->search . '%');
                 break;
             case 'encumbered_variance':
-                $query->where('encumbered_variance', 'LIKE', '%' . $this->search . '%');
+                $query->where('encumbered->variance', 'LIKE', '%' . $this->search . '%');
                 break;
             case 'previous_copy_of_title_type':
-                $query->where('previous_copy_of_title_type', 'LIKE', '%' . $this->search . '%');
+                $query->where('previous_copy_of_title->type of title', 'LIKE', '%' . $this->search . '%');
                 break;
             case 'previous_copy_of_title_number':
-                $query->where('previous_copy_of_title_number', 'LIKE', '%' . $this->search . '%');
+                $query->where('previous_copy_of_title->no.', 'LIKE', '%' . $this->search . '%');
                 break;
             case 'title_status':
                 $query->where('title_status', 'LIKE', '%' . $this->search . '%');

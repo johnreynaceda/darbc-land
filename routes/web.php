@@ -81,6 +81,12 @@ Route::get('/reports', function () {
 })
     ->middleware(['auth', 'verified'])
     ->name('report');
+
+Route::get('/settings', function () {
+    return view('settings');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('settings');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
         'profile.edit'
