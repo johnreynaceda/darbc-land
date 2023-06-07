@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Actual;
 use App\Models\BasicInformation;
+use Illuminate\Support\Facades\Storage;
 class Dashboard extends Component
 {
     protected $listeners = ['showReport', 'showActualReport', 'showMunicipalityReport', 'showTitleStatusReport'];
@@ -41,6 +42,12 @@ class Dashboard extends Component
     public $uwc;
     public $uwoc;
     public $title_status;
+
+
+    public function getFileUrl($filename)
+    {
+        return Storage::url($filename);
+    }
 
     public function showReport($label, $value)
     {

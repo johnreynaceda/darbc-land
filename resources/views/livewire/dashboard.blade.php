@@ -303,7 +303,15 @@
     </div>
     <div class="flex-1 ">
       <div id="img-container" class=" flex justify-center">
+        @if (App\Models\MapImage::get()->count() === 0)
         <img src="{{ asset('images/darbcmap3.jpg') }}" class="h-96" alt="">
+        @else
+        @php
+            $path = App\Models\MapImage::first()->path;
+        @endphp
+        <img src="{{ $this->getFileUrl($path) }}" class="h-96 mb-2" alt="">
+        @endif
+
       </div>
       <div class="relative">
         <div class="absolute inset-0 flex items-center" aria-hidden="true">

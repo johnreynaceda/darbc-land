@@ -1,13 +1,12 @@
 <div>
-    The Master doesn't talk, he acts.
-    {{-- <div class="mt-4">
+    <div class="mt-4">
         {{$this->table}}
     </div>
 
-    <x-modal.card title="Add Hospital" align="center" blur wire:model.defer="addHospital">
+    <x-modal.card title="Add User" align="center" blur wire:model.defer="addUser">
         <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
             <x-input label="Name" wire:model.defer="name"/>
-            <x-textarea label="Address"  wire:model.defer="address" />
+            <x-textarea label="Email"  wire:model.defer="address" />
         </div>
 
         <x-slot name="footer">
@@ -19,5 +18,5 @@
                 </div>
             </div>
         </x-slot>
-    </x-modal.card> --}}
+    </x-modal.card>
 </div>
