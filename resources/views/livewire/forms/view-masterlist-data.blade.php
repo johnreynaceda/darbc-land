@@ -577,37 +577,40 @@
       </x-modal>
 
         {{-- ADD TAX MODAL --}}
+        @if ($basicInfo->taxes->first() != null)
         <x-modal.card title="Upload" align="center" blur wire:model.defer="addTaxReceiptModal">
             <livewire:forms.upload-tax-receipt :tax_id="$basicInfo->taxes->first()->id" />
         </x-modal.card>
+        @endif
+
 
       {{-- TITLE ATTACHMENT MODAL --}}
        <x-modal.card title="Upload" align="center" blur wire:model.defer="titleAttachmentModal">
-            <livewire:forms.upload-title-attachment :basicinfo_id="$record->id" />
+            <livewire:forms.upload-title-attachment :basicinfo_id="$basicInfo->id" />
         </x-modal.card>
         {{-- DEED OF SALE ATTACHMENT MODAL --}}
        <x-modal.card title="Upload" align="center" blur wire:model.defer="deedOfSaleAttachmentModal">
-        <livewire:forms.upload-deed-of-sale-attachment :basicinfo_id="$record->id" />
+        <livewire:forms.upload-deed-of-sale-attachment :basicinfo_id="$basicInfo->id" />
         </x-modal.card>
           {{-- TAX DEC ATTACHMENT MODAL --}}
           <x-modal.card title="Upload" align="center" blur wire:model.defer="taxDecAttachmentModal">
-            <livewire:forms.upload-tax-dec-attachment :basicinfo_id="$record->id" />
+            <livewire:forms.upload-tax-dec-attachment :basicinfo_id="$basicInfo->id" />
           </x-modal.card>
         {{-- SKETCH PLAN ATTACHMENT MODAL --}}
         <x-modal.card title="Upload" align="center" blur wire:model.defer="sketchPlanAttachmentModal">
-        <livewire:forms.upload-sketch-plan-attachment :basicinfo_id="$record->id" />
+        <livewire:forms.upload-sketch-plan-attachment :basicinfo_id="$basicInfo->id" />
         </x-modal.card>
          {{-- ACTUAL PHOTO  ATTACHMENT MODAL --}}
        <x-modal.card title="Upload" align="center" blur wire:model.defer="actualPhotoAttachmentModal">
-        <livewire:forms.upload-actual-photo-attachment :basicinfo_id="$record->id" />
+        <livewire:forms.upload-actual-photo-attachment :basicinfo_id="$basicInfo->id" />
         </x-modal.card>
           {{-- VIDEO ATTACHMENT MODAL --}}
           <x-modal.card title="Upload" align="center" blur wire:model.defer="videoAttachmentModal">
-            <livewire:forms.upload-video-attachment :basicinfo_id="$record->id" />
+            <livewire:forms.upload-video-attachment :basicinfo_id="$basicInfo->id" />
             </x-modal.card>
         {{-- OTHERS ATTACHMENT MODAL --}}
         <x-modal.card title="Upload" align="center" blur wire:model.defer="othersAttachmentModal">
-            <livewire:forms.upload-others-attachment :basicinfo_id="$record->id" />
+            <livewire:forms.upload-others-attachment :basicinfo_id="$basicInfo->id" />
          </x-modal.card>
 
 </div>
