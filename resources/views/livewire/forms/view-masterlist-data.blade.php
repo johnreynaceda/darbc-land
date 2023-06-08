@@ -76,7 +76,16 @@
                 </div>
                 <div class="flex items-center">
                   <span class="text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">TYPE OF TITLE. :</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $type == null ? '--' : $type }}</span>
+                  @if ($type == null)
+                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">--</span>
+                  @else
+                  @if ($type === "TCT")
+                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">Transfer Certificate Title (TCT)</span>
+                  @else
+                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">Original Certificate Title (OCT)</span>
+                  @endif
+                  @endif
+
                 </div>
                 <div class="flex items-center">
                   <span class="text-2xs bg-gray-100 font-bold border px-2 w-32 py-2">PREV. TITLE NO. :</span>

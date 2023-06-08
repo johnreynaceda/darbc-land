@@ -1047,7 +1047,11 @@
                     @endif
                         @if ($filters['previous_copy_of_title_type'] != false && $filters['previous_copy_of_title_type'] != null)
                         <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
-                        {{ $previous_copy_of_title_array['type of title'] }}
+                            @if ($previous_copy_of_title_array['type of title'] === "TCT")
+                                Transfer Certificate Title (TCT)
+                            @elseif ($previous_copy_of_title_array['type of title'] === "OCT")
+                                Original Certificate Title (OCT)
+                            @endif
                         </td>
                     @endif
                     @if ($filters['previous_copy_of_title_number'] != false && $filters['previous_copy_of_title_number'] != null)

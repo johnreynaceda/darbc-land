@@ -494,7 +494,13 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     $json = json_decode($record->previous_copy_of_title, true);
                     $type = $json['type of title'];
 
-                    return $type;
+                    if($type === "TCT")
+                    {
+                        return $type = "Transfer Certificate Title (TCT)";
+                    }elseif($type === "OCT")
+                    {
+                        return $type = "Original Certificate Title (OCT)";
+                    }
                 }),
             TextColumn::make('previuscopyNo')
                 ->label('PREVIOUS COPY OF TITLE (NO.)')
