@@ -15,11 +15,11 @@
 
       <div class="grid grid-cols-2 gap-x-3 mt-4">
         <div class="col-span-1">
-          <x-datetime-picker without-time max="{{ $end_date }}" label="Start Date" placeholder="Start Date"
+          <x-datetime-picker timezone="Asia/Manila" without-time max="{{ $end_date }}" label="Start Date" placeholder="Start Date"
             wire:model="start_date" />
         </div>
         <div class="col-span-1">
-          <x-datetime-picker without-time min="{{ $start_date }}" label="End Date" placeholder="End Date"
+          <x-datetime-picker timezone="Asia/Manila" without-time min="{{ $start_date }}" label="End Date" placeholder="End Date"
             wire:model="end_date" />
         </div>
       </div>
@@ -42,11 +42,11 @@
 
       <div class="grid grid-cols-2 gap-x-3 mt-4">
         <div class="col-span-1">
-          <x-datetime-picker without-time max="{{ $update_end_date }}" label="Start Date" placeholder="Start Date"
+          <x-datetime-picker without-time timezone="Asia/Manila" max="{{ $update_end_date }}" label="Start Date" placeholder="Start Date"
             wire:model="update_start_date" />
         </div>
         <div class="col-span-1">
-          <x-datetime-picker without-time min="{{ $update_start_date }}" label="End Date" placeholder="End Date"
+          <x-datetime-picker without-time timezone="Asia/Manila" min="{{ $update_start_date }}" label="End Date" placeholder="End Date"
             wire:model="update_end_date" />
         </div>
       </div>
