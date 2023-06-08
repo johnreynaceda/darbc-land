@@ -2,7 +2,7 @@
   <div class="flex justify-end py-3 px-5">
     <x-button positive label="Add Event" icon="plus" class="right" wire:click="$set('eventModal', true)" />
   </div>
-  <div wire:ignore class="p-5">
+  <div wire:ignore class="p-3">
     <div id="calendar"></div>
   </div>
 
