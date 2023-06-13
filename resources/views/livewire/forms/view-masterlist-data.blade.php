@@ -143,12 +143,12 @@
                         <div class="flex justify-between items-center">
                           <div class="flex space-x-3 items-center">
                             <h1 class="font-bold text-lg text-gray-600 font-montserrat">ACTUAL</h1>
-                            <x-native-select wire:model="tax_get">
+                            {{-- <x-native-select wire:model="tax_get">
                               @foreach ($tax_years as $item)
                                 <option value="{{ $item }}">{{ $item }}</option>
                               @endforeach
 
-                            </x-native-select>
+                            </x-native-select> --}}
                           </div>
                           <div>
                             <x-button label="New Actual" icon="plus" class="print-button" positive wire:click="$set('addActualModal', true)" />
@@ -161,7 +161,7 @@
                               <div class="">
                                 <div class="border overflow-x-auto">
                                   <table class="min-w-full divide-y divide-gray-300">
-                                    <thead>
+                                    {{-- <thead>
                                       <tr class="divide-x divide-gray-200">
                                         <th scope="col"
                                           class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
@@ -179,8 +179,44 @@
                                           class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                           REMARKS</th>
                                       </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                    </thead> --}}
+                                    <thead>
+                                        <tr class="divide-x divide-gray-200">
+                                          <th scope="col"
+                                            class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">FIELD NUMBER
+                                          </th>
+                                          <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+
+                                          </th>
+                                          <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+
+                                          </th>
+                                          <th scope="col"
+                                            class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                            </th>
+                                          <th scope="col"
+                                            class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                            </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                        @foreach ($field_numbers as $item)
+                                          <tr class="divide-x divide-gray-200">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+                                              {{ $item->field_number }}</td>
+                                            <td class="whitespace-nowrap p-4 text-sm text-gray-500">
+                                            </td>
+                                            <td class="whitespace-nowrap p-4 text-sm text-gray-500">
+                                              </td>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+
+                                            </td>
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                              </td>
+                                          </tr>
+                                        @endforeach
+                                      </tbody>
+                                    {{-- <tbody class="divide-y divide-gray-200 bg-gray-100">
                                       @foreach ($actuals as $item)
                                         <tr class="divide-x divide-gray-200">
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
@@ -196,7 +232,7 @@
                                             {{ $item->remarks }}</td>
                                         </tr>
                                       @endforeach
-                                    </tbody>
+                                    </tbody> --}}
                                   </table>
                                 </div>
                               </div>

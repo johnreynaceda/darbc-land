@@ -32,4 +32,9 @@ class BasicInformation extends Model
     {
         return $this->hasMany(Actual::class, 'basic_information_id');
     }
+
+    public function field_numbers()
+    {
+        return $this->hasMany(ActualLotFieldNumbers::class, 'basic_information_id');
+    }
 }

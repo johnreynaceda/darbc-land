@@ -8,6 +8,7 @@ use Filament\Forms;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\BasicInformation;
+use App\Models\ActualLotFieldNumbers;
 use App\Models\Actual;
 use App\Models\Tax;
 use App\Models\Attachment;
@@ -642,6 +643,10 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
                 ->toArray(),
 
             'actuals' => Actual::where(
+                'basic_information_id',
+                $this->informationId
+            )->get(),
+            'field_numbers' => ActualLotFieldNumbers::where(
                 'basic_information_id',
                 $this->informationId
             )->get(),

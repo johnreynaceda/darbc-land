@@ -1,5 +1,10 @@
 <div>
     <div class="border p-2">
+        <h1>Field Numbers</h1>
+        <input type="file" wire:model="field_number" />
+        <x-button label="Upload" icon="upload" dark sm wire:click="uploadFieldNumbers"/>
+    </div>
+    <div class="border p-2">
         <h1>Basic Information</h1>
         <input type="file" wire:model="basic_information" />
         <x-button label="Upload" icon="upload" dark sm wire:click="uploadBasicInformation"/>

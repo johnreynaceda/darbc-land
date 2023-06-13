@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use League\Csv\Reader;
 use Illuminate\Support\Facades\Storage;
 use App\Models\BasicInformationLotAmortization;
+use App\Models\ActualLotFieldNumbers;
 use App\Models\BasicInformation;
 use App\Models\Tax;
 use App\Models\Actual;
@@ -17,6 +18,7 @@ class Upload extends Component
 {
     use WithFileUploads;
     use Actions;
+    public $field_number;
     public $basic_information;
     public $amortization;
     public $tax;
@@ -25,6 +27,26 @@ class Upload extends Component
     public function render()
     {
         return view('livewire.admin.upload');
+    }
+
+    public function uploadFieldNumbers(){
+
+        $csvContents = Storage::get($this->field_number->getClientOriginalName());
+        $csvReader = Reader::createFromString($csvContents);
+        $csvRecords = $csvReader->getRecords();
+
+        foreach ($csvRecords as $csvRecord) {
+            ActualLotFieldNumbers::create([
+               'basic_information_id' => $csvRecord[0],
+               'lot_number' => $csvRecord[1],
+               'field_number' => $csvRecord[2],
+            ]);
+        }
+
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data uploaded'
+        );
     }
 
     public function uploadBasicInformation(){
