@@ -38,92 +38,113 @@
               <div class="grid grid-cols-4 mt-0.5">
                 <div class="flex items-center">
                   <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">LOT NO:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->lot_number == null ? '--' : $basicInfo->lot_number }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->lot_number == null ? '--' : $basicInfo->lot_number }}</span>
                 </div>
                 <div class="flex items-center">
                   <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">SURVEY NO:</span>
-                  <span class="flex-1 text-center text-sm bg-green-100 border py-1.5">{{ $basicInfo->survey_number == null ? '--' : $basicInfo->survey_number }}</span>
+                  <span class="flex-1 text-center text-xs bg-green-100 border py-2">{{ $basicInfo->survey_number == null ? '--' : $basicInfo->survey_number }}</span>
                 </div>
                 <div class="flex col-span-2 items-center">
                   <span class="bg-gray-100 text-2xs font-bold border px-2 pr-8 py-2  w-40">PREV. LAND OWNER: </span>
-                  <span class="flex-1 text-sm  text-center bg-green-100 border py-1.5">{{ $basicInfo->previous_land_owner == null ? '--' : $basicInfo->previous_land_owner }}</span>
+                  <span class="flex-1 text-xs  text-center bg-green-100 border py-2">{{ $basicInfo->previous_land_owner == null ? '--' : $basicInfo->previous_land_owner }}</span>
                 </div>
                 <div class="flex items-center">
                   <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">FIELD NO:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->field_number == null ? '--' : $basicInfo->field_number }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->field_number == null ? '--' : $basicInfo->field_number }}</span>
                 </div>
                 <div class="flex items-center">
                   <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">TITLE AREA:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->title_area == null ? '--' : $basicInfo->title_area }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->title_area == null ? '--' : $basicInfo->title_area }}</span>
                 </div>
                 <div class="flex col-span-2  items-center">
                   <span class=" text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">AWARDED AREA:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->awarded_area == null ? '--' : $basicInfo->awarded_area }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->awarded_area == null ? '--' : $basicInfo->awarded_area }}</span>
                 </div>
                 <div class="flex items-center">
                   <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">TITLE NO:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->taxes->first()?->title_number == null ? '--' : $basicInfo->taxes->first()?->title_number }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->taxes->first()?->title_number == null ? '--' : $basicInfo->taxes->first()?->title_number }}</span>
                 </div>
                 <div class="grid grid-cols-2">
                   <div class="flex items-center">
                       <span class=" pr-7 py-2 text-2xs bg-gray-100 font-bold border px-2">CLOA NO:</span>
-                      <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->cloa_number == null ? '--' : $basicInfo->cloa_number }}</span>
+                      <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->cloa_number == null ? '--' : $basicInfo->cloa_number }}</span>
                     </div>
                     <div class="flex items-center">
                       <span class=" pr-4 py-2 text-2xs bg-gray-100 font-bold border px-2">PAGE:</span>
-                      <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->page == null ? '--' : $basicInfo->page }}</span>
+                      <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->page == null ? '--' : $basicInfo->page }}</span>
                     </div>
                 </div>
                 <div class="flex items-center">
                   <span class="text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">TYPE OF TITLE. :</span>
                   @if ($type == null)
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">--</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">--</span>
                   @else
                   @if ($type === "TCT")
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">Transfer Certificate Title (TCT)</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">Transfer Certificate Title (TCT)</span>
                   @else
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">Original Certificate Title (OCT)</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">Original Certificate Title (OCT)</span>
                   @endif
                   @endif
 
                 </div>
                 <div class="flex items-center">
                   <span class="text-2xs bg-gray-100 font-bold border px-2 w-32 py-2">PREV. TITLE NO. :</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $number == null ? '--' : $number }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $number == null ? '--' : $number }}</span>
                 </div>
                 <div class="flex col-span-2 items-center">
                   <span class="rounded-l-sm bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">BARANGAY:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->location == null ? '--' : $basicInfo->location }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->location == null ? '--' : $basicInfo->location }}</span>
                 </div>
                 <div class="flex  items-center">
                   <span class="bg-gray-100 text-2xs font-bold border px-2 w-40 ">
                     <h1>ENCUMBERED:</h1>
                     <h1 class="text-2xs">AREA</h1>
                   </span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$area == null ? '0' : $area}}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$area == null ? '0' : $area}}</span>
                 </div>
                 <div class="flex  items-center">
                   <span class="bg-gray-100 text-2xs font-bold border px-2 w-32 ">
                     <h1>ENCUMBERED:</h1>
                     <h1 class="text-2xs">VARIANCE</h1>
                   </span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$variance == null ? '0' : $variance}}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$variance == null ? '0' : $variance}}</span>
                 </div>
                 <div class="flex col-span-2 items-center">
                   <span class="rounded-l-sm bg-gray-100 text-2xs font-bold border px-2 w-32 py-2">MUNICIPALITY:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$basicInfo->municipality == null ? '--' : $basicInfo->municipality}}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$basicInfo->municipality == null ? '--' : $basicInfo->municipality}}</span>
                 </div>
                 <div class="flex col-span-2 items-center">
                   <span class="text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">REMARKS :</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{ $basicInfo->remarks == null ? '--' : $basicInfo->remarks }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->remarks == null ? '--' : $basicInfo->remarks }}</span>
                 </div>
                 <div class="flex col-span-2 items-center">
                   <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-32 py-2">TITLE STATUS:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$basicInfo->title_status == null ? '--' : $basicInfo->title_status}}</span>
+                  @if ($basicInfo->title_status == null)
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">--</span>
+                  @else
+                  @switch($basicInfo->title_status)
+                      @case('TWC')
+                      <span class="flex-1 text-xs text-center bg-green-100 border py-2">Title With CLOA (TWC)</span>
+                          @break
+                      @case('TWOC')
+                          <span class="flex-1 text-xs text-center bg-green-100 border py-2">Title Without CLOA (TWOC)</span>
+                           @break
+                      @case('UWC')
+                           <span class="flex-1 text-xs text-center bg-green-100 border py-2">Untitled With CLOA (UWC)</span>
+                            @break
+                      @case('UWOC')
+                            <span class="flex-1 text-xs text-center bg-green-100 border py-2">Untitled Without CLOA (UWOC)</span>
+                             @break
+                      @default
+                      <span class="flex-1 text-xs text-center bg-green-100 border py-2">--</span>
+                      @break
+                  @endswitch
+                  @endif
+                  {{-- <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$basicInfo->title_status == null ? '--' : $basicInfo->title_status}}</span> --}}
                 </div>
                 <div class="flex col-span-2 items-center">
                   <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">STATUS:</span>
-                  <span class="flex-1 text-sm text-center bg-green-100 border py-1.5">{{$basicInfo->status == null ? '--' : $basicInfo->status}}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$basicInfo->status == null ? '--' : $basicInfo->status}}</span>
                 </div>
               </div>
               <div class="mt-0 5">
@@ -164,35 +185,35 @@
                                     <thead>
                                       <tr class="divide-x divide-gray-200">
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                         </th>
-                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                        <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                           LEASED AREA
                                         </th>
-                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                        <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                           UPLANTED AREA
                                         </th>
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                           STATUS</th>
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                           REMARKS</th>
                                       </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-gray-100">
                                       @foreach ($actuals as $item)
                                         <tr class="divide-x divide-gray-200">
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
                                             {{ $item->land_status }}</td>
-                                          <td class="whitespace-nowrap p-4 text-sm text-gray-500">{{ $item->dolephil_leased }}
+                                          <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->dolephil_leased }}
                                           </td>
-                                          <td class="whitespace-nowrap p-4 text-sm text-gray-500">
+                                          <td class="whitespace-nowrap p-4 text-xs text-gray-500">
                                             {{ $item->owned_but_not_planted }}</td>
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->status }}
                                           </td>
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->remarks }}</td>
                                         </tr>
                                       @endforeach
@@ -229,24 +250,24 @@
                                   <table class="min-w-full divide-y divide-gray-300 ">
                                     <thead>
                                       <tr class="divide-x divide-gray-200">
-                                        <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-wrap">
+                                        <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-wrap">
                                          TAX DECLARATION NO.
                                         </th>
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                           OWNER</th>
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                           STATUS</th>
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                           TAX PAYMENT</th>
 
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-wrap">
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-wrap">
                                           YEAR OF PAYMENT</th>
                                         <th scope="col"
-                                          class="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                          class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                           OFFICIAL RECEIPT</th>
                                       </tr>
                                     </thead>
@@ -255,16 +276,16 @@
                                         <tr class="divide-x divide-gray-200">
                                           <td class="whitespace-nowrap p-4 text-sm text-gray-500">
                                             {{ $item->basicInformation->tax_dec_number }}</td>
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->owner }}
                                           </td>
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->basicInformation->title_status }}</td>
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->tax_payment }}</td>
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->year_of_payment }}</td>
-                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 ">
+                                          <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                              @if ($item->tax_receipt != null)
                                              <div class="print-button flex space-x-3 justify-center">
                                               <a href="{{ $this->getFileUrl($item->tax_receipt->image_path) }}" x-data="{}" target='_blank' class="">
@@ -312,26 +333,26 @@
                                       <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                                         <li class="relative py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
                                           <div class="flex items-start border-b py-2">
-                                            <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">AMORTIZATION </p>
-                                            <div class="font-rubik text-black uppercase text-sm text-right">
+                                            <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600">AMORTIZATION </p>
+                                            <div class="font-rubik text-black uppercase text-xs text-right">
                                               {{ $basicInfo->land_bank_amortization ?? '' }}
                                             </div>
                                           </div>
                                           <div class="flex items-start border-b py-2">
-                                            <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600"> AMOUNT </p>
-                                            <div class="font-rubik text-black uppercase text-sm text-right">
+                                            <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600"> AMOUNT </p>
+                                            <div class="font-rubik text-black uppercase text-xs text-right">
                                               {{ $basicInfo->amount ?? '' }}
                                             </div>
                                           </div>
                                           <div class="flex items-start border-b py-2">
-                                            <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">DATE PAID</p>
-                                            <div class="font-rubik text-black uppercase text-sm text-right">
+                                            <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600">DATE PAID</p>
+                                            <div class="font-rubik text-black uppercase text-xs text-right">
                                               {{ Carbon\Carbon::parse($basicInfo->date_paid ?? '')->format('F d, Y') }}
                                             </div>
                                           </div>
                                           <div class="flex items-start border-b py-2">
-                                            <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">DATE OF CERT</p>
-                                            <div class="font-rubik text-black uppercase text-sm text-right">
+                                            <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600">DATE OF CERT</p>
+                                            <div class="font-rubik text-black uppercase text-xs text-right">
                                               {{ Carbon\Carbon::parse($basicInfo->date_of_cert ?? '')->format('F d, Y') }}
                                             </div>
                                           </div>
@@ -346,14 +367,14 @@
                                       <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                                         <li class="relative py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
                                           <div class="flex items-start border-b py-2">
-                                            <p class="lg:w-48 border-r mr-2 font-bold text-sm text-gray-600">DIRECT PAYMENT SCHEME </p>
-                                            <div class="font-rubik text-black uppercase text-sm text-right">
+                                            <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600">DIRECT PAYMENT SCHEME </p>
+                                            <div class="font-rubik text-black uppercase text-xs text-right">
                                               {{ $basicInfo->ndc_direct_payment_scheme ?? '' }}
                                             </div>
                                           </div>
                                           <div class="border-b py-2">
-                                            <p class="lg:w-48 font-bold mb-1 text-sm text-gray-600"> NDC REMARKS : </p>
-                                            <span class="font-rubik text-black uppercase text-sm text-left"></span>{{ $basicInfo->ndc_remarks ?? '' }}
+                                            <p class="lg:w-48 font-bold mb-1 text-xs text-gray-600"> NDC REMARKS : </p>
+                                            <span class="font-rubik text-black uppercase text-xs text-left">{{ $basicInfo->ndc_remarks ?? '' }}</span>
                                           </div>
                                         </li>
                                       </ul>
@@ -383,7 +404,7 @@
             <div class="grid place-content-center space-y-3">
               <button wire:click="$set('titleAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                <span class="font-bold text-gray-600 ">TITLE</span>
+                <span class="font-bold text-sm text-gray-600 ">TITLE</span>
               </button>
                 {{-- <div class="mx-auto">
                     <x-button emerald icon="eye" label="View" />
@@ -392,7 +413,7 @@
             <div class="grid place-content-center space-y-3">
                 <button wire:click="$set('deedOfSaleAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                   <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                  <span class="font-bold text-gray-600 ">DEED OF SALE</span>
+                  <span class="font-bold text-sm text-gray-600 ">DEED OF SALE</span>
                 </button>
                   {{-- <div class="mx-auto">
                       <x-button emerald icon="eye" label="View" />
@@ -401,7 +422,7 @@
             <div class="grid place-content-center space-y-3">
               <button wire:click="$set('taxDecAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                <span class="font-bold text-gray-600 ">TAX DEC</span>
+                <span class="font-bold text-sm text-gray-600 ">TAX DEC</span>
               </button>
                 {{-- <div class="mx-auto">
                     <x-button emerald icon="eye" label="View" />
@@ -410,7 +431,7 @@
             <div class="grid place-content-center space-y-3">
               <button wire:click="$set('sketchPlanAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                <span class="font-bold text-gray-600 ">SKETCH PLAN & VICINITY MAP</span>
+                <span class="font-bold text-sm text-gray-600 ">SKETCH PLAN & VICINITY MAP</span>
               </button>
               {{-- <div class="mx-auto">
                 <x-button emerald icon="eye" label="View" />
@@ -419,7 +440,7 @@
             <div class="grid place-content-center space-y-3">
               <button wire:click="$set('actualPhotoAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                <span class="font-bold text-gray-600 ">ACTUAL PHOTO</span>
+                <span class="font-bold text-sm text-gray-600 ">ACTUAL PHOTO</span>
               </button>
               {{-- <div class="mx-auto">
                 <x-button emerald icon="eye" label="View" />
@@ -428,7 +449,7 @@
             <div class="grid place-content-center space-y-3">
               <button wire:click="$set('videoAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                <span class="font-bold text-gray-600 ">VIDEO</span>
+                <span class="font-bold text-sm text-gray-600 ">VIDEO</span>
               </button>
               {{-- <div class="mx-auto">
                 <x-button emerald icon="eye" label="View" />
@@ -437,7 +458,7 @@
             <div class="grid place-content-center space-y-3">
               <button wire:click="$set('othersAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                <span class="font-bold text-gray-600 ">OTHERS</span>
+                <span class="font-bold text-sm text-gray-600 ">OTHERS</span>
               </button>
             </div>
             {{-- buttons --}}

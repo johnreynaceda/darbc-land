@@ -393,35 +393,54 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     $post = BasicInformation::find($record->id);
 
                     $empty_columns = 0;
+                    $includedColumns = ['land_bank_amortization', 'ndc_direct_payment_scheme'];
+                    $includedColumnsEmpty = true;
 
                     foreach ($post->getAttributes() as $column => $value) {
                         // List the columns to exclude
-                        $excludedColumns = ['cloa_number', 'notes', 'remarks', 'land_bank_amortization'];
+                        $excludedColumns = ['cloa_number', 'notes', 'remarks', 'ndc_remarks'];
 
-                        if ($column === 'encumbered') {
-                            $encumberedData = json_decode($value, true);
-                            $varianceValue = $encumberedData['variance'] == null ? '' : $encumberedData['variance'];
-
-                            if (empty($varianceValue)) {
-                                continue; // Skip the variance column
+                        if (in_array($column, $includedColumns)) {
+                            if (!is_null($value) && !empty($value)) {
+                                $includedColumnsEmpty = false;
                             }
                         } elseif (!in_array($column, $excludedColumns) && (is_null($value) || empty($value))) {
                             $empty_columns++;
                         }
                     }
+
+                    if ($includedColumnsEmpty) {
+                        $empty_columns -= count($includedColumns);
+                    }
+
                     return $empty_columns;
                 })
                 ->color('warning')
                 ->action(function (BasicInformation $record): void {
                     $post = BasicInformation::find($record->id);
 
-                    $excludedColumns = ['cloa_number', 'variance', 'notes', 'remarks', 'land_bank_amortization'];
+                    $excludedColumns = ['cloa_number', 'variance', 'notes', 'remarks', 'land_bank_amortization', 'ndc_direct_payment_scheme','ndc_remarks'];
 
                     $emptyColumns = [];
+                    $includeColumns = ['land_bank_amortization', 'ndc_direct_payment_scheme'];
+                    $includeColumnsEmpty = true;
 
                     foreach ($post->getAttributes() as $column => $value) {
-                        if (!in_array($column, $excludedColumns) && (is_null($value) || empty($value))) {
+                        if (in_array($column, $includeColumns)) {
+                            if (!is_null($value) && !empty($value)) {
+                                $includeColumnsEmpty = false;
+                            }
+                        } elseif (!in_array($column, $excludedColumns) && (is_null($value) || empty($value))) {
                             $emptyColumns[] = $column;
+                        }
+                    }
+
+                    if ($includeColumnsEmpty) {
+                        foreach ($includeColumns as $column) {
+                            $key = array_search($column, $emptyColumns);
+                            if ($key !== false) {
+                                unset($emptyColumns[$key]);
+                            }
                         }
                     }
 
@@ -513,6 +532,21 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             TextColumn::make('title_status')
                 ->label('TITLE STATUS')
                 ->searchable()
+                ->formatStateUsing(function ($state) {
+                    if($state === "TWC")
+                    {
+                        return "Title With Cloa (TWC)";
+                    }elseif($state === "TWOC")
+                    {
+                        return "Title Without Cloa (TWOC)";
+                    }elseif($state === "UWC")
+                    {
+                        return "Untitled With Cloa (UWC)";
+                    }elseif($state === "UWOC")
+                    {
+                        return "Untitled With Cloa (UWOC)";
+                    }
+                 })
                 ->sortable(),
             TextColumn::make('title_copy')
                 ->label('TITLE COPY')

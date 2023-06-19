@@ -1061,7 +1061,16 @@
                     @endif
                     @if ($filters['title_status'] != false && $filters['title_status'] != null)
                       <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
-                        {{ $record->title_status }}
+                        @if ($record->title_status === "TWC")
+                        Title With Cloa (TWC)
+                        @elseif ($record->title_status === "TWOC")
+                        Title Without Cloa (TWOC)
+                        @elseif ($record->title_status === "UWC")
+                        Untitled With Cloa (UWC)
+                        @elseif ($record->title_status === "UWOC")
+                        Untitled Without Cloa (UWOC)
+                        @endif
+                        {{-- {{ $record->title_status }} --}}
                       </td>
                     @endif
                     @if ($filters['title_copy'] != false && $filters['title_copy'] != null)
