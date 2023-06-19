@@ -35,23 +35,42 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $title_status_detailed;
     public $view_modal = false;
     public $addActualModal = false;
+    public $updateActualModal = false;
     public $addTaxModal = false;
     public $addTaxReceiptModal = false;
     public $tax_get;
     public $tax_year;
      //actual lot models
+     public $actual_to_update;
+     public $actual_to_delete;
      public $land_status;
      public $leased_area;
      public $darbc_grower;
      public $other_area;
      public $status;
      public $remarks;
+     public $actual_field_number;
      public $gross_area;
      public $planted_area;
      public $gulley_area;
      public $total_area;
      public $facility_area;
      public $unutilized_area;
+     //update actual lot
+     public $update_land_status;
+     public $update_leased_area;
+     public $update_darbc_grower;
+     public $update_other_area;
+     public $update_status;
+     public $update_remarks;
+     public $update_actual_field_number;
+     public $update_gross_area;
+     public $update_planted_area;
+     public $update_gulley_area;
+     public $update_total_area;
+     public $update_facility_area;
+     public $update_unutilized_area;
+
      public $portion_field_array = [
          '0' => null,
          '1' => null,
@@ -472,6 +491,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
             'owned_but_not_planted' => $this->other_area,
             'status' => $this->status,
             'remarks' => $this->remarks,
+            'field_number' => $this->actual_field_number,
             'gross_area' => $this->gross_area,
             'planted_area' => $this->planted_area,
             'gulley_area' => $this->gulley_area,
@@ -589,6 +609,19 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         return redirect()->route('view-attachments', ['record' => $record,'type' => $type,]);
     }
 
+    public function updatedLandStatus()
+    {
+        $this->leased_area = null;
+        $this->darbc_grower = null;
+        $this->other_area = null;
+    }
+
+    public function updatedUpdateLandStatus()
+    {
+        $this->update_leased_area = null;
+        $this->update_darbc_grower = null;
+        $this->update_other_area = null;
+    }
 
     public function mount()
     {
@@ -623,6 +656,86 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
             $this->title_status_detailed = '';
                 break;
         }
+    }
+
+    public function updateActual($id)
+    {
+        $actual = Actual::find($id);
+        $this->actual_to_update = $actual;
+        $this->update_land_status = $actual->land_status;
+        $this->update_leased_area = $actual->dolephil_leased;
+        $this->update_darbc_grower = $actual->darbc_grower;
+        $this->update_other_area = $actual->owned_but_not_planted;
+        $this->update_status = $actual->status;
+        $this->update_remarks = $actual->remarks;
+        $this->update_actual_field_number = $actual->field_number;
+        $this->update_gross_area = $actual->gross_area;
+        $this->update_planted_area = $actual->planted_area;
+        $this->update_gulley_area = $actual->gulley_area;
+        $this->update_total_area = $actual->total_area;
+        $this->update_facility_area = $actual->facility_area;
+        $this->update_unutilized_area = $actual->unutilized_area;
+        $this->updateActualModal = true;
+    }
+
+    public function updateActualLot()
+    {
+        DB::beginTransaction();
+        $this->actual_to_update->land_status = $this->update_land_status;
+        $this->actual_to_update->dolephil_leased = $this->update_leased_area;
+        $this->actual_to_update->darbc_grower = $this->update_darbc_grower;
+        $this->actual_to_update->owned_but_not_planted = $this->update_other_area;
+        $this->actual_to_update->status = $this->update_status;
+        $this->actual_to_update->remarks = $this->update_remarks;
+        $this->actual_to_update->field_number = $this->update_actual_field_number;
+        $this->actual_to_update->gross_area = $this->update_gross_area;
+        $this->actual_to_update->planted_area = $this->update_planted_area;
+        $this->actual_to_update->gulley_area = $this->update_gulley_area;
+        $this->actual_to_update->total_area = $this->update_total_area;
+        $this->actual_to_update->facility_area = $this->update_facility_area;
+        $this->actual_to_update->unutilized_area = $this->update_unutilized_area;
+        $this->actual_to_update->save();
+        DB::commit();
+
+         $this->updateActualModal = false;
+
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data successfully updated'
+        );
+    }
+
+    public function deleteActual($id)
+    {
+        $actual = Actual::find($id);
+        $this->actual_to_delete =  $actual;
+
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete the information?',
+            'acceptLabel' => 'Yes, delete it',
+            'method'      => 'deleteActualFinal',
+        ]);
+    }
+
+    public function deleteActualFinal()
+    {
+        $deleted = false;
+        if (isset($this->actual_to_delete)) {
+            $deleted = Actual::where('id', $this->actual_to_delete->id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('$refresh');
     }
 
     public function render()

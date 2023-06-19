@@ -164,12 +164,12 @@
                         <div class="flex justify-between items-center">
                           <div class="flex space-x-3 items-center">
                             <h1 class="font-bold text-lg text-gray-600 font-montserrat">ACTUAL</h1>
-                            <x-native-select wire:model="tax_get">
+                            {{-- <x-native-select wire:model="tax_get">
                               @foreach ($tax_years as $item)
                                 <option value="{{ $item }}">{{ $item }}</option>
                               @endforeach
 
-                            </x-native-select>
+                            </x-native-select> --}}
                           </div>
                           <div>
                             <x-button label="New Actual" icon="plus" class="print-button" positive wire:click="$set('addActualModal', true)" />
@@ -181,7 +181,285 @@
                             <div class=" flow-root">
                               <div class="">
                                 <div class="border overflow-x-auto">
-                                  <table class="min-w-full divide-y divide-gray-300">
+                                    @foreach ($actuals as $item)
+                                    <div class="mb-4">
+                                        @if ($item->land_status === "LEASED")
+                                        <div class="">
+                                            <table class="min-w-full divide-y divide-gray-300">
+                                                <thead>
+                                                  <tr class="divide-x divide-gray-200">
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
+                                                    </th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                      LEASED AREA
+                                                    </th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      FIELD NUMBER</th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      ACTION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                                    <tr class="divide-x divide-gray-200">
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->land_status }}</td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->dolephil_leased }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        {{ $item->field_number }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        <div class="print-button flex space-x-3 justify-center">
+                                                            <button wire:click="updateActual({{$item->id}})">
+                                                                <svg class="h-5 w-5 flex-shrink-0 text-green-800 font-medium" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                  </svg>
+                                                            </button>
+                                                            <button wire:click="deleteActual({{$item->id}})">
+                                                            <svg class="h-5 w-5 flex-shrink-0 font-medium text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                           </svg>
+                                                          </button>
+                                                         </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+
+                                        @elseif ($item->land_status === "GROWERS")
+                                        <div class="">
+                                            <table class="min-w-full divide-y divide-gray-300">
+                                                <thead>
+                                                  <tr class="divide-x divide-gray-200">
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
+                                                    </th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                      GROWERS AREA
+                                                    </th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      FIELD NUMBER</th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      ACTION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                                    <tr class="divide-x divide-gray-200">
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->land_status }}</td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->darbc_grower }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        {{ $item->field_number }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        <div class="print-button flex space-x-3 justify-center">
+                                                            <button wire:click="updateActual({{$item->id}})">
+                                                                <svg class="h-5 w-5 flex-shrink-0 text-green-800 font-medium" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                  </svg>
+                                                            </button>
+                                                            <button wire:click="deleteActual({{$item->id}})">
+                                                            <svg class="h-5 w-5 flex-shrink-0 font-medium text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                           </svg>
+                                                          </button>
+                                                         </div></td>
+                                                    </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+
+                                        @elseif ($item->land_status === "UNPLANTED")
+                                        <div class="">
+                                            <table class="min-w-full divide-y divide-gray-300">
+                                                <thead>
+                                                  <tr class="divide-x divide-gray-200">
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
+                                                    </th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                      UNPLANTED AREA
+                                                    </th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      FIELD NUMBER</th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      ACTION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                                    <tr class="divide-x divide-gray-200">
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->land_status }}</td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->owned_but_not_planted }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        {{ $item->field_number }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        <div class="print-button flex space-x-3 justify-center">
+                                                            <button wire:click="updateActual({{$item->id}})">
+                                                                <svg class="h-5 w-5 flex-shrink-0 text-green-800 font-medium" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                  </svg>
+                                                            </button>
+                                                            <button wire:click="deleteActual({{$item->id}})">
+                                                            <svg class="h-5 w-5 flex-shrink-0 font-medium text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                           </svg>
+                                                          </button>
+                                                         </div></td>
+                                                    </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                        @elseif ($item->land_status === "COMPROMISE AGREEMENT")
+                                        <div class="">
+                                            <table class="min-w-full divide-y divide-gray-300">
+                                                <thead>
+                                                  <tr class="divide-x divide-gray-200">
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
+                                                    </th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                      UNPLANTED AREA
+                                                    </th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      FIELD NUMBER</th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      ACTION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                                    <tr class="divide-x divide-gray-200">
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->land_status }}</td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->owned_but_not_planted }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        {{ $item->field_number }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        <div class="print-button flex space-x-3 justify-center">
+                                                            <button wire:click="updateActual({{$item->id}})">
+                                                                <svg class="h-5 w-5 flex-shrink-0 text-green-800 font-medium" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                  </svg>
+                                                            </button>
+                                                            <button wire:click="deleteActual({{$item->id}})">
+                                                            <svg class="h-5 w-5 flex-shrink-0 font-medium text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                           </svg>
+                                                          </button>
+                                                         </div></td>
+                                                    </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                        @elseif ($item->land_status === "DELETED")
+                                        <div class="">
+                                            <table class="min-w-full divide-y divide-gray-300">
+                                                <thead>
+                                                  <tr class="divide-x divide-gray-200">
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
+                                                    </th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                      UNPLANTED AREA
+                                                    </th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      FIELD NUMBER</th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      ACTION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                                    <tr class="divide-x divide-gray-200">
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->land_status }}</td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->owned_but_not_planted }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        {{ $item->field_number }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        <div class="print-button flex space-x-3 justify-center">
+                                                            <button wire:click="updateActual({{$item->id}})">
+                                                                <svg class="h-5 w-5 flex-shrink-0 text-green-800 font-medium" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                  </svg>
+                                                            </button>
+                                                            <button wire:click="deleteActual({{$item->id}})">
+                                                            <svg class="h-5 w-5 flex-shrink-0 font-medium text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                           </svg>
+                                                          </button>
+                                                         </div></td>
+                                                    </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                        @else
+                                        <div class="">
+                                            <table class="min-w-full divide-y divide-gray-300">
+                                                <thead>
+                                                  <tr class="divide-x divide-gray-200">
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
+                                                    </th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                      LEASED AREA
+                                                    </th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      FIELD NUMBER</th>
+                                                    <th scope="col"
+                                                      class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                      ACTION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody class="divide-y divide-gray-200 bg-gray-100">
+                                                    <tr class="divide-x divide-gray-200">
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->land_status }}</td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->dolephil_leased }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        {{ $item->field_number }}
+                                                      </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                        <div class="print-button flex space-x-3 justify-center">
+                                                            <button wire:click="updateActual({{$item->id}})">
+                                                                <svg class="h-5 w-5 flex-shrink-0 text-green-800 font-medium" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                                  </svg>
+                                                            </button>
+                                                            <button wire:click="deleteActual({{$item->id}})">
+                                                            <svg class="h-5 w-5 flex-shrink-0 font-medium text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                           </svg>
+                                                          </button>
+                                                         </div></td>
+                                                    </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    @endforeach
+                                  {{-- <table class="min-w-full divide-y divide-gray-300">
                                     <thead>
                                       <tr class="divide-x divide-gray-200">
                                         <th scope="col"
@@ -218,7 +496,7 @@
                                         </tr>
                                       @endforeach
                                     </tbody>
-                                  </table>
+                                  </table> --}}
                                 </div>
                               </div>
                             </div>
@@ -505,18 +783,29 @@
     <x-modal align="center" wire:model.defer="addActualModal">
         <x-card title="Add Actual Lot">
           <div class="space-y-3">
-            <div class="grid grid-cols-2 gap-4">
-              <x-input label="Land Status" placeholder="Status" wire:model.defer="land_status" />
-              <x-input label="DOLEPHIL Leased" placeholder="Leased Area" wire:model.defer="leased_area" />
-              <x-input label="DARBC Grower" placeholder="DARBC Grower" wire:model.defer="darbc_grower" />
-              <x-input label="Other Area" placeholder="Owned but not planted by DOLEPHIL"
+            <div class="grid grid-cols-1 gap-4">
+              {{-- <x-input label="Land Status" placeholder="Status" wire:model.defer="land_status" /> --}}
+              <x-select label="Land Status" placeholder="Select one" wire:model="land_status">
+                    <x-select.option label="Leased" value="LEASED" />
+                    <x-select.option label="Growers" value="GROWERS" />
+                    <x-select.option label="Unplanted" value="UNPLANTED" />
+                    <x-select.option label="Compromise Agreement" value="COMPROMISE AGREEMENT" />
+                    <x-select.option label="Deleted" value="DELETED" />
+                </x-select>
+
+                @if ($land_status === "LEASED")
+                <x-input label="Leased Area" placeholder="" wire:model.defer="leased_area" />
+                @elseif($land_status === "GROWERS")
+                <x-input label="Growers Area" placeholder="" wire:model.defer="darbc_grower" />
+                @elseif($land_status === "UNPLANTED" || $land_status === "COMPROMISE AGREEMENT" || $land_status === "DELETED")
+                <x-input label="Unplanted Area" placeholder=""
                 wire:model.defer="other_area" />
+                @endif
+                <x-input label="Field Number" placeholder="" wire:model.defer="actual_field_number" />
+
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
-              <x-textarea label="Status" placeholder="" wire:model.defer="status" />
-              <x-textarea label="Remarks" placeholder="" wire:model.defer="remarks" />
-            </div>
+
 
           </div>
           <div class="grid grid-cols-3 gap-4 mt-3">
@@ -527,7 +816,11 @@
             <x-input label="Facility Area" placeholder="0" wire:model.defer="facility_area" />
             <x-input label="Unutilized Area" placeholder="0" wire:model.defer="unutilized_area" />
           </div>
-          <div class="bg-gray-200 rounded-md space-y-2 p-2 mt-3">
+          <div class="mt-3 grid grid-cols-1 gap-4">
+            <x-textarea label="Status" placeholder="" wire:model.defer="status" />
+            <x-textarea label="Remarks" placeholder="" wire:model.defer="remarks" />
+          </div>
+          {{-- <div class="bg-gray-200 rounded-md space-y-2 p-2 mt-3">
             <div class="grid grid-cols-3 gap-4">
               <x-input label="Portion Field" placeholder="0" wire:model.defer="portion_field_array.0" />
               <x-input label="Planted Area" placeholder="0" wire:model.defer="planted_area_array.0" />
@@ -548,7 +841,7 @@
               <x-input label="Total Area" placeholder="0" wire:model.defer="total_area_array.1" />
               <x-input label="Unutilized Area" placeholder="0" wire:model.defer="unutilized_area_array.1" />
             </div>
-          </div>
+          </div> --}}
 
           <x-slot name="footer">
             <div class="flex justify-end gap-x-4">
@@ -558,6 +851,83 @@
                         title: 'Are you sure you want to save this information?',
                         icon: 'question',
                         method: 'saveActualLot'
+                    }" />
+            </div>
+          </x-slot>
+        </x-card>
+      </x-modal>
+
+        <x-modal align="center" wire:model.defer="updateActualModal">
+        <x-card title="Update Actual Lot">
+          <div class="space-y-3">
+            <div class="grid grid-cols-1 gap-4">
+              {{-- <x-input label="Land Status" placeholder="Status" wire:model.defer="land_status" /> --}}
+              <x-select label="Land Status" placeholder="Select one" wire:model="update_land_status">
+                    <x-select.option label="Leased" value="LEASED" />
+                    <x-select.option label="Growers" value="GROWERS" />
+                    <x-select.option label="Unplanted" value="UNPLANTED" />
+                    <x-select.option label="Compromise Agreement" value="COMPROMISE AGREEMENT" />
+                    <x-select.option label="Deleted" value="DELETED" />
+                </x-select>
+
+                @if ($update_land_status === "LEASED")
+                <x-input label="Leased Area" placeholder="" wire:model.defer="update_leased_area" />
+                @elseif($update_land_status === "GROWERS")
+                <x-input label="Growers Area" placeholder="" wire:model.defer="update_darbc_grower" />
+                @elseif($update_land_status === "UNPLANTED" || $update_land_status === "COMPROMISE AGREEMENT" || $update_land_status === "DELETED")
+                <x-input label="Unplanted Area" placeholder=""
+                wire:model.defer="update_other_area" />
+                @endif
+                <x-input label="Field Number" placeholder="" wire:model.defer="update_actual_field_number" />
+
+            </div>
+
+
+
+          </div>
+          <div class="grid grid-cols-3 gap-4 mt-3">
+            <x-input label="Gross Area" placeholder="0" wire:model.defer="update_gross_area" />
+            <x-input label="Planted Area" placeholder="0" wire:model.defer="update_planted_area" />
+            <x-input label="Gulley Area" placeholder="0" wire:model.defer="update_gulley_area" />
+            <x-input label="Total Area" placeholder="0" wire:model.defer="update_total_area" />
+            <x-input label="Facility Area" placeholder="0" wire:model.defer="update_facility_area" />
+            <x-input label="Unutilized Area" placeholder="0" wire:model.defer="update_unutilized_area" />
+          </div>
+          <div class="mt-3 grid grid-cols-1 gap-4">
+            <x-textarea label="Status" placeholder="" wire:model.defer="update_status" />
+            <x-textarea label="Remarks" placeholder="" wire:model.defer="update_remarks" />
+          </div>
+          {{-- <div class="bg-gray-200 rounded-md space-y-2 p-2 mt-3">
+            <div class="grid grid-cols-3 gap-4">
+              <x-input label="Portion Field" placeholder="0" wire:model.defer="portion_field_array.0" />
+              <x-input label="Planted Area" placeholder="0" wire:model.defer="planted_area_array.0" />
+              <x-input label="Gulley Area" placeholder="0" wire:model.defer="gulley_area_array.0" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <x-input label="Total Area" placeholder="0" wire:model.defer="total_area_array.0" />
+              <x-input label="Unutilized Area" placeholder="0" wire:model.defer="unutilized_area_array.0" />
+            </div>
+          </div>
+          <div class="bg-gray-200 rounded-md space-y-2 p-2 mt-3">
+            <div class="grid grid-cols-3 gap-4">
+              <x-input label="Portion Field" placeholder="0" wire:model.defer="portion_field_array.1" />
+              <x-input label="Planted Area" placeholder="0" wire:model.defer="planted_area_array.1" />
+              <x-input label="Gulley Area" placeholder="0" wire:model.defer="gulley_area_array.1" />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <x-input label="Total Area" placeholder="0" wire:model.defer="total_area_array.1" />
+              <x-input label="Unutilized Area" placeholder="0" wire:model.defer="unutilized_area_array.1" />
+            </div>
+          </div> --}}
+
+          <x-slot name="footer">
+            <div class="flex justify-end gap-x-4">
+              <x-button flat label="Cancel" x-on:click="close" />
+              <x-button primary label="Submit"
+                x-on:confirm="{
+                        title: 'Are you sure you want to update this information?',
+                        icon: 'question',
+                        method: 'updateActualLot'
                     }" />
             </div>
           </x-slot>
