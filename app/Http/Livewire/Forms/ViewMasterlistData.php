@@ -32,12 +32,15 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $previous_copy_of_title;
     public $actual;
     public $taxes;
+    public $tax_data;
     public $title_status_detailed;
     public $view_modal = false;
     public $addActualModal = false;
     public $updateActualModal = false;
     public $addTaxModal = false;
     public $addTaxReceiptModal = false;
+    public $viewTaxModal = false;
+    public $updateTaxModal = false;
     public $tax_get;
     public $tax_year;
      //actual lot models
@@ -93,6 +96,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      ];
      //tax models
      public $title_number;
+     public $tax_to_delete;
      public $tax_declaration_number;
      public $owner;
      public $lease_to_dolefil;
@@ -107,6 +111,39 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $year_of_payment;
      public $official_receipt;
      public $receipt_image;
+
+    //view tax models
+    public $view_title_number;
+    public $view_tax_declaration_number;
+    public $view_owner;
+    public $view_lease_to_dolefil;
+    public $view_darbc_growers_hip;
+    public $view_darbc_not_planted;
+    public $view_tax_remarks;
+    public $view_market_value;
+    public $view_assessed_value;
+    public $view_year;
+    public $view_square_meter;
+    public $view_year_of_payment;
+    public $view_official_receipt;
+
+
+      //update tax models
+      public $update_title_number;
+      public $update_tax_declaration_number;
+      public $update_owner;
+      public $update_lease_to_dolefil;
+      public $update_darbc_growers_hip;
+      public $update_darbc_not_planted;
+      public $update_tax_remarks;
+      public $update_market_value;
+      public $update_assessed_value;
+      public $update_year;
+      public $update_square_meter;
+    //   public $update_tax_payment;
+      public $update_year_of_payment;
+      public $update_official_receipt;
+    //   public $update_receipt_image;
 
      //attachment variables
      public $title_attachment_id;
@@ -723,6 +760,103 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $deleted = false;
         if (isset($this->actual_to_delete)) {
             $deleted = Actual::where('id', $this->actual_to_delete->id)->first()->delete();
+        }
+       if ($deleted) {
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data has been deleted'
+        );
+       } else {
+        $this->dialog()->error(
+            $title = 'An error occured!',
+            $description = 'Reload the page and try again!'
+        );
+       }
+       $this->emit('$refresh');
+    }
+
+    public function viewTax($id)
+    {
+        $this->tax_data = Tax::find($id);
+        $this->viewTaxModal = true;
+        $this->view_title_number = $this->tax_data->title_number;
+        $this->view_tax_declaration_number = $this->tax_data->tax_declaration_number;
+        $this->view_owner = $this->tax_data->owner;
+        $this->view_lease_to_dolefil = $this->tax_data->lease_to_dolefil;
+        $this->view_darbc_growers_hip = $this->tax_data->darbc_growers_hip;
+        $this->view_darbc_not_planted = $this->tax_data->darbc_area_not_planted_pineapple;
+        $this->view_tax_remarks = $this->tax_data->remarks;
+        $this->view_market_value = $this->tax_data->market_value;
+        $this->view_assessed_value = $this->tax_data->assessed_value;
+        $this->view_year = $this->tax_data->year;
+        $this->view_square_meter = $this->tax_data->square_meter;
+        $this->view_year_of_payment = $this->tax_data->year_of_payment;
+        $this->view_official_receipt = $this->tax_data->official_receipt;
+    }
+
+    public function updateTax($id)
+    {
+        $this->tax_data = Tax::find($id);
+        $this->updateTaxModal = true;
+        $this->update_title_number = $this->tax_data->title_number;
+        $this->update_tax_declaration_number = $this->tax_data->tax_declaration_number;
+        $this->update_owner = $this->tax_data->owner;
+        $this->update_lease_to_dolefil = $this->tax_data->lease_to_dolefil;
+        $this->update_darbc_growers_hip = $this->tax_data->darbc_growers_hip;
+        $this->update_darbc_not_planted = $this->tax_data->darbc_area_not_planted_pineapple;
+        $this->update_tax_remarks = $this->tax_data->remarks;
+        $this->update_market_value = $this->tax_data->market_value;
+        $this->update_assessed_value = $this->tax_data->assessed_value;
+        $this->update_year = $this->tax_data->year;
+        $this->update_square_meter = $this->tax_data->square_meter;
+        $this->update_year_of_payment = $this->tax_data->year_of_payment;
+        $this->update_official_receipt = $this->tax_data->official_receipt;
+    }
+
+    public function confirmUpdateTax()
+    {
+        DB::beginTransaction();
+        $this->tax_data->title_number = $this->update_title_number;
+        $this->tax_data->tax_declaration_number = $this->update_tax_declaration_number;
+        $this->tax_data->owner = $this->update_owner;
+        $this->tax_data->lease_to_dolefil = $this->update_lease_to_dolefil;
+        $this->tax_data->darbc_growers_hip = $this->update_darbc_growers_hip;
+        $this->tax_data->darbc_area_not_planted_pineapple = $this->update_darbc_not_planted;
+        $this->tax_data->remarks = $this->update_tax_remarks;
+        $this->tax_data->market_value = $this->update_market_value;
+        $this->tax_data->assessed_value = $this->update_assessed_value;
+        $this->tax_data->year = $this->update_year;
+        $this->tax_data->square_meter = $this->update_square_meter;
+        $this->tax_data->year_of_payment = $this->update_year_of_payment;
+        $this->tax_data->official_receipt = $this->update_official_receipt;
+        $this->tax_data->save();
+        DB::commit();
+        $this->updateTaxModal = false;
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data has been successfully updated'
+        );
+    }
+
+    public function deleteTax($id)
+    {
+        $tax = Tax::find($id);
+        $this->tax_to_delete =  $tax;
+
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'icon' => 'error',
+            'description' => 'Delete the information?',
+            'acceptLabel' => 'Yes, delete it',
+            'method'      => 'deleteTaxFinal',
+        ]);
+    }
+
+    public function deleteTaxFinal()
+    {
+        $deleted = false;
+        if (isset($this->tax_to_delete)) {
+            $deleted = Tax::where('id', $this->tax_to_delete->id)->first()->delete();
         }
        if ($deleted) {
         $this->dialog()->success(
