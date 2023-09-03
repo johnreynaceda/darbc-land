@@ -191,12 +191,30 @@
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                                     </th>
+                                                    <th scope="col"
+                                                    class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                    FIELD NUMBER</th>
                                                     <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                                       LEASED AREA
                                                     </th>
-                                                    <th scope="col"
-                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
-                                                      FIELD NUMBER</th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GROSSED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        PLANTED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GULLEY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        FACILITY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        UTILIZED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        TOTAL AREA
+                                                      </th>
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                                       ACTION</th>
@@ -206,11 +224,23 @@
                                                     <tr class="divide-x divide-gray-200">
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
                                                         {{ $item->land_status }}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
+                                                            {{ $item->field_number }}
+                                                          </td>
                                                       <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->dolephil_leased }}
                                                       </td>
-                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                                        {{ $item->field_number }}
-                                                      </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gross_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->planted_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gulley_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->facility_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->utilized_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->total_area }}</td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                                         <div class="print-button flex space-x-3 justify-center">
                                                             <button wire:click="updateActual({{$item->id}})">
@@ -238,12 +268,30 @@
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                                     </th>
+                                                    <th scope="col"
+                                                    class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                    FIELD NUMBER</th>
                                                     <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                                       GROWERS AREA
                                                     </th>
-                                                    <th scope="col"
-                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
-                                                      FIELD NUMBER</th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GROSSED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        PLANTED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GULLEY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        FACILITY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        UTILIZED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        TOTAL AREA
+                                                      </th>
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                                       ACTION</th>
@@ -253,11 +301,23 @@
                                                     <tr class="divide-x divide-gray-200">
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
                                                         {{ $item->land_status }}</td>
-                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->darbc_grower }}
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->field_number }}
                                                       </td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                                        {{ $item->field_number }}
+                                                        {{ $item->darbc_grower }}
                                                       </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gross_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->planted_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gulley_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->facility_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->utilized_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->total_area }}</td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                                         <div class="print-button flex space-x-3 justify-center">
                                                             <button wire:click="updateActual({{$item->id}})">
@@ -284,12 +344,30 @@
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                                     </th>
+                                                    <th scope="col"
+                                                    class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                    FIELD NUMBER</th>
                                                     <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                                       UNPLANTED AREA
                                                     </th>
-                                                    <th scope="col"
-                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
-                                                      FIELD NUMBER</th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GROSSED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        PLANTED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GULLEY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        FACILITY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        UTILIZED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        TOTAL AREA
+                                                      </th>
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                                       ACTION</th>
@@ -299,11 +377,23 @@
                                                     <tr class="divide-x divide-gray-200">
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
                                                         {{ $item->land_status }}</td>
-                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->owned_but_not_planted }}
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->field_number }}
                                                       </td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                                        {{ $item->field_number }}
+                                                        {{ $item->owned_but_not_planted }}
                                                       </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gross_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->planted_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gulley_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->facility_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->utilized_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->total_area }}</td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                                         <div class="print-button flex space-x-3 justify-center">
                                                             <button wire:click="updateActual({{$item->id}})">
@@ -329,12 +419,30 @@
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                                     </th>
+                                                    <th scope="col"
+                                                    class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                    FIELD NUMBER</th>
                                                     <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                                       UNPLANTED AREA
                                                     </th>
-                                                    <th scope="col"
-                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
-                                                      FIELD NUMBER</th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GROSSED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        PLANTED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GULLEY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        FACILITY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        UTILIZED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        TOTAL AREA
+                                                      </th>
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                                       ACTION</th>
@@ -344,11 +452,23 @@
                                                     <tr class="divide-x divide-gray-200">
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
                                                         {{ $item->land_status }}</td>
-                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->owned_but_not_planted }}
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->field_number }}
                                                       </td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                                        {{ $item->field_number }}
+                                                        {{ $item->owned_but_not_planted }}
                                                       </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gross_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->planted_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gulley_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->facility_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->utilized_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->total_area }}</td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                                         <div class="print-button flex space-x-3 justify-center">
                                                             <button wire:click="updateActual({{$item->id}})">
@@ -374,12 +494,30 @@
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                                     </th>
-                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
-                                                      UNPLANTED AREA
-                                                    </th>
                                                     <th scope="col"
-                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
-                                                      FIELD NUMBER</th>
+                                                    class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                    FIELD NUMBER</th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                      DELETED AREA
+                                                    </th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GROSSED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        PLANTED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GULLEY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        FACILITY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        UTILIZED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        TOTAL AREA
+                                                      </th>
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                                       ACTION</th>
@@ -389,11 +527,23 @@
                                                     <tr class="divide-x divide-gray-200">
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
                                                         {{ $item->land_status }}</td>
-                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->owned_but_not_planted }}
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->field_number }}
                                                       </td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                                        {{ $item->field_number }}
+                                                        {{ $item->owned_but_not_planted }}
                                                       </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gross_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->planted_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gulley_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->facility_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->utilized_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->total_area }}</td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                                         <div class="print-button flex space-x-3 justify-center">
                                                             <button wire:click="updateActual({{$item->id}})">
@@ -419,12 +569,30 @@
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">LAND STATUS
                                                     </th>
+                                                    <th scope="col"
+                                                    class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
+                                                    FIELD NUMBER</th>
                                                     <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
                                                       LEASED AREA
                                                     </th>
-                                                    <th scope="col"
-                                                      class="py-3.5 pl-4 pr-4 text-left text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
-                                                      FIELD NUMBER</th>
+                                                    <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GROSSED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        PLANTED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        GULLEY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        FACILITY AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        UTILIZED AREA
+                                                      </th>
+                                                      <th scope="col" class="px-4 py-3.5 text-left text-xs font-semibold text-gray-900 bg-gray-100 whitespace-nowrap">
+                                                        TOTAL AREA
+                                                      </th>
                                                     <th scope="col"
                                                       class="py-3.5 pl-4 pr-4 text-center text-xs font-semibold text-gray-900 bg-gray-100  whitespace-nowrap">
                                                       ACTION</th>
@@ -434,11 +602,23 @@
                                                     <tr class="divide-x divide-gray-200">
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
                                                         {{ $item->land_status }}</td>
-                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->dolephil_leased }}
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->field_number }}
                                                       </td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                                        {{ $item->field_number }}
+                                                        {{ $item->dolephil_leased }}
                                                       </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gross_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->planted_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->gulley_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->facility_area }}
+                                                    </td>
+                                                    <td class="whitespace-nowrap p-4 text-xs text-gray-500">{{ $item->utilized_area }}
+                                                    </td>
+                                                      <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs font-medium text-gray-900 ">
+                                                        {{ $item->total_area }}</td>
                                                       <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                                         <div class="print-button flex space-x-3 justify-center">
                                                             <button wire:click="updateActual({{$item->id}})">
