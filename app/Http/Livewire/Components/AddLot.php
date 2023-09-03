@@ -60,7 +60,7 @@ class AddLot extends Component implements Forms\Contracts\HasForms
                             TextInput::make('_number')->label('No.'),
                             TextInput::make('_lot_number')->label('Lot No.'),
                             TextInput::make('_survey_number')->label('Survey No.'),
-                            TextInput::make('_title_area')->label('Area Based On Title'),
+                            TextInput::make('_title_area')->label('Title Area'),
                             TextInput::make('_awarded_area')->label('Awarded Area'),
                             TextInput::make('_previous_land_owner')->label('Previous Land Owner'),
                             TextInput::make('_field_number')->label('Field No.'),

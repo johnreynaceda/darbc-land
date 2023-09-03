@@ -62,7 +62,7 @@
                 </div>
                 <div class="flex items-center">
                   <span class="rounded-l-sm text-2xs bg-gray-100 border font-bold px-2 w-32 py-2">TITLE NO:</span>
-                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->taxes->first()?->title_number == null ? '--' : $basicInfo->taxes->first()?->title_number }}</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{ $basicInfo->title == null ? '--' : $basicInfo->title }}</span>
                 </div>
                 <div class="grid grid-cols-2">
                   <div class="flex items-center">

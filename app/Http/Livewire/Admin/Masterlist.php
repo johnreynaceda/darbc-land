@@ -293,7 +293,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                                 TextInput::make('__number')->label('No.'),
                                 TextInput::make('__lot_number')->label('Lot No.'),
                                 TextInput::make('__survey_number')->label('Survey No.'),
-                                TextInput::make('__title_area')->label('Area Based On Title'),
+                                TextInput::make('__title_area')->label('Title Area'),
                                 TextInput::make('__awarded_area')->label('Awarded Area'),
                                 TextInput::make('__previous_land_owner')->label('Previous Land Owner'),
                                 TextInput::make('__field_number')->label('Field No.'),
@@ -365,8 +365,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             ->button()
             ->color('warning')
             ->icon('heroicon-o-eye')
-            ->url(fn (BasicInformation $record): string => route('masterlist-data', $record))
-            ->openUrlInNewTab(),
+            ->url(fn (BasicInformation $record): string => route('masterlist-data', $record)),
         ];
     }
 
