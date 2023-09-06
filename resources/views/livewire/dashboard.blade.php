@@ -302,17 +302,16 @@
       </div>
     </div>
     <div class="flex-1 ">
-      <div id="img-container" class=" flex justify-center">
-        @if (App\Models\MapImage::get()->count() === 0)
-        <img src="{{ asset('images/darbcmap3.jpg') }}" class="h-96" alt="">
-        @else
-        @php
-            $path = App\Models\MapImage::first()->path;
-        @endphp
-        <img src="{{ $this->getFileUrl($path) }}" class="h-96 mb-2" alt="">
-        @endif
-
-      </div>
+        <div class="flex justify-center overflow-hidden relative">
+            @if (App\Models\MapImage::get()->count() === 0)
+            <img src="{{ asset('images/darbcmap3.jpg') }}"  id="img-container" class="h-96 img-zoomable" alt="">
+            @else
+            @php
+                $path = App\Models\MapImage::first()->path;
+            @endphp
+            <img src="{{ $this->getFileUrl($path) }}"  id="img-container" class="h-96 mb-2 img-zoomable" alt="">
+            @endif
+        </div>
       <div class="relative">
         <div class="absolute inset-0 flex items-center" aria-hidden="true">
           <div class="w-full border-t border-gray-300"></div>
@@ -795,6 +794,23 @@
         }
       };
 
-      new ImageZoom(document.getElementById("img-container"), options2);
+    const elem = document.getElementById('img-container')
+    const panzoom = Panzoom(elem, {
+    maxScale: 30,
+    minScale: 1,
+    })
+    panzoom.pan(10, 10)
+    panzoom.zoom(1, { animate: true })
+
+    // Panning and pinch zooming are bound automatically (unless disablePan is true).
+    // There are several available methods for zooming
+    // that can be bound on button clicks or mousewheel.
+    elem.addEventListener("wheel", function (e) {
+            panzoom.zoomWithWheel(e);
+        });
+          // Center the image on zoom
+    elem.addEventListener('panzoomzoom', function (e) {
+        panzoom.moveTo(0, 0); // Center the image
+    });
     </script>
   </div>
