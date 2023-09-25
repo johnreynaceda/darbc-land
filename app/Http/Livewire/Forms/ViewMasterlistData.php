@@ -24,7 +24,6 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
 {
     use Tables\Concerns\InteractsWithTable;
     use Actions;
-
     public $record;
     public $informationId;
     public $basicInfo;
@@ -41,6 +40,8 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $addTaxReceiptModal = false;
     public $viewTaxModal = false;
     public $updateTaxModal = false;
+    public $updateBasicInfoModal = false;
+    public $updateLandbankModal = false;
     public $tax_get;
     public $tax_year;
      //actual lot models
@@ -73,6 +74,34 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $update_total_area;
      public $update_facility_area;
      public $update_unutilized_area;
+
+     //update basic information
+     public $lot_number;
+     public $survey_number;
+     public $field_number;
+     public $title_area;
+     public $title_no;
+     public $cloa_no;
+     public $basic_page;
+     public $barangay;
+     public $municipality;
+     public $title_status;
+     public $prev_land_owner;
+     public $awarded_area;
+     public $type_of_title;
+     public $prev_title_no;
+     public $encumberd_area;
+     public $encumbered_variance;
+     public $basic_remarks;
+     public $basic_status;
+
+     //update labndbank
+     public $landbank_amortization;
+     public $landbank_amount;
+     public $landbank_date_paid;
+     public $landbank_date_of_cert;
+     public $landbank_direct_payment_scheme;
+     public $landbank_ndc_remarks;
 
      public $portion_field_array = [
          '0' => null,
@@ -184,6 +213,11 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
             ->label('UPLOAD RECEIPT IMAGE')
             ->image()
         ];
+    }
+
+    public function returnToMasterlist()
+    {
+        return redirect()->route('masterlist');
     }
 
     public function getFileUrl($filename)
@@ -786,8 +820,8 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->view_darbc_growers_hip = $this->tax_data->darbc_growers_hip;
         $this->view_darbc_not_planted = $this->tax_data->darbc_area_not_planted_pineapple;
         $this->view_tax_remarks = $this->tax_data->remarks;
-        $this->view_market_value = $this->tax_data->market_value;
-        $this->view_assessed_value = $this->tax_data->assessed_value;
+        $this->view_market_value = number_format($this->tax_data->market_value,2);
+        $this->view_assessed_value = number_format($this->tax_data->assessed_value,2);
         $this->view_year = $this->tax_data->year;
         $this->view_square_meter = $this->tax_data->square_meter;
         $this->view_year_of_payment = $this->tax_data->year_of_payment;
@@ -870,6 +904,115 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         );
        }
        $this->emit('$refresh');
+    }
+
+    public function updateBasicInfo()
+    {
+        if($this->encumbered == null)
+        {
+            $area = '';
+            $variance = '';
+        }else{
+            $json1 = json_decode($this->encumbered, true);
+            $area = $json1['area'];
+            $variance = $json1['variance'];
+        }
+
+        if($this->previous_copy_of_title == null)
+        {
+            $type = '';
+            $number = '';
+        }else{
+            $json2 = json_decode($this->previous_copy_of_title, true);
+            $type = $json2['type of title'];
+            $number = $json2['no.'];
+        }
+        $this->lot_number = $this->record->lot_number;
+        $this->survey_number = $this->record->survey_number;
+        $this->field_number = $this->record->field_number;
+        $this->title_area = $this->record->title_area;
+        $this->title_no = $this->record->title;
+        $this->cloa_no = $this->record->cloa_number;
+        $this->basic_page = $this->record->page;
+        $this->barangay = $this->record->location;
+        $this->municipality = $this->record->municipality;
+        $this->title_status = $this->record->title_status;
+        $this->prev_land_owner = $this->record->previous_land_owner;
+        $this->awarded_area = $this->record->awarded_area;
+        $this->type_of_title = $type;
+        $this->prev_title_no = $number;
+        $this->encumberd_area = $area;
+        $this->encumbered_variance = $variance;
+        $this->basic_remarks = $this->record->remarks;
+        $this->basic_status = $this->record->status;
+        $this->updateBasicInfoModal = true;
+    }
+
+    public function confirmUpdateBasicInformation()
+    {
+        $encumbered = json_encode([
+            'area' =>  $this->encumberd_area,
+            'variance' =>   $this->encumbered_variance,
+        ]);
+        $previous_copy_of_title = json_encode([
+            'type of title' =>   $this->type_of_title,
+            'no.' => $this->prev_title_no,
+        ]);
+
+        DB::beginTransaction();
+        $this->record->lot_number = $this->lot_number;
+        $this->record->survey_number = $this->survey_number;
+        $this->record->title_area = $this->title_area;
+        $this->record->awarded_area = $this->awarded_area;
+        $this->record->previous_land_owner = $this->prev_land_owner;
+        $this->record->field_number = $this->field_number;
+        $this->record->location = $this->barangay;
+        $this->record->municipality = $this->municipality;
+        $this->record->title = $this->title_no;
+        $this->record->cloa_number = $this->cloa_no;
+        $this->record->page = $this->basic_page;
+        $this->record->encumbered = $encumbered;
+        $this->record->previous_copy_of_title = $previous_copy_of_title;
+        $this->record->title_status = $this->title_status;
+        $this->record->remarks = $this->basic_remarks;
+        $this->record->status = $this->basic_status;
+        $this->record->save();
+        DB::commit();
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data successfully updated'
+        );
+        return redirect()->route('masterlist-data', $this->record);
+    }
+
+    public function updateLandBank()
+    {
+        $this->landbank_amortization = $this->record->land_bank_amortization;
+        $this->landbank_amount = $this->record->amount;
+        $this->landbank_date_paid = $this->record->date_paid;
+        $this->landbank_date_of_cert = $this->record->date_of_cert;
+        $this->landbank_direct_payment_scheme = $this->record->ndc_direct_payment_scheme;
+        $this->landbank_ndc_remarks = $this->record->ndc_remarks;
+        $this->updateLandbankModal = true;
+    }
+
+    public function confirmUpdateLandBank()
+    {
+        DB::beginTransaction();
+        $this->record->land_bank_amortization =  $this->landbank_amortization;
+        $this->record->date_paid =  \Carbon\Carbon::parse($this->landbank_date_paid)->format('Y-m-d');
+        $this->record->date_of_cert = \Carbon\Carbon::parse($this->landbank_date_of_cert)->format('Y-m-d');
+        $this->record->amount = $this->landbank_amount;
+        $this->record->ndc_direct_payment_scheme = $this->landbank_direct_payment_scheme;
+        $this->record->ndc_remarks = $this->landbank_ndc_remarks;
+        $this->record->save();
+        DB::commit();
+        $this->updateBasicInfoModal = false;
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data successfully updated'
+        );
+        return redirect()->route('masterlist-data', $this->record);
     }
 
     public function render()

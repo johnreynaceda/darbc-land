@@ -206,6 +206,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             ->modalHeading('Update Record')
             ->modalSubheading('Make sure all the data are correct before submitting.')
             ->modalWidth('5xl')
+            ->visible(false)
             ->mountUsing(fn (Forms\ComponentContainer $form, BasicInformation $record) => $form->fill([
                 '__number' => $record->number,
                 '__lot_number' => $record->lot_number,
@@ -363,6 +364,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             Action::make('view')
             ->label('View')
             ->button()
+            ->outlined()
             ->color('warning')
             ->icon('heroicon-o-eye')
             ->url(fn (BasicInformation $record): string => route('masterlist-data', $record)),

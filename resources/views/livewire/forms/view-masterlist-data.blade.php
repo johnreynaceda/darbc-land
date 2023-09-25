@@ -1,17 +1,31 @@
 <div x-data>
     <div>
-        <div class="flex justify-end py-2">
+        <div class="flex justify-between py-2">
+            <x-button label="Back" class="font-bold" icon="arrow-left" emerald wire:click="returnToMasterlist" />
             <x-button label="PRINT" class="font-bold" icon="printer" dark @click="printOut($refs.printContainer.outerHTML);" />
         </div>
         <div x-ref="printContainer" >
             <div class="grid grid-cols-1">
                 <div class="border bg-green-700 p-0.5 flex space-x-2 items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-white">
-                    <path
-                      d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13.529 14.4464L15.7395 16.6569L17.1537 15.2426L14.9432 13.0322C15.8492 11.4983 15.6432 9.48951 14.3252 8.17157C12.7631 6.60948 10.2305 6.60948 8.66839 8.17157C7.1063 9.73367 7.1063 12.2663 8.66839 13.8284C9.98633 15.1464 11.9951 15.3524 13.529 14.4464ZM12.911 12.4142C12.13 13.1953 10.8637 13.1953 10.0826 12.4142C9.30156 11.6332 9.30156 10.3668 10.0826 9.58579C10.8637 8.80474 12.13 8.80474 12.911 9.58579C13.6921 10.3668 13.6921 11.6332 12.911 12.4142Z">
-                    </path>
-                  </svg>
-                  <span class="font-bold text-black">BASIC INFORMATION</span>
+                    <div class="grid grid-cols-2 w-full">
+                        <div class="col-span-1 flex space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-6 w-6 fill-white">
+                                <path
+                                  d="M16 2L21 7V21.0082C21 21.556 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918C3 2.44405 3.44495 2 3.9934 2H16ZM13.529 14.4464L15.7395 16.6569L17.1537 15.2426L14.9432 13.0322C15.8492 11.4983 15.6432 9.48951 14.3252 8.17157C12.7631 6.60948 10.2305 6.60948 8.66839 8.17157C7.1063 9.73367 7.1063 12.2663 8.66839 13.8284C9.98633 15.1464 11.9951 15.3524 13.529 14.4464ZM12.911 12.4142C12.13 13.1953 10.8637 13.1953 10.0826 12.4142C9.30156 11.6332 9.30156 10.3668 10.0826 9.58579C10.8637 8.80474 12.13 8.80474 12.911 9.58579C13.6921 10.3668 13.6921 11.6332 12.911 12.4142Z">
+                                </path>
+                              </svg>
+                              <span class="font-bold text-black">BASIC INFORMATION</span>
+                        </div>
+                        <div class="col-span-1 flex justify-end">
+                            <button class="cursor-pointer" wire:click="updateBasicInfo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 fill-white">
+                                <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                              </svg>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
                 @php
                 if($encumbered == null)
@@ -149,13 +163,27 @@
               </div>
               <div class="mt-0 5">
                 <div class="flex items-center bg-orange-500 space-x-1 py-1 px-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                    class="h-6 w-6 fill-green-500 rounded-full bg-white">
-                    <path
-                      d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 11H8V13H12V16L16 12L12 8V11Z">
-                    </path>
-                  </svg>
-                  <span class="font-bold text-black">ADDITIONAL INFORMATION</span>
+                    <div class="grid grid-cols-2 w-full">
+                        <div class="col-span-1 flex space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            class="h-6 w-6 fill-green-500 rounded-full bg-white">
+                            <path
+                              d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM12 11H8V13H12V16L16 12L12 8V11Z">
+                            </path>
+                          </svg>
+                          <span class="font-bold text-black">ADDITIONAL INFORMATION</span>
+                        </div>
+                        <div class="col-span-1 flex justify-end">
+                            <button class="cursor-pointer"  wire:click="updateLandBank">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"  class="h-5 w-5 fill-white ">
+                                    <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+                                    <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+                                  </svg>
+                            </button>
+
+                        </div>
+                    </div>
+
                 </div>
                 <div class="grid grid-cols-2 bg-green-100">
                   <div>
@@ -743,7 +771,8 @@
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->basicInformation->title_status }}</td>
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                            {{ $item->tax_payment }}</td>
+                                            {{ $item->tax_payment == null ? '' : number_format($item->tax_payment,2) }}
+                                        </td>
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->year_of_payment }}</td>
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
@@ -1259,6 +1288,76 @@
           </x-slot>
         </x-card>
       </x-modal>
+
+      {{-- update basic info modal --}}
+      <x-modal align="center" wire:model.defer="updateBasicInfoModal">
+        <x-card title="Update Basic Information">
+          <div class="space-y-3">
+            <div class="grid grid-cols-3 gap-4">
+                <x-input label="Lot Number" placeholder="" wire:model.defer="lot_number" />
+                <x-input label="Survey Number" placeholder="" wire:model.defer="survey_number" />
+                <x-input label="Field Number" placeholder="" wire:model.defer="field_number" />
+                <x-input label="Title Area" placeholder="" wire:model.defer="title_area" />
+                <x-input label="Title Number" placeholder="" wire:model.defer="title_no" />
+                <x-input label="CLOA Number" placeholder="" wire:model.defer="cloa_no" />
+                <x-input label="Page" placeholder="" wire:model.defer="basic_page" />
+                <x-input label="Barangay" placeholder="" wire:model.defer="barangay" />
+                <x-input label="Municipality" placeholder="" wire:model.defer="municipality" />
+                <x-input label="Title Status" placeholder="" wire:model.defer="title_status" />
+                <x-input label="Previous Land Owner" placeholder="" wire:model.defer="prev_land_owner" />
+                <x-input label="Awarded Area" placeholder="" wire:model.defer="awarded_area" />
+              </div>
+            <div class="grid grid-cols-2 gap-4">
+              <x-input label="Type Of Title" placeholder="" wire:model.defer="type_of_title" />
+              <x-input label="Previous Title Number" placeholder="" wire:model.defer="prev_title_no" />
+              <x-input label="Encumbered (Area)" placeholder="" wire:model.defer="encumberd_area" />
+              <x-input label="Encumbered (Variance)" placeholder="" wire:model.defer="encumbered_variance" />
+              <x-textarea label="Remarks" placeholder="" wire:model.defer="basic_remarks" />
+              <x-textarea label="Status" placeholder="" wire:model.defer="basic_status" />
+            </div>
+          </div>
+
+          <x-slot name="footer">
+            <div class="flex justify-end gap-x-4">
+              <x-button flat label="Cancel" x-on:click="close" />
+              <x-button primary label="Submit"
+                x-on:confirm="{
+                        title: 'Are you sure you want to save this information?',
+                        icon: 'question',
+                        method: 'confirmUpdateBasicInformation'
+                    }" />
+            </div>
+          </x-slot>
+        </x-card>
+      </x-modal>
+
+        {{-- update landbank amortization modal --}}
+        <x-modal align="center" wire:model.defer="updateLandbankModal">
+            <x-card title="Update LandBank Amortization">
+              <div class="space-y-3">
+                <div class="grid grid-cols-2 gap-4">
+                  <x-input label="Amortization" placeholder="" wire:model.defer="landbank_amortization" />
+                  <x-input label="Amount" placeholder="" wire:model.defer="landbank_amount" />
+                  <x-datetime-picker label="Date Paid" without-time wire:model.defer="landbank_date_paid"/>
+                  <x-datetime-picker label="Date of Cert" without-time wire:model.defer="landbank_date_of_cert"/>
+                </div>
+                <x-input label="NDC Direct Payment Scheme" placeholder="" wire:model.defer="landbank_direct_payment_scheme" />
+                <x-textarea label="NDC Remarks" placeholder="" wire:model.defer="landbank_ndc_remarks" />
+              </div>
+
+              <x-slot name="footer">
+                <div class="flex justify-end gap-x-4">
+                  <x-button flat label="Cancel" x-on:click="close" />
+                  <x-button primary label="Submit"
+                    x-on:confirm="{
+                            title: 'Are you sure you want to save this information?',
+                            icon: 'question',
+                            method: 'confirmUpdateLandBank'
+                        }" />
+                </div>
+              </x-slot>
+            </x-card>
+          </x-modal>
 
         {{-- ADD TAX MODAL --}}
         @if ($basicInfo->taxes->first() != null)
