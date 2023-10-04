@@ -664,7 +664,7 @@
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="p-1 bg-gray-100 text-xs font-bold">
                   @php
-                    $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENSAN' . '%')->sum('title_area');
+                    $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
                   @endphp
                   <span>GENSAN AREA: {{ $total }}</span>
                 </div>
