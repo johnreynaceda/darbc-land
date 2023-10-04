@@ -4,6 +4,12 @@
       <x-native-select label="Select Report" wire:model="report">
         <option value="1">Actual</option>
         <option value="2">Tax</option>
+        <option value="3">Loss in Case</option>
+        <option value="4">Cancelled CLOA</option>
+        <option value="5">Exchange Lot</option>
+        <option value="6">Free Lot</option>
+        <option value="7">Compromise Agreement</option>
+        <option value="8">DARBC Projects</option>
       </x-native-select>
     </div>
     <x-button.circle icon="refresh" positive spinner="report" />
@@ -198,7 +204,7 @@
         </tbody>
       </table>
     </div>
-  @else
+  @elseif($report == 2)
   <div class="flex space-x-2">
     <x-button label="Print" icon="printer" dark sm class="font-bold uppercase"
       @click="printOut($refs.printContainer.outerHTML);" />
@@ -346,6 +352,18 @@
       </tbody>
     </table>
   </div>
+  @elseif($report == 3)
+    @include('reports.loss-in-case')
+  @elseif($report == 4)
+    @include('reports.cancelled-cloa')
+  @elseif($report == 5)
+    @include('reports.exchanged-lot')
+  @elseif($report == 6)
+    @include('reports.free-lot')
+  @elseif($report == 7)
+    @include('reports.compromise-agreement')
+  @elseif($report == 8)
+    @include('reports.darbc-projects')
   @endif
 
 </div>
