@@ -60,11 +60,15 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $total_area;
      public $facility_area;
      public $unutilized_area;
+     public $darbc_other_specify;
+     public $darbc_other;
      //update actual lot
      public $update_land_status;
      public $update_leased_area;
      public $update_darbc_grower;
      public $update_other_area;
+     public $update_darbc_other;
+     public $update_darbc_other_specify;
      public $update_status;
      public $update_remarks;
      public $update_actual_field_number;
@@ -560,6 +564,8 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
             'dolephil_leased' => $this->leased_area,
             'darbc_grower' => $this->darbc_grower,
             'owned_but_not_planted' => $this->other_area,
+            'darbc_other' => $this->darbc_other,
+            'darbc_other_specify' => $this->darbc_other_specify,
             'status' => $this->status,
             'remarks' => $this->remarks,
             'field_number' => $this->actual_field_number,
@@ -692,6 +698,8 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->update_leased_area = null;
         $this->update_darbc_grower = null;
         $this->update_other_area = null;
+        $this->update_darbc_other = null;
+        $this->update_darbc_other_specify = null;
     }
 
     public function mount()
@@ -737,6 +745,8 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->update_leased_area = $actual->dolephil_leased;
         $this->update_darbc_grower = $actual->darbc_grower;
         $this->update_other_area = $actual->owned_but_not_planted;
+        $this->update_darbc_other = $actual->darbc_other;
+        $this->update_darbc_other_specify = $actual->darbc_other_specify;
         $this->update_status = $actual->status;
         $this->update_remarks = $actual->remarks;
         $this->update_actual_field_number = $actual->field_number;
@@ -756,6 +766,8 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->actual_to_update->dolephil_leased = $this->update_leased_area;
         $this->actual_to_update->darbc_grower = $this->update_darbc_grower;
         $this->actual_to_update->owned_but_not_planted = $this->update_other_area;
+        $this->actual_to_update->darbc_other = $this->update_darbc_other;
+        $this->actual_to_update->darbc_other_specify = $this->update_darbc_other_specify;
         $this->actual_to_update->status = $this->update_status;
         $this->actual_to_update->remarks = $this->update_remarks;
         $this->actual_to_update->field_number = $this->update_actual_field_number;
