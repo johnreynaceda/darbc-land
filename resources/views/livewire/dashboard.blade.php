@@ -333,6 +333,105 @@
       </div>
       <div class="mt-5 grid grid-cols-2 gap-5">
         <div>
+            <div class="mt-2 flow-root">
+              <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
+                          OVERALL LAND STATUS</th>
+                        <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                          HECTARES</th>
+
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Loss in Case</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $loss_in_case }}
+                          {{-- ------ --}}
+                        </td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Cancelled CLOA</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{-- {{ App\Models\Actual::sum('darbc_grower') }} --}}
+                          ------
+                        </td>
+                        </td>
+                        </td>
+                      </tr>
+
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Deleted Land</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        {{-- {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }} --}}
+                        ------
+                      </td>
+                      </td>
+                      </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="mt-2 flow-root">
+              <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
+                          STATUS</th>
+                        <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                          HECTARES</th>
+
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Areas Leased by Dolefil</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          {{ App\Models\Actual::sum('dolephil_leased') }}</td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          DARBC Growership</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          {{ App\Models\Actual::sum('darbc_grower') }}</td>
+                        </td>
+                        </td>
+                      </tr>
+
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        FREE LOTS</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }}
+                      </td>
+                      </td>
+                      </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        <div>
           <div class="mt-2 flow-root">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -431,52 +530,10 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="mt-2 flow-root">
-            <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+        <div class="">
 
-                <table class="min-w-full divide-y divide-gray-300">
-                  <thead>
-                    <tr>
-                      <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
-                        STATUS</th>
-                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                        HECTARES</th>
-
-                    </tr>
-                  </thead>
-                  <tbody class="bg-white">
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Areas Leased by Dolefil</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                        {{ App\Models\Actual::sum('dolephil_leased') }}</td>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        DARBC Growership</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                        {{ App\Models\Actual::sum('darbc_grower') }}</td>
-                      </td>
-                      </td>
-                    </tr>
-
-                    <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                      FREE LOTS</td>
-                    <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                      {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }}
-                    </td>
-                    </td>
-                    </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
         </div>
+
         <div>
           <div class="mt-2 flow-root">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">

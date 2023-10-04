@@ -43,6 +43,16 @@ class Dashboard extends Component
     public $uwoc;
     public $title_status;
 
+    //overall land status
+    public $loss_in_case;
+    public $cancelled_cloa;
+    public $deleted_land;
+    public $exchange_lot;
+    public $free_lot;
+    public $compromise_agreement;
+    public $darbc_projects;
+    public $total_deduction_title_area;
+
 
     public function getFileUrl($filename)
     {
@@ -140,6 +150,12 @@ class Dashboard extends Component
         $this->twoc = BasicInformation::where('title_status', 'TWOC')->count();
         $this->uwc = BasicInformation::where('title_status', 'UWC')->count();
         $this->uwoc = BasicInformation::where('title_status', 'UWOC')->count();
+
+
+        //overall land status
+        $this->loss_in_case = BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->sum('title_area');
+        // $this->cancelled_cloa = BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->sum('title_area');
+        // $this->deleted_land = BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->sum('title_area');
     }
 
     public function render()
