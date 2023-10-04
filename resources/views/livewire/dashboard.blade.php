@@ -326,7 +326,8 @@
       <div class="mt-2 text-center">
         <h1 class="text-2xl font-bold font-montserrat text-gray-700">
           @php
-            $total = App\Models\BasicInformation::sum('title_area');
+            $total_area = App\Models\BasicInformation::sum('title_area');
+            $total = $total_area - $total_deduction_title_area;
           @endphp
           {{ number_format($total, 2) }}
         </h1>
@@ -336,7 +337,9 @@
             <div class="mt-2 flow-root">
               <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-
+                    <div class="p-1 bg-gray-100 text-xs text-red-600 font-bold">
+                        <span>TOTAL OVERALL LAND STATUS (LESS) : {{ $total_deduction_title_area }}</span>
+                      </div>
                   <table class="min-w-full divide-y divide-gray-300">
                     <thead>
                       <tr>
@@ -355,27 +358,46 @@
                           {{ $loss_in_case }}
                           {{-- ------ --}}
                         </td>
-                        </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Cancelled CLOA</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{-- {{ App\Models\Actual::sum('darbc_grower') }} --}}
-                          ------
-                        </td>
-                        </td>
+                          {{ $cancelled_cloa }}
+                          {{-- ------ --}}
                         </td>
                       </tr>
 
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Deleted Land</td>
+                        Exchange Lot</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                        {{-- {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }} --}}
-                        ------
+                        {{ $exchange_lot }}
+                        {{-- ------ --}}
                       </td>
-                      </td>
-                      </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Free Lot</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $free_lot }}
+                          {{-- ------ --}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Compromise Agreement</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $compromise_agreement }}
+                          {{-- ------ --}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          DARBC Projects</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $darbc_projects }}
+                          {{-- ------ --}}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
