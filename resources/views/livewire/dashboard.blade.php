@@ -326,7 +326,11 @@
       <div class="mt-2 text-center">
         <h1 class="text-2xl font-bold font-montserrat text-gray-700">
           @php
-            $total_area = App\Models\BasicInformation::sum('title_area');
+            $total_polomolok = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area');
+            $total_tupi = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
+            $total_gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
+            $total_area = $total_polomolok + $total_tupi + $total_gensan;
+            // $total_area = App\Models\BasicInformation::sum('title_area');
             $total = $total_area - $total_deduction_title_area;
           @endphp
           {{ number_format($total, 2) }}
@@ -338,7 +342,7 @@
               <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                     <div class="p-1 bg-gray-100 text-xs text-red-600 font-bold">
-                        <span>TOTAL OVERALL LAND STATUS (LESS) : {{ $total_deduction_title_area }}</span>
+                        <span>TOTAL OVERALL LAND STATUS (LESS) : {{ number_format($total_deduction_title_area, 2) }}</span>
                       </div>
                   <table class="min-w-full divide-y divide-gray-300">
                     <thead>
@@ -461,7 +465,7 @@
                   @php
                     $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area');
                   @endphp
-                  <span>POLOMOLOK AREA: {{ $total }}</span>
+                  <span>POLOMOLOK AREA: {{ number_format($total, 2) }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -564,7 +568,7 @@
                   @php
                     $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
                   @endphp
-                  <span>TUPI AREA: {{ $total }}</span>
+                  <span>TUPI AREA: {{ number_format($total, 2) }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -666,7 +670,7 @@
                   @php
                     $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
                   @endphp
-                  <span>GENSAN AREA: {{ $total }}</span>
+                  <span>GENSAN AREA: {{ number_format($total, 2) }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
