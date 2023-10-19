@@ -2,34 +2,37 @@
 
 namespace App\Http\Livewire\Admin;
 
-use Livewire\Component;
+use DB;
+use Carbon\Carbon;
+use App\Models\Tax;
+use Filament\Forms;
 use Filament\Tables;
+use App\Models\Actual;
+use Livewire\Component;
+use WireUi\Traits\Actions;
+use App\Models\TaxReceiptImage;
+use App\Models\BasicInformation;
+use Illuminate\Support\HtmlString;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\Layout;
 use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Wizard;
+use Filament\Tables\Actions\Position;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use App\Models\BasicInformation;
-use Filament\Tables\Columns\TextColumn;
-use WireUi\Traits\Actions;
-use Filament\Tables\Actions\Action;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Actual;
-use App\Models\Tax;
-use App\Models\TaxReceiptImage;
-use Filament\Tables\Actions\Position;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
-use Illuminate\Support\HtmlString;
-use Carbon\Carbon;
-use DB;
 
 class Masterlist extends Component implements Tables\Contracts\HasTable
 {
@@ -193,6 +196,46 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     protected function getTableQuery(): Builder
     {
         return BasicInformation::query();
+    }
+
+    protected function getTableFiltersLayout(): ?string
+    {
+        return Layout::AboveContent;
+    }
+
+    protected function getTableFilters(): array
+    {
+        return [
+            Filter::make('deleted')
+            ->form([
+                Forms\Components\Select::make('is_deleted')
+                ->options([
+                        true => 'Deleted',
+                        false => 'Active',
+                    ])->default(false)
+                    ->label('Filter'),
+            ])
+            ->query(function (Builder $query, array $data): Builder {
+                if ($data['is_deleted'] == true) {
+                        $query->where('is_deleted', true);
+                } else {
+                        $query->where('is_deleted', false);
+                }
+                return $query;
+            }),
+            // Filter::make('is_deleted')
+            // ->default(false)
+            // ->toggle()
+            // ->label('Deleted')
+            // ->query(function (Builder $query, $state): Builder {
+            //     if($state)
+            //     {
+            //         return $query->where('is_deleted', true);
+            //     }else{
+            //         return $query->where('is_deleted', false);
+            //     }
+            // })
+        ];
     }
 
 
@@ -367,7 +410,24 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
             ->outlined()
             ->color('warning')
             ->icon('heroicon-o-eye')
-            ->url(fn (BasicInformation $record): string => route('masterlist-data', $record)),
+            ->url(fn (BasicInformation $record): string => route('masterlist-data', $record))
+            ->visible(fn ($record) => $record->is_deleted == false),
+            Action::make('restore')
+            ->label('Restore')
+            ->button()
+            ->outlined()
+            ->color('success')
+            ->icon('heroicon-o-refresh')
+            ->visible(fn ($record) => $record->is_deleted == true)
+            ->action(function ($record) {
+                $record->is_deleted = false;
+                $record->save();
+                $this->dialog()->success(
+                    $title = 'Success',
+                    $description = 'Data successfully restored'
+                );
+            })
+            ->requiresConfirmation(),
         ];
     }
 

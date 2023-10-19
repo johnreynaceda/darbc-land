@@ -2,7 +2,10 @@
     <div>
         <div class="flex justify-between py-2">
             <x-button label="Back" class="font-bold" icon="arrow-left" emerald wire:click="returnToMasterlist" />
-            <x-button label="PRINT" class="font-bold" icon="printer" dark @click="printOut($refs.printContainer.outerHTML);" />
+            <div class="flex space-x-4">
+                <x-button label="PRINT" class="font-bold" icon="printer" dark @click="printOut($refs.printContainer.outerHTML);" />
+                <x-button label="DELETE" class="font-bold" icon="trash" red  wire:click="deleteLand({{$record->id}})" />
+            </div>
         </div>
         <div x-ref="printContainer" >
             <div class="grid grid-cols-1">

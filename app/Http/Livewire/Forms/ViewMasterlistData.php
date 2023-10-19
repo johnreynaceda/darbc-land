@@ -25,6 +25,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     use Tables\Concerns\InteractsWithTable;
     use Actions;
     public $record;
+    public $record_delete;
     public $informationId;
     public $basicInfo;
     public $encumbered;
@@ -1025,6 +1026,30 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
             $description = 'Data successfully updated'
         );
         return redirect()->route('masterlist-data', $this->record);
+    }
+
+    public function deleteLand($record)
+    {
+        $this->record_delete = BasicInformation::where('id', $record)->first();
+        $this->dialog()->confirm([
+            'title'       => 'Are you Sure?',
+            'description' => 'Delete this land information?',
+            'acceptLabel' => 'Yes, delete it',
+            'icon'        => 'error',
+            'method'      => 'confirmDeleteLand',
+            'params'      => 'Saved',
+        ]);
+    }
+
+    public function confirmDeleteLand()
+    {
+        $this->record_delete->is_deleted = 1;
+        $this->record_delete->save();
+        $this->dialog()->success(
+            $title = 'Success',
+            $description = 'Data successfully deleted'
+        );
+        return redirect()->route('masterlist');
     }
 
     public function render()
