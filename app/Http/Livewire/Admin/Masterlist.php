@@ -231,26 +231,11 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     ->label('Status'),
             ])
             ->query(function (Builder $query, array $data): Builder {
-                switch($data['status_id'])
+                if($data['status_id'])
                 {
-                    case 1:
-                        $query->where('status_id', 1);
-                        break;
-                    case 2:
-                        $query->where('status_id', 2);
-                        break;
-                    case 3:
-                        $query->where('status_id', 3);
-                        break;
-                    case 4:
-                        $query->where('status_id', 4);
-                        break;
-                    case 5:
-                        $query->where('status_id', 5);
-                        break;
-                    case 6:
-                        $query->where('status_id', 6);
-                        break;
+                    $query->where('status_id', $data['status_id']);
+                }else{
+                    $query->get();
                 }
                 return $query;
             }),

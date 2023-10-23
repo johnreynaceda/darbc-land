@@ -410,7 +410,7 @@
             </div>
           </div>
           <div>
-            <div class="mt-2 flow-root">
+            <div class="mt-8 flow-root">
               <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
 
@@ -429,7 +429,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Areas Leased by Dolefil</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ App\Models\Actual::sum('dolephil_leased') }}</td>
+                          {{ App\Models\Actual::sum('dolephil_leased') }}
                         </td>
                       </tr>
                       <tr>
@@ -438,16 +438,48 @@
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
                           {{ App\Models\Actual::sum('darbc_grower') }}</td>
                         </td>
+                      </tr>
+                    <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Livelihood Program</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          {{ App\Models\BasicInformation::where('status_id', 7)->sum('title_area') }}
                         </td>
                       </tr>
-
-                      {{-- <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        FREE LOTS</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                        {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }}
-                      </td> --}}
-                      </td>
-                      </td>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Facility</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                           {{ App\Models\BasicInformation::where('status_id', 8)->sum('title_area') }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          UNPLANTED<small>(AGREED WITH DAR, DARBC & DOLE)</small></td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          {{ App\Models\BasicInformation::where('status_id', 9)->sum('title_area') }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Additional Lot</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                           {{ App\Models\BasicInformation::where('status_id', 10)->sum('title_area') }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Deleted Area as Planted Pineapple</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                           {{ App\Models\BasicInformation::where('status_id', 11)->sum('title_area') }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          DARBC Quarry</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                           {{ App\Models\BasicInformation::where('status_id', 12)->sum('title_area') }}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
