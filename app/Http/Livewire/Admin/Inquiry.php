@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire\Admin;
 
-use Livewire\Component;
 use Filament\Tables;
+use App\Models\Sample;
+use App\Models\Status;
+use Livewire\Component;
+use App\Models\BasicInformation;
 use Illuminate\Contracts\View\View;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use App\Models\Sample;
-use Filament\Tables\Columns\TextColumn;
-use App\Models\BasicInformation;
 
 class Inquiry extends Component implements Tables\Contracts\HasTable
 {
@@ -21,6 +22,8 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     public $selected_columns = [];
     public $title_filter;
     public $dataToExport;
+    public $basic_statuses;
+    public $selected_status = [];
     public $search = '';
     public $filters = [
         'number' => null,
@@ -89,6 +92,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
 
     public function mount()
     {
+        $this->basic_statuses = Status::all();
         $this->selected_columns = ['lot_number', 'survey_number', 'title_area', 'awarded_area',
         'location', 'municipality', 'cloa_number', 'previous_copy_of_title_number'];
     }
@@ -115,6 +119,14 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
 
     if (!empty($this->title_types)) {
         $query->whereIn('previous_copy_of_title->type of title', $this->title_types);
+    }
+
+    if(!empty($this->selected_status)){
+        //where basic_status relationship is equal to selected status
+        $query->whereHas('basic_status', function ($query) {
+            $query->whereIn('id', $this->selected_status);
+        });
+        // $query->whereIn('status', $this->selected_status);
     }
 
     if (!empty($this->title_filter) && !empty($this->search)) {
@@ -181,7 +193,9 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 $query->where('remarks', 'LIKE', '%' . $this->search . '%');
                 break;
             case 'status':
-                $query->where('status', 'LIKE', '%' . $this->search . '%');
+                $query->whereHas('basic_status', function ($query) {
+                    $query->where('name', 'LIKE', '%' . $this->search . '%');
+                });
                 break;
             case 'land_bank_amortization':
                 $query->where('land_bank_amortization', 'LIKE', '%' . $this->search . '%');

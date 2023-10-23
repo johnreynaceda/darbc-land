@@ -178,7 +178,7 @@
               <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->page_number ?? '' }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->title_status ?? '' }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->title_area ?? '' }}</td>
-              <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->status ?? '' }}</td>
+              <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->basic_status == null ? '' : $item->basic_information->basic_status->name }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->dolephil_leased }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->darbc_grower }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->owned_but_not_planted }}</td>

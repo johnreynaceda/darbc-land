@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Components;
 
 use Filament\Forms;
 use App\Models\BasicInformation;
+use App\Models\Status;
 use WireUi\Traits\Actions;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\TextInput;
@@ -15,6 +16,8 @@ use Filament\Forms\Components\DatePicker;
 use Illuminate\Support\HtmlString;
 use Livewire\Component;
 use DB;
+use Filament\Forms\Components\Select;
+
 class AddLot extends Component implements Forms\Contracts\HasForms
 {
     use Forms\Concerns\InteractsWithForms;
@@ -102,9 +105,9 @@ class AddLot extends Component implements Forms\Contracts\HasForms
                             ])->columns(3),
                             Card::make()
                             ->schema([
-                            TextArea::make('_remarks')->label('Remarks'),
-                            TextArea::make('_status')->label('Status'),
-                            ])->columns(2),
+                                Select::make('_status')->label('Status')->options(Status::all()->pluck('name', 'id')->toArray()),
+                                TextInput::make('_remarks')->label('Remarks'),
+                            ])->columns(1),
                     ])->label('Step 3'),
                 Wizard\Step::make('step_4')
                     ->schema([
@@ -134,6 +137,7 @@ class AddLot extends Component implements Forms\Contracts\HasForms
         ]);
         DB::beginTransaction();
         BasicInformation::create([
+            'status_id' => $this->_status,
             'number' => $this->_number,
             'lot_number' => $this->_lot_number,
             'survey_number' => $this->_survey_number,
@@ -152,7 +156,7 @@ class AddLot extends Component implements Forms\Contracts\HasForms
             'title_copy' => $this->_title_copy,
             'tax_dec_number' => $this->_tax_dec_number,
             'remarks' => $this->_remarks,
-            'status' => $this->_status,
+            // 'status' => $this->_status,
             'land_bank_amortization' => $this->_land_bank_amortization,
             'amount' => $this->_amount,
             'date_paid' => \Carbon\Carbon::parse($this->_date_paid)->format(

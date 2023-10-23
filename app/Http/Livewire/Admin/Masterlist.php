@@ -8,6 +8,7 @@ use App\Models\Tax;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Actual;
+use App\Models\Status;
 use Livewire\Component;
 use WireUi\Traits\Actions;
 use App\Models\TaxReceiptImage;
@@ -213,7 +214,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                         true => 'Deleted',
                         false => 'Active',
                     ])->default(false)
-                    ->label('Filter'),
+                    ->label('Filter Deleted'),
             ])
             ->query(function (Builder $query, array $data): Builder {
                 if ($data['is_deleted'] == true) {
@@ -223,18 +224,36 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 }
                 return $query;
             }),
-            // Filter::make('is_deleted')
-            // ->default(false)
-            // ->toggle()
-            // ->label('Deleted')
-            // ->query(function (Builder $query, $state): Builder {
-            //     if($state)
-            //     {
-            //         return $query->where('is_deleted', true);
-            //     }else{
-            //         return $query->where('is_deleted', false);
-            //     }
-            // })
+            Filter::make('status')
+            ->form([
+                Forms\Components\Select::make('status_id')
+                ->options(Status::pluck('name', 'id')->toArray())
+                    ->label('Status'),
+            ])
+            ->query(function (Builder $query, array $data): Builder {
+                switch($data['status_id'])
+                {
+                    case 1:
+                        $query->where('status_id', 1);
+                        break;
+                    case 2:
+                        $query->where('status_id', 2);
+                        break;
+                    case 3:
+                        $query->where('status_id', 3);
+                        break;
+                    case 4:
+                        $query->where('status_id', 4);
+                        break;
+                    case 5:
+                        $query->where('status_id', 5);
+                        break;
+                    case 6:
+                        $query->where('status_id', 6);
+                        break;
+                }
+                return $query;
+            }),
         ];
     }
 
@@ -621,7 +640,9 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 ->label('REMARKS')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('status')
+                // Tables\Columns\SelectColumn::make('status_id')
+                // ->options(Status::pluck('name', 'id')),
+            TextColumn::make('basic_status.name')
                 ->label('STATUS')
                 ->searchable()
                 ->sortable(),

@@ -11,6 +11,7 @@ use App\Models\BasicInformation;
 use App\Models\Actual;
 use App\Models\Tax;
 use App\Models\Attachment;
+use App\Models\Status;
 use App\Models\TaxReceiptImage;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Support\HtmlString;
@@ -27,6 +28,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $record;
     public $record_delete;
     public $informationId;
+    public $all_status;
     public $basicInfo;
     public $encumbered;
     public $previous_copy_of_title;
@@ -98,6 +100,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $encumberd_area;
      public $encumbered_variance;
      public $basic_remarks;
+     public $basic_status_id;
      public $basic_status;
 
      //update labndbank
@@ -705,6 +708,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
 
     public function mount()
     {
+        $this->all_status = Status::all();
         $this->tax_year = Tax::where('year', '!=', '')
         ->groupBy('year')
         ->pluck('year')
@@ -957,7 +961,9 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->encumberd_area = $area;
         $this->encumbered_variance = $variance;
         $this->basic_remarks = $this->record->remarks;
-        $this->basic_status = $this->record->status;
+        $this->basic_status_id = $this->record->status_id;
+
+        // $this->basic_status = $this->record->status;
         $this->updateBasicInfoModal = true;
     }
 
@@ -988,7 +994,13 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->record->previous_copy_of_title = $previous_copy_of_title;
         $this->record->title_status = $this->title_status;
         $this->record->remarks = $this->basic_remarks;
-        $this->record->status = $this->basic_status;
+        if($this->basic_status_id == "")
+        {
+            $this->record->status_id = null;
+        }else{
+            $this->record->status_id = $this->basic_status_id;
+        }
+        // $this->record->status = $this->basic_status;
         $this->record->save();
         DB::commit();
         $this->dialog()->success(

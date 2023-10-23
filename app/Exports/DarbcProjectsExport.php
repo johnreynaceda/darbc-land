@@ -15,7 +15,7 @@ class DarbcProjectsExport implements FromView
     public function view(): View
     {
         return view('admin.report.darbc-projects', [
-            'darbc_projects' => BasicInformation::where('remarks', 'LIKE','%DARBC Real Estate Project%')->get(),
+            'darbc_projects' => BasicInformation::where('status_id', 6)->get(),
         ]);
     }
 }

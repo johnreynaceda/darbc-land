@@ -15,7 +15,7 @@ class FreeLotExport implements FromView
     public function view(): View
     {
         return view('admin.report.free-lot', [
-            'free_lot' => BasicInformation::where('remarks', 'LIKE','%Free Lot%')->get(),
+            'free_lot' => BasicInformation::where('status_id', 4)->get(),
         ]);
     }
 }

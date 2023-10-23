@@ -15,12 +15,12 @@ class Report extends Component
         return view('livewire.admin.report', [
             'actuals' => Actual::get(),
             'tax' => Tax::get(),
-            'loss_in_case' => BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->get(),
-            'cancelled_cloa' => BasicInformation::where('status', 'LIKE','%Cancelled CLOA%')->get(),
-            'exchange_lot' => BasicInformation::where('remarks', 'LIKE','%Exchange Lot%')->get(),
-            'free_lot' => BasicInformation::where('remarks', 'LIKE','%Free Lot%')->get(),
-            'compromise_agreement' => BasicInformation::where('remarks', 'LIKE','%Compromise Agreement%')->get(),
-            'darbc_projects' => BasicInformation::where('remarks', 'LIKE','%DARBC Real Estate Project%')->get(),
+            'loss_in_case' => BasicInformation::where('status_id', 1)->get(),
+            'cancelled_cloa' => BasicInformation::where('status_id', 2)->get(),
+            'exchange_lot' => BasicInformation::where('status_id', 3)->get(),
+            'free_lot' => BasicInformation::where('status_id', 4)->get(),
+            'compromise_agreement' => BasicInformation::where('status_id', 5)->get(),
+            'darbc_projects' => BasicInformation::where('status_id', 6)->get(),
         ]);
     }
 

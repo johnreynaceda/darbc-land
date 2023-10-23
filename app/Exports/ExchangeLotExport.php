@@ -15,7 +15,7 @@ class ExchangeLotExport implements FromView
     public function view(): View
     {
         return view('admin.report.exchange-lot', [
-            'exchange_lot' => BasicInformation::where('remarks', 'LIKE','%Exchange Lot%')->get(),
+            'exchange_lot' => BasicInformation::where('status_id', 3)->get(),
         ]);
     }
 }

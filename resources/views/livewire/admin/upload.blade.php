@@ -1,4 +1,5 @@
 <div>
+    <x-button label="Reset"  dark sm wire:click="resetRemarks"/>
     <div class="border p-2">
         <h1>Basic Information</h1>
         <input type="file" wire:model="basic_information" />

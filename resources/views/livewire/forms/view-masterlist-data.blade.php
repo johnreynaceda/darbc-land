@@ -160,8 +160,8 @@
                   {{-- <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$basicInfo->title_status == null ? '--' : $basicInfo->title_status}}</span> --}}
                 </div>
                 <div class="flex col-span-2 items-center">
-                  <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">STATUS:</span>
-                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$basicInfo->status == null ? '--' : $basicInfo->status}}</span>
+                  <span class="rounded-l-sm text-2xs bg-gray-100 font-bold border px-2 w-40 py-2">STATUS :</span>
+                  <span class="flex-1 text-xs text-center bg-green-100 border py-2">{{$basicInfo->status_id == null ? '--' : $basicInfo->basic_status->name}}</span>
                 </div>
               </div>
               <div class="mt-0 5">
@@ -1404,9 +1404,15 @@
               <x-input label="Previous Title Number" placeholder="" wire:model.defer="prev_title_no" />
               <x-input label="Encumbered (Area)" placeholder="" wire:model.defer="encumberd_area" />
               <x-input label="Encumbered (Variance)" placeholder="" wire:model.defer="encumbered_variance" />
-              <x-textarea label="Remarks" placeholder="" wire:model.defer="basic_remarks" />
-              <x-textarea label="Status" placeholder="" wire:model.defer="basic_status" />
             </div>
+            <x-textarea label="Remarks" placeholder="" wire:model.defer="basic_remarks" />
+            <x-native-select label="Status" wire:model="basic_status_id">
+                <option value="">Select one</option>
+                @foreach ($all_status as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+                @endforeach
+            </x-native-select>
+            {{-- <x-textarea label="Status" placeholder="" wire:model.defer="basic_status" /> --}}
           </div>
 
           <x-slot name="footer">

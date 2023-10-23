@@ -214,6 +214,13 @@
             <x-select.option label="OCT" value="OCT" />
         </x-select>
         </div>
+        <div class="{{in_array('status', $selected_columns) ? '' : 'hidden'}} col-span-1">
+            <x-select label="Select Status" multiselect placeholder="All" wire:model="selected_status">
+            @foreach ($basic_statuses as $item)
+            <x-select.option label="{{$item->name}}" value="{{$item->id}}" />
+            @endforeach
+        </x-select>
+        </div>
 
         <div class="col-span-1 col-start-5">
             <div class="flex space-x-3">
@@ -1088,7 +1095,7 @@
                     @endif
 
                     @if ($filters['status'] != false && $filters['status'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->status }}
+                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->basic_status == null ? '---': $record->basic_status->name }}
                       </td>
                     @endif
                     @if ($filters['land_bank_amortization'] != false && $filters['land_bank_amortization'] != null)

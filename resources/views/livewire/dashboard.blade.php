@@ -441,11 +441,11 @@
                         </td>
                       </tr>
 
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                      {{-- <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         FREE LOTS</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
                         {{ App\Models\Actual::where('dolephil_leased', '=', '')->where('darbc_grower', '=', '')->count() }}
-                      </td>
+                      </td> --}}
                       </td>
                       </td>
                       </tr>

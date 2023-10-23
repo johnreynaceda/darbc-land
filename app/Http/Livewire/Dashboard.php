@@ -153,12 +153,12 @@ class Dashboard extends Component
 
 
         //overall land status
-        $this->loss_in_case = BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->sum('title_area');
-        $this->cancelled_cloa = BasicInformation::where('status', 'LIKE','%Cancelled CLOA%')->sum('title_area');
-        $this->exchange_lot = BasicInformation::where('remarks', 'LIKE','%Exchange Lot%')->sum('title_area');
-        $this->free_lot = BasicInformation::where('remarks', 'LIKE','%Free Lot%')->sum('title_area');
-        $this->compromise_agreement = BasicInformation::where('remarks', 'LIKE','%Compromise Agreement%')->sum('title_area');
-        $this->darbc_projects = BasicInformation::where('remarks', 'LIKE','%DARBC Real Estate Project%')->sum('title_area');
+        $this->loss_in_case = BasicInformation::where('status_id', 1)->sum('title_area');
+        $this->cancelled_cloa = BasicInformation::where('status_id', 2)->sum('title_area');
+        $this->exchange_lot = BasicInformation::where('status_id', 3)->sum('title_area');
+        $this->free_lot = BasicInformation::where('status_id', 4)->sum('title_area');
+        $this->compromise_agreement = BasicInformation::where('status_id', 5)->sum('title_area');
+        $this->darbc_projects = BasicInformation::where('status_id', 6)->sum('title_area');
         $this->total_deduction_title_area = $this->loss_in_case + $this->cancelled_cloa + $this->exchange_lot + $this->free_lot
         + $this->compromise_agreement + $this->darbc_projects;
         // $this->deleted_land = BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->sum('title_area');

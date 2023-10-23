@@ -15,7 +15,7 @@ class CompromiseAgreementExport implements FromView
     public function view(): View
     {
         return view('admin.report.compromise-agreement', [
-            'compromise_agreement' => BasicInformation::where('remarks', 'LIKE','%Compromise Agreement%')->get(),
+            'compromise_agreement' => BasicInformation::where('status_id', 5)->get(),
         ]);
     }
 }

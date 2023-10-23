@@ -15,7 +15,7 @@ class LossInCaseExport implements FromView
     public function view(): View
     {
         return view('admin.report.loss-in-case', [
-            'loss_in_case' => BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->get(),
+            'loss_in_case' => BasicInformation::where('status_id', 1)->get(),
         ]);
     }
 }

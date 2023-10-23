@@ -32,4 +32,9 @@ class BasicInformation extends Model
     {
         return $this->hasMany(Actual::class, 'basic_information_id');
     }
+
+    public function basic_status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
 }

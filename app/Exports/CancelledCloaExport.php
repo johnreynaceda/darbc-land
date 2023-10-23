@@ -15,7 +15,7 @@ class CancelledCloaExport implements FromView
     public function view(): View
     {
         return view('admin.report.cancelled-cloa', [
-            'cancelled_cloa' => BasicInformation::where('status', 'LIKE','%Cancelled CLOA%')->get(),
+            'cancelled_cloa' => BasicInformation::where('status_id', 2)->get(),
         ]);
     }
 }

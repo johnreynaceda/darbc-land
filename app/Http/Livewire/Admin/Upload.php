@@ -27,6 +27,11 @@ class Upload extends Component
         return view('livewire.admin.upload');
     }
 
+    public function resetRemarks()
+    {
+        BasicInformation::query()->update(['remarks' => null]);
+    }
+
     public function uploadBasicInformation(){
 
         $csvContents = Storage::get($this->basic_information->getClientOriginalName());
