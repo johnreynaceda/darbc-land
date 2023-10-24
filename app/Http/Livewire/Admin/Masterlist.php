@@ -513,12 +513,13 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
 
                 }),
             TextColumn::make('lot_number')
-                ->label('LOT NO.')
-                ->searchable()
+                ->label('LOT NO.‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ')
+                ->searchable(isIndividual: true, isGlobal: false)
                 ->sortable(),
             TextColumn::make('survey_number')
                 ->label('SURVEY NO.')
                 ->searchable()
+                ->toggleable()
                 ->sortable(),
             TextColumn::make('title_area')
                 ->label('TITLE AREA')
