@@ -338,79 +338,7 @@
       </div>
       <div class="mt-5 grid grid-cols-2 gap-5">
         <div>
-            <div class="mt-2 flow-root">
-              <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="p-1 bg-gray-100 text-xs text-red-600 font-bold">
-                        <span>TOTAL OVERALL LAND STATUS (LESS) : {{ number_format($total_deduction_title_area, 2) }}</span>
-                      </div>
-                  <table class="min-w-full divide-y divide-gray-300">
-                    <thead>
-                      <tr>
-                        <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
-                          OVERALL LAND STATUS</th>
-                        <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
-                          HECTARES</th>
-
-                      </tr>
-                    </thead>
-                    <tbody class="bg-white">
-                      <tr>
-                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                          Loss in Case</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $loss_in_case }}
-                          {{-- ------ --}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                          Cancelled CLOA</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $cancelled_cloa }}
-                          {{-- ------ --}}
-                        </td>
-                      </tr>
-
-                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                        Exchange Lot</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                        {{ $exchange_lot }}
-                        {{-- ------ --}}
-                      </td>
-                      </tr>
-                      <tr>
-                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                          Free Lot</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $free_lot }}
-                          {{-- ------ --}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                          Compromise Agreement</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $compromise_agreement }}
-                          {{-- ------ --}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
-                          DARBC Projects</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $darbc_projects }}
-                          {{-- ------ --}}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="mt-8 flow-root">
+            <div class="flow-root">
               <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
 
@@ -488,16 +416,93 @@
             </div>
           </div>
 
+        <div>
+            <div class="mt-2 flow-root">
+              <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="p-1 bg-gray-100 text-xs text-red-600 font-bold">
+                        <span>TOTAL OVERALL LAND STATUS (LESS) : {{ number_format($total_deduction_title_area, 2) }}</span>
+                      </div>
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
+                          OVERALL LAND STATUS</th>
+                        <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                          HECTARES</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Loss in Case</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $loss_in_case }}
+                          {{-- ------ --}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Cancelled CLOA</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $cancelled_cloa }}
+                          {{-- ------ --}}
+                        </td>
+                      </tr>
+
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Exchange Lot</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        {{ $exchange_lot }}
+                        {{-- ------ --}}
+                      </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Free Lot</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $free_lot }}
+                          {{-- ------ --}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Compromise Agreement</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $compromise_agreement }}
+                          {{-- ------ --}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          DARBC Projects</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $darbc_projects }}
+                          {{-- ------ --}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
         <div>
           <div class="mt-2 flow-root">
+            <div class="text-center font-semibold text-lg">
+                <span class="text-center mx-auto underline">AWARDED LOT</span>
+            </div>
+
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="p-1 bg-gray-100 text-xs font-bold">
-                  @php
+                  {{-- @php
                     $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area');
-                  @endphp
-                  <span>POLOMOLOK AREA: {{ number_format($total, 2) }}</span>
+                  @endphp --}}
+                  <span>POLOMOLOK AREA: {{ number_format($total_polomolok, 2) }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -588,19 +593,131 @@
             </div>
           </div>
         </div>
-        <div class="">
 
-        </div>
+       <div>
+            <div class="mt-2 flow-root">
+                <div class="text-center font-semibold text-lg">
+                    <span class="text-center mx-auto underline">ACTUAL LOT</span>
+                </div>
+              <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="p-1 bg-gray-100 text-xs text-red-600 font-bold">
+                        <span>TOTAL LAND STATUS (LESS) : {{ number_format($total_deduction_title_area_polomolok, 2) }}</span>
+                      </div>
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
+                          OVERALL LAND STATUS</th>
+                        <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                          HECTARES</th>
+                          <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">
+                            NO. OF LOTS</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Loss in Case</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $polomolok_loss_in_case }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $polomolok_loss_in_case_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->where('status_id', 1)
+                            ->count();
+                      @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_loss_in_case_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Cancelled CLOA</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $polomolok_cancelled_cloa }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $polomolok_cancelled_cloa_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->where('status_id', 2)
+                            ->count();
+                      @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_cancelled_cloa_lots }}</td>
+                      </tr>
+
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Exchange Lot</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        {{ $polomolok_exchange_lot }}
+                        {{-- ------ --}}
+                      </td>
+                      @php
+                      $polomolok_exchange_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')
+                          ->where('status_id', 3)
+                          ->count();
+                     @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_exchange_lot_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Free Lot</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $polomolok_free_lot }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $polomolok_free_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->where('status_id', 4)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_free_lot_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Compromise Agreement</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $polomolok_compromise_agreement }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $polomolok_compromise_agreement_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->where('status_id', 5)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_compromise_agreement_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          DARBC Projects</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $polomolok_darbc_projects }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $polomolok_darbc_projects_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')
+                            ->where('status_id', 6)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_darbc_projects_lots }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
         <div>
           <div class="mt-2 flow-root">
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="p-1 bg-gray-100 text-xs font-bold">
-                  @php
+                  {{-- @php
                     $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
-                  @endphp
-                  <span>TUPI AREA: {{ number_format($total, 2) }}</span>
+                  @endphp --}}
+                  <span>TUPI AREA: {{ number_format($total_tupi, 2) }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -611,7 +728,6 @@
                         HECTARES</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                       </th>
-
                     </tr>
                   </thead>
                   <tbody class="bg-white">
@@ -692,6 +808,116 @@
           </div>
         </div>
         <div>
+
+            <div>
+                <div class="mt-2 flow-root">
+                  <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                        <div class="p-1 bg-gray-100 text-xs text-red-600 font-bold">
+                            <span>TOTAL OVERALL LAND STATUS (LESS) : {{ number_format($total_deduction_title_area_tupi, 2) }}</span>
+                          </div>
+                      <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                          <tr>
+                            <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
+                              OVERALL LAND STATUS</th>
+                            <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                              HECTARES</th>
+                              <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                          <tr>
+                            <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                              Loss in Case</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              {{ $tupi_loss_in_case }}
+                              {{-- ------ --}}
+                            </td>
+                            @php
+                            $tupi_loss_in_case_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                ->where('status_id', 1)
+                                ->count();
+                           @endphp
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_loss_in_case_lots }}</td>
+                          </tr>
+                          <tr>
+                            <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                              Cancelled CLOA</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              {{ $tupi_cancelled_cloa }}
+                              {{-- ------ --}}
+                            </td>
+                            @php
+                            $tupi_cancelled_cloa_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                ->where('status_id', 2)
+                                ->count();
+                           @endphp
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_cancelled_cloa_lots }}</td>
+                          </tr>
+
+                          <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                            Exchange Lot</td>
+                          <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                            {{ $tupi_exchange_lot }}
+                            {{-- ------ --}}
+                          </td>
+                          @php
+                          $tupi_exchange_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                              ->where('status_id', 3)
+                              ->count();
+                         @endphp
+                          <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_exchange_lot_lots }}</td>
+                          </tr>
+                          <tr>
+                            <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                              Free Lot</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              {{ $tupi_free_lot }}
+                              {{-- ------ --}}
+                            </td>
+                            @php
+                            $tupi_free_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                ->where('status_id', 4)
+                                ->count();
+                           @endphp
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_free_lot_lots }}</td>
+                          </tr>
+                          <tr>
+                            <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                              Compromise Agreement</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              {{ $tupi_compromise_agreement }}
+                              {{-- ------ --}}
+                            </td>
+                            @php
+                            $tupi_compromise_agreement_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                ->where('status_id', 5)
+                                ->count();
+                           @endphp
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_compromise_agreement_lots }}</td>
+                          </tr>
+                          <tr>
+                            <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                              DARBC Projects</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              {{ $tupi_darbc_projects }}
+                              {{-- ------ --}}
+                            </td>
+                            @php
+                            $tupi_darbc_projects_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                ->where('status_id', 6)
+                                ->count();
+                           @endphp
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_darbc_projects_lots }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
         </div>
         <div>
@@ -699,10 +925,10 @@
             <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="p-1 bg-gray-100 text-xs font-bold">
-                  @php
+                  {{-- @php
                     $total = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
-                  @endphp
-                  <span>GENSAN AREA: {{ number_format($total, 2) }}</span>
+                  @endphp --}}
+                  <span>GENSAN AREA: {{ number_format($total_gensan, 2) }}</span>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
@@ -792,6 +1018,127 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div>
+            <div class="mt-2 flow-root">
+              <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="p-1 bg-gray-100 text-xs text-red-600 font-bold">
+                        <span>TOTAL OVERALL LAND STATUS (LESS) : {{ number_format($total_deduction_title_area_gensan, 2) }}</span>
+                      </div>
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
+                          OVERALL LAND STATUS</th>
+                        <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                          HECTARES</th>
+                          <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Loss in Case</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $gensan_loss_in_case }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $gensan_loss_in_case_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
+                            ->where('status_id', 1)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_loss_in_case_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Cancelled CLOA</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $gensan_cancelled_cloa }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $gensan_cancelled_cloa_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
+                            ->where('status_id', 2)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_cancelled_cloa_lots }}</td>
+                      </tr>
+
+                      <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                        Exchange Lot</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        {{ $gensan_exchange_lot }}
+                        {{-- ------ --}}
+                      </td>
+                      @php
+                      $gensan_exchange_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
+                          ->where('status_id', 3)
+                          ->count();
+                     @endphp
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_exchange_lot_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Free Lot</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $gensan_free_lot }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $gensan_free_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
+                            ->where('status_id', 4)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_free_lot_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          Compromise Agreement</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $gensan_compromise_agreement }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $gensan_compromise_agreement_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
+                            ->where('status_id', 5)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_compromise_agreement_lots }}</td>
+                      </tr>
+                      <tr>
+                        <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
+                          DARBC Projects</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          {{ $gensan_darbc_projects }}
+                          {{-- ------ --}}
+                        </td>
+                        @php
+                        $gensan_darbc_projects_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
+                            ->where('status_id', 6)
+                            ->count();
+                       @endphp
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_darbc_projects_lots }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          @php
+            $total_awarded_lot = $total_polomolok + $total_tupi + $total_gensan;
+          @endphp
+          <div class="text-left font-semibold text-sm">
+            <span class="text-center mx-auto">TOTAL AWARDED LOT (HECTARES) : {{number_format($total_awarded_lot, 2)}}</span>
+        </div>
+        @php
+            $total_actual_lot = $total_deduction_title_area_polomolok + $total_deduction_title_area_tupi + $total_deduction_title_area_gensan;
+        @endphp
+        <div class="text-left font-semibold text-sm">
+            <span class="text-center mx-auto ">TOTAL ACTUAL LOT (HECTARES) : {{number_format($total_actual_lot, 2)}}</span>
         </div>
       </div>
     </div>

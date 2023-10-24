@@ -31,8 +31,11 @@ class Dashboard extends Component
     //Municipality
     public $showMunicipalitySummaryModal = false;
     public $polomolok;
+    public $total_polomolok;
     public $tupi;
+    public $total_tupi;
     public $gensan;
+    public $total_gensan;
     public $municipality_type;
 
     //Title Status
@@ -52,6 +55,31 @@ class Dashboard extends Component
     public $compromise_agreement;
     public $darbc_projects;
     public $total_deduction_title_area;
+
+    //per municipality
+    public $polomolok_loss_in_case;
+    public $polomolok_cancelled_cloa;
+    public $polomolok_exchange_lot;
+    public $polomolok_free_lot;
+    public $polomolok_compromise_agreement;
+    public $polomolok_darbc_projects;
+    public $total_deduction_title_area_polomolok;
+
+    public $tupi_loss_in_case;
+    public $tupi_cancelled_cloa;
+    public $tupi_exchange_lot;
+    public $tupi_free_lot;
+    public $tupi_compromise_agreement;
+    public $tupi_darbc_projects;
+    public $total_deduction_title_area_tupi;
+
+    public $gensan_loss_in_case;
+    public $gensan_cancelled_cloa;
+    public $gensan_exchange_lot;
+    public $gensan_free_lot;
+    public $gensan_compromise_agreement;
+    public $gensan_darbc_projects;
+    public $total_deduction_title_area_gensan;
 
 
     public function getFileUrl($filename)
@@ -161,6 +189,41 @@ class Dashboard extends Component
         $this->darbc_projects = BasicInformation::where('status_id', 6)->sum('title_area');
         $this->total_deduction_title_area = $this->loss_in_case + $this->cancelled_cloa + $this->exchange_lot + $this->free_lot
         + $this->compromise_agreement + $this->darbc_projects;
+
+        //polomolok area total
+        $this->total_polomolok = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area');
+        $this->polomolok_loss_in_case = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->where('status_id', 1)->sum('title_area');
+        $this->polomolok_cancelled_cloa = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->where('status_id', 2)->sum('title_area');
+        $this->polomolok_exchange_lot = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->where('status_id', 3)->sum('title_area');
+        $this->polomolok_free_lot = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->where('status_id', 4)->sum('title_area');
+        $this->polomolok_compromise_agreement = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->where('status_id', 5)->sum('title_area');
+        $this->polomolok_darbc_projects = BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->where('status_id', 6)->sum('title_area');
+        $this->total_deduction_title_area_polomolok = $this->polomolok_loss_in_case +
+        $this->polomolok_cancelled_cloa + $this->polomolok_exchange_lot + $this->polomolok_free_lot +
+        $this->polomolok_compromise_agreement + $this->polomolok_darbc_projects;
+
+        //tupo area total
+        $this->total_tupi = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
+        $this->tupi_loss_in_case = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('status_id', 1)->sum('title_area');
+        $this->tupi_cancelled_cloa = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('status_id', 2)->sum('title_area');
+        $this->tupi_exchange_lot = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('status_id', 3)->sum('title_area');
+        $this->tupi_free_lot = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('status_id', 4)->sum('title_area');
+        $this->tupi_compromise_agreement = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('status_id', 5)->sum('title_area');
+        $this->tupi_darbc_projects = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('status_id', 6)->sum('title_area');
+        $this->total_deduction_title_area_tupi = $this->tupi_loss_in_case +
+        $this->tupi_cancelled_cloa + $this->tupi_exchange_lot + $this->tupi_free_lot +
+        $this->tupi_compromise_agreement + $this->tupi_darbc_projects;
+        //gensan area total
+        $this->total_gensan = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
+        $this->gensan_loss_in_case = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('status_id', 1)->sum('title_area');
+        $this->gensan_cancelled_cloa = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('status_id', 2)->sum('title_area');
+        $this->gensan_exchange_lot = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('status_id', 3)->sum('title_area');
+        $this->gensan_free_lot = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('status_id', 4)->sum('title_area');
+        $this->gensan_compromise_agreement = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('status_id', 5)->sum('title_area');
+        $this->gensan_darbc_projects = BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('status_id', 6)->sum('title_area');
+        $this->total_deduction_title_area_gensan = $this->gensan_loss_in_case +
+        $this->gensan_cancelled_cloa + $this->gensan_exchange_lot + $this->gensan_free_lot +
+        $this->gensan_compromise_agreement + $this->gensan_darbc_projects;
         // $this->deleted_land = BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->sum('title_area');
     }
 
