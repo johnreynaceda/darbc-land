@@ -6,6 +6,7 @@ use Filament\Tables;
 use App\Models\Sample;
 use App\Models\Status;
 use Livewire\Component;
+use App\Models\TitleStatus;
 use App\Models\BasicInformation;
 use Illuminate\Contracts\View\View;
 use Filament\Tables\Columns\TextColumn;
@@ -17,6 +18,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     use Tables\Concerns\InteractsWithTable;
     public $municipalities = [];
     public $locations = [];
+    public $basic_title_statuses = [];
     public $title_statuses = [];
     public $title_types = [];
     public $selected_columns = [];
@@ -24,6 +26,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     public $dataToExport;
     public $basic_statuses;
     public $selected_status = [];
+    public $selected_title_status = [];
     public $search = '';
     public $filters = [
         'number' => null,
@@ -93,6 +96,7 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
     public function mount()
     {
         $this->basic_statuses = Status::all();
+        $this->basic_title_statuses = TitleStatus::all();
         $this->selected_columns = ['lot_number', 'survey_number', 'title_area', 'awarded_area',
         'location', 'municipality', 'cloa_number', 'previous_copy_of_title_number'];
     }
@@ -113,8 +117,11 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
         });
     }
 
-    if (!empty($this->title_statuses)) {
-        $query->whereIn('title_status', $this->title_statuses);
+    if (!empty($this->selected_title_status)) {
+        $query->whereHas('basic_title_status', function ($query) {
+            $query->whereIn('id', $this->selected_title_status);
+        });
+       // $query->whereIn('title_status', $this->title_statuses);
     }
 
     if (!empty($this->title_types)) {
@@ -181,7 +188,9 @@ class Inquiry extends Component implements Tables\Contracts\HasTable
                 $query->where('previous_copy_of_title->no.', 'LIKE', '%' . $this->search . '%');
                 break;
             case 'title_status':
-                $query->where('title_status', 'LIKE', '%' . $this->search . '%');
+                $query->whereHas('basic_title_status', function ($query) {
+                    $query->where('name', 'LIKE', '%' . $this->search . '%');
+                });
                 break;
             case 'title_copy':
                 $query->where('title_copy', 'LIKE', '%' . $this->search . '%');

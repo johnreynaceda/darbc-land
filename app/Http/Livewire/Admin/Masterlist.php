@@ -11,6 +11,7 @@ use App\Models\Actual;
 use App\Models\Status;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use App\Models\TitleStatus;
 use App\Models\TaxReceiptImage;
 use App\Models\BasicInformation;
 use Illuminate\Support\HtmlString;
@@ -214,7 +215,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                         true => 'Deleted',
                         false => 'Active',
                     ])->default(false)
-                    ->label('Filter Deleted'),
+                    ->label('Deleted Records'),
             ])
             ->query(function (Builder $query, array $data): Builder {
                 if ($data['is_deleted'] == true) {
@@ -234,6 +235,21 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                 if($data['status_id'])
                 {
                     $query->where('status_id', $data['status_id']);
+                }else{
+                    $query->get();
+                }
+                return $query;
+            }),
+            Filter::make('title_status')
+            ->form([
+                Forms\Components\Select::make('title_status_id')
+                ->options(TitleStatus::pluck('name', 'id')->toArray())
+                    ->label('Title Status'),
+            ])
+            ->query(function (Builder $query, array $data): Builder {
+                if($data['title_status_id'])
+                {
+                    $query->where('title_status_id', $data['title_status_id']);
                 }else{
                     $query->get();
                 }
@@ -595,25 +611,11 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
 
                     return $number;
                 }),
-            TextColumn::make('title_status')
-                ->label('TITLE STATUS')
-                ->searchable()
-                ->formatStateUsing(function ($state) {
-                    if($state === "TWC")
-                    {
-                        return "Title With Cloa (TWC)";
-                    }elseif($state === "TWOC")
-                    {
-                        return "Title Without Cloa (TWOC)";
-                    }elseif($state === "UWC")
-                    {
-                        return "Untitled With Cloa (UWC)";
-                    }elseif($state === "UWOC")
-                    {
-                        return "Untitled With Cloa (UWOC)";
-                    }
-                 })
-                ->sortable(),
+            TextColumn::make('basic_title_status.name')
+            ->label('TITLE STATUS')
+            ->searchable()
+            ->sortable()
+            ,
             TextColumn::make('title_copy')
                 ->label('TITLE COPY')
                 ->searchable()

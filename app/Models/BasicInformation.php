@@ -37,4 +37,9 @@ class BasicInformation extends Model
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+
+    public function basic_title_status()
+    {
+        return $this->belongsTo(TitleStatus::class, 'title_status_id');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Components;
 use Filament\Forms;
 use App\Models\BasicInformation;
 use App\Models\Status;
+use App\Models\TitleStatus;
 use WireUi\Traits\Actions;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\TextInput;
@@ -100,7 +101,8 @@ class AddLot extends Component implements Forms\Contracts\HasForms
                                     TextInput::make('_tax_dec_number')->label('Tax Declaration Number'),
                                 ]),
                                 TextInput::make('_title_copy')->label('Title Copy'),
-                                TextInput::make('_title_status')->label('Title Status'),
+                                Select::make('_title_status')->label('Title Status')->options(TitleStatus::all()->pluck('name', 'id')->toArray()),
+                                //TextInput::make('_title_status')->label('Title Status'),
                                 TextInput::make('_land_bank_amortization')->label('Land Bank Amortization'),
                             ])->columns(3),
                             Card::make()
@@ -138,6 +140,7 @@ class AddLot extends Component implements Forms\Contracts\HasForms
         DB::beginTransaction();
         BasicInformation::create([
             'status_id' => $this->_status,
+            'title_status_id' => $this->_title_status,
             'number' => $this->_number,
             'lot_number' => $this->_lot_number,
             'survey_number' => $this->_survey_number,
@@ -152,7 +155,7 @@ class AddLot extends Component implements Forms\Contracts\HasForms
             'page' => $this->_page,
             'encumbered' => $encumbered,
             'previous_copy_of_title' => $previous_copy_of_title,
-            'title_status' => $this->_title_status,
+            //'title_status' => $this->_title_status,
             'title_copy' => $this->_title_copy,
             'tax_dec_number' => $this->_tax_dec_number,
             'remarks' => $this->_remarks,

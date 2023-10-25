@@ -176,7 +176,7 @@
                 {{ $previous_copy_of_title_array['no.'] ?? '' }}
               </td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->page_number ?? '' }}</td>
-              <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->title_status ?? '' }}</td>
+              <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->basic_title_status == null ? '' : $item->basic_information->basic_title_status->name }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->title_area ?? '' }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->basic_information->basic_status == null ? '' : $item->basic_information->basic_status->name }}</td>
               <td class="border text-gray-600  px-3 py-1">{{ $item->dolephil_leased }}</td>

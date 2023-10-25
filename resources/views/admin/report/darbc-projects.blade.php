@@ -36,7 +36,7 @@
           <td class="border text-gray-600  px-3 py-1">{{ $item->field_number ?? '' }}</td>
           <td class="border text-gray-600  px-3 py-1">{{ $item->location ?? '' }}</td>
           <td class="border text-gray-600  px-3 py-1">{{ $item->municipality ?? '' }}</td>
-          <td class="border text-gray-600  px-3 py-1">{{ $item->title_status ?? '' }}</td>
+          <td class="border text-gray-600  px-3 py-1">{{ $item->basic_title_status == null ? '' : $item->basic_title_status->name }}</td>
           <td class="border text-gray-600  px-3 py-1">{{ $item->remarks ?? '' }}</td>
           <td class="border text-gray-600  px-3 py-1">{{ $item->basic_status == null ? '' : $item->basic_status->name }}</td>
         </tr>

@@ -13,6 +13,7 @@ use App\Models\Tax;
 use App\Models\Attachment;
 use App\Models\Status;
 use App\Models\TaxReceiptImage;
+use App\Models\TitleStatus;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
@@ -29,6 +30,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $record_delete;
     public $informationId;
     public $all_status;
+    public $all_title_status;
     public $basicInfo;
     public $encumbered;
     public $previous_copy_of_title;
@@ -93,6 +95,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
      public $barangay;
      public $municipality;
      public $title_status;
+     public $basic_title_status_id;
      public $prev_land_owner;
      public $awarded_area;
      public $type_of_title;
@@ -709,6 +712,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public function mount()
     {
         $this->all_status = Status::all();
+        $this->all_title_status = TitleStatus::all();
         $this->tax_year = Tax::where('year', '!=', '')
         ->groupBy('year')
         ->pluck('year')
@@ -723,23 +727,23 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->actual = Actual::where('basic_information_id', $id)->first();
         $this->taxes = $this->view_modal = true;
 
-        switch ($this->basicInfo->title_status) {
-            case 'TWC':
-                $this->title_status_detailed = 'TWC - Title with CLOA';
-                break;
-            case 'TWOC':
-                    $this->title_status_detailed = 'TWOC - Title without CLOA';
-                break;
-            case 'UWC':
-                    $this->title_status_detailed = 'UWC - Untitled with CLOA';
-                break;
-            case 'UWOC':
-                    $this->title_status_detailed = 'UWOC - Untitled without CLOA';
-                 break;
-            default:
-            $this->title_status_detailed = '';
-                break;
-        }
+        // switch ($this->basicInfo->title_status) {
+        //     case 'TWC':
+        //         $this->title_status_detailed = 'TWC - Title with CLOA';
+        //         break;
+        //     case 'TWOC':
+        //             $this->title_status_detailed = 'TWOC - Title without CLOA';
+        //         break;
+        //     case 'UWC':
+        //             $this->title_status_detailed = 'UWC - Untitled with CLOA';
+        //         break;
+        //     case 'UWOC':
+        //             $this->title_status_detailed = 'UWOC - Untitled without CLOA';
+        //          break;
+        //     default:
+        //     $this->title_status_detailed = '';
+        //         break;
+        // }
     }
 
     public function updateActual($id)
@@ -953,7 +957,8 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->basic_page = $this->record->page;
         $this->barangay = $this->record->location;
         $this->municipality = $this->record->municipality;
-        $this->title_status = $this->record->title_status;
+       // $this->title_status = $this->record->title_status;
+        $this->basic_title_status_id = $this->record->title_status_id;
         $this->prev_land_owner = $this->record->previous_land_owner;
         $this->awarded_area = $this->record->awarded_area;
         $this->type_of_title = $type;
@@ -993,14 +998,9 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->record->encumbered = $encumbered;
         $this->record->previous_copy_of_title = $previous_copy_of_title;
         $this->record->title_status = $this->title_status;
+        $this->basic_title_status_id == "" ? $this->record->title_status_id = null : $this->record->title_status_id = $this->basic_title_status_id;
         $this->record->remarks = $this->basic_remarks;
-        if($this->basic_status_id == "")
-        {
-            $this->record->status_id = null;
-        }else{
-            $this->record->status_id = $this->basic_status_id;
-        }
-        // $this->record->status = $this->basic_status;
+        $this->basic_status_id == "" ? $this->record->status_id = null : $this->record->status_id = $this->basic_status_id;
         $this->record->save();
         DB::commit();
         $this->dialog()->success(

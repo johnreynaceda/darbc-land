@@ -201,12 +201,11 @@
         </x-select>
         </div>
         <div class="{{in_array('title_status', $selected_columns) ? '' : 'hidden'}} col-span-1">
-            <x-select label="Select Title Status" multiselect placeholder="All" wire:model="title_statuses">
-            <x-select.option label="TWC" value="TWC" />
-            <x-select.option label="TWOC" value="TWOC" />
-            <x-select.option label="UWC" value="UWC" />
-            <x-select.option label="UWOC" value="UWOC" />
-        </x-select>
+            <x-select label="Select Title Status" multiselect placeholder="All" wire:model="selected_title_status">
+                @foreach ($basic_title_statuses as $item)
+                <x-select.option label="{{$item->name}}" value="{{$item->id}}" />
+                @endforeach
+            </x-select>
         </div>
         <div class="{{in_array('previous_copy_of_title_type', $selected_columns) ? '' : 'hidden'}} col-span-1">
             <x-select label="Select Title Type" multiselect placeholder="All" wire:model="title_types">
@@ -1067,18 +1066,8 @@
                     </td>
                     @endif
                     @if ($filters['title_status'] != false && $filters['title_status'] != null)
-                      <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">
-                        @if ($record->title_status === "TWC")
-                        Title With Cloa (TWC)
-                        @elseif ($record->title_status === "TWOC")
-                        Title Without Cloa (TWOC)
-                        @elseif ($record->title_status === "UWC")
-                        Untitled With Cloa (UWC)
-                        @elseif ($record->title_status === "UWOC")
-                        Untitled Without Cloa (UWOC)
-                        @endif
-                        {{-- {{ $record->title_status }} --}}
-                      </td>
+                    <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->basic_title_status == null ? '---': $record->basic_title_status->name }}
+                    </td>
                     @endif
                     @if ($filters['title_copy'] != false && $filters['title_copy'] != null)
                       <td class=" py-4 pl-4 pr-4 text-sm text-gray-700 text-left uppercase ">{{ $record->title_copy }}
