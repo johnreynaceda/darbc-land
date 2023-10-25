@@ -326,9 +326,9 @@
       <div class="mt-2 text-center">
         <h1 class="text-2xl font-bold font-montserrat text-gray-700">
           @php
-            $total_polomolok = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area');
-            $total_tupi = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
-            $total_gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
+        //  $total_polomolok = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area');
+            // $total_tupi = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
+            // $total_gensan = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
             $total_area = $total_polomolok + $total_tupi + $total_gensan;
             // $total_area = App\Models\BasicInformation::sum('title_area');
             $total = $total_area - $total_deduction_title_area;
