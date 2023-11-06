@@ -11,8 +11,12 @@ class Dashboard extends Component
     protected $listeners = ['showReport', 'showActualReport', 'showMunicipalityReport', 'showTitleStatusReport'];
     public $showLandSummaryModal = false;
     public $leased;
-    public $unplanted;
     public $growers;
+    public $livelihood_program;
+    public $unplanted;
+    public $additional_lot;
+    public $deleted;
+    public $darbc_quarry;
     public $compromise;
     public $others;
     public $land_summary_type;
@@ -80,6 +84,11 @@ class Dashboard extends Component
     public $gensan_compromise_agreement;
     public $gensan_darbc_projects;
     public $total_deduction_title_area_gensan;
+
+    public $total_twc;
+    public $total_twoc;
+    public $total_uwc;
+    public $total_uwoc;
 
 
     public function getFileUrl($filename)
@@ -159,17 +168,23 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $this->leased = Actual::where('land_status', 'Leased')->count();
-        $this->unplanted = Actual::where('land_status', 'Unplanted')->count();
-        $this->growers = Actual::where('land_status', 'Growers')->count();
+        // $this->leased = Actual::where('land_status', 'Leased')->count();
+        $this->leased = Actual::sum('dolephil_leased');
+        $this->growers = Actual::sum('darbc_grower');
+        $this->livelihood_program = BasicInformation::where('status_id', 7)->sum('title_area');
+        $this->facility = BasicInformation::where('status_id', 8)->sum('title_area');
+        $this->unplanted = BasicInformation::where('status_id', 9)->sum('title_area');
+        $this->additional_lot = BasicInformation::where('status_id', 10)->sum('title_area');
+        $this->deleted = BasicInformation::where('status_id', 11)->sum('title_area');
+        $this->darbc_quarry = BasicInformation::where('status_id', 12)->sum('title_area');
+
         $this->compromise = Actual::where('land_status', 'Compromise Agreement')->count();
-        $this->deleted = Actual::where('land_status', 'Deleted')->count();
         $this->others = Actual::where('land_status', 'Others')->count();
         $this->gross = Actual::sum('gross_area');
         $this->planted = Actual::sum('planted_area');
         $this->gulley = Actual::sum('gulley_area');
         $this->total = Actual::sum('total_area');
-        $this->facility = Actual::sum('facility_area');
+
         $this->unutilized = Actual::sum('unutilized_area');
         $this->polomolok = BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->count();
         $this->tupi = BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->count();
@@ -207,7 +222,7 @@ class Dashboard extends Component
         $this->polomolok_cancelled_cloa + $this->polomolok_exchange_lot + $this->polomolok_free_lot +
         $this->polomolok_compromise_agreement + $this->polomolok_darbc_projects;
 
-        //tupo area total
+        //tupi area total
         $tupi_area_twc = BasicInformation::where('title_status_id', 1)->where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
         $tupi_area_twoc = BasicInformation::where('title_status_id', 2)->where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
         $tupi_area_uwc = BasicInformation::where('title_status_id', 3)->where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
@@ -239,6 +254,11 @@ class Dashboard extends Component
         $this->total_deduction_title_area_gensan = $this->gensan_loss_in_case +
         $this->gensan_cancelled_cloa + $this->gensan_exchange_lot + $this->gensan_free_lot +
         $this->gensan_compromise_agreement + $this->gensan_darbc_projects;
+
+        $this->total_twc = $polomolok_area_twc + $tupi_area_twc + $gensan_area_twc;
+        $this->total_twoc = $polomolok_area_twoc + $tupi_area_twoc + $gensan_area_twoc;
+        $this->total_uwc = $polomolok_area_uwc + $tupi_area_uwc + $gensan_area_uwc;
+        $this->total_uwoc = $polomolok_area_uwoc + $tupi_area_uwoc + $gensan_area_uwoc;
         // $this->deleted_land = BasicInformation::where('remarks', 'LIKE','%Loss In Case%')->sum('title_area');
     }
 

@@ -14,22 +14,26 @@
         data: {
           labels: [
             'Leased',
-            'Growers',
+            'DARBC Growership',
+            'Livelihood Program',
+            'Facility',
             'Unplanted',
-            'Compromise Agreement',
-            'Deleted',
-            'Others',
+            'Additional Lot',
+            'Deleted Area',
+            'DARBC Quarry',
           ],
           datasets: [{
             label: 'Land Summary',
-            data: [{{ $leased }}, {{ $growers }}, {{ $unplanted }}, {{ $compromise }}, {{ $deleted }}, {{ $others }}],
+            data: [{{ $leased }}, {{ $growers }}, {{ $livelihood_program }}, {{ $facility }}, {{ $unplanted }}, {{ $additional_lot }}, {{ $deleted }}, {{ $darbc_quarry }}],
             backgroundColor: [
               '#FF6384',
               '#36A2EB',
               '#FFCE56',
               '#E7E9ED',
               '#8C9EFF',
-              '#FF7F50'
+              '#FF7F50',
+              '#FF6384',
+              '#36A2EB',
             ]
           }]
         },

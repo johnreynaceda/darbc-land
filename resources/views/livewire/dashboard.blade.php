@@ -8,10 +8,11 @@
         //   $compromise = App\Models\Actual::where('land_status', 'Compromise Agreement')->count();
         //   $deleted = App\Models\Actual::where('land_status', 'Deleted')->count();
         //   $others = App\Models\Actual::where('land_status', 'Others')->count();
-          $total_hectars = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area') + App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
+        $total_hectars = $leased + $growers + $livelihood_program + $facility + $unplanted + $additional_lot + $deleted + $darbc_quarry;
+          //$total_hectars = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')->sum('title_area') + App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
         @endphp
         <div class="flex justify-between">
-            <header class=" font-bold">LAND SUMMARY</header>
+            <header class=" font-bold">LAND SUMMARY (Status)</header>
         </div>
         <div>
         <x-modal.card width="xl" align="center" title="Land Summary ({{$land_summary_type}})" blur wire:model="showLandSummaryModal">
@@ -20,10 +21,10 @@
                     @switch($land_summary_type)
                         @case('Leased')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::where('land_status', 'LEASED')->sum('dolephil_leased');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($leased,2)}}</h1>
                         </div>
                         @break
                         @case('Growers')
@@ -85,7 +86,7 @@
         </x-modal.card>
     </div>
 
-        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
+        <span class="leading-3 text-sm">Total Area in Hectares: {{ number_format($total_hectars, 2) }}</span>
         <div class="mt-2">
           <div wire:ignore>
             <canvas id="land_summary" height="200"></canvas>
@@ -101,7 +102,8 @@
         //   $facility = App\Models\Actual::sum('facility_area');
         //   $unutilized = App\Models\Actual::sum('unutilized_area');
         @endphp
-        <header class=" font-bold">ACTUAL LAND SUMMARY </header>
+        {{-- <header class=" font-bold">ACTUAL LAND SUMMARY </header> --}}
+        <header class=" font-bold">OVERALL LAND STATUS</header>
         <x-modal.card width="xl" align="center" title="Actual Land Summary ({{$actual_land_summary_type}})" blur wire:model="showActualLandSummaryModal">
             <div>
                 <div class="inline-block min-w-full py-2">
@@ -169,7 +171,7 @@
                 </div>
             </x-slot>
         </x-modal.card>
-        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
+        <span class="leading-3 text-sm text-red-500">Total Area in Hectares: {{ number_format($total_deduction_title_area, 2) }}</span>
         <div class="mt-2">
           <div class="" wire:ignore>
             <canvas id="actual_summary" height="200"></canvas>
@@ -208,7 +210,7 @@
                         @php
                             $sum = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
                         @endphp
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        <h1 class="font-semibold text-md">Total Area in Hectares: {{number_format($sum,2)}}</h1>
                     </div>
                     @break
                     @default
@@ -226,7 +228,10 @@
                 </div>
             </x-slot>
         </x-modal.card>
-        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
+        @php
+        $total_awarded_lots = $total_polomolok + $total_tupi + $total_gensan;
+       @endphp
+        <span class="leading-3 text-sm">Total Area in Hectares: {{ number_format($total_awarded_lots, 2) }}</span>
         <div class="mt-2">
           <div wire:ignore>
             <canvas id="piechart3" height="200"></canvas>
@@ -293,7 +298,10 @@
                 </div>
             </x-slot>
         </x-modal.card>
-        <span class="leading-3 text-sm">Total Hectares: {{ $total_hectars }}</span>
+        @php
+            $total_title_status = $total_twc + $total_twoc + $total_uwc + $total_uwoc;
+        @endphp
+        <span class="leading-3 text-sm">Total Area in Hectares: {{ number_format($total_title_status, 2) }}</span>
         <div class="mt-2">
           <div wire:ignore>
             <canvas id="title_status" height="200"></canvas>
@@ -357,56 +365,56 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Areas Leased by Dolefil</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ App\Models\Actual::sum('dolephil_leased') }}
+                          {{ number_format(App\Models\Actual::sum('dolephil_leased'), 2) }}
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Growership</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ App\Models\Actual::sum('darbc_grower') }}</td>
+                          {{ number_format(App\Models\Actual::sum('darbc_grower'), 2) }}</td>
                         </td>
                       </tr>
                     <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Livelihood Program</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ App\Models\BasicInformation::where('status_id', 7)->sum('title_area') }}
+                          {{ number_format(App\Models\BasicInformation::where('status_id', 7)->sum('title_area'), 2) }}
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Facility</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                           {{ App\Models\BasicInformation::where('status_id', 8)->sum('title_area') }}
+                           {{ number_format(App\Models\BasicInformation::where('status_id', 8)->sum('title_area'), 2) }}
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           UNPLANTED<small>(AGREED WITH DAR, DARBC & DOLE)</small></td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ App\Models\BasicInformation::where('status_id', 9)->sum('title_area') }}
+                          {{ number_format(App\Models\BasicInformation::where('status_id', 9)->sum('title_area'), 2) }}
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Additional Lot</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                           {{ App\Models\BasicInformation::where('status_id', 10)->sum('title_area') }}
+                           {{ number_format(App\Models\BasicInformation::where('status_id', 10)->sum('title_area'), 2) }}
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Deleted Area as Planted Pineapple</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                           {{ App\Models\BasicInformation::where('status_id', 11)->sum('title_area') }}
+                           {{ number_format(App\Models\BasicInformation::where('status_id', 11)->sum('title_area'), 2) }}
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Quarry</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                           {{ App\Models\BasicInformation::where('status_id', 12)->sum('title_area') }}
+                           {{ number_format(App\Models\BasicInformation::where('status_id', 12)->sum('title_area'), 2) }}
                         </td>
                       </tr>
                     </tbody>
@@ -437,7 +445,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Loss in Case</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $loss_in_case }}
+                          {{ number_format($loss_in_case, 2) }}
                           {{-- ------ --}}
                         </td>
                       </tr>
@@ -445,7 +453,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Cancelled CLOA</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $cancelled_cloa }}
+                          {{ number_format($cancelled_cloa, 2) }}
                           {{-- ------ --}}
                         </td>
                       </tr>
@@ -453,7 +461,7 @@
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         Exchange Lot</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                        {{ $exchange_lot }}
+                        {{ number_format($exchange_lot, 2) }}
                         {{-- ------ --}}
                       </td>
                       </tr>
@@ -461,7 +469,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Free Lot</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $free_lot }}
+                          {{ number_format($free_lot, 2) }}
                           {{-- ------ --}}
                         </td>
                       </tr>
@@ -469,7 +477,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Compromise Agreement</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $compromise_agreement }}
+                          {{ number_format($compromise_agreement, 2) }}
                           {{-- ------ --}}
                         </td>
                       </tr>
@@ -477,7 +485,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Projects</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $darbc_projects }}
+                          {{ number_format($darbc_projects, 2) }}
                           {{-- ------ --}}
                         </td>
                       </tr>
@@ -528,7 +536,7 @@
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -551,7 +559,7 @@
                         //     ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                         //     ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -567,7 +575,7 @@
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -583,7 +591,7 @@
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -620,7 +628,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Loss in Case</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $polomolok_loss_in_case }}
+                          {{ number_format($polomolok_loss_in_case, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -634,7 +642,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Cancelled CLOA</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $polomolok_cancelled_cloa }}
+                          {{ number_format($polomolok_cancelled_cloa, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -648,7 +656,7 @@
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         Exchange Lot</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                        {{ $polomolok_exchange_lot }}
+                        {{ number_format($polomolok_exchange_lot, 2) }}
                         {{-- ------ --}}
                       </td>
                       @php
@@ -662,7 +670,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Free Lot</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $polomolok_free_lot }}
+                          {{ number_format($polomolok_free_lot, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -676,7 +684,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Compromise Agreement</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $polomolok_compromise_agreement }}
+                          {{ number_format($polomolok_compromise_agreement, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -690,7 +698,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Projects</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $polomolok_darbc_projects }}
+                          {{ number_format($polomolok_darbc_projects, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -742,7 +750,7 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -757,7 +765,7 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -773,7 +781,7 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -789,7 +797,7 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -824,7 +832,7 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Loss in Case</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                              {{ $tupi_loss_in_case }}
+                              {{ number_format($tupi_loss_in_case, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -838,7 +846,7 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Cancelled CLOA</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                              {{ $tupi_cancelled_cloa }}
+                              {{ number_format($tupi_cancelled_cloa, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -852,7 +860,7 @@
                           <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                             Exchange Lot</td>
                           <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                            {{ $tupi_exchange_lot }}
+                            {{ number_format($tupi_exchange_lot, 2) }}
                             {{-- ------ --}}
                           </td>
                           @php
@@ -866,7 +874,7 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Free Lot</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                              {{ $tupi_free_lot }}
+                              {{ number_format($tupi_free_lot, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -880,7 +888,7 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Compromise Agreement</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                              {{ $tupi_compromise_agreement }}
+                              {{ number_format($tupi_compromise_agreement, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -894,7 +902,7 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               DARBC Projects</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                              {{ $tupi_darbc_projects }}
+                              {{ number_format($tupi_darbc_projects, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -946,7 +954,7 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -961,7 +969,7 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -977,7 +985,7 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -993,7 +1001,7 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $area }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area,2) }}</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
                       </td>
                     </tr>
@@ -1026,7 +1034,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Loss in Case</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $gensan_loss_in_case }}
+                          {{ number_format($gensan_loss_in_case, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -1040,7 +1048,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Cancelled CLOA</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $gensan_cancelled_cloa }}
+                          {{ number_format($gensan_cancelled_cloa, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -1054,7 +1062,7 @@
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         Exchange Lot</td>
                       <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                        {{ $gensan_exchange_lot }}
+                        {{ number_format($gensan_exchange_lot, 2) }}
                         {{-- ------ --}}
                       </td>
                       @php
@@ -1068,7 +1076,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Free Lot</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $gensan_free_lot }}
+                          {{ number_format($gensan_free_lot, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -1082,7 +1090,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Compromise Agreement</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $gensan_compromise_agreement }}
+                          {{ number_format($gensan_compromise_agreement, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php
@@ -1096,7 +1104,7 @@
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Projects</td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
-                          {{ $gensan_darbc_projects }}
+                          {{ number_format($gensan_darbc_projects, 2) }}
                           {{-- ------ --}}
                         </td>
                         @php

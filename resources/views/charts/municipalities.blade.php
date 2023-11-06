@@ -19,7 +19,7 @@
           ],
           datasets: [{
             label: 'Land Summary',
-            data: [{{ $polomolok }}, {{ $tupi }}, {{ $gensan }}],
+            data: [{{ $total_polomolok }}, {{ $total_tupi }}, {{ $total_gensan }}],
             backgroundColor: [
               '#FF6384',
               '#36A2EB',

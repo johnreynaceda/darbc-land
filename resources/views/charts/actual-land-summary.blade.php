@@ -13,17 +13,17 @@
         type: 'bar',
         data: {
             labels: [
-            'Planted Area',
-            'Gulley Area',
-            'Total Area',
-            'Facilty Area',
-            'Unutilized Area',
-            'Gross Area',
+            'Loss in Case',
+            'Cancelled CLOA',
+            'Exchange Lot',
+            'Free Lot',
+            'Compromise Agreement',
+            'DARBC Projects',
           ],
           datasets: [{
             label: 'Land Summary',
-            data:[{{ $planted }}, {{ $gulley }}, {{ $total }}, {{ $facility }},
-              {{ $unutilized }}, {{ $gross }}
+            data:[{{ $loss_in_case }}, {{ $cancelled_cloa }}, {{ $exchange_lot }}, {{ $free_lot }},
+              {{ $compromise_agreement }}, {{ $darbc_projects }}
             ],
             backgroundColor: [
                 '#FF6384',

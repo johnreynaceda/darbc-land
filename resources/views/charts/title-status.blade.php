@@ -20,7 +20,7 @@
           ],
           datasets: [{
             label: 'Land Summary',
-            data: [{{ $twc }}, {{ $twoc }}, {{ $uwc }}, {{ $uwoc }}],
+            data: [{{ $total_twc }}, {{ $total_twoc }}, {{ $total_uwc }}, {{ $total_uwoc }}],
             backgroundColor: [
               '#FF6384',
               '#36A2EB',
