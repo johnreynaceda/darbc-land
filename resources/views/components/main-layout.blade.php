@@ -279,11 +279,11 @@
                   id="options-menu-button" aria-expanded="false" aria-haspopup="true">
                   <span class="flex w-full space-x-3 items-center justify-between">
                     <span class="flex min-w-0 items-center justify-between space-x-3">
-                      <img class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
+                      {{-- <img class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
                         src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                        alt="">
+                        alt=""> --}}
                       <span class="flex min-w-0 flex-1 flex-col">
-                        <span class="truncate text-sm font-medium text-gray-700 uppercase">MARIA TERESISA</span>
+                        {{-- <span class="truncate text-sm font-medium text-gray-700 uppercase">MARIA TERESISA</span> --}}
                         <span class="truncate text-sm text-indigo-500">Land Admin</span>
                       </span>
                     </span>
