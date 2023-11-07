@@ -27,35 +27,11 @@ class LandSummaryTable extends Component implements Tables\Contracts\HasTable
 
     public function showReportData($label)
     {
-        switch($label)
+        if($label == 'DARBC Growership')
         {
-            case 'Leased':
-                $this->record = 'Leased';
-                break;
-            case 'DARBC Growership':
-                $this->record = 'DARBC Growership';
-                break;
-            case 'Livelihood Program':
-                $this->record = 7;
-                break;
-            case 'Facility':
-                $this->record = 8;
-                break;
-            case 'Unplanted':
-                $this->record = 9;
-                break;
-            case 'Additional Lot':
-                $this->record = 10;
-                break;
-            case 'Deleted Area':
-                $this->record = 11;
-                break;
-            case 'DARBC Quarry':
-                $this->record = 12;
-                break;
-            default:
-                $this->record = $label;
-                break;
+            $this->record = 'GROWERS';
+        }else{
+            $this->record = $label;
         }
     }
 
@@ -91,20 +67,7 @@ class LandSummaryTable extends Component implements Tables\Contracts\HasTable
 
     protected function getTableQuery(): Builder
     {
-        if($this->record == "Leased")
-        {
-            return Actual::query()->with('basic_information')->where('land_status', $this->record);
-        }elseif($this->record == "DARBC Growership")
-        {
-            return Actual::query()->with('basic_information')->where('land_status', 'GROWERS');
-        }
-        else{
-            return Actual::query()->with('basic_information', function($query){
-                $query->where('status_id', $this->record);
-            });
-        //    return BasicInformation::query()->where('status_id', $this->record);
-        }
-
+        return Actual::query()->with('basic_information')->where('land_status', $this->record);
     }
 
     protected function paginateTableQuery(Builder $query): Paginator
@@ -116,8 +79,6 @@ class LandSummaryTable extends Component implements Tables\Contracts\HasTable
 
     protected function getTableColumns(): array
     {
-        if($this->record == "Leased" || $this->record == "DARBC Growership")
-        {
         return [
             TextColumn::make('basic_information.lot_number')
             ->label('Lot No.'),
@@ -127,30 +88,6 @@ class LandSummaryTable extends Component implements Tables\Contracts\HasTable
             ->color('warning')
             ->label('Status'),
         ];
-        }elseif($this->record == "DARBC Growership")
-        {
-            return [
-                TextColumn::make('basic_information.lot_number')
-                ->label('Lot No.'),
-                TextColumn::make('basic_information.field_number')
-                ->label('Field No.'),
-                BadgeColumn::make('land_status')
-                ->color('warning')
-                ->label('Status'),
-            ];
-        }
-        else{
-            return [
-                TextColumn::make('lot_number')
-                ->label('Lot Nos.'),
-                TextColumn::make('field_number')
-                ->label('Field No.'),
-                BadgeColumn::make('status.name')
-                ->color('warning')
-                ->label('Status'),
-            ];
-        }
-
     }
 
     public function render()

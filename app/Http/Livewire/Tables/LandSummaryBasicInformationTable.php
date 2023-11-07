@@ -2,54 +2,57 @@
 
 namespace App\Http\Livewire\Tables;
 
-use Filament\Tables;
-use App\Models\Actual;
 use Livewire\Component;
-use App\Models\BasicInformation;
-use Filament\Tables\Filters\Layout;
+use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\Paginator;
-// use App\Models\BasicInformation;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Layout;
+use App\Models\Actual;
+use App\Models\BasicInformation;
 
-class TitleStatusTable extends Component implements Tables\Contracts\HasTable
+class LandSummaryBasicInformationTable extends Component implements Tables\Contracts\HasTable
 {
     use Tables\Concerns\InteractsWithTable;
 
     public $record;
-    protected $listeners = ['showTitleStatusReportData'];
+    protected $listeners = ['showReportData'];
 
     public function mount($record)
     {
-         $this->record = $record;
-
+        $this->record = $record;
     }
 
-    public function showTitleStatusReportData($label)
+    public function showReportData($label)
     {
-        // $this->record = $label;
         switch($label)
         {
-            case 'TWC':
-            $this->record = 1;
+            case 'Livelihood Program':
+            $this->record = 7;
             break;
-            case 'TWOC':
-            $this->record = 2;
+            case 'Facility':
+            $this->record = 8;
             break;
-            case 'UWC':
-            $this->record = 3;
+            case 'Unplanted':
+            $this->record = 9;
             break;
-            case 'UWOC':
-            $this->record = 4;
+            case 'Additional Lot':
+            $this->record = 10;
+            break;
+            case 'Deleted Area':
+            $this->record = 11;
+            break;
+            case 'DARBC Quarry':
+            $this->record = 12;
             break;
         }
     }
 
     protected function getTableQuery(): Builder
     {
-        return BasicInformation::query()->where('title_status_id', $this->record);
+        return BasicInformation::query()->where('status_id', $this->record);
     }
 
     protected function paginateTableQuery(Builder $query): Paginator
@@ -64,7 +67,7 @@ class TitleStatusTable extends Component implements Tables\Contracts\HasTable
             ->label('Lot No.'),
             TextColumn::make('field_number')
             ->label('Field No.'),
-            BadgeColumn::make('basic_title_status.name')
+            BadgeColumn::make('basic_status.name')
             ->color('warning')
             ->label('Status'),
         ];
@@ -72,6 +75,6 @@ class TitleStatusTable extends Component implements Tables\Contracts\HasTable
 
     public function render()
     {
-        return view('livewire.tables.title-status-table');
+        return view('livewire.tables.land-summary-basic-information-table');
     }
 }

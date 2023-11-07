@@ -33,16 +33,16 @@
         },
         options: {
           responsive: true,
-        //   onClick: (event, elements) => {
-        //     if (elements.length > 0) {
-        //       const clickedDatasetIndex = elements[0].datasetIndex;
-        //       const clickedIndex = elements[0].index;
-        //       const clickedValue = landSummaryChart.data.datasets[clickedDatasetIndex].data[clickedIndex];
-        //       const clickedLabel = landSummaryChart.data.labels[clickedIndex];
-        //       console.log(clickedLabel);
-        //       Livewire.emit('showTitleStatusReport', clickedLabel, clickedValue);
-        //     }
-        //   }
+          onClick: (event, elements) => {
+            if (elements.length > 0) {
+              const clickedDatasetIndex = elements[0].datasetIndex;
+              const clickedIndex = elements[0].index;
+              const clickedValue = landSummaryChart.data.datasets[clickedDatasetIndex].data[clickedIndex];
+              const clickedLabel = landSummaryChart.data.labels[clickedIndex];
+              console.log(clickedLabel);
+              Livewire.emit('showTitleStatusReport', clickedLabel, clickedValue);
+            }
+          }
         }
       });
     }

@@ -70,8 +70,11 @@
                         @default
 
                     @endswitch
-
+                    @if($land_summary_type == 'Leased' || $land_summary_type == 'DARBC Growership')
                     <livewire:tables.land-summary-table :record="$land_summary_type"/>
+                    @else
+                    <livewire:tables.land-summary-basic-information-table :record="$land_summary_type"/>
+                    @endif
                   </div>
             </div>
 
@@ -191,26 +194,26 @@
                     @switch($municipality_type)
                     @case('POLOMOLOK')
                     <div class="flex justify-end py-2">
-                        @php
+                        {{-- @php
                             $sum = App\Models\BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->sum('title_area');
-                        @endphp
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        @endphp --}}
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_polomolok,2)}}</h1>
                     </div>
                     @break
                     @case('TUPI')
                     <div class="flex justify-end py-2">
-                        @php
+                        {{-- @php
                             $sum = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
-                        @endphp
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        @endphp --}}
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_tupi,2)}}</h1>
                     </div>
                     @break
                     @case('GENERAL SANTOS')
                     <div class="flex justify-end py-2">
-                        @php
+                        {{-- @php
                             $sum = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
-                        @endphp
-                        <h1 class="font-semibold text-md">Total Area in Hectares: {{number_format($sum,2)}}</h1>
+                        @endphp --}}
+                        <h1 class="font-semibold text-md">Total Area in Hectares: {{number_format($total_gensan,2)}}</h1>
                     </div>
                     @break
                     @default
@@ -252,34 +255,34 @@
                     @switch($title_status)
                     @case('Titled with CLOA')
                     <div class="flex justify-end py-2">
-                        @php
+                        {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'TWC')->sum('title_area');
-                        @endphp
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        @endphp --}}
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_twc,2)}}</h1>
                     </div>
                     @break
                     @case('Titled without CLOA')
                     <div class="flex justify-end py-2">
-                        @php
+                        {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'TWOC')->sum('title_area');
-                        @endphp
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        @endphp --}}
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_twoc,2)}}</h1>
                     </div>
                     @break
                     @case('Untitled with CLOA')
                     <div class="flex justify-end py-2">
-                        @php
+                        {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'UWC')->sum('title_area');
-                        @endphp
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        @endphp --}}
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_uwc,2)}}</h1>
                     </div>
                     @break
                     @case('Untitled without CLOA')
                     <div class="flex justify-end py-2">
-                        @php
+                        {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'UWOC')->sum('title_area');
-                        @endphp
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                        @endphp --}}
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_uwoc,2)}}</h1>
                     </div>
                     @break
                     @default
