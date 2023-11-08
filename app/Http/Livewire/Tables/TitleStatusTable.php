@@ -19,6 +19,7 @@ class TitleStatusTable extends Component implements Tables\Contracts\HasTable
     use Tables\Concerns\InteractsWithTable;
 
     public $record;
+    public $municipality;
     protected $listeners = ['showTitleStatusReportData'];
 
     public function mount($record)
@@ -27,9 +28,21 @@ class TitleStatusTable extends Component implements Tables\Contracts\HasTable
 
     }
 
-    public function showTitleStatusReportData($label)
+    public function showTitleStatusReportData($index ,$label)
     {
-        // $this->record = $label;
+        switch($index)
+        {
+            case 0:
+            $this->municipality = "POLOMOLOK";
+            break;
+            case 1:
+            $this->municipality = "TUPI";
+            break;
+            case 2:
+            $this->municipality = "GENERAL SANTOS";
+            break;
+        }
+
         switch($label)
         {
             case 'TWC':
@@ -49,7 +62,7 @@ class TitleStatusTable extends Component implements Tables\Contracts\HasTable
 
     protected function getTableQuery(): Builder
     {
-        return BasicInformation::query()->where('title_status_id', $this->record);
+        return BasicInformation::query()->where('municipality', 'like', '%' . $this->municipality . '%')->where('title_status_id', $this->record);
     }
 
     protected function paginateTableQuery(Builder $query): Paginator
@@ -64,6 +77,9 @@ class TitleStatusTable extends Component implements Tables\Contracts\HasTable
             ->label('Lot No.'),
             TextColumn::make('field_number')
             ->label('Field No.'),
+            BadgeColumn::make('municipality')
+            ->color('primary')
+            ->label('Municipality'),
             BadgeColumn::make('basic_title_status.name')
             ->color('warning')
             ->label('Status'),

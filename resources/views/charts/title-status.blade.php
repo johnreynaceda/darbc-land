@@ -18,18 +18,59 @@
             'Untitled with CLOA',
             'Untitled without CLOA'
           ],
-          datasets: [{
-            label: 'Land Summary',
-            data: [{{ $total_twc }}, {{ $total_twoc }}, {{ $total_uwc }}, {{ $total_uwoc }}],
+          datasets: [
+            {
+            label: 'Polomolok',
+            data: [
+                {{ $polomolok_area_twc }},
+                 {{ $polomolok_area_twoc }},
+                 {{ $polomolok_area_uwc }},
+                 {{ $polomolok_area_uwoc }}
+            ],
+            backgroundColor: [
+              '#36A2EB',
+            //    '#36A2EB',
+            //    '#FFCE56',
+            //    '#E7E9ED',
+            //   '#8C9EFF',
+            //   '#FF7F50'
+            ]
+          },
+          {
+            label: 'Tupi',
+            data: [
+                {{ $tupi_area_twc }},
+                 {{ $tupi_area_twoc }},
+                 {{ $tupi_area_uwc }},
+                 {{ $tupi_area_uwoc }}
+            ],
+            backgroundColor: [
+              '#FF7F50',
+            //    '#36A2EB',
+            //    '#FFCE56',
+            //    '#E7E9ED',
+            //   '#8C9EFF',
+            //   '#FF7F50'
+            ]
+          },
+          {
+            label: 'Gensan',
+            data: [
+                {{ $gensan_area_twc }},
+                 {{ $gensan_area_twoc }},
+                 {{ $gensan_area_uwc }},
+                 {{ $gensan_area_uwoc }}
+            ],
             backgroundColor: [
               '#FF6384',
-              '#36A2EB',
-              '#FFCE56',
-              '#E7E9ED',
-              '#8C9EFF',
-              '#FF7F50'
+            //    '#36A2EB',
+            //    '#FFCE56',
+            //    '#E7E9ED',
+            //   '#8C9EFF',
+            //   '#FF7F50'
             ]
-          }]
+          },
+        ]
         },
         options: {
           responsive: true,
@@ -39,8 +80,8 @@
               const clickedIndex = elements[0].index;
               const clickedValue = landSummaryChart.data.datasets[clickedDatasetIndex].data[clickedIndex];
               const clickedLabel = landSummaryChart.data.labels[clickedIndex];
-              console.log(clickedLabel);
-              Livewire.emit('showTitleStatusReport', clickedLabel, clickedValue);
+              console.log(clickedDatasetIndex);
+              Livewire.emit('showTitleStatusReport', clickedDatasetIndex, clickedLabel, clickedValue);
             }
           }
         }

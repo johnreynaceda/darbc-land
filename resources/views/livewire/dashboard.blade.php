@@ -265,7 +265,7 @@
         //   $uwoc = App\Models\BasicInformation::where('title_status', 'UWOC')->count();
         @endphp
         <header class=" font-bold">TITLE STATUS</header>
-        <x-modal.card width="xl" align="center" title="Title Status ({{$title_status}})" blur wire:model="showTitleStatusModal">
+        <x-modal.card width="xl" align="center" title="Title Status ({{$title_status}} - {{$selected_municipality}})" blur wire:model="showTitleStatusModal">
             <div>
                 <div class="inline-block min-w-full py-2">
                     @switch($title_status)
@@ -274,7 +274,13 @@
                         {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'TWC')->sum('title_area');
                         @endphp --}}
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_twc,2)}}</h1>
+                        @if ($selected_municipality == "POLOMOLOK")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_twc,2)}}</h1>
+                        @elseif ($selected_municipality == "TUPI")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_twc,2)}}</h1>
+                        @elseif ($selected_municipality == "GENERAL SANTOS")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_twc,2)}}</h1>
+                        @endif
                     </div>
                     @break
                     @case('Titled without CLOA')
@@ -282,7 +288,13 @@
                         {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'TWOC')->sum('title_area');
                         @endphp --}}
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_twoc,2)}}</h1>
+                        @if ($selected_municipality == "POLOMOLOK")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_twoc,2)}}</h1>
+                        @elseif ($selected_municipality == "TUPI")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_twoc,2)}}</h1>
+                        @elseif ($selected_municipality == "GENERAL SANTOS")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_twoc,2)}}</h1>
+                        @endif
                     </div>
                     @break
                     @case('Untitled with CLOA')
@@ -290,7 +302,13 @@
                         {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'UWC')->sum('title_area');
                         @endphp --}}
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_uwc,2)}}</h1>
+                        @if ($selected_municipality == "POLOMOLOK")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_uwc,2)}}</h1>
+                        @elseif ($selected_municipality == "TUPI")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_uwc,2)}}</h1>
+                        @elseif ($selected_municipality == "GENERAL SANTOS")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_uwc,2)}}</h1>
+                        @endif
                     </div>
                     @break
                     @case('Untitled without CLOA')
@@ -298,7 +316,13 @@
                         {{-- @php
                             $sum = App\Models\BasicInformation::where('title_status', 'UWOC')->sum('title_area');
                         @endphp --}}
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($total_uwoc,2)}}</h1>
+                        @if ($selected_municipality == "POLOMOLOK")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_uwoc,2)}}</h1>
+                        @elseif ($selected_municipality == "TUPI")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_uwoc,2)}}</h1>
+                        @elseif ($selected_municipality == "GENERAL SANTOS")
+                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_uwoc,2)}}</h1>
+                        @endif
                     </div>
                     @break
                     @default
