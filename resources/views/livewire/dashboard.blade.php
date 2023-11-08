@@ -27,44 +27,60 @@
                             <h1 class="font-semibold text-md">Total Area: {{number_format($leased,2)}}</h1>
                         </div>
                         @break
-                        @case('Growers')
+                        @case('DARBC Growership')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::where('land_status', 'GROWERS')->sum('darbc_grower');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($growers,2)}}</h1>
+                        </div>
+                        @break
+                        @case('Livelihood Program')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::where('land_status', 'UNPLANTED')->sum('owned_but_not_planted');
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($livelihood_program,2)}}</h1>
+                        </div>
+                        @break
+                        @case('Facility')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::where('land_status', 'COMPROMISE AGREEMENT')->sum('owned_but_not_planted');
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($facility,2)}}</h1>
                         </div>
                         @break
                         @case('Unplanted')
                         <div class="flex justify-end py-2">
-                            @php
-                                $sum = App\Models\Actual::where('land_status', 'UNPLANTED')->sum('owned_but_not_planted');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
-                        </div>
-                        @break
-                        @case('Compromise Agreement')
-                        <div class="flex justify-end py-2">
-                            @php
-                                $sum = App\Models\Actual::where('land_status', 'COMPROMISE AGREEMENT')->sum('owned_but_not_planted');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
-                        </div>
-                        @break
-                        @case('Deleted')
-                        <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::where('land_status', 'DELETED')->sum('owned_but_not_planted');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($unplanted,2)}}</h1>
                         </div>
                         @break
-                        @case('Others')
+                        @case('Additional Lot')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::where('land_status', 'OTHERS')->sum('owned_but_not_planted');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($additional_lot,2)}}</h1>
+                        </div>
+                        @break
+                        @case('Deleted Area')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::where('land_status', 'OTHERS')->sum('owned_but_not_planted');
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($deleted,2)}}</h1>
+                        </div>
+                        @break
+                        @case('DARBC Quarry')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::where('land_status', 'OTHERS')->sum('owned_but_not_planted');
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($darbc_quarry,2)}}</h1>
                         </div>
                         @break
                         @default
@@ -111,52 +127,52 @@
             <div>
                 <div class="inline-block min-w-full py-2">
                         @switch($actual_land_summary_type)
-                        @case('Planted Area')
+                        @case('Loss in Case')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::with('basic_information')->sum('planted_area');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($loss_in_case,2)}}</h1>
                         </div>
                         @break
-                        @case('Gulley Area')
+                        @case('Cancelled CLOA')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::with('basic_information')->sum('gulley_area');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($cancelled_cloa,2)}}</h1>
                         </div>
                         @break
-                        @case('Total Area')
+                        @case('Exchange Lot')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::with('basic_information')->sum('total_area');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($exchange_lot,2)}}</h1>
                         </div>
                         @break
-                        @case('Facilty Area')
+                        @case('Free Lot')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::with('basic_information')->sum('facility_area');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($free_lot,2)}}</h1>
                         </div>
                         @break
-                        @case('Unutilized Area')
+                        @case('Compromise Agreement')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::with('basic_information')->sum('unutilized_area');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($compromise_agreement,2)}}</h1>
                         </div>
                         @break
-                        @case('Gross Area')
+                        @case('DARBC Projects')
                         <div class="flex justify-end py-2">
-                            @php
+                            {{-- @php
                                 $sum = App\Models\Actual::with('basic_information')->sum('gross_area');
-                            @endphp
-                            <h1 class="font-semibold text-md">Total Area: {{number_format($sum,3)}}</h1>
+                            @endphp --}}
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($darbc_projects,2)}}</h1>
                         </div>
                         @break
                         @default
