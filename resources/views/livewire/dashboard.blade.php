@@ -342,9 +342,11 @@
             </x-slot>
         </x-modal.card>
         @php
-            $total_title_status = $total_twc + $total_twoc + $total_uwc + $total_uwoc;
+          //  $total_title_status = $total_twc + $total_twoc + $total_uwc + $total_uwoc;
+            $total_area = $total_polomolok + $total_tupi + $total_gensan;
+            $total = $total_area - $total_deduction_title_area;
         @endphp
-        <span class="leading-3 text-sm">Total Area in Hectares: {{ number_format($total_title_status, 2) }}</span>
+        <span class="leading-3 text-sm">Total Area in Hectares: {{ number_format($total, 2) }}</span>
         <div class="mt-2">
           <div wire:ignore>
             <canvas id="title_status" height="200"></canvas>
