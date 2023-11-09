@@ -22,10 +22,10 @@
             {
             label: 'Polomolok',
             data: [
-                {{ $polomolok_area_twc }},
-                 {{ $polomolok_area_twoc }},
-                 {{ $polomolok_area_uwc }},
-                 {{ $polomolok_area_uwoc }}
+                {{ $polomolok_total_twc }},
+                 {{ $polomolok_total_twoc }},
+                 {{ $polomolok_total_uwc }},
+                 {{ $polomolok_total_uwoc }}
             ],
             backgroundColor: [
               '#36A2EB',
@@ -39,10 +39,10 @@
           {
             label: 'Tupi',
             data: [
-                {{ $tupi_area_twc }},
-                 {{ $tupi_area_twoc }},
-                 {{ $tupi_area_uwc }},
-                 {{ $tupi_area_uwoc }}
+                {{ $tupi_total_twc }},
+                 {{ $tupi_total_twoc }},
+                 {{ $tupi_total_uwc }},
+                 {{ $tupi_total_uwoc }}
             ],
             backgroundColor: [
               '#FF7F50',
@@ -56,10 +56,10 @@
           {
             label: 'Gensan',
             data: [
-                {{ $gensan_area_twc }},
-                 {{ $gensan_area_twoc }},
-                 {{ $gensan_area_uwc }},
-                 {{ $gensan_area_uwoc }}
+                {{ $gensan_total_twc }},
+                 {{ $gensan_total_twoc }},
+                 {{ $gensan_total_uwc }},
+                 {{ $gensan_total_uwoc }}
             ],
             backgroundColor: [
               '#FF6384',

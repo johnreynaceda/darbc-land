@@ -62,7 +62,7 @@ class TitleStatusTable extends Component implements Tables\Contracts\HasTable
 
     protected function getTableQuery(): Builder
     {
-        return BasicInformation::query()->where('municipality', 'like', '%' . $this->municipality . '%')->where('title_status_id', $this->record);
+        return BasicInformation::query()->where('municipality', 'like', '%' . $this->municipality . '%')->where('title_status_id', $this->record)->where('status_id', null);
     }
 
     protected function paginateTableQuery(Builder $query): Paginator

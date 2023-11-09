@@ -91,15 +91,31 @@ class Dashboard extends Component
     public $polomolok_area_uwc;
     public $polomolok_area_uwoc;
 
+    public $polomolok_total_twc;
+    public $polomolok_total_twoc;
+    public $polomolok_total_uwc;
+    public $polomolok_total_uwoc;
+
     public $tupi_area_twc;
     public $tupi_area_twoc;
     public $tupi_area_uwc;
     public $tupi_area_uwoc;
 
+    public $tupi_total_twc;
+    public $tupi_total_twoc;
+    public $tupi_total_uwc;
+    public $tupi_total_uwoc;
+
+
     public $gensan_area_twc;
     public $gensan_area_twoc;
     public $gensan_area_uwc;
     public $gensan_area_uwoc;
+
+    public $gensan_total_twc;
+    public $gensan_total_twoc;
+    public $gensan_total_uwc;
+    public $gensan_total_uwoc;
 
     public $total_twc;
     public $total_twoc;
@@ -251,6 +267,17 @@ class Dashboard extends Component
         $this->polomolok_cancelled_cloa + $this->polomolok_exchange_lot + $this->polomolok_free_lot +
         $this->polomolok_compromise_agreement + $this->polomolok_darbc_projects;
 
+        $total_pol_twc = $this->polomolok_area_twc - $this->total_deduction_title_area_polomolok;
+        $total_pol_twoc = $this->polomolok_area_twoc - $this->total_deduction_title_area_polomolok;
+        $total_pol_uwc = $this->polomolok_area_uwc - $this->total_deduction_title_area_polomolok;
+        $total_pol_uwoc = $this->polomolok_area_uwoc - $this->total_deduction_title_area_polomolok;
+
+        $this->polomolok_total_twc = $total_pol_twc < 0 ? 0 : $total_pol_twc;
+        $this->polomolok_total_twoc = $total_pol_twoc < 0 ? 0 : $total_pol_twoc;
+        $this->polomolok_total_uwc = $total_pol_uwc < 0 ? 0 : $total_pol_uwc;
+        $this->polomolok_total_uwoc = $total_pol_uwoc < 0 ? 0 : $total_pol_uwoc;
+
+
         //tupi area total
         $this->tupi_area_twc = BasicInformation::where('title_status_id', 1)->where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
         $this->tupi_area_twoc = BasicInformation::where('title_status_id', 2)->where('municipality', 'like', '%' . 'TUPI' . '%')->sum('title_area');
@@ -267,6 +294,17 @@ class Dashboard extends Component
         $this->total_deduction_title_area_tupi = $this->tupi_loss_in_case +
         $this->tupi_cancelled_cloa + $this->tupi_exchange_lot + $this->tupi_free_lot +
         $this->tupi_compromise_agreement + $this->tupi_darbc_projects;
+
+        $total_tupi_twc = $this->tupi_area_twc - $this->total_deduction_title_area_tupi;
+        $total_tupi_twoc = $this->tupi_area_twoc - $this->total_deduction_title_area_tupi;
+        $total_tupi_uwc = $this->tupi_area_uwc - $this->total_deduction_title_area_tupi;
+        $total_tupi_uwoc = $this->tupi_area_uwoc - $this->total_deduction_title_area_tupi;
+
+        $this->tupi_total_twc = $total_tupi_twc < 0 ? 0 : $total_tupi_twc;
+        $this->tupi_total_twoc = $total_tupi_twoc < 0 ? 0 : $total_tupi_twoc;
+        $this->tupi_total_uwc = $total_tupi_uwc < 0 ? 0 : $total_tupi_uwc;
+        $this->tupi_total_uwoc = $total_tupi_uwoc < 0 ? 0 : $total_tupi_uwoc;
+
         //gensan area total
         $this->gensan_area_twc = BasicInformation::where('title_status_id', 1)->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
         $this->gensan_area_twoc = BasicInformation::where('title_status_id', 2)->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->sum('title_area');
@@ -283,6 +321,16 @@ class Dashboard extends Component
         $this->total_deduction_title_area_gensan = $this->gensan_loss_in_case +
         $this->gensan_cancelled_cloa + $this->gensan_exchange_lot + $this->gensan_free_lot +
         $this->gensan_compromise_agreement + $this->gensan_darbc_projects;
+
+        $total_gen_twc = $this->gensan_area_twc - $this->total_deduction_title_area_gensan;
+        $total_gen_twoc = $this->gensan_area_twoc - $this->total_deduction_title_area_gensan;
+        $total_gen_uwc = $this->gensan_area_uwc - $this->total_deduction_title_area_gensan;
+        $total_gen_uwoc = $this->gensan_area_uwoc - $this->total_deduction_title_area_gensan;
+
+        $this->gensan_total_twc = $total_gen_twc < 0 ? 0 : $total_gen_twc;
+        $this->gensan_total_twoc = $total_gen_twoc < 0 ? 0 : $total_gen_twoc;
+        $this->gensan_total_uwc = $total_gen_uwc < 0 ? 0 : $total_gen_uwc;
+        $this->gensan_total_uwoc = $total_gen_uwoc < 0 ? 0 : $total_gen_uwoc;
 
         $this->total_twc = $this->polomolok_area_twc + $this->tupi_area_twc + $this->gensan_area_twc;
         $this->total_twoc = $this->polomolok_area_twoc + $this->tupi_area_twoc + $this->gensan_area_twoc;
