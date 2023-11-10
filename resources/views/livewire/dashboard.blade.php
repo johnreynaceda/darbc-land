@@ -351,6 +351,59 @@
           <div wire:ignore>
             <canvas id="title_status" height="200"></canvas>
           </div>
+
+          <div class="overflow-x-auto m-3">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th class="px-4 py-3 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider"></th>
+                  <th class="px-4 py-3 bg-gray-200 text-left text-2xs leading-4 font-medium text-gray-600 uppercase tracking-wider">TWC</th>
+                  <th class="px-4 py-3 bg-gray-200 text-left text-2xs leading-4 font-medium text-gray-600 uppercase tracking-wider">TWOC</th>
+                  <th class="px-4 py-3 bg-gray-200 text-left text-2xs leading-4 font-medium text-gray-600 uppercase tracking-wider">UWC</th>
+                  <th class="px-4 py-3 bg-gray-200 text-left text-2xs leading-4 font-medium text-gray-600 uppercase tracking-wider">UWOC</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr>
+                  @php
+                    $pol_twc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->where('title_status_id', 1)->where('status_id', null)->count();
+                    $pol_twoc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->where('title_status_id', 2)->where('status_id', null)->count();
+                    $pol_uwc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->where('title_status_id', 3)->where('status_id', null)->count();
+                    $pol_uwoc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'POLOMOLOK' . '%')->where('title_status_id', 4)->where('status_id', null)->count();
+
+                    $tupi_twc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('title_status_id', 1)->where('status_id', null)->count();
+                    $tupi_twoc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('title_status_id', 2)->where('status_id', null)->count();
+                    $tupi_uwc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('title_status_id', 3)->where('status_id', null)->count();
+                    $tupi_uwoc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')->where('title_status_id', 4)->where('status_id', null)->count();
+
+                    $gen_twc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('title_status_id', 1)->where('status_id', null)->count();
+                    $gen_twoc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('title_status_id', 2)->where('status_id', null)->count();
+                    $gen_uwc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('title_status_id', 3)->where('status_id', null)->count();
+                    $gen_uwoc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('title_status_id', 4)->where('status_id', null)->count();
+                  @endphp
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">Polomolok</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_twc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_twoc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_uwc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_uwoc_count}}</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">Tupi</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_twc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_twoc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_uwc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_uwoc_count}}</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">Gensan</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_twc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_twoc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_uwc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_uwoc_count}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
