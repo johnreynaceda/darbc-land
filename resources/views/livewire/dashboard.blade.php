@@ -105,6 +105,96 @@
         </x-modal.card>
     </div>
 
+
+    <div>
+    <x-modal.card width="xl" align="center" title="Land Summary ({{$overall_land_summary_type}})" blur wire:model="showOverallLandSummaryModal">
+        <div>
+            <div class="inline-block min-w-full py-2">
+                @switch($overall_land_summary_type)
+                @case('Areas Leased by Dolefil')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'LEASED')->sum('dolephil_leased');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($leased,2)}}</h1>
+                </div>
+                @break
+                @case('DARBC Growership')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'GROWERS')->sum('darbc_grower');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($growers,2)}}</h1>
+                </div>
+                @break
+                @case('Livelihood Program')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'UNPLANTED')->sum('owned_but_not_planted');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($livelihood_program,2)}}</h1>
+                </div>
+                @break
+                @case('Facility')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'COMPROMISE AGREEMENT')->sum('owned_but_not_planted');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($facility,2)}}</h1>
+                </div>
+                @break
+                @case('Unplanted')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'DELETED')->sum('owned_but_not_planted');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($unplanted,2)}}</h1>
+                </div>
+                @break
+                @case('Additional Lot')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'OTHERS')->sum('owned_but_not_planted');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($additional_lot,2)}}</h1>
+                </div>
+                @break
+                @case('Deleted Area')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'OTHERS')->sum('owned_but_not_planted');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($deleted,2)}}</h1>
+                </div>
+                @break
+                @case('DARBC Quarry')
+                <div class="flex justify-end py-2">
+                    {{-- @php
+                        $sum = App\Models\Actual::where('land_status', 'OTHERS')->sum('owned_but_not_planted');
+                    @endphp --}}
+                    <h1 class="font-semibold text-md">Total Area: {{number_format($darbc_quarry,2)}}</h1>
+                </div>
+                @break
+            @endswitch
+            @if($overall_land_summary_type == 'Areas Leased by Dolefil' || $overall_land_summary_type == 'DARBC Growership')
+            <livewire:tables.overall-land-summary-table :record="$overall_land_summary_type"/>
+            @else
+            <livewire:tables.overall-land-summary-basic-information-table :record="$overall_land_summary_type"/>
+            @endif
+              </div>
+        </div>
+
+        <x-slot name="footer">
+            <div class="flex justify-between gap-x-4">
+                <div></div>
+                <div class="flex">
+                    <x-button slate label="CLOSE" wire:click="closeModal" />
+                </div>
+            </div>
+        </x-slot>
+    </x-modal.card>
+</div>
+
         <span class="leading-3 text-sm">Total Area in Hectares: {{ number_format($total_hectars, 2) }}</span>
         <div class="mt-2">
           <div wire:ignore>
@@ -190,6 +280,131 @@
                 </div>
             </x-slot>
         </x-modal.card>
+
+        {{-- TOTAL OVERALL LAND STATUS MODAL --}}
+
+        <x-modal.card width="xl" align="center" title="Actual Land Summary ({{$overall_actual_land_summary_type}}) - {{$overall_actual_land_summary_label}}" blur wire:model="showOverallActualLandSummaryModal">
+            <div>
+                <div class="inline-block min-w-full py-2">
+                        @switch($overall_actual_land_summary_type)
+                        @case('Loss in Case')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('planted_area');
+                            @endphp --}}
+                            @if($overall_actual_land_summary_label == 'Overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($loss_in_case,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Polomolok')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_loss_in_case,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Tupi')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_loss_in_case,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'General Santos')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_loss_in_case,2)}}</h1>
+                            @endif
+
+                        </div>
+                        @break
+                        @case('Cancelled CLOA')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('gulley_area');
+                            @endphp --}}
+                            @if($overall_actual_land_summary_label == 'Overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($cancelled_cloa,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Polomolok')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_cancelled_cloa,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Tupi')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_cancelled_cloa,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'General Santos')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_cancelled_cloa,2)}}</h1>
+                            @endif
+                        </div>
+                        @break
+                        @case('Exchange Lot')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('total_area');
+                            @endphp --}}
+                            @if($overall_actual_land_summary_label == 'Overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($exchange_lot,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Polomolok')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_exchange_lot,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Tupi')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_exchange_lot,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'General Santos')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_exchange_lot,2)}}</h1>
+                            @endif
+
+
+                        </div>
+                        @break
+                        @case('Free Lot')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('facility_area');
+                            @endphp --}}
+                            @if($overall_actual_land_summary_label == 'Overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($free_lot,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Polomolok')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_free_lot,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Tupi')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_free_lot,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'General Santos')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_free_lot,2)}}</h1>
+                            @endif
+
+                        </div>
+                        @break
+                        @case('Compromise Agreement')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('unutilized_area');
+                            @endphp --}}
+                            @if($overall_actual_land_summary_label == 'Overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($compromise_agreement,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Polomolok')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_compromise_agreement,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Tupi')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_compromise_agreement,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'General Santos')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_compromise_agreement,2)}}</h1>
+                            @endif
+                        </div>
+                        @break
+                        @case('DARBC Projects')
+                        <div class="flex justify-end py-2">
+                            {{-- @php
+                                $sum = App\Models\Actual::with('basic_information')->sum('gross_area');
+                            @endphp --}}
+                            @if($overall_actual_land_summary_label == 'Overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($darbc_projects,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Polomolok')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_darbc_projects,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'Tupi')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_darbc_projects,2)}}</h1>
+                            @elseif($overall_actual_land_summary_label == 'General Santos')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_darbc_projects,2)}}</h1>
+                            @endif
+                        </div>
+                        @break
+                        @default
+                        @endswitch
+                    <livewire:tables.overall-actual-land-summary-table :record="$overall_actual_land_summary_type"/>
+                  </div>
+            </div>
+
+            <x-slot name="footer">
+                <div class="flex justify-between gap-x-4">
+                    <div></div>
+                    <div class="flex">
+                        <x-button slate label="CLOSE" wire:click="closeActualModal" />
+                    </div>
+                </div>
+            </x-slot>
+        </x-modal.card>
+
+        {{-- END TOTAL OVERALL LAND STATUS --}}
+
         <span class="leading-3 text-sm text-red-500">Total Area in Hectares: {{ number_format($total_deduction_title_area, 2) }}</span>
         <div class="mt-2">
           <div class="" wire:ignore>
@@ -275,11 +490,24 @@
                             $sum = App\Models\BasicInformation::where('title_status', 'TWC')->sum('title_area');
                         @endphp --}}
                         @if ($selected_municipality == "POLOMOLOK")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_twc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_twc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_twc,2)}}</h1>
+                            @endif
+
                         @elseif ($selected_municipality == "TUPI")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_twc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_twc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_twc,2)}}</h1>
+                            @endif
                         @elseif ($selected_municipality == "GENERAL SANTOS")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_twc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_twc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_twc,2)}}</h1>
+                            @endif
                         @endif
                     </div>
                     @break
@@ -289,11 +517,23 @@
                             $sum = App\Models\BasicInformation::where('title_status', 'TWOC')->sum('title_area');
                         @endphp --}}
                         @if ($selected_municipality == "POLOMOLOK")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_twoc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_twoc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_twoc,2)}}</h1>
+                            @endif
                         @elseif ($selected_municipality == "TUPI")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_twoc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_twoc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_twoc,2)}}</h1>
+                            @endif
                         @elseif ($selected_municipality == "GENERAL SANTOS")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_twoc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_twoc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_twoc,2)}}</h1>
+                            @endif
                         @endif
                     </div>
                     @break
@@ -303,11 +543,23 @@
                             $sum = App\Models\BasicInformation::where('title_status', 'UWC')->sum('title_area');
                         @endphp --}}
                         @if ($selected_municipality == "POLOMOLOK")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_uwc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_uwc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_uwc,2)}}</h1>
+                            @endif
                         @elseif ($selected_municipality == "TUPI")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_uwc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_uwc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_uwc,2)}}</h1>
+                            @endif
                         @elseif ($selected_municipality == "GENERAL SANTOS")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_uwc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_uwc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_uwc,2)}}</h1>
+                            @endif
                         @endif
                     </div>
                     @break
@@ -317,18 +569,35 @@
                             $sum = App\Models\BasicInformation::where('title_status', 'UWOC')->sum('title_area');
                         @endphp --}}
                         @if ($selected_municipality == "POLOMOLOK")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_uwoc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_total_uwoc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($polomolok_area_uwoc,2)}}</h1>
+                            @endif
                         @elseif ($selected_municipality == "TUPI")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_uwoc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_total_uwoc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($tupi_area_uwoc,2)}}</h1>
+                            @endif
                         @elseif ($selected_municipality == "GENERAL SANTOS")
-                        <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_uwoc,2)}}</h1>
+                            @if ($overall_title_status_type == 'overall')
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_total_uwoc,2)}}</h1>
+                            @else
+                            <h1 class="font-semibold text-md">Total Area: {{number_format($gensan_area_uwoc,2)}}</h1>
+                            @endif
                         @endif
                     </div>
                     @break
                     @default
 
                     @endswitch
+                    @if ($overall_title_status_type == 'overall')
                     <livewire:tables.title-status-table :record="$title_status"/>
+                    @elseif($overall_title_status_type == 'municipality')
+                    <livewire:tables.overall-title-status-table :record="$title_status"/>
+                    @endif
+
                   </div>
             </div>
 
@@ -455,6 +724,7 @@
                           STATUS</th>
                         <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
                           HECTARES</th>
+                          <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
 
                       </tr>
                     </thead>
@@ -462,57 +732,124 @@
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Areas Leased by Dolefil</td>
+                        <td class="whitespace-nowrap border-b text-center px-3 py-2 text-xs text-gray-500">
+                          {{-- {{ number_format(App\Models\Actual::sum('dolephil_leased'), 2) }} --}}
+                          {{number_format($leased, 2)}}
+                        </td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ number_format(App\Models\Actual::sum('dolephil_leased'), 2) }}
+                          <button wire:click="overAllAwardedLot({{1}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Growership</td>
+                        <td class="whitespace-nowrap border-b text-center px-3 py-2 text-xs text-gray-500">
+                          {{-- {{ number_format(App\Models\Actual::sum('darbc_grower'), 2) }} --}}
+                          {{number_format($growers, 2)}}
+                        </td>
+                        </td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ number_format(App\Models\Actual::sum('darbc_grower'), 2) }}</td>
+                          <button wire:click="overAllAwardedLot({{2}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                     <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Livelihood Program</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">
+                          {{ number_format($livelihood_program, 2) }}
+                        </td>
                         <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
-                          {{ number_format(App\Models\BasicInformation::where('status_id', 7)->sum('title_area'), 2) }}
+                          <button wire:click="overAllAwardedLot({{3}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Facility</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">
                            {{ number_format(App\Models\BasicInformation::where('status_id', 8)->sum('title_area'), 2) }}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          <button wire:click="overAllAwardedLot({{4}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           UNPLANTED<small>(AGREED WITH DAR, DARBC & DOLE)</small></td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">
                           {{ number_format(App\Models\BasicInformation::where('status_id', 9)->sum('title_area'), 2) }}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          <button wire:click="overAllAwardedLot({{5}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Additional Lot</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">
                            {{ number_format(App\Models\BasicInformation::where('status_id', 10)->sum('title_area'), 2) }}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          <button wire:click="overAllAwardedLot({{6}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Deleted Area as Planted Pineapple</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">
                            {{ number_format(App\Models\BasicInformation::where('status_id', 11)->sum('title_area'), 2) }}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          <button wire:click="overAllAwardedLot({{7}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Quarry</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-gray-500">
                            {{ number_format(App\Models\BasicInformation::where('status_id', 12)->sum('title_area'), 2) }}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                          <button wire:click="overAllAwardedLot({{8}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                     </tbody>
@@ -534,57 +871,106 @@
                       <tr>
                         <th scope="col" class="py-2 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-3">
                           OVERALL LAND STATUS</th>
-                        <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
+                        <th scope="col" class="px-3 py-2 text-xs text-center font-semibold text-gray-900">AREA IN
                           HECTARES</th>
+                          <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
                       </tr>
                     </thead>
                     <tbody class="bg-white">
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Loss in Case</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                           {{ number_format($loss_in_case, 2) }}
                           {{-- ------ --}}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{9}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Cancelled CLOA</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                           {{ number_format($cancelled_cloa, 2) }}
                           {{-- ------ --}}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{10}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
 
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         Exchange Lot</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                      <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                         {{ number_format($exchange_lot, 2) }}
                         {{-- ------ --}}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
+                        <button wire:click="overAllAwardedLot({{11}}, 'all')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Free Lot</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                           {{ number_format($free_lot, 2) }}
                           {{-- ------ --}}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{12}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Compromise Agreement</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                           {{ number_format($compromise_agreement, 2) }}
                           {{-- ------ --}}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{13}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Projects</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                           {{ number_format($darbc_projects, 2) }}
                           {{-- ------ --}}
+                        </td>
+                        <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{14}}, 'all')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
                         </td>
                       </tr>
                     </tbody>
@@ -619,6 +1005,7 @@
                         HECTARES</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                       </th>
+                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
 
                     </tr>
                   </thead>
@@ -634,8 +1021,16 @@
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <button wire:click="showOverallTitleStatusReport({{0}}, 'Titled with CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -657,8 +1052,16 @@
                         //     ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                         //     ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <button wire:click="showOverallTitleStatusReport({{0}}, 'Titled without CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -673,8 +1076,16 @@
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <button wire:click="showOverallTitleStatusReport({{0}}, 'Untitled with CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -689,8 +1100,16 @@
                             ->where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">
+                        <button wire:click="showOverallTitleStatusReport({{0}}, 'Untitled without CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -719,13 +1138,14 @@
                           HECTARES</th>
                           <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">
                             NO. OF LOTS</th>
+                            <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
                       </tr>
                     </thead>
                     <tbody class="bg-white">
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Loss in Case</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($polomolok_loss_in_case, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -734,26 +1154,43 @@
                             ->where('status_id', 1)
                             ->count();
                       @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_loss_in_case_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $polomolok_loss_in_case_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{1}}, 'polomolok')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Cancelled CLOA</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($polomolok_cancelled_cloa, 2) }}
                           {{-- ------ --}}
                         </td>
+
                         @php
                         $polomolok_cancelled_cloa_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'Polomolok' . '%')
                             ->where('status_id', 2)
                             ->count();
                       @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_cancelled_cloa_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $polomolok_cancelled_cloa_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{2}}, 'polomolok')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
 
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         Exchange Lot</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                         {{ number_format($polomolok_exchange_lot, 2) }}
                         {{-- ------ --}}
                       </td>
@@ -762,12 +1199,20 @@
                           ->where('status_id', 3)
                           ->count();
                      @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_exchange_lot_lots }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $polomolok_exchange_lot_lots }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="overAllAwardedLot({{3}}, 'polomolok')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
+                      </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Free Lot</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($polomolok_free_lot, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -776,12 +1221,20 @@
                             ->where('status_id', 4)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_free_lot_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $polomolok_free_lot_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{4}}, 'polomolok')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Compromise Agreement</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($polomolok_compromise_agreement, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -790,12 +1243,20 @@
                             ->where('status_id', 5)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_compromise_agreement_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $polomolok_compromise_agreement_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{5}}, 'polomolok')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Projects</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($polomolok_darbc_projects, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -804,7 +1265,15 @@
                             ->where('status_id', 6)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $polomolok_darbc_projects_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $polomolok_darbc_projects_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{6}}, 'polomolok')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -834,6 +1303,7 @@
                         HECTARES</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                       </th>
+                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
                     </tr>
                   </thead>
                   <tbody class="bg-white">
@@ -848,8 +1318,16 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button  wire:click="showOverallTitleStatusReport({{1}}, 'Titled with CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -863,8 +1341,16 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="showOverallTitleStatusReport({{1}}, 'Titled without CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -879,8 +1365,16 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button  wire:click="showOverallTitleStatusReport({{1}}, 'Untitled with CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -895,8 +1389,16 @@
                             ->where('municipality', 'like', '%' . 'TUPI' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="showOverallTitleStatusReport({{1}}, 'Untitled without CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -923,13 +1425,14 @@
                               HECTARES</th>
                               <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                             </th>
+                            <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
                           </tr>
                         </thead>
                         <tbody class="bg-white">
                           <tr>
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Loss in Case</td>
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                            <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                               {{ number_format($tupi_loss_in_case, 2) }}
                               {{-- ------ --}}
                             </td>
@@ -938,12 +1441,20 @@
                                 ->where('status_id', 1)
                                 ->count();
                            @endphp
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_loss_in_case_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-gray-500">{{ $tupi_loss_in_case_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              <button wire:click="overAllAwardedLot({{1}}, 'tupi')">
+                                <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                  <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
+                            </td>
                           </tr>
                           <tr>
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Cancelled CLOA</td>
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                            <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
                               {{ number_format($tupi_cancelled_cloa, 2) }}
                               {{-- ------ --}}
                             </td>
@@ -952,12 +1463,20 @@
                                 ->where('status_id', 2)
                                 ->count();
                            @endphp
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_cancelled_cloa_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-gray-500">{{ $tupi_cancelled_cloa_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              <button wire:click="overAllAwardedLot({{2}}, 'tupi')">
+                                <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                  <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
+                            </td>
                           </tr>
 
                           <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                             Exchange Lot</td>
-                          <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                             {{ number_format($tupi_exchange_lot, 2) }}
                             {{-- ------ --}}
                           </td>
@@ -966,12 +1485,20 @@
                               ->where('status_id', 3)
                               ->count();
                          @endphp
-                          <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_exchange_lot_lots }}</td>
+                          <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_exchange_lot_lots }}</td>
+                          <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                            <button wire:click="overAllAwardedLot({{3}}, 'tupi')">
+                              <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                              </svg>
+                            </button>
+                          </td>
                           </tr>
                           <tr>
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Free Lot</td>
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                               {{ number_format($tupi_free_lot, 2) }}
                               {{-- ------ --}}
                             </td>
@@ -980,12 +1507,20 @@
                                 ->where('status_id', 4)
                                 ->count();
                            @endphp
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_free_lot_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_free_lot_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              <button wire:click="overAllAwardedLot({{4}}, 'tupi')">
+                                <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                  <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
+                            </td>
                           </tr>
                           <tr>
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Compromise Agreement</td>
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                               {{ number_format($tupi_compromise_agreement, 2) }}
                               {{-- ------ --}}
                             </td>
@@ -994,12 +1529,20 @@
                                 ->where('status_id', 5)
                                 ->count();
                            @endphp
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_compromise_agreement_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_compromise_agreement_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              <button wire:click="overAllAwardedLot({{5}}, 'tupi')">
+                                <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                  <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
+                            </td>
                           </tr>
                           <tr>
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               DARBC Projects</td>
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                               {{ number_format($tupi_darbc_projects, 2) }}
                               {{-- ------ --}}
                             </td>
@@ -1008,7 +1551,15 @@
                                 ->where('status_id', 6)
                                 ->count();
                            @endphp
-                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $tupi_darbc_projects_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_darbc_projects_lots }}</td>
+                            <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                              <button wire:click="overAllAwardedLot({{6}}, 'tupi')">
+                                <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                  <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                                </svg>
+                              </button>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -1037,6 +1588,7 @@
                         HECTARES</th>
                       <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS
                       </th>
+                      <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
 
                     </tr>
                   </thead>
@@ -1052,8 +1604,16 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="showOverallTitleStatusReport({{2}}, 'Titled with CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -1067,8 +1627,16 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="showOverallTitleStatusReport({{2}}, 'Titled without CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -1083,8 +1651,16 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area, 2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area, 2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="showOverallTitleStatusReport({{2}}, 'Untitled with CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                     <tr>
@@ -1099,8 +1675,16 @@
                             ->where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')
                             ->count();
                       @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ number_format($area,2) }}</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $lots }}
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ number_format($area,2) }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $lots }}
+                      </td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="showOverallTitleStatusReport({{2}}, 'Untitled without CLOA')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -1125,13 +1709,14 @@
                         <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">AREA IN
                           HECTARES</th>
                           <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900">NO. OF LOTS</th>
+                          <th scope="col" class="px-3 py-2 text-left text-xs font-semibold text-gray-900"></th>
                       </tr>
                     </thead>
                     <tbody class="bg-white">
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Loss in Case</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($gensan_loss_in_case, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -1140,12 +1725,20 @@
                             ->where('status_id', 1)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_loss_in_case_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $gensan_loss_in_case_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{1}}, 'gensan')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Cancelled CLOA</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($gensan_cancelled_cloa, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -1154,12 +1747,20 @@
                             ->where('status_id', 2)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_cancelled_cloa_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $gensan_cancelled_cloa_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{2}}, 'gensan')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
 
                       <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                         Exchange Lot</td>
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                         {{ number_format($gensan_exchange_lot, 2) }}
                         {{-- ------ --}}
                       </td>
@@ -1168,12 +1769,20 @@
                           ->where('status_id', 3)
                           ->count();
                      @endphp
-                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_exchange_lot_lots }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $gensan_exchange_lot_lots }}</td>
+                      <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <button wire:click="overAllAwardedLot({{3}}, 'gensan')">
+                          <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
+                      </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Free Lot</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($gensan_free_lot, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -1182,12 +1791,20 @@
                             ->where('status_id', 4)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_free_lot_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $gensan_free_lot_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{4}}, 'gensan')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           Compromise Agreement</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($gensan_compromise_agreement, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -1196,12 +1813,20 @@
                             ->where('status_id', 5)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_compromise_agreement_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $gensan_compromise_agreement_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{5}}, 'gensan')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                       <tr>
                         <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                           DARBC Projects</td>
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
                           {{ number_format($gensan_darbc_projects, 2) }}
                           {{-- ------ --}}
                         </td>
@@ -1210,7 +1835,15 @@
                             ->where('status_id', 6)
                             ->count();
                        @endphp
-                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-gray-500">{{ $gensan_darbc_projects_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $gensan_darbc_projects_lots }}</td>
+                        <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
+                          <button wire:click="overAllAwardedLot({{5}}, 'gensan')">
+                            <svg class="w-5 h-5 text-indigo-600 hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                            </svg>
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

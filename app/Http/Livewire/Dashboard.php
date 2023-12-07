@@ -10,6 +10,7 @@ class Dashboard extends Component
 {
     protected $listeners = ['showReport', 'showActualReport', 'showMunicipalityReport', 'showTitleStatusReport'];
     public $showLandSummaryModal = false;
+    public $showOverallLandSummaryModal = false;
     public $leased;
     public $growers;
     public $livelihood_program;
@@ -19,11 +20,15 @@ class Dashboard extends Component
     public $darbc_quarry;
     public $compromise;
     public $others;
+    public $overall_land_summary_type;
+    public $overall_actual_land_summary_type;
+    public $overall_actual_land_summary_label;
     public $land_summary_type;
     public $land_summary_value;
 
     //actual summary
     public $showActualLandSummaryModal = false;
+    public $showOverallActualLandSummaryModal = false;
     public $gross;
     public $planted;
     public $gulley;
@@ -43,6 +48,7 @@ class Dashboard extends Component
     public $municipality_type;
 
     //Title Status
+    public $overall_title_status_type;
     public $showTitleStatusModal = false;
     public $twc;
     public $twoc;
@@ -152,6 +158,7 @@ class Dashboard extends Component
     public function showTitleStatusReport($index, $label, $value)
     {
         $this->title_status = $label;
+        $this->overall_title_status_type = 'overall';
         switch($index)
         {
             case 0:
@@ -185,6 +192,43 @@ class Dashboard extends Component
         $this->showTitleStatusModal = true;
     }
 
+    public function showOverallTitleStatusReport($index, $label)
+    {
+        $this->title_status = $label;
+        $this->overall_title_status_type = 'municipality';
+        switch($index)
+        {
+            case 0:
+            $this->selected_municipality = "POLOMOLOK";
+            break;
+            case 1:
+            $this->selected_municipality = "TUPI";
+            break;
+            case 2:
+            $this->selected_municipality = "GENERAL SANTOS";
+            break;
+        }
+
+        switch ($label) {
+            case 'Titled with CLOA':
+                $label = 'TWC';
+              break;
+            case 'Titled without CLOA':
+                $label = 'TWOC';
+              break;
+            case 'Untitled with CLOA':
+                $label = 'UWC';
+              break;
+              case 'Untitled without CLOA':
+                $label = 'UWOC';
+              break;
+            default:
+            $label = 'TWC';
+          }
+        $this->emit('showOverallTitleStatusReportData', $index, $label);
+        $this->showTitleStatusModal = true;
+    }
+
     public function closeModal()
     {
         $refresh;
@@ -209,13 +253,201 @@ class Dashboard extends Component
         $this->showTitleStatusModal = false;
     }
 
+    public function overAllAwardedLot($value, $label)
+    {
+        if($label == 'all')
+        {
+            $this->overall_actual_land_summary_label = 'Overall';
+            switch ($value) {
+                case '1':
+                    $this->overall_land_summary_type = 'Areas Leased by Dolefil';
+                    $this->emit('showOverallReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '2':
+                    $this->overall_land_summary_type = 'DARBC Growership';
+                    $this->emit('showOverallReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '3':
+                    $this->overall_land_summary_type = 'Livelihood Program';
+                    $this->emit('showOverallBasicInformationReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '4':
+                    $this->overall_land_summary_type = 'Facility';
+                    $this->emit('showOverallBasicInformationReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '5':
+                    $this->overall_land_summary_type = 'Unplanted';
+                    $this->emit('showOverallBasicInformationReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '6':
+                    $this->overall_land_summary_type = 'Additional Lot';
+                    $this->emit('showOverallBasicInformationReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '7':
+                    $this->overall_land_summary_type = 'Deleted Area';
+                    $this->emit('showOverallBasicInformationReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '8':
+                    $this->overall_land_summary_type = 'DARBC Quarry';
+                    $this->emit('showOverallBasicInformationReportData', $this->overall_land_summary_type);
+                    $this->showOverallLandSummaryModal = true;
+                    break;
+                case '9':
+                    $this->overall_actual_land_summary_type = 'Loss in Case';
+                    $this->emit('showOverallActualReportData', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '10':
+                    $this->overall_actual_land_summary_type = 'Cancelled CLOA';
+                    $this->emit('showOverallActualReportData', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '11':
+                    $this->overall_actual_land_summary_type = 'Exchange Lot';
+                    $this->emit('showOverallActualReportData', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '12':
+                    $this->overall_actual_land_summary_type = 'Free Lot';
+                    $this->emit('showOverallActualReportData', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '13':
+                    $this->overall_actual_land_summary_type = 'Compromise Agreement';
+                    $this->emit('showOverallActualReportData', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '14':
+                    $this->overall_actual_land_summary_type = 'DARBC Projects';
+                    $this->emit('showOverallActualReportData', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+            }
+        }elseif($label == 'polomolok'){
+            $this->overall_actual_land_summary_label = 'Polomolok';
+            switch ($value) {
+                case '1':
+                    $this->overall_actual_land_summary_type = 'Loss in Case';
+                    $this->emit('showOverallActualReportDataPolomolok', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '2':
+                    $this->overall_actual_land_summary_type = 'Cancelled CLOA';
+                    $this->emit('showOverallActualReportDataPolomolok', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '3':
+                    $this->overall_actual_land_summary_type = 'Exchange Lot';
+                    $this->emit('showOverallActualReportDataPolomolok', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '4':
+                    $this->overall_actual_land_summary_type = 'Free Lot';
+                    $this->emit('showOverallActualReportDataPolomolok', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '5':
+                    $this->overall_actual_land_summary_type = 'Compromise Agreement';
+                    $this->emit('showOverallActualReportDataPolomolok', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '6':
+                    $this->overall_actual_land_summary_type = 'DARBC Projects';
+                    $this->emit('showOverallActualReportDataPolomolok', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+            }
+        }elseif($label == 'tupi'){
+            $this->overall_actual_land_summary_label = 'Tupi';
+            switch ($value) {
+                case '1':
+                    $this->overall_actual_land_summary_type = 'Loss in Case';
+                    $this->emit('showOverallActualReportDataTupi', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '2':
+                    $this->overall_actual_land_summary_type = 'Cancelled CLOA';
+                    $this->emit('showOverallActualReportDataTupi', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '3':
+                    $this->overall_actual_land_summary_type = 'Exchange Lot';
+                    $this->emit('showOverallActualReportDataTupi', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '4':
+                    $this->overall_actual_land_summary_type = 'Free Lot';
+                    $this->emit('showOverallActualReportDataTupi', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '5':
+                    $this->overall_actual_land_summary_type = 'Compromise Agreement';
+                    $this->emit('showOverallActualReportDataTupi', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '6':
+                    $this->overall_actual_land_summary_type = 'DARBC Projects';
+                    $this->emit('showOverallActualReportDataTupi', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+            }
+        }elseif($label == 'gensan'){
+            $this->overall_actual_land_summary_label = 'General Santos';
+            switch ($value) {
+                case '1':
+                    $this->overall_actual_land_summary_type = 'Loss in Case';
+                    $this->emit('showOverallActualReportDataGensan', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '2':
+                    $this->overall_actual_land_summary_type = 'Cancelled CLOA';
+                    $this->emit('showOverallActualReportDataGensan', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '3':
+                    $this->overall_actual_land_summary_type = 'Exchange Lot';
+                    $this->emit('showOverallActualReportDataGensan', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '4':
+                    $this->overall_actual_land_summary_type = 'Free Lot';
+                    $this->emit('showOverallActualReportDataGensan', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '5':
+                    $this->overall_actual_land_summary_type = 'Compromise Agreement';
+                    $this->emit('showOverallActualReportDataGensan', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+                case '6':
+                    $this->overall_actual_land_summary_type = 'DARBC Projects';
+                    $this->emit('showOverallActualReportDataGensan', $this->overall_actual_land_summary_type);
+                    $this->showOverallActualLandSummaryModal = true;
+                    break;
+            }
+        }
+
+    }
+
 
 
     public function mount()
     {
-        // $this->leased = Actual::where('land_status', 'Leased')->count();
-        $this->leased = Actual::sum('dolephil_leased');
-        $this->growers = Actual::sum('darbc_grower');
+        // $this->leased = Actual::sum('dolephil_leased');
+        // $this->growers = Actual::sum('darbc_grower');
+        $this->leased = BasicInformation::whereHas('actuals', function($query) {
+            $query->where('land_status', 'LEASED');
+        })->sum('title_area');
+        $this->growers = BasicInformation::whereHas('actuals', function($query) {
+            $query->where('land_status', 'GROWERS');
+        })->sum('title_area');
         $this->livelihood_program = BasicInformation::where('status_id', 7)->sum('title_area');
         $this->facility = BasicInformation::where('status_id', 8)->sum('title_area');
         $this->unplanted = BasicInformation::where('status_id', 9)->sum('title_area');
@@ -300,7 +532,8 @@ class Dashboard extends Component
         $total_tupi_uwc = $this->tupi_area_uwc - $this->total_deduction_title_area_tupi;
         $total_tupi_uwoc = $this->tupi_area_uwoc - $this->total_deduction_title_area_tupi;
 
-        $this->tupi_total_twc = $total_tupi_twc < 0 ? 0 : $total_tupi_twc;
+        $this->tupi_total_twc = $this->tupi_area_twc - $this->total_deduction_title_area_tupi;
+        // $this->tupi_total_twc = $total_tupi_twc < 0 ? 0 : $total_tupi_twc;
         $this->tupi_total_twoc = $total_tupi_twoc < 0 ? 0 : $total_tupi_twoc;
         $this->tupi_total_uwc = $total_tupi_uwc < 0 ? 0 : $total_tupi_uwc;
         $this->tupi_total_uwoc = $total_tupi_uwoc < 0 ? 0 : $total_tupi_uwoc;
