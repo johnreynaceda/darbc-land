@@ -188,7 +188,7 @@
             <div class="flex justify-between gap-x-4">
                 <div></div>
                 <div class="flex">
-                    <x-button slate label="CLOSE" wire:click="closeModal" />
+                    <x-button slate label="CLOSE" wire:click="closeOverallModal" />
                 </div>
             </div>
         </x-slot>
@@ -397,7 +397,7 @@
                 <div class="flex justify-between gap-x-4">
                     <div></div>
                     <div class="flex">
-                        <x-button slate label="CLOSE" wire:click="closeActualModal" />
+                        <x-button slate label="CLOSE" wire:click="closeOverAllActualModal" />
                     </div>
                 </div>
             </x-slot>

@@ -235,10 +235,22 @@ class Dashboard extends Component
         $this->showLandSummaryModal = false;
     }
 
+    public function closeOverallModal()
+    {
+        $refresh;
+        $this->showOverallLandSummaryModal = false;
+    }
+
     public function closeActualModal()
     {
         $refresh;
         $this->showActualLandSummaryModal = false;
+    }
+
+    public function closeOverAllActualModal()
+    {
+        $refresh;
+        $this->showOverallActualLandSummaryModal = false;
     }
 
     public function closeMunicipalityModal()
