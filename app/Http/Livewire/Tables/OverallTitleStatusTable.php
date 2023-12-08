@@ -76,7 +76,7 @@ class OverallTitleStatusTable extends Component implements Tables\Contracts\HasT
             TextColumn::make('lot_number')
             ->label('Lot No.'),
             TextColumn::make('title_area')
-            ->formatStateUsing(fn($record) => $record->title_area != ' ' ? number_format($record->title_area, 2) : '0.00')
+            ->formatStateUsing(fn($record) => is_numeric($record->title_area) ? number_format($record->title_area, 2) : '0.00')
             ->label('Title Area'),
             BadgeColumn::make('basic_title_status.name')
             ->color('warning')

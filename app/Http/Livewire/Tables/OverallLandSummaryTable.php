@@ -52,7 +52,7 @@ class OverallLandSummaryTable extends Component implements Tables\Contracts\HasT
             TextColumn::make('basic_information.lot_number')
             ->label('Lot No.'),
             TextColumn::make('basic_information.title_area')
-            ->formatStateUsing(fn($record) => $record->basic_information->title_area != ' ' ? number_format($record->basic_information->title_area, 2) : '0.00')
+            ->formatStateUsing(fn($record) => is_numeric($record->basic_information->title_area) ? number_format($record->basic_information->title_area, 2) : '0.00')
             ->label('Title Area'),
             BadgeColumn::make('land_status')
             ->color('warning')
