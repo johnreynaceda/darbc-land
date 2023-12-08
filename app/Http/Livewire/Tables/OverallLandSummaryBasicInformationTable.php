@@ -66,7 +66,7 @@ class OverallLandSummaryBasicInformationTable extends Component implements Table
             TextColumn::make('lot_number')
             ->label('Lot No.'),
             TextColumn::make('title_area')
-            ->formatStateUsing(fn($record) => empty($record->title_area) ? number_format($record->title_area, 2) : '0.00')
+            ->formatStateUsing(fn($record) => is_numeric($record->title_area) ? number_format($record->title_area, 2) : '0.00')
             ->label('Title Area'),
             BadgeColumn::make('basic_status.name')
             ->color('warning')
