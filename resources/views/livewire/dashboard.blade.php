@@ -678,24 +678,24 @@
                     $gen_uwoc_count = App\Models\BasicInformation::where('municipality', 'like', '%' . 'GENERAL SANTOS' . '%')->where('title_status_id', 4)->where('status_id', null)->count();
                   @endphp
                   <td class="px-4 py-4 text-xs whitespace-no-wrap">Polomolok</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_twc_count - $pol_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_twoc_count - $pol_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_uwc_count - $pol_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_uwoc_count - $pol_total_less}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_twc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_twoc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_uwc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$pol_uwoc_count}}</td>
                 </tr>
                 <tr>
                   <td class="px-4 py-4 text-xs whitespace-no-wrap">Tupi</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_twc_count - $tupi_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_twoc_count - $tupi_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_uwc_count - $tupi_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_uwoc_count - $tupi_total_less}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_twc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_twoc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_uwc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$tupi_uwoc_count}}</td>
                 </tr>
                 <tr>
                   <td class="px-4 py-4 text-xs whitespace-no-wrap">Gensan</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_twc_count - $gensan_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_twoc_count - $gensan_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_uwc_count - $gensan_total_less}}</td>
-                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_uwoc_count - $gensan_total_less}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_twc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_twoc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_uwc_count}}</td>
+                  <td class="px-4 py-4 text-xs whitespace-no-wrap">{{$gen_uwoc_count}}</td>
                 </tr>
               </tbody>
             </table>
