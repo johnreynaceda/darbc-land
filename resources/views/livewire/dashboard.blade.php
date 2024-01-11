@@ -1460,7 +1460,12 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Loss in Case</td>
                             <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
-                              {{ number_format($tupi_loss_in_case, 2) }}
+                                @php
+                                $tupi_loss_in_case_area = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                    ->where('status_id', 1)
+                                    ->sum('title_area');
+                               @endphp
+                              {{ number_format($tupi_loss_in_case_area, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
