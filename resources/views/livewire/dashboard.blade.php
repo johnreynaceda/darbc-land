@@ -1466,7 +1466,7 @@
                             @php
                             $tupi_loss_in_case_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
                                 ->where('status_id', 1)
-                                ->count();
+                                ->sum('title_area');
                            @endphp
                             <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-gray-500">{{ $tupi_loss_in_case_lots }}</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
@@ -1488,7 +1488,7 @@
                             @php
                             $tupi_cancelled_cloa_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
                                 ->where('status_id', 2)
-                                ->count();
+                                ->sum('title_area');
                            @endphp
                             <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-gray-500">{{ $tupi_cancelled_cloa_lots }}</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
@@ -1510,7 +1510,7 @@
                           @php
                           $tupi_exchange_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
                               ->where('status_id', 3)
-                              ->count();
+                              ->sum('title_area');
                          @endphp
                           <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_exchange_lot_lots }}</td>
                           <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
@@ -1532,7 +1532,7 @@
                             @php
                             $tupi_free_lot_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
                                 ->where('status_id', 4)
-                                ->count();
+                                ->sum('title_area');
                            @endphp
                             <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_free_lot_lots }}</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
@@ -1554,7 +1554,7 @@
                             @php
                             $tupi_compromise_agreement_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
                                 ->where('status_id', 5)
-                                ->count();
+                                ->sum('title_area');
                            @endphp
                             <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_compromise_agreement_lots }}</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
@@ -1576,7 +1576,7 @@
                             @php
                             $tupi_darbc_projects_lots = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
                                 ->where('status_id', 6)
-                                ->count();
+                                ->sum('title_area');
                            @endphp
                             <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-gray-500">{{ $tupi_darbc_projects_lots }}</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-xs text-red-700">
