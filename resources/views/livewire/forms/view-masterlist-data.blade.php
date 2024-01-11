@@ -831,7 +831,7 @@
                                       @foreach ($taxss as $item)
                                         <tr class="divide-x divide-gray-200">
                                           <td class="whitespace-nowrap p-4 text-sm text-gray-500">
-                                            {{ $item->basicInformation->tax_dec_number }}</td>
+                                            {{ $item->tax_declaration_number }}</td>
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->owner }}
                                           </td>
