@@ -1487,7 +1487,12 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Cancelled CLOA</td>
                             <td class="whitespace-nowrap border-b px-3 text-center py-2 text-xs text-red-700">
-                              {{ number_format($tupi_cancelled_cloa, 2) }}
+                                @php
+                                $tupi_cancelled_cloa_area = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                    ->where('status_id', 2)
+                                    ->sum('title_area');
+                               @endphp
+                              {{ number_format($tupi_cancelled_cloa_area, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -1509,7 +1514,12 @@
                           <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                             Exchange Lot</td>
                           <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
-                            {{ number_format($tupi_exchange_lot, 2) }}
+                            @php
+                            $tupi_exchange_lot_area = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                ->where('status_id', 3)
+                                ->sum('title_area');
+                           @endphp
+                            {{ number_format($tupi_exchange_lot_area, 2) }}
                             {{-- ------ --}}
                           </td>
                           @php
@@ -1531,7 +1541,12 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Free Lot</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
-                              {{ number_format($tupi_free_lot, 2) }}
+                                @php
+                                $tupi_free_lot_area = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                    ->where('status_id', 4)
+                                    ->sum('title_area');
+                               @endphp
+                              {{ number_format($tupi_free_lot_area, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -1553,7 +1568,12 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               Compromise Agreement</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
-                              {{ number_format($tupi_compromise_agreement, 2) }}
+                                @php
+                                $tupi_compromise_agreement_area = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                    ->where('status_id', 5)
+                                    ->sum('title_area');
+                               @endphp
+                              {{ number_format($tupi_compromise_agreement_area, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
@@ -1575,7 +1595,12 @@
                             <td class="whitespace-nowrap border-b py-2 pl-4 pr-3 text-xs font-medium text-gray-900 sm:pl-3">
                               DARBC Projects</td>
                             <td class="whitespace-nowrap border-b px-3 py-2 text-center text-xs text-red-700">
-                              {{ number_format($tupi_darbc_projects, 2) }}
+                                @php
+                                $tupi_darbc_projects_area = App\Models\BasicInformation::where('municipality', 'like', '%' . 'TUPI' . '%')
+                                    ->where('status_id', 6)
+                                    ->sum('title_area');
+                               @endphp
+                              {{ number_format($tupi_darbc_projects_area, 2) }}
                               {{-- ------ --}}
                             </td>
                             @php
