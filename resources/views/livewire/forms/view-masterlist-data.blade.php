@@ -1261,8 +1261,9 @@
               <x-input label="Year" placeholder="" wire:model.defer="year" />
               <x-input label="Square Meters" placeholder="" wire:model.defer="square_meter" />
               <x-input label="Year of payment" placeholder="" wire:model.defer="year_of_payment" />
-              <x-input label="Official Receipt" placeholder="" wire:model.defer="official_receipt" />
+              <x-input label="Tax Payment" placeholder="" wire:model.defer="tax_payment" />
             </div>
+            <x-input label="Official Receipt" placeholder="" wire:model.defer="official_receipt" />
             {{-- <div class="">
               {{ $this->form }}
             </div> --}}
@@ -1304,8 +1305,9 @@
               <x-input label="Year" disabled placeholder="" wire:model.defer="view_year" />
               <x-input label="Square Meters" disabled placeholder="" wire:model.defer="view_square_meter" />
               <x-input label="Year of payment" disabled placeholder="" wire:model.defer="view_year_of_payment" />
-              <x-input label="Official Receipt" disabled placeholder="" wire:model.defer="view_official_receipt" />
+              <x-input label="Tax Payment" disabled placeholder="" wire:model.defer="view_tax_payment" />
             </div>
+            <x-input label="Official Receipt" disabled placeholder="" wire:model.defer="view_official_receipt" />
             {{-- <div class="">
               {{ $this->form }}
             </div> --}}
@@ -1342,8 +1344,9 @@
               <x-input label="Year" placeholder="" wire:model.defer="update_year" />
               <x-input label="Square Meters" placeholder="" wire:model.defer="update_square_meter" />
               <x-input label="Year of payment" placeholder="" wire:model.defer="update_year_of_payment" />
-              <x-input label="Official Receipt" placeholder="" wire:model.defer="update_official_receipt" />
+              <x-input label="Tax Payment" placeholder="" wire:model.defer="update_tax_payment" />
             </div>
+            <x-input label="Official Receipt" placeholder="" wire:model.defer="update_official_receipt" />
             {{-- <div class="">
               {{ $this->form }}
             </div> --}}

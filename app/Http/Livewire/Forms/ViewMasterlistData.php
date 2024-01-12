@@ -165,6 +165,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $view_year;
     public $view_square_meter;
     public $view_year_of_payment;
+    public $view_tax_payment;
     public $view_official_receipt;
 
 
@@ -182,6 +183,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
       public $update_square_meter;
     //   public $update_tax_payment;
       public $update_year_of_payment;
+      public $update_tax_payment;
       public $update_official_receipt;
     //   public $update_receipt_image;
 
@@ -846,6 +848,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->view_year = $this->tax_data->year;
         $this->view_square_meter = $this->tax_data->square_meter;
         $this->view_year_of_payment = $this->tax_data->year_of_payment;
+        $this->view_tax_payment = $this->tax_data->tax_payment;
         $this->view_official_receipt = $this->tax_data->official_receipt;
     }
 
@@ -865,6 +868,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->update_year = $this->tax_data->year;
         $this->update_square_meter = $this->tax_data->square_meter;
         $this->update_year_of_payment = $this->tax_data->year_of_payment;
+        $this->update_tax_payment = $this->tax_data->tax_payment;
         $this->update_official_receipt = $this->tax_data->official_receipt;
     }
 
@@ -883,6 +887,7 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
         $this->tax_data->year = $this->update_year;
         $this->tax_data->square_meter = $this->update_square_meter;
         $this->tax_data->year_of_payment = $this->update_year_of_payment;
+        $this->tax_data->tax_payment = $this->update_tax_payment;
         $this->tax_data->official_receipt = $this->update_official_receipt;
         $this->tax_data->save();
         DB::commit();
