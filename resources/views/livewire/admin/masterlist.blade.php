@@ -1139,4 +1139,32 @@
       </x-slot>
     </x-card>
   </x-modal>
+
+      {{-- view missing documents modal --}}
+
+      <x-modal align="center" wire:model.defer="viewMissingDocs">
+        <x-card title="Missing Documents">
+          <div class="space-y-3">
+            <ul class="p-3 list-disc">
+                @if (count($missingDocuments) > 0)
+                    @foreach ($missingDocuments as $missing)
+                    <li class="text-sm font-semibold uppercase">
+                        {{ str_replace('_', ' ', $missing) }}
+                    </li>
+                    @endforeach
+                @else
+                <li class="text-sm font-semibold uppercase">NO MISSING DOCUMENT</li>
+                @endif
+
+            </ul>
+          </div>
+          <x-slot name="footer">
+            <div class="flex justify-end gap-x-4">
+              <x-button flat label="Cancel" x-on:click="close" />
+            </div>
+          </x-slot>
+        </x-card>
+      </x-modal>
+
+
 </div>

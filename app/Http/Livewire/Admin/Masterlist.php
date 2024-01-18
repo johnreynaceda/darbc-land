@@ -43,6 +43,9 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
     public $update_modal = false;
     public $viewMissingData = false;
     public $missingData = [];
+    public $viewMissingDocs = false;
+    public $missingDocuments = [];
+
 
     //for add
     public $_number;
@@ -464,6 +467,12 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
         $this->viewMissingData = true;
     }
 
+    public function viewMissingDocuments($missingDocuments)
+    {
+        $this->missingDocuments = $missingDocuments;
+        $this->viewMissingDocs = true;
+    }
+
     protected function getTableColumns(): array
     {
         return [
@@ -528,6 +537,32 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                     $this->viewEmptyColumns($emptyColumns);
 
                 }),
+                BadgeColumn::make('missingDocuments')
+                // TextColumn::make('missingDetails')
+                    ->label('MISSING DOCUMENTS')
+                    ->formatStateUsing(function ($record) {
+                        $post = BasicInformation::find($record->id);
+
+                        $attachedDocuments = $post->attachments()->where('documentable_id', $post->id)->pluck('document_type')->toArray();
+                        $allDocumentNames = ['TITLE', 'DEED OF SALE', 'TAX DEC', 'SKETCH PLAN', 'ACTUAL PHOTO', 'VIDEO', 'OTHERS'];
+                        $missingDocuments = array_diff($allDocumentNames, $attachedDocuments);
+
+
+                        return count($missingDocuments);
+
+
+                    })
+                    ->color('warning')
+                    ->action(function (BasicInformation $record): void {
+                        $post = BasicInformation::find($record->id);
+
+                        $attachedDocuments = $post->attachments()->where('documentable_id', $post->id)->pluck('document_type')->toArray();
+                        $allDocumentNames = ['TITLE', 'DEED OF SALE', 'TAX DEC', 'SKETCH PLAN', 'ACTUAL PHOTO', 'VIDEO', 'OTHERS'];
+                        $missingDocuments = array_diff($allDocumentNames, $attachedDocuments);
+
+                        $this->viewMissingDocuments($missingDocuments);
+
+                    }),
             TextColumn::make('lot_number')
                 ->label('LOT NUMBER')
                 ->searchable(isIndividual: true, isGlobal: false)
