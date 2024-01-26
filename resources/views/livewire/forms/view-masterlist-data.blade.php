@@ -838,7 +838,7 @@
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->basicInformation->title_status }}</td>
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
-                                            {{-- {{ $item->tax_payment == null ? '' : number_format($item->tax_payment,2) }} --}}
+                                            {{ $item->tax_payment == null ? '' : $item->tax_payment }}
                                         </td>
                                           <td class="whitespace-nowrap py-4 pl-4 pr-4 text-xs text-gray-500 ">
                                             {{ $item->year_of_payment }}</td>
