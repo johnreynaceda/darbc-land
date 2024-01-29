@@ -2,25 +2,25 @@
 
 namespace App\Http\Livewire\Forms;
 
-use Livewire\Component;
-use Filament\Tables;
-use Filament\Forms;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use App\Models\BasicInformation;
-use App\Models\Actual;
+use DB;
+use Carbon\Carbon;
 use App\Models\Tax;
-use App\Models\Attachment;
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Actual;
 use App\Models\Status;
-use App\Models\TaxReceiptImage;
+use Livewire\Component;
+use App\Models\Attachment;
+use WireUi\Traits\Actions;
 use App\Models\TitleStatus;
-use Filament\Forms\Components\DatePicker;
+use App\Models\TaxReceiptImage;
+use App\Models\BasicInformation;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use WireUi\Traits\Actions;
-use Carbon\Carbon;
-use DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
 {
@@ -167,7 +167,6 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public $view_year_of_payment;
     public $view_tax_payment;
     public $view_official_receipt;
-
 
       //update tax models
       public $update_title_number;
@@ -693,6 +692,11 @@ class ViewMasterlistData extends Component  implements Tables\Contracts\HasTable
     public function viewAttachment($record, $type)
     {
         return redirect()->route('view-attachments', ['record' => $record,'type' => $type,]);
+    }
+
+    public function viewOtherAttachment($record)
+    {
+        return redirect()->route('view-other-attachments', ['record' => $record]);
     }
 
     public function updatedLandStatus()

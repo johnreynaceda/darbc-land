@@ -544,7 +544,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                         $post = BasicInformation::find($record->id);
 
                         $attachedDocuments = $post->attachments()->where('documentable_id', $post->id)->pluck('document_type')->toArray();
-                        $allDocumentNames = ['TITLE', 'DEED OF SALE', 'TAX DEC', 'SKETCH PLAN', 'ACTUAL PHOTO', 'VIDEO', 'OTHERS'];
+                        $allDocumentNames = ['TITLE', 'DEED OF SALE', 'TAX DEC', 'SKETCH PLAN', 'ACTUAL PHOTO', 'VIDEO'];
                         $missingDocuments = array_diff($allDocumentNames, $attachedDocuments);
 
 
@@ -557,7 +557,7 @@ class Masterlist extends Component implements Tables\Contracts\HasTable
                         $post = BasicInformation::find($record->id);
 
                         $attachedDocuments = $post->attachments()->where('documentable_id', $post->id)->pluck('document_type')->toArray();
-                        $allDocumentNames = ['TITLE', 'DEED OF SALE', 'TAX DEC', 'SKETCH PLAN', 'ACTUAL PHOTO', 'VIDEO', 'OTHERS'];
+                        $allDocumentNames = ['TITLE', 'DEED OF SALE', 'TAX DEC', 'SKETCH PLAN', 'ACTUAL PHOTO', 'VIDEO'];
                         $missingDocuments = array_diff($allDocumentNames, $attachedDocuments);
 
                         $this->viewMissingDocuments($missingDocuments);

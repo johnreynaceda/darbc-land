@@ -28,6 +28,9 @@
             <a href="#" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
             :class="{ 'bg-indigo-100 text-indigo-700 rounded-md px-3 py-2 text-sm font-medium': activeTab === 'title_status', 'text-gray-500 hover:text-indigo-700 rounded-md px-3 py-2 text-sm font-medium': activeTab !== 'title_status' }"
             @click.prevent="activeTab = 'title_status'">Land Title Status</a>
+            <a href="#" class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
+            :class="{ 'bg-indigo-100 text-indigo-700 rounded-md px-3 py-2 text-sm font-medium': activeTab === 'other_attachments', 'text-gray-500 hover:text-indigo-700 rounded-md px-3 py-2 text-sm font-medium': activeTab !== 'other_attachments' }"
+            @click.prevent="activeTab = 'other_attachments'">Other Attachments</a>
           </nav>
         </div>
 
@@ -66,6 +69,16 @@
                 <div class="relative block mt-3 w-full rounded-lg text-center focus:outline-none">
                     <span class="mt-2 block text-gray-600">
                           <livewire:settings.manage-title-status />
+                    </span>
+                </div>
+            </div>
+          </div>
+
+          <div x-show="activeTab === 'other_attachments'">
+            <div class="flex justify-center items-center">
+                <div class="relative block mt-3 w-full rounded-lg text-center focus:outline-none">
+                    <span class="mt-2 block text-gray-600">
+                          <livewire:settings.manage-other-attachments />
                     </span>
                 </div>
             </div>

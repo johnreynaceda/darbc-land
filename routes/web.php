@@ -52,6 +52,17 @@ Route::get('/view-attachments/{record}', function ($record) {
     ->middleware(['auth', 'verified'])
     ->name('view-attachments');
 
+Route::get('/view-other-attachments/{record}', function ($record) {
+    $attachment = BasicInformation::findOrFail($record);
+    $record = request()->query('record');
+
+    return view('forms.view-other-attachments', [
+        'record' => $attachment,
+    ]);
+})
+    ->middleware(['auth', 'verified'])
+    ->name('view-other-attachments');
+
 Route::get('/inquiry', function () {
     return view('admin.inquiry');
 })

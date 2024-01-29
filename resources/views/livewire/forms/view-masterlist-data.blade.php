@@ -1033,10 +1033,15 @@
               </div> --}}
             </div>
             <div class="grid place-content-center space-y-3">
-              <button wire:click="$set('othersAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
+                <div class="flex justify-center items-center flex-col hover:text-green-500">
+                    <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
+                    <span class="font-bold text-sm text-gray-600 ">OTHER ATTACHMENTS</span>
+                </div>
+
+              {{-- <button wire:click="$set('othersAttachmentModal', true)" class="flex justify-center items-center flex-col hover:text-green-500">
                 <img src="{{ asset('images/upload.png') }}" class="h-10" alt="">
-                <span class="font-bold text-sm text-gray-600 ">OTHERS</span>
-              </button>
+                <span class="font-bold text-sm text-gray-600 ">OTHER ATTACHMENTS</span>
+              </button> --}}
             </div>
             {{-- buttons --}}
             <div class="grid place-content-center space-y-2">
@@ -1071,7 +1076,7 @@
             </div>
             <div class="grid place-content-center space-y-2">
                 <div class="mx-auto">
-                    <x-button emerald icon="eye" wire:click="viewAttachment({{$basicInfo->id}}, 'OTHERS')"   label="View" />
+                    <x-button amber icon="arrow-right" wire:click="viewOtherAttachment({{$basicInfo->id}})"   label="Proceed" />
                   </div>
             </div>
           </div>
@@ -1482,8 +1487,8 @@
             <livewire:forms.upload-video-attachment :basicinfo_id="$basicInfo->id" />
             </x-modal.card>
         {{-- OTHERS ATTACHMENT MODAL --}}
-        <x-modal.card title="Upload" align="center" blur wire:model.defer="othersAttachmentModal">
+        {{-- <x-modal.card title="Upload" align="center" blur wire:model.defer="othersAttachmentModal">
             <livewire:forms.upload-others-attachment :basicinfo_id="$basicInfo->id" />
-         </x-modal.card>
+         </x-modal.card> --}}
 
 </div>

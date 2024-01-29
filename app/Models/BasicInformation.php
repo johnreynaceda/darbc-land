@@ -15,6 +15,11 @@ class BasicInformation extends Model
         return $this->morphMany(Attachment::class, 'documentable');
     }
 
+    public function other_attachments()
+    {
+        return $this->hasMany(OtherAttachment::class);
+    }
+
     public function lot_amortizations()
     {
         return $this->hasMany(
