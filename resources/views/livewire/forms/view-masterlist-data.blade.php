@@ -921,6 +921,7 @@
                                               {{ $basicInfo->amount ?? '' }}
                                             </div>
                                           </div>
+                                          @if($basicInfo->ndc_direct_payment_scheme != "FULLY PAID")
                                           <div class="flex items-start border-b py-2">
                                             <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600">DATE PAID</p>
                                             <div class="font-rubik text-black uppercase text-xs text-right">
@@ -933,6 +934,7 @@
                                               {{ Carbon\Carbon::parse($basicInfo->date_of_cert ?? '')->format('F d, Y') }}
                                             </div>
                                           </div>
+                                          @endif
                                         </li>
                                       </ul>
                                     </div>
@@ -944,7 +946,7 @@
                                       <ul role="list" class="divide-y divide-gray-200 border-gray-200">
                                         <li class="relative py-5 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600">
                                           <div class="flex items-start border-b py-2">
-                                            <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600">DIRECT PAYMENT SCHEME </p>
+                                            <p class="lg:w-48 border-r mr-2 font-bold text-xs text-gray-600">DIRECT PAYMENT SCHEME: </p>
                                             <div class="font-rubik text-black uppercase text-xs text-right">
                                               {{ $basicInfo->ndc_direct_payment_scheme ?? '' }}
                                             </div>
